@@ -138,9 +138,9 @@
                 if ($.trim(city_id) != ''){
                     $.get('/get_transport_fares',{city_id: city_id}, function (transport_fares) {
                         $('#transport_fare').empty();
-                        $('#transport_fare').append("<option value=''>Selecione una sub categoria</option>");
+                        // $('#transport_fare').append("<option value=''>Selecione una sub categoria</option>");
                         $.each(transport_fares, function (index , value){
-                            $('#transport_fare').append("<option value='"+index+"'>"+value+"</option>");
+                            $('#transport_fare').append("<option selected='selected' value='"+index+"'>"+value+"</option>");
                         }).done();
                     });
                 }

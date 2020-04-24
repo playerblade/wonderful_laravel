@@ -45,12 +45,14 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 //        return  response()->json($request->user_id);
+//        1 paso crea una orden
         $order = new Order();
         $order->user_id = $request->user_id;
         $order->transport_fares_id = $request->transport_fares_id;
         $order->total_amount = 0;
         $order->save();
 
+//        2 paso crea el detalle de la orden
         $order_datail = new OrderDetail();
         $order_datail->article_id = $request->article_id;
         $order_datail->order_id = $order->id;
