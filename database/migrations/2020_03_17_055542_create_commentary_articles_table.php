@@ -16,10 +16,10 @@ class CreateCommentaryArticlesTable extends Migration
         Schema::create('commentary_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('comment',1000);
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -105,4 +105,11 @@ Route::group(['middleware' => 'web','auth'], function () {
         'OrderController'
     );
 
+    Route::get('/get_transport_fares',
+        'OrderController@getTransportFares'
+    );
+
+    Route::get('/orders_initial',
+        'OrderController@ordersInitial'
+    );
 });

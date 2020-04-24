@@ -1,5 +1,4 @@
 <div class="wrapper">
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-1">
     <div class="container">

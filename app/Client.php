@@ -7,24 +7,24 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client extends Authenticatable
 {
-    public function orders(){
-        return $this->hasMany(Order::class);
-    }
+//    public function orders(){
+//        return $this->hasMany(Order::class);
+//    }
 
-    public function articles(){
-        return $this->belongsToMany(Article::class);
-    }
+//    public function articles(){
+//        return $this->belongsToMany(Article::class);
+//    }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
+//    public function role(){
+//        return $this->belongsTo(Role::class);
+//    }
 
-    public function authorizeRole($role){
-        if ($this->hasRole($role)){
-            return true;
-        }
+//    public function authorizeRole($role){
+//        if ($this->hasRole($role)){
+//            return true;
+//        }
 //        abort(403,"nos estas autorizado");
-    }
+//    }
 
 //    public function hasAnyRoles($roles){
 //        if (is_array($roles)){
@@ -41,10 +41,10 @@ class Client extends Authenticatable
 //        return false;
 //    }
 
-    public function hasRole($role){
-        if ($this->role()->where('role',$role)->first()){
-            return true;
-        }
-        return false;
-    }
+//    public function hasRole($role){
+//        if ($this->role()->where('role',$role)->first()){
+//            return true;
+//        }
+//        return false;
+//    }
 }

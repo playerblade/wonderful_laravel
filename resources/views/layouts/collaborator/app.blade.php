@@ -7,6 +7,7 @@
 
     <title>WonderFuL</title>
 
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset("/admin-lte/plugins/fontawesome-free/css/all.min.css")}}">
     <!-- IonIcons -->
@@ -36,10 +37,11 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
-    <body class="hold-transition layout-top-nav">
-        @extends('layouts.client.menu')
-    </body>
+<body class="hold-transition layout-top-nav">
+    @extends('layouts.collaborator.menu')
+</body>
 </html>
+
 {{--  Start Script   --}}
 <!-- jQuery -->
 <script src="{{asset("/admin-lte/plugins/jquery/jquery.min.js")}}"></script>
@@ -324,5 +326,3 @@
         bsCustomFileInput.init();
     });
 </script>
-
-@yield('script_cities')

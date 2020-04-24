@@ -234,7 +234,7 @@
       <workItem from="1587606405411" duration="9048000" />
       <workItem from="1587617653488" duration="3449000" />
       <workItem from="1587647101026" duration="796000" />
-      <workItem from="1587648577367" duration="13899000" />
+      <workItem from="1587648577367" duration="47864000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -330,10 +330,10 @@
       <screen x="0" y="0" width="1366" height="732" />
     </state>
     <state x="441" y="0" width="484" height="736" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.732@0.0.1366.732" timestamp="1584426695767" />
-    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587659582554">
+    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587680469565">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587659582554" />
+    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587680469565" />
     <state x="417" y="122" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.732@0.0.1366.732" timestamp="1586460014753" />
     <state x="324" y="18" width="688" height="640" key="#phpunit.xml" timestamp="1587263761902">
       <screen x="0" y="0" width="1280" height="680" />
@@ -350,22 +350,22 @@
       <screen x="0" y="0" width="1366" height="732" />
     </state>
     <state x="467" y="122" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1584744298748" />
-    <state width="1237" height="48" key="GridCell.Tab.0.bottom" timestamp="1587657139829">
+    <state width="1237" height="206" key="GridCell.Tab.0.bottom" timestamp="1587699539017">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="48" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587657139829" />
-    <state width="1237" height="48" key="GridCell.Tab.0.center" timestamp="1587657139829">
+    <state width="1237" height="206" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587699539017" />
+    <state width="1237" height="206" key="GridCell.Tab.0.center" timestamp="1587699539017">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="48" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587657139829" />
-    <state width="1237" height="48" key="GridCell.Tab.0.left" timestamp="1587657139829">
+    <state width="1237" height="206" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587699539017" />
+    <state width="1237" height="206" key="GridCell.Tab.0.left" timestamp="1587699539017">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="48" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587657139829" />
-    <state width="1237" height="48" key="GridCell.Tab.0.right" timestamp="1587657139829">
+    <state width="1237" height="206" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587699539017" />
+    <state width="1237" height="206" key="GridCell.Tab.0.right" timestamp="1587699539017">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="48" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587657139829" />
+    <state width="1237" height="206" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587699539017" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1587413801032">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

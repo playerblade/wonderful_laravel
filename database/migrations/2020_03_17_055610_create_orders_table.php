@@ -16,10 +16,10 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transport_fares_id');
-            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('total_amount');
-            $table->foreign('transport_fares_id')->references('id')->on('transport_fares')->onDelete('cascade');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('transport_fares_id')->references('id')->on('transport_fares')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

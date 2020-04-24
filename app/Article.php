@@ -30,7 +30,10 @@ class Article extends Model
         return $this->belongsToMany(Order::class);
     }
 
-    public function clients(){
-        return $this->belongsToMany(Client::class);
+//    public function clients(){
+//        return $this->belongsToMany(Client::class);
+//    }
+    public function users(){
+        return $this->belongsToMany(User::class);
     }
 }
