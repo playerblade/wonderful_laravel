@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+
+Auth::routes();
 Route::get('/',
     'WelcomeController@welcome'
 );
@@ -23,18 +25,9 @@ Route::get('/article/{id}/detail',
     'WelcomeController@articleDetail'
 );
 
-Route::group(['middleware' => 'web','auth'], function () {
+Route::group(['middleware' => 'web','role:administrador'], function () {
 
-    // Route::get('/home', 'HomeController@index')->name('home')->middleware('password.confirm');
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    // Route::auth();
-    Auth::routes();
-
-    //login Client
-    Route::get('/clients/login', 'ClientController@showLoginForm');
-    Route::post('/login/clients', 'ClientController@login');
-
+    Route::get('/home','HomeController@index');
     //    consulta 1
     Route::get('/reportes/articulos' , 'ArticleController@articulosVendidosPorMes')->name('articulos');
     //    consulta 2
@@ -105,6 +98,24 @@ Route::group(['middleware' => 'web','auth'], function () {
         'OrderController'
     );
 
+    Route::get('/get_transport_fares',
+        'OrderController@getTransportFares'
+    );
+
+    Route::get('/orders_initial',
+        'OrderController@ordersInitial'
+    );
+});
+
+Route::group(['middleware' => 'web','role:cliente'], function () {
+    Route::get('/home','HomeController@index');
+
+    Route::get('/order/{article_id}/form',
+        'OrderController@formOrder'
+    );
+    Route::resource('orders',
+        'OrderController'
+    );
     Route::get('/get_transport_fares',
         'OrderController@getTransportFares'
     );

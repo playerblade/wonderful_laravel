@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('role_id');
             $table->string('ci');
             $table->string('first_name');
             $table->string('second_name');
@@ -28,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->boolean('active');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
     }

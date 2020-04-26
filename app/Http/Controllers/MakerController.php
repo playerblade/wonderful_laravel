@@ -2,35 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\makers;
+use App\Maker;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class MakersController extends Controller
+class MakerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->user()->authorizeRole(['administrador'])) {
-            
-            // $makers= makers::all();
-
-            $makers = DB::select(
-                "select id, name as makerss, location, phone_number
-                from makers
-                -- where a.id = 1
-                order by makerss;
-            ");
-            //        dd($articles);
-           return view('makers.index', compact('makers'));
-           
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+        //
     }
 
     /**
@@ -57,10 +41,10 @@ class MakersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\makers  $makers
+     * @param  \App\Maker  $maker
      * @return \Illuminate\Http\Response
      */
-    public function show(makers $makers)
+    public function show(Maker $maker)
     {
         //
     }
@@ -68,10 +52,10 @@ class MakersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\makers  $makers
+     * @param  \App\Maker  $maker
      * @return \Illuminate\Http\Response
      */
-    public function edit(makers $makers)
+    public function edit(Maker $maker)
     {
         //
     }
@@ -80,10 +64,10 @@ class MakersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\makers  $makers
+     * @param  \App\Maker  $maker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, makers $makers)
+    public function update(Request $request, Maker $maker)
     {
         //
     }
@@ -91,10 +75,10 @@ class MakersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\makers  $makers
+     * @param  \App\Maker  $maker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(makers $makers)
+    public function destroy(Maker $maker)
     {
         //
     }

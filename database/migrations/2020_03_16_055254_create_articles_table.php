@@ -16,13 +16,12 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sub_category_id');
-//            $table->unsignedBigInteger('makers_id');
+            $table->unsignedBigInteger('maker_id');
             $table->string('title');
-            $table->string('marker');
             $table->string('description');
             $table->integer('stock');
             $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('cascade');
-//            $table->foreign('makers_id')->references('id')->on('makers')->onDelete('cascade');
+            $table->foreign('maker_id')->references('id')->on('makers')->onDelete('cascade');
             $table->timestamps();
         });
     }

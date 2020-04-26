@@ -26,29 +26,30 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $articles = DB::select("
-                select a.title as articulo , a.marker as fabricante, ia.url_image as image,
+                select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join price_articles pa on a.id = pa.article_id
+                    inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                order by articulo desc ;
+                order by articulo desc;
         ");
 
         $user = Auth::user();
-        if ($request->user()->authorizeRole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
             return view('layouts.admin.home',compact('user'));
         }
-        if ($request->user()->authorizeRole(['colaborador'])) {
-            return view('layouts.collaborator.home',compact('user'));
+        if ($request->user()->hasRole('colaborador')){
+            return view('layouts.client.home',compact('user'));
         }
-        if ($request->user()->authorizeRole(['verificador'])) {
+        if ($request->user()->hasRole('verificador')){
             return view('layouts.checker.home',compact('user'));
         }
-
-        if ($request->user()->authorizeRole(['cliente'])) {
+        if ($request->user()->hasRole('cliente')){
             return view('layouts.client.home',compact('user','articles'));
         }
+
     }
 
 }

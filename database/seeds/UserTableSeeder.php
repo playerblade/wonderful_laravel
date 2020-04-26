@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
     {
 //        user 1
         DB::table('users')->insert([
+            'role_id' => 1,
             'ci' => '3553534',
             'first_name' => 'Sara',
             'second_name' => 'Sara',
@@ -31,6 +32,7 @@ class UserTableSeeder extends Seeder
 
 //        user 2
         DB::table('users')->insert([
+            'role_id' => 2,
             'ci' => '3553534',
             'first_name' => 'Raul',
             'second_name' => 'Raul',
@@ -48,6 +50,7 @@ class UserTableSeeder extends Seeder
 
 //        user 3
         DB::table('users')->insert([
+            'role_id' => 3,
             'ci' => '3553534',
             'first_name' => 'Julio',
             'second_name' => 'Pedro',
@@ -65,6 +68,7 @@ class UserTableSeeder extends Seeder
 
 //        user 4
         DB::table('users')->insert([
+            'role_id' => 4,
             'ci' => '3553534',
             'first_name' => 'Pedro',
             'second_name' => 'Lucas',
@@ -82,6 +86,7 @@ class UserTableSeeder extends Seeder
 
 //        user 5
         DB::table('users')->insert([
+            'role_id' => 5,
             'ci' => '3553534',
             'first_name' => 'Josh',
             'second_name' => 'Josh',
@@ -99,6 +104,7 @@ class UserTableSeeder extends Seeder
 
 //        user 6
         DB::table('users')->insert([
+            'role_id' => 5,
             'ci' => '3553534',
             'first_name' => 'Drake',
             'second_name' => 'Drake',
@@ -113,6 +119,5 @@ class UserTableSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
-
     }
 }

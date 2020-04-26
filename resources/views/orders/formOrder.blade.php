@@ -58,24 +58,32 @@
                                         </label>
                                     @endforeach
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <h4>Escoge un Color</h4>
-                                        <select  name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                            <option selected="selected">Seleccione un color</option>
-                                            @foreach ($colors as $color)
-                                                <option value="{{ $color->id }}">
-                                                    {{ $color->name }}
-{{--                                                <input hidden type="text" name="color_id" value="{{$color->id}}">--}}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                <form action="">
+                                    <div class="row mt-2">
+                                        <div class="col-6">
+                                            <h4>Escoge un Color</h4>
+                                            <select  name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                                <option selected="selected">Seleccione un color</option>
+                                                @foreach ($colors as $color)
+                                                    <option value="{{ $color->id }}">
+                                                        {{ $color->name }}
+                                                        {{--                                                <input hidden type="text" name="color_id" value="{{$color->id}}">--}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>Cantidad</h4>
+                                            <input type="number" name="quantity" class="form-control">
+                                        </div>
+                                        <div class="btn btn-primary btn-sm btn-flat">
+                                            <button class="btn btn-primary">
+                                                Agregar
+                                                <i class="fa fa-plus-square fa-lg mr-2"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <h4>Cantidad</h4>
-                                        <input type="number" name="quantity" class="form-control">
-                                    </div>
-                                </div>
+                                </form>
                                 <div class="bg-gray py-2 px-3 mt-4">
                                     @foreach($prices as $price )
                                         @if($price->current == 1)
@@ -92,27 +100,7 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <h4 class="mt-4">
-                                    Costo de Envio:
-                                </h4>
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <select id="cities" name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                            <option selected="selected">Seleccione Categoria</option>
-                                                @foreach ($cities as $city)
-                                                    <option value="{{ $city->id }}">
-                                                        {{ $city->city }}
-                                                    </option>
-                                                @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
-{{--                                        <label>Sub Categoria:</label>--}}
-                                        <select id="transport_fare" name="transport_fares_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                            {{--                                                code js is here--}}
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div class="mt-4">
                                     <div class="btn btn-primary btn-lg btn-flat">
                                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
