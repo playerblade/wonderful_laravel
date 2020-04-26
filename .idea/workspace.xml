@@ -21,26 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Client.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MakersController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/makers.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_11_050037_create_makers_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_15_055451_create_clients_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_16_055254_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_16_055254_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ClientRoleTableSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ClientsTableSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserRoleTableSeeder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UserTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +238,7 @@
       <workItem from="1587617653488" duration="3449000" />
       <workItem from="1587647101026" duration="796000" />
       <workItem from="1587648577367" duration="49988000" />
-      <workItem from="1587924105139" duration="11472000" />
+      <workItem from="1587924105139" duration="16343000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -377,22 +358,22 @@
       <screen x="0" y="0" width="1366" height="732" />
     </state>
     <state x="467" y="122" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1584744298748" />
-    <state width="1237" height="206" key="GridCell.Tab.0.bottom" timestamp="1587709964755">
+    <state width="1237" height="92" key="GridCell.Tab.0.bottom" timestamp="1587939407993">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="206" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587709964755" />
-    <state width="1237" height="206" key="GridCell.Tab.0.center" timestamp="1587709964754">
+    <state width="1237" height="92" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587939407993" />
+    <state width="1237" height="92" key="GridCell.Tab.0.center" timestamp="1587939407992">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="206" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587709964754" />
-    <state width="1237" height="206" key="GridCell.Tab.0.left" timestamp="1587709964753">
+    <state width="1237" height="92" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587939407992" />
+    <state width="1237" height="92" key="GridCell.Tab.0.left" timestamp="1587939407991">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="206" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587709964753" />
-    <state width="1237" height="206" key="GridCell.Tab.0.right" timestamp="1587709964755">
+    <state width="1237" height="92" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587939407991" />
+    <state width="1237" height="92" key="GridCell.Tab.0.right" timestamp="1587939407993">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="206" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587709964755" />
+    <state width="1237" height="92" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587939407993" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1587413801032">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -412,10 +393,10 @@
     <state x="0" y="0" width="608" height="680" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1587261600732" />
     <state x="0" y="0" width="645" height="738" key="find.popup/0.0.1360.738@0.0.1360.738" timestamp="1585704840424" />
     <state x="0" y="0" width="648" height="732" key="find.popup/0.0.1366.732@0.0.1366.732" timestamp="1585881174694" />
-    <state x="325" y="148" width="672" height="677" key="run.anything.popup" timestamp="1587652358931">
+    <state x="325" y="148" width="672" height="677" key="run.anything.popup" timestamp="1587939392046">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="148" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587652358931" />
+    <state x="325" y="148" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587939392046" />
     <state x="345" y="161" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1586836935180" />
     <state x="347" y="160" width="672" height="677" key="run.anything.popup/0.0.1366.732@0.0.1366.732" timestamp="1585922423918" />
     <state x="324" y="49" width="672" height="630" key="search.everywhere.popup" timestamp="1587929049069">

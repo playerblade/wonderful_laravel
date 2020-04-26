@@ -47,9 +47,6 @@ class OrderController extends Controller
 //        return  response()->json($request->user_id);
 //        1 paso crea una orden
         $order = new Order();
-        $order->user_id = $request->user_id;
-        $order->transport_fares_id = $request->transport_fares_id;
-        $order->total_amount = 0;
         $order->save();
 
 //        2 paso crea el detalle de la orden
@@ -57,6 +54,7 @@ class OrderController extends Controller
         $order_datail->article_id = $request->article_id;
         $order_datail->order_id = $order->id;
         $order_datail->price_article_id = $request->price_article_id;
+        $order_datail->colors = $request->colors;
         $order_datail->quantity = $request->quantity;
         $order_datail->sub_total = $request->price * $order_datail->quantity;
         $order_datail->save();
