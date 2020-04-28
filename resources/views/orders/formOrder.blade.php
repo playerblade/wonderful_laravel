@@ -58,32 +58,35 @@
                                         </label>
                                     @endforeach
                                 </div>
-                                <form action="">
+{{--                                <form action="">--}}
                                     <div class="row mt-2">
                                         <div class="col-6">
                                             <h4>Escoge un Color</h4>
-                                            <select  name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                                <option selected="selected">Seleccione un color</option>
-                                                @foreach ($colors as $color)
-                                                    <option value="{{ $color->id }}">
-                                                        {{ $color->name }}
-                                                        {{--                                                <input hidden type="text" name="color_id" value="{{$color->id}}">--}}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <div class="select2-purple">
+                                                <select id="color" class="select2" name="color_article[]"   multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
+                                                    @foreach ($colors as $color)
+                                                        <option value="{{ $color->image }}">
+                                                            {{ $color->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div id="cantidad" class="col-6">
                                             <h4>Cantidad</h4>
                                             <input type="number" name="quantity" class="form-control">
                                         </div>
-                                        <div class="btn btn-primary btn-sm btn-flat">
-                                            <button class="btn btn-primary">
-                                                Agregar
-                                                <i class="fa fa-plus-square fa-lg mr-2"></i>
-                                            </button>
+                                        <div id="cantidad_article" class="col-6">
+
                                         </div>
+{{--                                        <div class="btn btn-primary btn-sm btn-flat">--}}
+{{--                                            <button class="btn btn-primary">--}}
+{{--                                                Agregar--}}
+{{--                                                <i class="fa fa-plus-square fa-lg mr-2"></i>--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
                                     </div>
-                                </form>
+{{--                                </form>--}}
                                 <div class="bg-gray py-2 px-3 mt-4">
                                     @foreach($prices as $price )
                                         @if($price->current == 1)
@@ -131,6 +134,23 @@
                             $('#transport_fare').append("<option selected='selected' value='"+index+"'>"+value+"</option>");
                         }).done();
                     });
+                }
+            });
+        });
+    </script>
+@endsection
+@section('script_color_form')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#color').on('change',function () {
+                var color = $('#color').val();
+                if ($.trim(color.length) > 1){
+                    $('#cantidad').hide();
+                    console.log($.trim(color.length));
+                    // $('#cantidad_article').append("<h4>Total De Articulos</h4>\n" +
+                    //     "                  <input type='number' value='"+$.trim(color.length)+"' class='form-control'>\n" +
+                    //     "                  ");
+                    //
                 }
             });
         });

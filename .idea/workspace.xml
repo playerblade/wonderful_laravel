@@ -20,8 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailAdd.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,7 +243,9 @@
       <workItem from="1587617653488" duration="3449000" />
       <workItem from="1587647101026" duration="796000" />
       <workItem from="1587648577367" duration="49988000" />
-      <workItem from="1587924105139" duration="16343000" />
+      <workItem from="1587924105139" duration="16822000" />
+      <workItem from="1587952657955" duration="1496000" />
+      <workItem from="1588022395913" duration="16976000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -358,22 +365,22 @@
       <screen x="0" y="0" width="1366" height="732" />
     </state>
     <state x="467" y="122" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1584744298748" />
-    <state width="1237" height="92" key="GridCell.Tab.0.bottom" timestamp="1587939407993">
+    <state width="1237" height="92" key="GridCell.Tab.0.bottom" timestamp="1587943301161">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="92" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587939407993" />
-    <state width="1237" height="92" key="GridCell.Tab.0.center" timestamp="1587939407992">
+    <state width="1237" height="92" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587943301161" />
+    <state width="1237" height="92" key="GridCell.Tab.0.center" timestamp="1587943301160">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="92" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587939407992" />
-    <state width="1237" height="92" key="GridCell.Tab.0.left" timestamp="1587939407991">
+    <state width="1237" height="92" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587943301160" />
+    <state width="1237" height="92" key="GridCell.Tab.0.left" timestamp="1587943301159">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="92" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587939407991" />
-    <state width="1237" height="92" key="GridCell.Tab.0.right" timestamp="1587939407993">
+    <state width="1237" height="92" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587943301159" />
+    <state width="1237" height="92" key="GridCell.Tab.0.right" timestamp="1587943301160">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="92" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587939407993" />
+    <state width="1237" height="92" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587943301160" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1587413801032">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

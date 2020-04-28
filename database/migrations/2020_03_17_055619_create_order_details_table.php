@@ -18,6 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('price_article_id');
+            $table->string('color_article');
             $table->integer('quantity');
             $table->integer('sub_total');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');

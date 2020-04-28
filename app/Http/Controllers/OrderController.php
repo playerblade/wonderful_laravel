@@ -23,7 +23,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json("Hello Index");
     }
 
     /**
@@ -47,30 +47,49 @@ class OrderController extends Controller
 //        return  response()->json($request->user_id);
 //        1 paso crea una orden
         $order = new Order();
+        $order->transport_fares_id = 4;
+        $order->user_id =  $request->user_id;
+        $order->total_amount = 0;
         $order->save();
-
-//        2 paso crea el detalle de la orden
-        $order_datail = new OrderDetail();
-        $order_datail->article_id = $request->article_id;
-        $order_datail->order_id = $order->id;
-        $order_datail->price_article_id = $request->price_article_id;
-        $order_datail->colors = $request->colors;
-        $order_datail->quantity = $request->quantity;
-        $order_datail->sub_total = $request->price * $order_datail->quantity;
-        $order_datail->save();
+//        $color = array($request->color_article);
+//        print_r($color);
+        $length_colors = sizeof($request->color_article);
+        if ($length_colors > 1){
+            $list = [];
+            foreach ($request->color_article as $colors){
+//                $order_detail = new OrderDetail();
+                $data = [
+                    'article_id' => $request->article_id,
+                    'order_id' => $order->id,
+                    'price_article_id' => $request->price_article_id,
+                    'color_article' => $colors,
+                    'quantity' => 1,
+                    'sub_total' => $request->price * 1,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s")
+                ];
+                array_push($list,$data);
+            }
+            DB::table('order_details')->insert($list);
+//            return response()->json($list);
+        }else{
+            $order_datail = new OrderDetail();
+            $order_datail->article_id = $request->article_id;
+            $order_datail->order_id = $order->id;
+            $order_datail->price_article_id = $request->price_article_id;
+            $order_datail->color_article = $request->color_article[0];
+            $order_datail->quantity = $request->quantity;
+            $order_datail->sub_total = $request->price * $order_datail->quantity;
+            $order_datail->save();
+//            return response()->json($order_datail);
+        }
 
         $status_order = new StatusOrder();
         $status_order->order_id = $order->id;
         $status_order->process_order_id = 1;
         $status_order->save();
 
-//        $color_article = new ColorArticle();
-//        $color_article->article_id = $request->article_id;
-//        $color_article->color_id = $request->color_id;
-//        $color_article->save();
-//        return response()->json($color_article);
-//        return  response()->json($status_order);
-
+        return redirect()->route('orders.index',$order->id)->with('200 , the first artcle add on order');
     }
 
     /**

@@ -326,3 +326,4 @@
 </script>
 
 @yield('script_cities')
+@yield('script_color_form')
