@@ -152,7 +152,7 @@
                                         <div class="form-group">
                                             <strong>Color:</strong>
                                             <div class="select2-purple">
-                                                <select class="select2" name="color_id[]"   multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
+                                                <select class="select2" name="color_id[]"  multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach($colors as $color)
                                                     <option value="{{$color->id}}">{{ $color->name }}</option>
                                                     @endforeach

@@ -20,22 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailAddMore.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/orders/paymentMethods.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/orders/shipingMethods.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/orders/showMore.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_15_063325_create_transport_fares_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_15_063325_create_transport_fares_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/UserTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/UserTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/categories/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/crud/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/collaborator/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/collaborator/menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderDetail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailAdd.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrderMore.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderDetail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderDetail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -258,6 +250,7 @@
       <workItem from="1588022395913" duration="29238000" />
       <workItem from="1588079265293" duration="7256000" />
       <workItem from="1588101268984" duration="26942000" />
+      <workItem from="1588161150801" duration="5321000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -357,10 +350,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587927255419" />
-    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588127900222">
+    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588164837715">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1588127900222" />
+    <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1588164837715" />
     <state x="417" y="122" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.732@0.0.1366.732" timestamp="1586460014753" />
     <state x="324" y="18" width="688" height="640" key="#phpunit.xml" timestamp="1587263761902">
       <screen x="0" y="0" width="1280" height="680" />

@@ -21,22 +21,19 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->user()->authorizeRole(['administrador'])) {
             $categories = Category::all();
             $sub_categories = SubCategory::all();
             $colors = Color::all();
 
             $articles = DB::select(
-                "select sb.id ,  a.id as id , a.title as article , a.marker as marker , a.stock  as stock,
+                "select sb.id ,  a.id as id , a.title as article , m.name as marker , a.stock  as stock,
                         sb.sub_category as sub_category , c.category as category , a.description as description
-                 from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
-                 inner join categories c on sb.category_id  = c.id;
+                       from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
+                       inner join categories c on sb.category_id  = c.id
+                       inner join makers m on a.maker_id = m.id;
             ");
             //        dd($articles);
             return view('articles.crud.index', compact('articles','categories','sub_categories','colors'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
     }
 
     /**
@@ -63,9 +60,6 @@ class ArticleController extends Controller
 
         // $articles = request()->except('_token');
         $request->except('_token');
-
-        if ($request->user()->authorizeRole(['administrador'])) {
-
             $request->validate([
                 'sub_category_id' => 'required',
                 'title' => 'required|max:250|string|regex:/^.+@.+$/i',
@@ -112,9 +106,6 @@ class ArticleController extends Controller
             return redirect()->route('articles.index')
             ->with('success','Product created successfully.');
 
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
     }
 
     /**

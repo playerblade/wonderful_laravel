@@ -18,13 +18,22 @@ use Illuminate\Support\Facades\Auth;
 //});
 
 Auth::routes();
-Route::get('/',
-    'WelcomeController@welcome'
-);
-Route::get('/article/{id}/detail',
-    'WelcomeController@articleDetail'
-);
 
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/',
+        'WelcomeController@welcome'
+    );
+    Route::get('/article/{id}/detail',
+        'WelcomeController@articleDetail'
+    );
+
+    Route::get('/get_sub_categories_search',
+        'WelcomeController@get_sub_categories_search'
+    );
+    Route::get('/get_articles_search',
+        'WelcomeController@get_articles_search'
+    );
+});
 Route::group(['middleware' => 'web','role:administrador'], function () {
 
     Route::get('/home','HomeController@index');

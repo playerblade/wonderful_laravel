@@ -52,9 +52,10 @@
                                             <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <input type="number" name="order_id" value="{{$order_detail->order_id}}">
+                                                <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
 {{--                                                <input type="number" name="process_order_id" value="{{$order_detail->porcess_order_id}}">--}}
-                                                <input type="number" name="process_order_id" value="2">
+                                                <input hidden type="number" name="process_order_id" value="2">
+                                                &ensp;&ensp;&ensp;&ensp;&ensp;
                                                 <button class="btn btn-info">Proceso</button>
                                             </form>
                                         </td>

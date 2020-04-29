@@ -89,7 +89,7 @@ class OrderDetailController extends Controller
     }
 
     public function detalleDeOrdenesPorCliente(Request $request, Client $clients){
-        if ($request->user()->authorizeRole(['cliente','administrador'])) {
+//        if ($request->user()->authorizeRole(['cliente','administrador'])) {
 //            $users =  DB::table('users')->select('*')->get();
             $clients = DB::select("
                 select c.id as id,
@@ -109,9 +109,9 @@ class OrderDetailController extends Controller
             );
 //            dd($users);
             return view('clients.detalleDeOrdenesPorCliente1Pantalla',compact('clients'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+//        } else {
+//            abort(403, 'you do not authorized for this web site');
+//        }
     }
 
     public function listaDeOrdenesPorCliente($client_id, Request $request, Order $orders){
