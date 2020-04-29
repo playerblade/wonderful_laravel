@@ -41,7 +41,7 @@ class HomeController extends Controller
             return view('layouts.admin.home',compact('user'));
         }
         if ($request->user()->hasRole('colaborador')){
-            return view('layouts.client.home',compact('user'));
+            return view('layouts.collaborator.home',compact('user'));
         }
         if ($request->user()->hasRole('verificador')){
             return view('layouts.checker.home',compact('user'));

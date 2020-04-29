@@ -115,7 +115,7 @@ class UserTableSeeder extends Seeder
             'birthday' => date("Y-m-d H:i:s"),
             'user' => 'drakemartinez3553534',
             'password' => bcrypt('3553534'),
-            'active' => 0,
+            'active' => 1,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

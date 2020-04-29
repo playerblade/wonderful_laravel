@@ -18,7 +18,7 @@ class CreateTransportFaresTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->string('price');
             $table->date('end_date');
-            $table->boolean('valid');
+            $table->boolean('shiping');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->timestamps();
         });

@@ -325,5 +325,5 @@
     });
 </script>
 
-@yield('script_cities')
+@yield('script_transport_fares')
 @yield('script_color_form')

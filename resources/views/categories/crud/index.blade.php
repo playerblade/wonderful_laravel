@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit"  class="btn btn-info form-control ">Guardad Categoria</button>
+                                <button type="submit"  class="btn btn-info form-control ">Guardar Categoria</button>
                             </div>
                         </form>
                         <!-- /.card-body -->

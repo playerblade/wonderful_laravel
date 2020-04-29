@@ -1,6 +1,6 @@
 @extends('layouts.collaborator.app')
 @section('content')
-    <div class="content-header">
+    <section class="content-header">
         <div class="container">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -15,11 +15,11 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-    </div>
-    <div class="content">
+    </section>
+    <section class="content">
         <div class="container">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-md-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h4></h4>
@@ -48,7 +48,15 @@
                                         <td>{{$order_detail->cantidad}}</td>
                                         <td>{{$order_detail->subTotal}}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-info">Proceso</button>
+                                            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                                            <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="number" name="order_id" value="{{$order_detail->order_id}}">
+{{--                                                <input type="number" name="process_order_id" value="{{$order_detail->porcess_order_id}}">--}}
+                                                <input type="number" name="process_order_id" value="2">
+                                                <button class="btn btn-info">Proceso</button>
+                                            </form>
                                         </td>
                                         {{--                                        <td>{{$order_detail->color}}</td>--}}
                                     </tr>
@@ -74,5 +82,5 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-    </div>
+    </section>
 @endsection

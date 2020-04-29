@@ -108,7 +108,7 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
 });
 
 Route::group(['middleware' => 'web','role:cliente'], function () {
-    Route::get('/home','HomeController@index');
+    Route::get('/home','HomeController@index')->name('home');
 
     Route::get('/order/{article_id}/form',
         'OrderController@formOrder'
@@ -119,8 +119,38 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::get('/get_transport_fares',
         'OrderController@getTransportFares'
     );
+    Route::get('/order/add/more/{order_id}',
+        'OrderController@articleAddMore'
+    )->name('orderAdd');
+
+    Route::get('more/{order_id}/article',
+        'OrderController@showMoreArticles'
+    );
+    Route::post('orders/add/more/form',
+        'OrderController@addMoreArticles'
+    )->name('storeMoreArticles');
+
+    Route::get('/order/{article_id}/{order_id}/form/more',
+        'OrderController@formAddMoreArticles'
+    );
+
+    Route::get('/payment/methods/{order_id}',
+        'OrderController@paymentMethods'
+    )->name('paymentMethods');
+
+});
+Route::group(['middleware' => 'web','role:colaborador'], function () {
+    Route::get('/home','HomeController@index')->name('home');
 
     Route::get('/orders_initial',
-        'OrderController@ordersInitial'
+        'StatusOrderController@ordersInitial'
+    )->name('statusOrder');
+
+    Route::resource('status_orders',
+        'StatusOrderController'
+    );
+
+    Route::get('/orders_process',
+        'StatusOrderController@ordersProcess'
     );
 });

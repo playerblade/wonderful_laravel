@@ -20,7 +20,7 @@
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                             <li><a href="/orders_initial" class="dropdown-item">Estado Inicial </a></li>
                             <li class="dropdown-divider"></li>
-                            <li><a href="#" class="dropdown-item">Estado En Proceso </a></li>
+                            <li><a href="/orders_process" class="dropdown-item">Estado En Proceso </a></li>
                         </ul>
                     </li>
                 </ul>
