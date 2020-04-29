@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use App\Client;
 use App\Order;
 use App\OrderDetail;
 use App\User;
@@ -88,24 +87,26 @@ class OrderDetailController extends Controller
         //
     }
 
-    public function detalleDeOrdenesPorCliente(Request $request, Client $clients){
+    public function detalleDeOrdenesPorCliente(Request $request){
 //        if ($request->user()->authorizeRole(['cliente','administrador'])) {
 //            $users =  DB::table('users')->select('*')->get();
             $clients = DB::select("
-                select c.id as id,
-                       c.phone_number as telefono,
-                       CASE c.gender
-                        when 'F' then 'Femenino'
-                        when 'M' then 'Masculino'
-                       END as genero,
-                       concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
-                       c.email as user,
-                       c.ci as ci ,
-                       CASE c.active
-                          when 1 then 'activo'
-                          when 0 then 'inactivo'
-                       END as activo
-                from clients c;"
+                select c.id as id, c.phone_number as telefono,
+                      CASE c.gender
+                         when 'F' then 'Femenino'
+                         when 'M' then 'Masculino'
+                      END as genero,
+                      concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
+                      c.user as user,
+                      c.ci as ci,
+                      CASE c.active
+                         when 1 then 'activo'
+                         when 0 then 'inactivo'
+                      END as activo
+                from roles r
+                inner join users c on r.id = c.role_id
+                and r.id = 5;
+                "
             );
 //            dd($users);
             return view('clients.detalleDeOrdenesPorCliente1Pantalla',compact('clients'));
@@ -115,53 +116,55 @@ class OrderDetailController extends Controller
     }
 
     public function listaDeOrdenesPorCliente($client_id, Request $request, Order $orders){
-        if ($request->user()->authorizeRole(['administrador'])) {
             $orders = DB::select("
-
-                select o.id as order_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
-                       CASE po.process_order
-                          when 'initial' then 'inicial'
-                          when 'process' then 'proceso'
-                          when 'preparation' then 'preparacion'
-                          when 'dispatched' then 'despachado'
-                          when 'delivered' then 'entregado'
-                       END as estado , o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario
-                from clients c inner join orders o on c.id = o.client_id
+                select o.id as order_id , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
+                      CASE po.process_order
+                         when 'initial' then 'inicial'
+                         when 'process' then 'proceso'
+                         when 'preparation' then 'preparacion'
+                         when 'dispatched' then 'despachado'
+                         when 'delivered' then 'entregado'
+                      END as estado,
+                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario
+                from users u inner join orders o on u.id = o.user_id
                      inner join status_orders so on o.id = so.order_id
                      inner join process_orders po on so.process_order_id = po.id
-                     inner join user_status_orders uso on so.id = uso.status_order_id
-                     inner join users u on uso.user_id = u.id
-                and c.id = $client_id
+                     -- inner join user_status_orders uso on so.id = uso.status_order_id
+                     -- inner join users c on uso.user_id = c.id
+                -- and u.id = 5
+                and u.id = $client_id
                 order by o.created_at desc;"
             );
 //            dd($orders);
             return view('clients.listaDeOrdenesPorCliente2Pantalla',compact('orders'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+
     }
 
     public function detallesDeLasOrdnesDelCliente($order_id, Request $request , OrderDetail $orderDetails){
-        if ($request->user()->authorizeRole(['administrador'])) {
+
             $orderDetails = DB::select("
                 select a.id as article_id, o.id as order_id ,
                        c.id as client_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
                        od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
                        od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
                        o.created_at as fecha
-                from clients c inner join orders o on c.id = o.client_id
-                     inner join order_details od on o.id = od.order_id
-                     inner join articles a on od.article_id = a.id
-                     inner join price_articles pa on a.id = pa.article_id
+                from roles r inner join users c on r.id = c.role_id
+                      inner join orders o on c.id = o.user_id
+                      inner join order_details od on o.id = od.order_id
+                      inner join articles a on od.article_id = a.id
+                      inner join price_articles pa on a.id = pa.article_id
                 and o.id = $order_id
+                and r.role = 'cliente'
                 and pa.is_current = 1
-                group by c.id, od.id, a.title, pa.price
-                order by fecha desc;"
+                -- group by c.id, od.id, a.title, pa.price
+                group by a.id, o.id, c.id, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name), od.id, a.title, pa.price, od.quantity, od.sub_total, o.created_at
+                order by fecha desc;
+                "
             );
 
             $totalAmounts = DB::select("
                 select o.id as order_id, sum(od.sub_total) as montoTotal
-                from clients c inner join orders o on c.id = o.client_id
+                from users c inner join orders o on c.id = o.user_id
                       inner join order_details od on o.id = od.order_id
                       inner join articles a on od.article_id = a.id
                       inner join price_articles pa on a.id = pa.article_id
@@ -172,25 +175,23 @@ class OrderDetailController extends Controller
 
 //            dd($orderDetails);
             return view('clients.detallesDeLasOrdnesDelCliente3Pantalla',compact('orderDetails','totalAmounts'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
     }
 
     public function detalleDelArticulo($article_id ,  Request $request , Article $articles ){
-        if ($request->user()->authorizeRole(['administrador'])) {
             $articles = DB::select("
-                select a.title as articulo , a.marker as fabricante , a.stock as stock ,
+                select a.title as articulo , m.name as fabricante , a.stock as stock ,
                        c.image as color , a.description as descripcion,
                        c.name as nombreColor
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join color_articles ca on a.id = ca.article_id
+                    inner join makers m  on a.maker_id = m.id
                     inner join colors c on ca.color_id = c.id
                     inner join sub_categories sc on a.sub_category_id = sc.id
                     inner join categories cta on sc.category_id = cta.id
                     inner join price_articles pa on a.id = pa.article_id
                 and a.id = $article_id
-                group by nombreColor,color;"
+                group by a.title, m.name, a.stock, c.image, a.description, c.name;
+                "
             );
 
 //            dd($orderDetails);
@@ -215,8 +216,5 @@ class OrderDetailController extends Controller
             ");
 
             return view('clients.detalleDelArticulo4Pantalla',compact('articles', 'prices_articles','images_articles'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
     }
 }

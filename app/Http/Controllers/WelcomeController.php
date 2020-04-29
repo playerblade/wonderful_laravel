@@ -63,7 +63,8 @@ class WelcomeController extends Controller
             $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
 
             foreach ($articles as $article) {
-                $articles_array[$article->id] = $article->title;
+                $articles_array[$article->id] = [$article->title,$article->description];
+//                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
         }

@@ -106,22 +106,22 @@
                                 <div class="modal-body">
                                     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
                                         <div class="carousel-inner">
-                                            @if($images_articles)
-                                                <div class="carousel-item active" data-interval="2000">
-                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[1]->imagen)}}">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img class="rounded mx-auto d-block img-fluid" src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[2]->imagen)}}">
-                                                </div>
-                                                <div class="carousel-item" data-interval="2000">
-                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[3]->imagen)}}">
-                                                </div>
-                                                <div class="carousel-item" data-interval="2000">
-                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[4]->imagen)}}">
-                                                </div>
-                                            @elseif(!$images_articles)
-                                                <h2 class="text-center">No hay imagenes secundarios....</h2>
-                                            @endif
+{{--                                            @if($images_articles)--}}
+{{--                                                <div class="carousel-item active" data-interval="2000">--}}
+{{--                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[1]->imagen)}}">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="carousel-item">--}}
+{{--                                                    <img class="rounded mx-auto d-block img-fluid" src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[2]->imagen)}}">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="carousel-item" data-interval="2000">--}}
+{{--                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[3]->imagen)}}">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="carousel-item" data-interval="2000">--}}
+{{--                                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$images_articles[4]->imagen)}}">--}}
+{{--                                                </div>--}}
+{{--                                            @elseif(!$images_articles)--}}
+{{--                                                <h2 class="text-center">No hay imagenes secundarios....</h2>--}}
+{{--                                            @endif--}}
                                         </div>
                                         <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

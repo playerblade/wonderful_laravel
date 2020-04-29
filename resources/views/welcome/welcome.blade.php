@@ -27,40 +27,14 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <h5 id="content" class="card-title m-0 float-right">
+{{--                                <h5 id="content" class="card-title m-0 float-right">--}}
 
-                                </h5>
+{{--                                </h5>--}}
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        @foreach($articles as $article)
-                            <div class="row">
-                                <div class="col-4">
-                                    {{--                              <h1>Images</h1>--}}
-                                    {{--                              <img src="" alt="">--}}
-                                    <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$article->image)}}">
-                                </div>
-                                <div class="col-8">
-                                    <h1>Title : {{$article->articulo}}</h1>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <h3>Price :{{$article->price}}</h3>
-                                            <p>!Compra ahora!!!</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <h4><b>Maker:</b> <br> {{$article->fabricante}}</h4>
-                                        </div>
-                                        <br><br><br>
-                                        <a href="#" class="btn btn-primary float-right">Añadir al carrito</a>
-                                    </div>
-                                </div>
-                                <a href="/article/{{$article->id}}/detail" class="btn btn-primary mt-2">Ver detalle del producto</a>
-                            </div>
-                            <hr>
-                            <hr>
-                        @endforeach
+                    <div id="content" class="card-body">
+{{--                        json code--}}
                     </div>
                 </div>
             </div>
@@ -94,9 +68,33 @@
                     $.get('get_articles_search',{sub_category_id: sub_category_id}, function (articles) {
                         $('#content').empty();
                         // $('#content').append("<h1>HELLO CONTENT</h1>");
-                        $.each(articles, function (index , value){
+                        $.each(articles, function (index , value ){
                             // $('#content').append("<h1>"+value+"</h1>");
-                            $('#content').append("<input type='text' value='"+value+"'/>");
+                            $('#content').append("<div class='row'>\n" +
+                                "                                <div class='col-4'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='#'>\n" +
+                                "                                </div>\n" +
+                                "                                <div  class='col-8'>\n" +
+                                "                                    <h1>Title : "+value[0]+"</h1>\n" +
+                                "                                    <br>\n" +
+                                "                                    <div class='row'>\n" +
+                                "                                        <div class='col-8'>\n" +
+                                "                                            <h3><b>Price :</b></h3>\n" +
+                                "                                            <h3><b>Description :</b></h3>\n" +
+                                "                                            <p> "+value[1]+" </p> \n"+
+                                "                                            <p>!Compra ahora!!!</p>\n" +
+                                "                                        </div>\n" +
+                                "                                        <div class='col-4'>\n" +
+                                "                                            <h4><b>Maker:</b> <br> </h4>\n" +
+                                "                                        </div>\n" +
+                                "                                        <br><br><br>\n" +
+                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                            </div>\n" +
+                                "                            <hr>\n" +
+                                "                            <hr>");
                         });
                     }).done();
                 }
