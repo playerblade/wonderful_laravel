@@ -344,6 +344,7 @@ class OrderController extends Controller
                  inner join cities c on tf.city_id = c.id
             where o.id = $order_id;
         ");
+        
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,

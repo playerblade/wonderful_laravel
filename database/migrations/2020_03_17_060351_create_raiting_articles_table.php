@@ -13,7 +13,7 @@ class CreateRaitingArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('raiting_articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('raiting_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('user_id');

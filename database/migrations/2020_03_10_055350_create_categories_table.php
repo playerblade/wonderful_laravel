@@ -13,9 +13,9 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::connection('mysql')->create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('category')->unique();
+            $table->string('category',40)->unique();
             $table->timestamps();
         });
     }

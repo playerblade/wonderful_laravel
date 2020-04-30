@@ -13,7 +13,7 @@ class CreateImageArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('image_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->string('url_image');

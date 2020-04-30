@@ -13,7 +13,7 @@ class CreateMakersTable extends Migration
      */
     public function up()
     {
-        Schema::create('makers', function (Blueprint $table) {
+        Schema::connection('mysql')->create('makers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('location');

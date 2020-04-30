@@ -13,7 +13,7 @@ class CreateStarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stars', function (Blueprint $table) {
+        Schema::connection('mysql')->create('stars', function (Blueprint $table) {
             $table->id();
             $table->string('star');
             $table->timestamps();

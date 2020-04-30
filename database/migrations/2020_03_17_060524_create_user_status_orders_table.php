@@ -13,7 +13,8 @@ class CreateUserStatusOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_status_orders', function (Blueprint $table) {
+        // Schema::create('user_status_orders', function (Blueprint $table) {
+        Schema::connection('mysql')->create('user_status_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('status_order_id');
             $table->unsignedBigInteger('user_id');

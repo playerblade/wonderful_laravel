@@ -13,7 +13,7 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sub_category_id');
             $table->unsignedBigInteger('maker_id');

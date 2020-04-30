@@ -13,7 +13,7 @@ class CreateColorArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('color_articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('color_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('color_id');

@@ -13,7 +13,7 @@ class CreatePriceArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('price_articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('price_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->string('price');

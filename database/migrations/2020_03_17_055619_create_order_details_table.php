@@ -13,7 +13,7 @@ class CreateOrderDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::connection('mysql')->create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('order_id');

@@ -13,7 +13,7 @@ class CreateCommentaryArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentary_articles', function (Blueprint $table) {
+        Schema::connection('mysql')->create('commentary_articles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('user_id');

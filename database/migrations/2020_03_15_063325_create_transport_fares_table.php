@@ -13,7 +13,7 @@ class CreateTransportFaresTable extends Migration
      */
     public function up()
     {
-        Schema::create('transport_fares', function (Blueprint $table) {
+        Schema::connection('mysql')->create('transport_fares', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('city_id');
             $table->string('price');
