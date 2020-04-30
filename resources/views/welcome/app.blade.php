@@ -37,7 +37,7 @@
 
 </head>
     <body class="hold-transition layout-top-nav">
-        <div class="wrapper">
+        <section class="wrapper">
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-1">
                 <div class="container">
@@ -256,7 +256,7 @@
                 <!-- Default to the left -->
                 <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
             </footer>
-        </div>
+        </section>
         <!-- ./wrapper -->
     </body>
 </html>

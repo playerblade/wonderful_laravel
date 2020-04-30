@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = Category::all();
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id
@@ -47,7 +49,7 @@ class HomeController extends Controller
             return view('layouts.checker.home',compact('user'));
         }
         if ($request->user()->hasRole('cliente')){
-            return view('layouts.client.home',compact('user','articles'));
+            return view('layouts.client.home',compact('user','articles','categories'));
         }
 
     }
