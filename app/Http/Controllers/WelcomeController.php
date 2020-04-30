@@ -60,10 +60,21 @@ class WelcomeController extends Controller
 
     public function get_articles_search(Request $request){
         if ($request->ajax()){
-            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
-
+//            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
+            $articles = DB::select("
+                select a.title as articulo , m.name as fabricante, ia.url_image as image,
+                       pa.price as price , a.id as id
+                from articles a inner join image_articles ia on a.id = ia.article_id
+                    inner join sub_categories sc on a.sub_category_id = sc.id
+                    inner join price_articles pa on a.id = pa.article_id
+                    inner join makers m on a.maker_id = m.id
+                    and pa.is_current = 1
+                    and ia.is_main = 1
+                    and sc.id = $request->sub_category_id
+                order by articulo desc;
+            ");
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->title,$article->description];
+                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);

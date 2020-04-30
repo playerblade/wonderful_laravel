@@ -72,20 +72,18 @@
                             // $('#content').append("<h1>"+value+"</h1>");
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
-                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='#'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='{{asset('/imagenes/imagenes_articulos/'."1.jpg")}}'>\n" +
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h1>Title : "+value[0]+"</h1>\n" +
                                 "                                    <br>\n" +
                                 "                                    <div class='row'>\n" +
                                 "                                        <div class='col-8'>\n" +
-                                "                                            <h3><b>Price :</b></h3>\n" +
-                                "                                            <h3><b>Description :</b></h3>\n" +
-                                "                                            <p> "+value[1]+" </p> \n"+
+                                "                                            <h3>Price :"+value[1]+"</h3>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class='col-4'>\n" +
-                                "                                            <h4><b>Maker:</b> <br> </h4>\n" +
+                                "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
                                 "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
