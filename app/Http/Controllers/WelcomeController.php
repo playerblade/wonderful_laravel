@@ -167,6 +167,7 @@ class WelcomeController extends Controller
             foreach ($articles as $article) {
                 $articles_array[$article->title] = [$article->title,$article->url_image,$article->price,$article->name];
             }
+            
             return response()->json($articles_array);
         }
     }

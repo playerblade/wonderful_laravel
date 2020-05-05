@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function GuzzleHttp\Promise\all;
 
 class TransactionsController extends Controller
 {
@@ -36,20 +37,19 @@ class TransactionsController extends Controller
      */
     public function store(Request $request)
     {
-        $bank_accounts = DB::connection('db1')
-                                            ->select('select b.amount as amount, b.account_number as account_number from bank_accounts b
-                                            ');
-        
-        foreach ($bank_accounts as $bank_account) {
-            if ($request->account_number == $bank_account->account_number) {
-                // return response()->json(true);
-                return response()->json(true);
-            }
-                return response()->json(false);
-            
+//        $amount = $request->amount;
+        $bank_accounts = DB::connection('db1')->table('bank_accounts')
+                                                    ->where('account_number','=',[$request->account_number])
+                                                    ->where('active','=',1)
+                                                    ->where('amount', '>=' ,[$request->amount])
+                                                    ->first();
+        if ($bank_accounts){
+            return response()->json(true);
+        }else{
+            return response()->json(false);
         }
-                                                   
-        // return response()->json($bank_accounts);
+//        return response()->json($bank_account_array);
+
     }
 
     /**
