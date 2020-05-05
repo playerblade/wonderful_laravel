@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::connection('mysql')->create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('role_id');
+            // $table->unsignedBigInteger('bank_account_id');
             $table->string('ci');
             $table->string('first_name');
             $table->string('second_name');
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            // $table->foreign('bank_account_id')->references('id')->on('bank_accounts')->onDelete('cascade');
             $table->timestamps();
         });
     }

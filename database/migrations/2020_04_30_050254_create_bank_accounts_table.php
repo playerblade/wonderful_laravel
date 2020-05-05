@@ -24,7 +24,7 @@ class CreateBankAccountsTable extends Migration
         Schema::connection('db1')->create('bank_accounts', function (Blueprint $table) {
         // $this->schema->create('bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo_Client');
+            $table->integer('account_number');
             $table->integer('monto');
             $table->timestamps();
         });
