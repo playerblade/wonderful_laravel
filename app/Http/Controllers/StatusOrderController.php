@@ -92,21 +92,18 @@ class StatusOrderController extends Controller
     public function ordersInitial()
     {
         $order_details = DB::select("
-            select a.id as article_id, o.id as order_id ,
-                   u.id as user_id , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
-                   a.title as articulo , pa.price as precio , od.quantity as cantidad ,
-                   od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
-                   o.created_at as fecha , po.id as porcess_order_id
-            from users u inner join orders o on u.id = o.user_id
-                  inner join status_orders so on so.order_id = o.id
-                  inner join process_orders po on so.process_order_id = po.id
-                  inner join order_details od on o.id = od.order_id
-                  inner join articles a on od.article_id = a.id
-                  inner join price_articles pa on a.id = pa.article_id
-            and pa.is_current = 1
-            and po.id = 1
-            group by a.id, o.id, u.id, concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name), a.title, pa.price, od.quantity, od.sub_total, o.created_at , porcess_order_id
-            order by fecha desc;
+            select o.id as order_id ,concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
+                   a.id as article_id, a.title as articulo,
+                   pa.price as precio , od.quantity as cantidad , od.sub_total as subTotal,
+                   od.created_at , po.process_order as estado
+            from order_details od inner join orders o on od.order_id = o.id
+                 inner join users u on o.user_id = u.id
+                 inner join status_orders so on o.id = so.order_id
+                 inner join process_orders po on so.process_order_id = po.id
+                 inner join articles a on od.article_id = a.id
+                 inner join price_articles pa on od.price_article_id = pa.id
+            where pa.is_current = 1
+            and po.process_order = 'initial';
         ");
 
         return view('statusOrders.orderDetail',compact('order_details'));

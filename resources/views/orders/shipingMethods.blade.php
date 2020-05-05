@@ -88,7 +88,12 @@
                         $('#transport_fare').empty();
                         $('#transport_fare').append("<option value=''>Selecione su tipo y precio de envio</option>");
                         $.each(transport_fares, function (index , value){
-                            $('#transport_fare').append("<option  value='"+index+"'>"+value+"</option>");
+                            if (value[1] == 1 ){
+                                $('#transport_fare').append("<option  value='"+index+"'>Costo de "+value[0]+" bs. Por Vuelo</option>");
+                            }
+                            if (value[1] == 0 ){
+                                $('#transport_fare').append("<option  value='"+index+"'>Costo de "+value[0]+" bs. Por Bus</option>");
+                            }
                         }).done();
                     });
                 }

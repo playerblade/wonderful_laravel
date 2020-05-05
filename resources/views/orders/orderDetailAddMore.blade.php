@@ -1,5 +1,6 @@
 @extends('layouts.client.app')
 @section('content')
+    <br>
     <div class="container">
         <div class="row">
             <!-- /.col-md-6 -->
@@ -7,20 +8,20 @@
                 <div class="card card-primary card-outline">
                     <div class="card-header">
                         <div class="row">
+{{--                            <div class="col-6">--}}
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <select id="" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-6">--}}
+{{--                                        <select id="" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col-6">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <select id="" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
-                                        <select id="" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <h5 class="card-title m-0 float-right"><b>Articulos</b></h5>
+                                <h5 class="card-title m-0 float-left"><b>Articulos</b></h5>
                             </div>
                         </div>
                     </div>
@@ -55,10 +56,11 @@
                         @endforeach
                         <div class="form-group">
                             <a href="/more/{{$order_details[0]->order_id}}/article" class="btn btn-info float-left">Añadir Mas Articulos</a>
-                            <a href="/payment/methods/{{$order_details[0]->order_id}}/{{$orders[0]->transport_fares_id}}/{{$orders[0]->user_id}}" class="btn btn-danger float-right">Proceder con forma de envio!!!</a>
-                            <a href="{{ route('orders.edit',$order_details[0]->order_id) }}" class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                            </a>
+{{--                            <a href="/payment/methods/{{$order_details[0]->order_id}}/{{$orders[0]->transport_fares_id}}/{{$orders[0]->user_id}}" class="btn btn-danger float-right">Proceder con forma de envio!!!</a>--}}
+                            <a href="{{ route('orders.edit',$order_details[0]->order_id) }}" class="btn btn-danger float-right">Proceder con forma de envio!!!</a>
+{{--                            <a href="{{ route('orders.edit',$order_details[0]->order_id) }}" class="btn btn-warning">--}}
+{{--                                <i class="fas fa-edit"></i>--}}
+{{--                            </a>--}}
                         </div>
                     </div>
                 </div>

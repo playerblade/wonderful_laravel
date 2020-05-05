@@ -16,10 +16,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="header">
-                            <b>Por Categorias</b>
-                        </div>
-                        <hr>
                         <div class="row">
                             <div class="col-6">
                                 <label>Categoria</label>
@@ -35,15 +31,22 @@
                             <div class="col-6">
                                 <label>Sub Categoria</label>
                                 <select id="sub_categories" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    {{--                                                code js is here--}}
+{{--                                    ajax code--}}
                                 </select>
                             </div>
                         </div>
                         <hr>
-                        <div class="header">
-                            <b>Por Raiting</b>
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Makers</label>
+                                <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        <option selected >Select a maker</option>
+                                    @foreach($makers as $maker)
+                                        <option value="{{$maker->id}}">{{$maker->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
@@ -99,35 +102,142 @@
 {{--    </div>--}}
     <!-- /.container-fluid -->
 @endsection
-@section('script_categories_search')
+@section('script_for_search')
     <script type="text/javascript">
+// search for Categories
         $(document).ready(function () {
+            var img_path = '/imagenes/imagenes_articulos/';
             $('#categories').on('change',function () {
                 var category_id = $('#categories').val();
                 if ($.trim(category_id) != ''){
-                    $.get('get_sub_categories_search',{category_id: category_id}, function (sub_categories) {
+                    $.get('get_sub_categories',{category_id: category_id}, function (sub_categories) {
                         $('#sub_categories').empty();
                         $('#sub_categories').append("<option value=''>Selecione una sub categoria</option>");
                         $.each(sub_categories, function (index , value){
                             $('#sub_categories').append("<option value='"+index+"'>"+value+"</option>");
+
+                        });
+                    }).done();
+                    // for search articles for categories
+                    {{--var img_path = {{asset('/imagenes/imgenes_articulos/')}}--}}
+                    $.get('get_articles_for_categories',{category_id: category_id}, function (articles) {
+                        $('#content').empty();
+                        $('#content_hidden').hide();
+                        // $('#content').append(" <h1>Hello Brow</h1> ");
+                        $.each(articles, function (index , value ){
+                            $('#content').append("<div class='row'>\n" +
+                                "                                <div class='col-4'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                </div>\n" +
+                                "                                <div  class='col-8'>\n" +
+                                "                                    <h1>Title : "+value[0]+"</h1>\n" +
+                                "                                    <br>\n" +
+                                "                                    <div class='row'>\n" +
+                                "                                        <div class='col-8'>\n" +
+                                "                                            <h3>Price :"+value[1]+"</h3>\n" +
+                                "                                            <p>!Compra ahora!!!</p>\n" +
+                                "                                        </div>\n" +
+                                "                                        <div class='col-4'>\n" +
+                                "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
+                                "                                        </div>\n" +
+                                "                                        <br><br><br>\n" +
+                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                                <a href='/article/"+index+"/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                            </div>\n" +
+                                "                            <hr>\n" +
+                                "                            <hr>");
                         });
                     }).done();
                 }
             });
-
+// search for sub Categories
             $('#sub_categories').on('change', function () {
                 var sub_category_id = $('#sub_categories').val();
                 if ($.trim(sub_category_id) != ''){
                     // $('#content').empty();
                     // $('#content').append("<h1>HELLO CONTENT</h1>");
-                    $.get('get_articles_search',{sub_category_id: sub_category_id}, function (articles) {
+                    $.get('get_articles_for_sub_categories',{sub_category_id: sub_category_id}, function (articles) {
                         $('#content').empty();
                         $('#content_hidden').hide();
                         $.each(articles, function (index , value ){
                             // $('#content').append("<h1>"+value+"</h1>");
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
-                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='{{asset('/imagenes/imagenes_articulos/'."1.jpg")}}'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                </div>\n" +
+                                "                                <div  class='col-8'>\n" +
+                                "                                    <h1>Title : "+value[0]+"</h1>\n" +
+                                "                                    <br>\n" +
+                                "                                    <div class='row'>\n" +
+                                "                                        <div class='col-8'>\n" +
+                                "                                            <h3>Price :"+value[1]+"</h3>\n" +
+                                "                                            <p>!Compra ahora!!!</p>\n" +
+                                "                                        </div>\n" +
+                                "                                        <div class='col-4'>\n" +
+                                "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
+                                "                                        </div>\n" +
+                                "                                        <br><br><br>\n" +
+                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                            </div>\n" +
+                                "                            <hr>\n" +
+                                "                            <hr>");
+                        });
+                    }).done();
+                }
+            });
+// search for makers
+            $('#makers_search').on('change', function () {
+                var maker_id = $('#makers_search').val();
+                // search for only makers
+                if ($.trim(maker_id) != ''){
+                    $.get('get_articles_for_makers',{maker_id: maker_id}, function (articles) {
+                        $('#content').empty();
+                        $('#content_hidden').hide();
+                        $.each(articles, function (index , value ){
+                            // $('#content').append("<h1>"+value+"</h1>");
+                            $('#content').append("<div class='row'>\n" +
+                                "                                <div class='col-4'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                </div>\n" +
+                                "                                <div  class='col-8'>\n" +
+                                "                                    <h1>Title : "+value[0]+"</h1>\n" +
+                                "                                    <br>\n" +
+                                "                                    <div class='row'>\n" +
+                                "                                        <div class='col-8'>\n" +
+                                "                                            <h3>Price :"+value[1]+"</h3>\n" +
+                                "                                            <p>!Compra ahora!!!</p>\n" +
+                                "                                        </div>\n" +
+                                "                                        <div class='col-4'>\n" +
+                                "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
+                                "                                        </div>\n" +
+                                "                                        <br><br><br>\n" +
+                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                            </div>\n" +
+                                "                            <hr>\n" +
+                                "                            <hr>");
+                        });
+                    }).done();
+                }
+
+                // search for makers and sub_categories
+                var sub_category_id = $('#sub_categories').val();
+                if ($.trim(maker_id) != '' && $.trim(sub_category_id) != ''){
+                    $.get('get_articles_for_makers_and_sub_categories',{maker_id: maker_id,sub_category_id: sub_category_id }, function (articles) {
+                        $('#content').empty();
+                        $('#content_hidden').hide();
+                        $.each(articles, function (index , value ){
+                            // $('#content').append("<h1>"+value+"</h1>");
+                            $('#content').append("<div class='row'>\n" +
+                                "                                <div class='col-4'>\n" +
+                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h1>Title : "+value[0]+"</h1>\n" +

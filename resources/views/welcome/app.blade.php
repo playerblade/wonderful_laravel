@@ -544,5 +544,4 @@
     });
 </script>
 
-@yield('script_categories_search')
-
+@yield('script_for_search')

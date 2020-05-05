@@ -327,4 +327,4 @@
 
 @yield('script_transport_fares')
 @yield('script_color_form')
-@yield('script_categories_search')
+@yield('script_for_search')

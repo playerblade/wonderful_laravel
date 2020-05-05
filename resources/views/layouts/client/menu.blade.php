@@ -16,7 +16,7 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="/reportes/cliente/5/ordenes" class="nav-link">Cambiar Estado de Ordenes en Despacho</a>
+                <a href="/reportes/cliente/5/ordenes" class="nav-link">Options</a>
             </li>
           <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
@@ -54,16 +54,16 @@
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-0 ml-md-3">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </form>
+{{--        <form class="form-inline ml-0 ml-md-3">--}}
+{{--          <div class="input-group input-group-sm">--}}
+{{--            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">--}}
+{{--            <div class="input-group-append">--}}
+{{--              <button class="btn btn-navbar" type="submit">--}}
+{{--                <i class="fas fa-search"></i>--}}
+{{--              </button>--}}
+{{--            </div>--}}
+{{--          </div>--}}
+{{--        </form>--}}
       </div>
 
       <!-- Right navbar links -->
@@ -115,7 +115,11 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    @yield('content')
+      <!-- Main content -->
+      <section class="content">
+          @yield('content')
+      </section>
+      <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 

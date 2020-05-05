@@ -210,7 +210,7 @@ class OrderController extends Controller
         if ($request->ajax()){
             $transport_fares = TransportFare::where('city_id', $request->city_id)->get();
             foreach ($transport_fares as $transport_fare) {
-                $transport_fare_array[$transport_fare->id] = $transport_fare->price;
+                $transport_fare_array[$transport_fare->id] = [$transport_fare->price,$transport_fare->shiping];
             }
             return response()->json($transport_fare_array);
         }
@@ -344,7 +344,7 @@ class OrderController extends Controller
                  inner join cities c on tf.city_id = c.id
             where o.id = $order_id;
         ");
-        
+
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,

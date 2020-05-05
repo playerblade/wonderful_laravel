@@ -27,11 +27,23 @@ Route::group(['middleware' => 'web'], function () {
         'WelcomeController@articleDetail'
     );
 
-    Route::get('/get_sub_categories_search',
-        'WelcomeController@get_sub_categories_search'
+    Route::get('/get_articles_for_categories',
+        'WelcomeController@geArticlesForCategories'
     );
-    Route::get('/get_articles_search',
-        'WelcomeController@get_articles_search'
+    Route::get('/get_sub_categories',
+        'WelcomeController@getSubCategories'
+    );
+    Route::get('/get_articles_for_sub_categories',
+        'WelcomeController@getArticlesForSubCategories'
+    );
+    Route::get('/get_articles_for_makers',
+        'WelcomeController@getArticlesForMakers'
+    );
+    Route::get('/get_articles_for_makers_and_sub_categories',
+        'WelcomeController@getArticlesForMakersAndSubCategories'
+    );
+    Route::get('/get_search_articles',
+        'WelcomeController@getSearchArticles'
     );
 });
 Route::group(['middleware' => 'web','role:administrador'], function () {
