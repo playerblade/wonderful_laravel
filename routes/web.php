@@ -159,6 +159,10 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
         'OrderController@paymentMethods'
     )->name('paymentMethods');
 
+    Route::resource('transactions',
+    'TransactionsController'
+    );
+
 });
 Route::group(['middleware' => 'web','role:colaborador'], function () {
     Route::get('/home','HomeController@index')->name('home');

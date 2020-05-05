@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="#" method="POST">
+                        <form action="{{route('transactions.store')}}" method="POST">
                             @csrf
                             @foreach($orders as $order)
                                 <div class="row">
@@ -38,7 +38,7 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-8">
-                                            <input type="number" class="form-control float-left" placeholder="Ingrese numero de tarjeta..">
+                                            <input type="number" name="account_number" class="form-control float-left" placeholder="Ingrese numero de tarjeta..">
                                         </div>
                                         <div class="col-4">
                                             <i class="fa fa-credit-card" aria-hidden="true"></i>&ensp;&ensp;

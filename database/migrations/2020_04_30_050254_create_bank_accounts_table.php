@@ -24,10 +24,12 @@ class CreateBankAccountsTable extends Migration
         Schema::connection('db1')->create('bank_accounts', function (Blueprint $table) {
         // $this->schema->create('bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('account_number');
+            $table->integer('account_number')->unique();
+            $table->unsignedBigInteger('bank_user_id');
             $table->integer('amount');
             $table->boolean('active');
             $table->timestamps();
+            $table->foreign('bank_user_id')->references('id')->on('bank_users')->onDelete('cascade');
         });
     }
 
