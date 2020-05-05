@@ -25,7 +25,8 @@ class CreateBankAccountsTable extends Migration
         // $this->schema->create('bank_accounts', function (Blueprint $table) {
             $table->id();
             $table->integer('account_number');
-            $table->integer('monto');
+            $table->integer('amount');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
