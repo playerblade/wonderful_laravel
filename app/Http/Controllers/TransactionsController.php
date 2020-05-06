@@ -56,7 +56,6 @@ class TransactionsController extends Controller
                 // $transactions->save();
             ]);
         }else{
-
             return response()->json(false);
         }
         return redirect()->route('home');

@@ -80,6 +80,15 @@ class OrderController extends Controller
             $order_datail->quantity = $request->quantity;
             $order_datail->sub_total = $request->price * $order_datail->quantity;
             $order_datail->save();
+
+            $res = $request->quantity_total - $request->quantity;
+            dd($res);
+           DB::table('color_articles')
+               ->join('colors','color_articles.color_id','=','colors.id')
+               ->where('colors.image',[$request->color_article])
+               ->update(['color_articles.quantity'=>$res]);
+                                      
+        //    dd($color_update);
 //            return response()->json($order_datail);
         }
 
@@ -185,7 +194,7 @@ class OrderController extends Controller
             where a.id = $article_id;
         ");
         $colors = DB::select("
-            select c.name as name , c.image as image , c.id as id
+            select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
             from articles a inner join color_articles ca on a.id = ca.article_id
                  inner join colors c on ca.color_id = c.id
             where a.id = $article_id;
@@ -201,7 +210,6 @@ class OrderController extends Controller
                     and a.id = $article_id
                 order by articulo desc ;
         ");
-
         return view('orders.formOrder',compact('articles','cities','colors','prices'));
     }
 
