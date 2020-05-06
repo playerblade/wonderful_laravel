@@ -53,10 +53,13 @@
                                             <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
                                             {{$color->name}}
                                             <br>
-{{--                                            <i class="fas fa-circle fa-2x text-green"></i>--}}
                                                 <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
+                                                <br> Cant.: {{$color->quantity}}
+                                                <input  type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
+                                        
                                     @endforeach
+
                                 </div>
 {{--                                <form action="">--}}
                                     <div class="row mt-2">
@@ -65,7 +68,8 @@
                                             <div class="select2-purple">
                                                 <select id="color" class="select2" name="color_article[]"   multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($colors as $color)
-                                                        <option value="{{ $color->image }}">
+                                                        <!-- <input  type="number" name="quantity_total" value="{{$color->quantity}}"> -->
+                                                        <option value="{{ $color->image}}">
                                                             {{ $color->name }}
                                                         </option>
                                                     @endforeach

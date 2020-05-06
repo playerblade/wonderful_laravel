@@ -17,6 +17,7 @@ class CreateColorArticlesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('color_id');
+            $table->integer('quantity');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
             $table->timestamps();

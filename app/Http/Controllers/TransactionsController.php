@@ -37,7 +37,6 @@ class TransactionsController extends Controller
      */
     public function store(Request $request)
     {
-//        DB::transaction(function (Request $request){
             $bank_accounts = DB::connection('db1')
                 ->table('bank_accounts')
                 ->where('account_number','=',[$request->account_number])
@@ -49,7 +48,29 @@ class TransactionsController extends Controller
             }else{
                 return response()->json(false);
             }
-//        });
+
+//        $amount = $request->amount;
+        $bank_accounts = DB::connection('db1')->table('bank_accounts')
+                                                    ->where('account_number','=',[$request->account_number])
+                                                    ->where('active','=',1)
+                                                    ->where('amount', '>=' ,[$request->amount])
+                                                    ->select('bank_accounts.id')
+                                                    ->first();
+        if ($bank_accounts){
+            // return response()->json(true);
+            DB::connection('db1')->table('transactions')->insert([
+                // $transactions = new Transactions();
+                'bank_accounts_id' => $bank_accounts->id,
+                'transaction_type_id' => 1,
+                'mount_transaction' => $request->amount,
+                'created_at' => date("Y-m-d H:i:s")
+                // $transactions->save();
+            ]);
+        }else{
+            return response()->json(false);
+        }
+        return redirect()->route('home');
+//        return response()->json($bank_account_array);
     }
 
     /**
