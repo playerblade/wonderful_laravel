@@ -37,19 +37,19 @@ class TransactionsController extends Controller
      */
     public function store(Request $request)
     {
-//        $amount = $request->amount;
-        $bank_accounts = DB::connection('db1')->table('bank_accounts')
-                                                    ->where('account_number','=',[$request->account_number])
-                                                    ->where('active','=',1)
-                                                    ->where('amount', '>=' ,[$request->amount])
-                                                    ->first();
-        if ($bank_accounts){
-            return response()->json(true);
-        }else{
-            return response()->json(false);
-        }
-//        return response()->json($bank_account_array);
-
+//        DB::transaction(function (Request $request){
+            $bank_accounts = DB::connection('db1')
+                ->table('bank_accounts')
+                ->where('account_number','=',[$request->account_number])
+                ->where('active','=',1)
+                ->where('amount', '>=' ,[$request->amount])
+                ->first();
+            if ($bank_accounts){
+                return response()->json(true);
+            }else{
+                return response()->json(false);
+            }
+//        });
     }
 
     /**
