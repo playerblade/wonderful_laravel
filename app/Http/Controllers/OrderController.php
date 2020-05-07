@@ -46,6 +46,11 @@ class OrderController extends Controller
     {
 //        return  response()->json($request->user_id);
 //        1 paso crea una orden
+        if ($request->quantity_total == $request->quantity){
+             return redirect()->back()->with('alert','fail!!');
+        }else{
+            return response()->json(true);
+        }
         $order = new Order();
         $order->transport_fares_id = 4;
         $order->user_id =  $request->user_id;
@@ -82,14 +87,13 @@ class OrderController extends Controller
             $order_datail->save();
 
             $res = $request->quantity_total - $request->quantity;
-            dd($res);
+//            dd($res);
            DB::table('color_articles')
                ->join('colors','color_articles.color_id','=','colors.id')
                ->where('colors.image',[$request->color_article])
                ->update(['color_articles.quantity'=>$res]);
-                                      
-        //    dd($color_update);
-//            return response()->json($order_datail);
+
+
         }
 
         $status_order = new StatusOrder();

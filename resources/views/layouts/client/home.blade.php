@@ -277,28 +277,28 @@
                         $('#content_hidden').hide();
                         $.each(articles, function (title , value){
                             $('#content').append("<div class='row'>\n" +
-                                "                                <div class='col-4'>\n" +
-                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[1]+"'>\n" +
-                                "                                </div>\n" +
-                                "                                <div  class='col-8'>\n" +
-                                "                                    <h1>Title : "+title+"</h1>\n" +
-                                "                                    <br>\n" +
-                                "                                    <div class='row'>\n" +
-                                "                                        <div class='col-8'>\n" +
-                                "                                            <h3>Price :"+value[2]+"</h3>\n" +
-                                "                                            <p>!Compra ahora!!!</p>\n" +
-                                "                                        </div>\n" +
-                                "                                        <div class='col-4'>\n" +
-                                "                                            <h4><b>Maker:</b><br>"+value[3]+" </h4>\n" +
-                                "                                        </div>\n" +
-                                "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
-                                "                                    </div>\n" +
-                                "                                </div>\n" +
-                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
-                                "                            </div>\n" +
-                                "                            <hr>\n" +
-                                "                            <hr>"
+                            "                                <div class='col-4'>\n" +
+                            "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[1]+"'>\n" +
+                            "                                </div>\n" +
+                            "                                <div  class='col-8'>\n" +
+                            "                                    <h1>Title : "+title+"</h1>\n" +
+                            "                                    <br>\n" +
+                            "                                    <div class='row'>\n" +
+                            "                                        <div class='col-8'>\n" +
+                            "                                            <h3>Price :"+value[2]+"</h3>\n" +
+                            "                                            <p>!Compra ahora!!!</p>\n" +
+                            "                                        </div>\n" +
+                            "                                        <div class='col-4'>\n" +
+                            "                                            <h4><b>Maker:</b><br>"+value[3]+" </h4>\n" +
+                            "                                        </div>\n" +
+                            "                                        <br><br><br>\n" +
+                            "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                                <a href='/article/"+value[0]+"/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                            "                            </div>\n" +
+                            "                            <hr>\n" +
+                            "                            <hr>"
                             );
                         });
                     })

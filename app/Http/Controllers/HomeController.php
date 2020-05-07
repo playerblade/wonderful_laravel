@@ -27,17 +27,25 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::all();
-        $makers = Maker::all();
+//        $categories = Category::all();
+        $categories = Category::select('categories.*')->orderBy('category','asc')->get();
+        $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
+//        $makers = DB::table('makers')
+//                      ->select('makers.*')
+//                      ->orderBy('name','asc')->get();
+
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id
                 from articles a inner join image_articles ia on a.id = ia.article_id
+                    inner join sub_categories sc on a.sub_category_id = sc.id
+                    inner join categories c on sc.category_id = c.id
                     inner join price_articles pa on a.id = pa.article_id
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                order by articulo desc;
+                    and c.id = 1
+               order by a.title asc;
         ");
 
         $user = Auth::user();

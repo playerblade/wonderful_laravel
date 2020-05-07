@@ -57,7 +57,7 @@
                                                 <br> Cant.: {{$color->quantity}}
                                                 <input  type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
-                                        
+
                                     @endforeach
 
                                 </div>
@@ -113,6 +113,9 @@
                                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                         <button class="btn btn-primary">Add to Cart</button>
                                     </div>
+{{--                                    <div class="swalDefaultError">--}}
+{{--                                        content json--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -120,6 +123,8 @@
                     <!-- /.card-body -->
                 @endforeach
             </form>
+
+            <button class="hola">swalt</button>
         </div>
     </div>
     <br>
@@ -151,12 +156,71 @@
                 if ($.trim(color.length) > 1){
                     $('#cantidad').hide();
                     console.log($.trim(color.length));
-                    // $('#cantidad_article').append("<h4>Total De Articulos</h4>\n" +
-                    //     "                  <input type='number' value='"+$.trim(color.length)+"' class='form-control'>\n" +
-                    //     "                  ");
-                    //
+                }
+                if ($.trim(color.length) == 1){
+                    console.log($.trim(color.length));
                 }
             });
         });
     </script>
+@endsection
+@section('alert_validations')
+{{--    <script type="text/javascript">--}}
+{{--        var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}'--}}
+{{--        var exist = '{{\Illuminate\Support\Facades\Session::has('alert')}}'--}}
+{{--        if (exist){--}}
+{{--            alert(msg)--}}
+{{--        }--}}
+{{--    </script>--}}
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            // if exist some errors
+            var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}'
+            var exist = '{{\Illuminate\Support\Facades\Session::has('alert')}}'
+            if (exist){
+                Toast.fire({
+                    type: 'error',
+                    title: msg
+                })
+            }
+
+            $('.swalDefaultSuccess').click(function() {
+                Toast.fire({
+                    type: 'success',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultInfo').click(function() {
+                Toast.fire({
+                    type: 'info',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            // $('.swalDefaultError').click(function() {
+            //     Toast.fire({
+            //         type: 'error',
+            //         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            //     })
+            // });
+            $('.swalDefaultWarning').click(function() {
+                Toast.fire({
+                    type: 'warning',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultQuestion').click(function() {
+                Toast.fire({
+                    type: 'question',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+        });
+    </script>
+
 @endsection

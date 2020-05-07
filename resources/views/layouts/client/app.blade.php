@@ -328,3 +328,4 @@
 @yield('script_transport_fares')
 @yield('script_color_form')
 @yield('script_for_search')
+@yield('alert_validations')
