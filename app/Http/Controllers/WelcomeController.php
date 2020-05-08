@@ -67,7 +67,7 @@ class WelcomeController extends Controller
                     and pa.is_current = 1
                     and ia.is_main = 1
                     and c.id = $request->category_id
-                order by articulo desc;
+                order by articulo asc;
             ");
             foreach ($articles as $article) {
                 $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
@@ -79,7 +79,8 @@ class WelcomeController extends Controller
 
     public function getSubCategories(Request $request){
         if ($request->ajax()){
-            $sub_categories = SubCategory::where('category_id', $request->category_id)->get();
+            $sub_categories = SubCategory::where('category_id', $request->category_id)
+                                           ->orderBy('sub_category','asc')->get();
 
             foreach ($sub_categories as $sub_category) {
                 $sub_categories_array[$sub_category->id] = $sub_category->sub_category;
@@ -101,7 +102,7 @@ class WelcomeController extends Controller
                     and pa.is_current = 1
                     and ia.is_main = 1
                     and sc.id = $request->sub_category_id
-                order by articulo desc;
+                order by articulo asc;
             ");
             foreach ($articles as $article) {
                 $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
@@ -123,7 +124,7 @@ class WelcomeController extends Controller
                     and pa.is_current = 1
                     and ia.is_main = 1
                     and m.id = $request->maker_id
-                order by articulo desc;
+                order by articulo asc;
             ");
             foreach ($articles as $article) {
                 $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
@@ -147,7 +148,7 @@ class WelcomeController extends Controller
                     and ia.is_main = 1
                     and m.id = $request->maker_id
                     and sc.id = $request->sub_category_id
-                order by articulo desc;
+                order by articulo asc;
             ");
             foreach ($articles as $article) {
                 $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
@@ -165,7 +166,8 @@ class WelcomeController extends Controller
                 ->join('price_articles','articles.id','=','price_articles.id')
                 ->join('makers','articles.maker_id','=','makers.id')
                 ->where('articles.title','LIKE','%'.$request->text.'%')
-                ->select('articles.*','image_articles.url_image','price_articles.price','makers.name')->get();
+                ->select('articles.*','image_articles.url_image','price_articles.price','makers.name')
+                ->orderBy('title','asc')->get();
 
             foreach ($articles as $article) {
                 $articles_array[$article->title] = [$article->id,$article->url_image,$article->price,$article->name];

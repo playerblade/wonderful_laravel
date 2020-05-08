@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Category;
+use App\City;
 use App\Maker;
+use App\PriceArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +38,7 @@ class HomeController extends Controller
 //                      ->orderBy('name','asc')->get();
 
         $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
+            select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join sub_categories sc on a.sub_category_id = sc.id

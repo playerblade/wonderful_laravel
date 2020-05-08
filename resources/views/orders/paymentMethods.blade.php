@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <strong class="float-right">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</strong>
-                                    <input type="text" name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
+                                    <h2 class="float-right" style="color: red;">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</h2>
+                                    <input type="text" hidden name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
                                 </div>
                             </div>
                             <hr>
@@ -83,6 +83,28 @@
                     });
                 }
             });
+        });
+    </script>
+@endsection
+@section('alert_validations')
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+            // if exist some errors
+            var msg = '{{\Illuminate\Support\Facades\Session::get('alerta')}}'
+            var exist = '{{\Illuminate\Support\Facades\Session::has('alerta')}}'
+            if (exist){
+                Toast.fire({
+                    type: 'warning',
+                    title: msg
+                })
+            }
+
         });
     </script>
 @endsection

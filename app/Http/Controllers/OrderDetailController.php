@@ -84,7 +84,8 @@ class OrderDetailController extends Controller
      */
     public function destroy(OrderDetail $orderDetail)
     {
-        //
+        $orderDetail->delete();
+        return redirect()->back();
     }
 
     public function detalleDeOrdenesPorCliente(Request $request){

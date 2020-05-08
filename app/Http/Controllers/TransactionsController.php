@@ -46,7 +46,7 @@ class TransactionsController extends Controller
                                                     ->first();
         if ($bank_accounts){
             // return response()->json(true);
-            DB::connection('db1')->table('transactions')->insert([
+            $transaction = DB::connection('db1')->table('transactions')->insert([
                 // $transactions = new Transactions();
                 'bank_accounts_id' => $bank_accounts->id,
                 'transaction_type_id' => 1,
@@ -55,9 +55,9 @@ class TransactionsController extends Controller
                 // $transactions->save();
             ]);
         }else{
-            return response()->json(false);
+            return redirect()->back()->with('alerta','Monto insuficiente o Cuanta inactiva');
         }
-        return redirect()->route('home');
+        return redirect()->route('detail_transaction',['bank_account_id' => $bank_accounts->id])->with('alert','Su pedio fue realizado con exito');
 //        return response()->json($bank_account_array);
     }
 
@@ -104,5 +104,18 @@ class TransactionsController extends Controller
     public function destroy(Transactions $transactions)
     {
         //
+    }
+
+    public function transactionDetail($bank_account_id){
+        $transaction_details = DB::connection('db1')
+                               ->table('bank_users')
+                               ->join('bank_accounts','bank_accounts.bank_user_id','=','bank_users.id')
+                               ->join('transactions','transactions.bank_accounts_id','=','bank_accounts.id')
+                               ->join('transaction_types','transactions.transaction_type_id','=','transaction_types.id')
+                               ->where('bank_accounts.id',$bank_account_id)
+                               ->select('transactions.*','transactions.id','bank_users.*','bank_accounts.*','transaction_types.*')
+                               ->get();
+
+        return view('orders.transactionDetail',compact('transaction_details'));
     }
 }

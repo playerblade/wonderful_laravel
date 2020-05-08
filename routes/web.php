@@ -163,7 +163,16 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     'TransactionsController'
     );
 
+    Route::resource('order_details',
+        'OrderDetailController'
+    );
+
+    Route::get('/detail_transaction/{bank_account_id}',
+        'TransactionsController@transactionDetail'
+    )->name('detail_transaction');
+
 });
+
 Route::group(['middleware' => 'web','role:colaborador'], function () {
     Route::get('/home','HomeController@index')->name('home');
 

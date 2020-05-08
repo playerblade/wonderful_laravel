@@ -55,11 +55,10 @@
                                             <br>
                                                 <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
                                                 <br> Cant.: {{$color->quantity}}
-                                                <input  type="number" name="quantity_total" value="{{$color->quantity}}">
+                                                <input hidden type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
 
                                     @endforeach
-
                                 </div>
 {{--                                <form action="">--}}
                                     <div class="row mt-2">
@@ -68,27 +67,21 @@
                                             <div class="select2-purple">
                                                 <select id="color" class="select2" name="color_article[]"   multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($colors as $color)
-                                                        <!-- <input  type="number" name="quantity_total" value="{{$color->quantity}}"> -->
-                                                        <option value="{{ $color->image}}">
+                                                        <option value="{{$color->image}}">
                                                             {{ $color->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div id="cant"></div>
                                         </div>
                                         <div id="cantidad" class="col-6">
                                             <h4>Cantidad</h4>
                                             <input type="number" name="quantity" class="form-control">
                                         </div>
-                                        <div id="cantidad_article" class="col-6">
-
+                                        <div  class="col-6">
+{{--                                            space--}}
                                         </div>
-{{--                                        <div class="btn btn-primary btn-sm btn-flat">--}}
-{{--                                            <button class="btn btn-primary">--}}
-{{--                                                Agregar--}}
-{{--                                                <i class="fa fa-plus-square fa-lg mr-2"></i>--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
                                     </div>
 {{--                                </form>--}}
                                 <div class="bg-gray py-2 px-3 mt-4">
@@ -123,8 +116,6 @@
                     <!-- /.card-body -->
                 @endforeach
             </form>
-
-            <button class="hola">swalt</button>
         </div>
     </div>
     <br>
@@ -157,28 +148,18 @@
                     $('#cantidad').hide();
                     console.log($.trim(color.length));
                 }
-                if ($.trim(color.length) == 1){
-                    console.log($.trim(color.length));
-                }
             });
         });
     </script>
 @endsection
 @section('alert_validations')
-{{--    <script type="text/javascript">--}}
-{{--        var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}'--}}
-{{--        var exist = '{{\Illuminate\Support\Facades\Session::has('alert')}}'--}}
-{{--        if (exist){--}}
-{{--            alert(msg)--}}
-{{--        }--}}
-{{--    </script>--}}
     <script type="text/javascript">
         $(function() {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 4000
             });
             // if exist some errors
             var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}'

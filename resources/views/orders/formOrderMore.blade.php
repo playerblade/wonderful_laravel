@@ -55,6 +55,8 @@
                                             <br>
                                             {{--                                            <i class="fas fa-circle fa-2x text-green"></i>--}}
                                             <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
+                                            <br> Cant.: {{$color->quantity}}
+                                            <input hidden type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
                                     @endforeach
                                 </div>
@@ -102,7 +104,7 @@
                                     <div class="btn btn-primary btn-lg btn-flat">
                                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                         <button class="btn btn-primary">Add to Cart</button>
-                                        <input type="number" name="order_id" value="{{$orders[0]->order_id}}">
+                                        <input hidden type="number" name="order_id" value="{{$orders[0]->order_id}}">
                                     </div>
                                 </div>
                             </div>
