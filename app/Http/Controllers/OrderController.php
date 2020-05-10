@@ -82,7 +82,7 @@ class OrderController extends Controller
             $order_datail->save();
 
             $res = $request->quantity_total - $request->quantity;
-            dd($res);
+            // dd($res);
            DB::table('color_articles')
                ->join('colors','color_articles.color_id','=','colors.id')
                ->where('colors.image',[$request->color_article])

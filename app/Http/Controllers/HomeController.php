@@ -31,13 +31,16 @@ class HomeController extends Controller
         $makers = Maker::all();
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
-                from articles a inner join image_articles ia on a.id = ia.article_id
+                       pa.price as price , a.id as id, sc.sub_category, c.category
+                from categories c inner join sub_categories sc on c.id=sc.category_id
+                    inner join articles a on sc.id=a.sub_category_id
+                    inner join image_articles ia on a.id = ia.article_id
                     inner join price_articles pa on a.id = pa.article_id
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                order by articulo desc;
+                    and sc.id=1
+                order by c.category,sc.sub_category,articulo desc;
         ");
 
         $user = Auth::user();

@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <strong class="float-right">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</strong>
-                                    <input type="text" name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
+                                    <h3 class="float-right bg-info">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</h3>
+                                    <input hidden type="text" name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
                                 </div>
                             </div>
                             <hr>

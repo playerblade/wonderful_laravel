@@ -55,7 +55,7 @@
                                             <br>
                                                 <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
                                                 <br> Cant.: {{$color->quantity}}
-                                                <input  type="number" name="quantity_total" value="{{$color->quantity}}">
+                                                <input hidden  type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
                                         
                                     @endforeach

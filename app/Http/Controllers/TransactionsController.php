@@ -37,7 +37,7 @@ class TransactionsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 //        $amount = $request->amount;
         $bank_accounts = DB::connection('db1')->table('bank_accounts')
                                                     ->where('account_number','=',[$request->account_number])
@@ -52,11 +52,13 @@ class TransactionsController extends Controller
                 'bank_accounts_id' => $bank_accounts->id,
                 'transaction_type_id' => 1,
                 'mount_transaction' => $request->amount,
-                'created_at' => date("Y-m-d H:i:s")
+                'created_at' => date("Y-m-d H:i:s"),
+                // $request->amount -$bank_accounts->mount_transaction
                 // $transactions->save();
             ]);
         }else{
             return response()->json(false);
+            // return ('no tiene monto suficiente');
         }
         return redirect()->route('home');
 //        return response()->json($bank_account_array);
