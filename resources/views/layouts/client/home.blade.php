@@ -64,11 +64,11 @@
                         </div>
                     </div>
                     <div id="content_hidden" class="card-body">
+                        <hr>
                         @foreach($articles as $article)
                             <div class="row">
                                 <div class="col-4">
                                     <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$article->image)}}">
-{{--                                    <a href="/order/{{$article->id}}/form" class="btn btn-primary mt-2" style="display: block;">Ver detalle del producto</a>--}}
                                 </div>
                                 <div class="col-8">
                                     <h3>{{$article->articulo}}</h3>
@@ -76,10 +76,13 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <h4>Price :{{$article->price}}</h4>
-{{--                                            <h4>Before Price :{{$article->price}}</h4>--}}
+{{--                                            @if($article->is_current == 0)--}}
+                                                <h4>Before Price :{{$article->price}}</h4>
+{{--                                            @endif--}}
                                             <p>!Compra ahora!!!</p>
                                         </div>
                                         <div class="col-4">
+{{--                                                <h5><b>Avaliable Colors</b></h5>--}}
                                             <h5><b>Maker:</b> <br> {{$article->fabricante}}</h5>
                                         </div>
                                         <br><br><br>
@@ -143,10 +146,10 @@
                                 "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/article/"+index+"/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -181,10 +184,10 @@
                                 "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -218,10 +221,10 @@
                                 "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -253,10 +256,10 @@
                                 "                                            <h4><b>Maker:</b><br>"+value[2]+" </h4>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -277,28 +280,28 @@
                         $('#content_hidden').hide();
                         $.each(articles, function (title , value){
                             $('#content').append("<div class='row'>\n" +
-                                "                                <div class='col-4'>\n" +
-                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[1]+"'>\n" +
-                                "                                </div>\n" +
-                                "                                <div  class='col-8'>\n" +
-                                "                                    <h1>Title : "+title+"</h1>\n" +
-                                "                                    <br>\n" +
-                                "                                    <div class='row'>\n" +
-                                "                                        <div class='col-8'>\n" +
-                                "                                            <h3>Price :"+value[2]+"</h3>\n" +
-                                "                                            <p>!Compra ahora!!!</p>\n" +
-                                "                                        </div>\n" +
-                                "                                        <div class='col-4'>\n" +
-                                "                                            <h4><b>Maker:</b><br>"+value[3]+" </h4>\n" +
-                                "                                        </div>\n" +
-                                "                                        <br><br><br>\n" +
-                                "                                        <a href='#' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
-                                "                                    </div>\n" +
-                                "                                </div>\n" +
-                                "                                <a href='/article/{article->id}/detail' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
-                                "                            </div>\n" +
-                                "                            <hr>\n" +
-                                "                            <hr>"
+                            "                                <div class='col-4'>\n" +
+                            "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[1]+"'>\n" +
+                            "                                </div>\n" +
+                            "                                <div  class='col-8'>\n" +
+                            "                                    <h1>Title : "+title+"</h1>\n" +
+                            "                                    <br>\n" +
+                            "                                    <div class='row'>\n" +
+                            "                                        <div class='col-8'>\n" +
+                            "                                            <h3>Price :"+value[2]+"</h3>\n" +
+                            "                                            <p>!Compra ahora!!!</p>\n" +
+                            "                                        </div>\n" +
+                            "                                        <div class='col-4'>\n" +
+                            "                                            <h4><b>Maker:</b><br>"+value[3]+" </h4>\n" +
+                            "                                        </div>\n" +
+                            "                                        <br><br><br>\n" +
+                            "                                        <a href='/order/"+value[0]+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                                <a href='/order/"+value[0]+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
+                            "                            </div>\n" +
+                            "                            <hr>\n" +
+                            "                            <hr>"
                             );
                         });
                     })

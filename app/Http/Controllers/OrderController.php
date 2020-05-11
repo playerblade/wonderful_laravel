@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use App\City;
 use App\ColorArticle;
+use App\Maker;
 use App\Order;
 use App\OrderDetail;
 use App\ProcessOrder;
@@ -44,60 +46,68 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-//        return  response()->json($request->user_id);
-//        1 paso crea una orden
-        $order = new Order();
-        $order->transport_fares_id = 4;
-        $order->user_id =  $request->user_id;
-        $order->total_amount = 0;
-        $order->save();
+//            return response()->json($request->quantity_total);
 
-        $length_colors = sizeof($request->color_article);
-        if ($length_colors > 1){
-            $list = [];
-            foreach ($request->color_article as $colors){
-                $data = [
-                    'article_id' => $request->article_id,
-                    'order_id' => $order->id,
-                    'price_article_id' => $request->price_article_id,
-                    'color_article' => $colors,
-                    'quantity' => 1,
-                    'sub_total' => $request->price * 1,
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'updated_at' => date("Y-m-d H:i:s")
-                ];
-//                $order_detail = new OrderDetail();
-                array_push($list,$data);
-            }
-            DB::table('order_details')->insert($list);
-//            return response()->json($list);
+        if ($request->quantity >
+         $request->stocks){
+             return redirect()->back()->with('alert','No hay suficientes productos en el stock');
+
         }else{
-            $order_datail = new OrderDetail();
-            $order_datail->article_id = $request->article_id;
-            $order_datail->order_id = $order->id;
-            $order_datail->price_article_id = $request->price_article_id;
-            $order_datail->color_article = $request->color_article[0];
-            $order_datail->quantity = $request->quantity;
-            $order_datail->sub_total = $request->price * $order_datail->quantity;
-            $order_datail->save();
+//            return response()->json(true);
+//        1 paso crea una orden
+            $order = new Order();
+            $order->transport_fares_id = 4;
+            $order->user_id =  $request->user_id;
+            $order->total_amount = 0;
+            $order->save();
 
-            $res = $request->quantity_total - $request->quantity;
-            // dd($res);
-           DB::table('color_articles')
-               ->join('colors','color_articles.color_id','=','colors.id')
-               ->where('colors.image',[$request->color_article])
-               ->update(['color_articles.quantity'=>$res]);
-                                      
-        //    dd($color_update);
-//            return response()->json($order_datail);
+            $length_colors = sizeof($request->color_article);
+            if ($length_colors > 1){
+                $list = [];
+                foreach ($request->color_article as $colors){
+                    $data = [
+                        'article_id' => $request->article_id,
+                        'order_id' => $order->id,
+                        'price_article_id' => $request->price_article_id,
+                        'color_article' => $colors,
+                        'quantity' => 1,
+                        'sub_total' => $request->price * 1,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ];
+//                $order_detail = new OrderDetail();
+                    array_push($list,$data);
+                }
+                DB::table('order_details')->insert($list);
+//            return response()->json($list);
+            }else{
+                $order_datail = new OrderDetail();
+                $order_datail->article_id = $request->article_id;
+                $order_datail->order_id = $order->id;
+                $order_datail->price_article_id = $request->price_article_id;
+                $order_datail->color_article = $request->color_article[0];
+                $order_datail->quantity = $request->quantity;
+                $order_datail->sub_total = $request->price * $order_datail->quantity;
+                $order_datail->save();
+
+//                $res = $request->quantity_total - $request->quantity;
+                DB::table('color_articles')
+                    ->join('colors','color_articles.color_id','=','colors.id')
+                    ->join('articles','color_articles.article_id','=','articles.id')
+                    ->where('colors.image',[$request->color_article])
+                    ->where('article_id',[$request->article_id])
+                    ->update(['color_articles.quantity'=> $request->quantity- $request->quantity]);
+
+
+            }
+
+            $status_order = new StatusOrder();
+            $status_order->order_id = $order->id;
+            $status_order->process_order_id = 1;
+            $status_order->save();
+
+            return redirect()->route('orderAdd',['order_id' => $order->id])->with('200 , the first artcle add on order');
         }
-
-        $status_order = new StatusOrder();
-        $status_order->order_id = $order->id;
-        $status_order->process_order_id = 1;
-        $status_order->save();
-
-        return redirect()->route('orderAdd',['order_id' => $order->id])->with('200 , the first artcle add on order');
     }
 
     /**
@@ -131,7 +141,7 @@ class OrderController extends Controller
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
                    od.sub_total as subTotal, pa.price as precio , od.created_at as fecha,
-                   ia.url_image as imagen
+                   ia.url_image as imagen, od.id as id
             from users u inner join orders o on u.id = o.user_id
                   inner join order_details od on o.id = od.order_id
                   inner join articles a on od.article_id = a.id
@@ -210,7 +220,14 @@ class OrderController extends Controller
                     and a.id = $article_id
                 order by articulo desc ;
         ");
-        return view('orders.formOrder',compact('articles','cities','colors','prices'));
+        $stocks = DB::select("
+                    select a.id as id, sum(ca.quantity) as stock
+                    from colors c inner join color_articles ca on c.id = ca.color_id
+                    inner join articles a on ca.article_id = a.id
+                    and a.id = $article_id
+                    group by id;
+        ");
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks'));
     }
 
     public function getTransportFares(Request $request)
@@ -257,17 +274,21 @@ class OrderController extends Controller
             from orders o
             where o.id = $order_id;
         ");
+        $categories = Category::select('categories.*')->orderBy('category','asc')->get();
+        $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
         $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
+            select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id
                 from articles a inner join image_articles ia on a.id = ia.article_id
+                    inner join sub_categories sc on a.sub_category_id = sc.id
+                    inner join categories c on sc.category_id = c.id
                     inner join price_articles pa on a.id = pa.article_id
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                order by articulo desc;
+               order by a.title desc;
         ");
-        return view('orders.showMore',compact('articles','orders'));
+        return view('orders.showMore',compact('articles','orders','categories','makers'));
     }
 
     public function formAddMoreArticles($article_id , $order_id){
@@ -282,7 +303,7 @@ class OrderController extends Controller
             where a.id = $article_id;
         ");
         $colors = DB::select("
-            select c.name as name , c.image as image , c.id as id
+            select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
             from articles a inner join color_articles ca on a.id = ca.article_id
                  inner join colors c on ca.color_id = c.id
             where a.id = $article_id;

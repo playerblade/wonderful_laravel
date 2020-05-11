@@ -44,8 +44,12 @@
                             </div>
                             <div class="col-12 col-sm-6">
                                 <h3 class="my-3">{{$article->articulo}}</h3>
+                                <h5><b>Fabricante: </b>{{$article->fabricante}}.</h5>
+                                @foreach ($stocks as $stock)
+                                    <h5><b>Stock: </b>{{$stock->stock}}.</h5>
+                                    <input hidden type="number" name="stocks" value="{{$stock->stock}}">
+                                @endforeach
                                 <p><b>Description: </b>{{$article->description}}.</p>
-                                <hr>
                                 <h4>Available Colors</h4>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     @foreach($colors as $color)
@@ -55,11 +59,9 @@
                                             <br>
                                                 <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
                                                 <br> Cant.: {{$color->quantity}}
-                                                <input hidden  type="number" name="quantity_total" value="{{$color->quantity}}">
                                         </label>
-                                        
-                                    @endforeach
 
+                                    @endforeach
                                 </div>
 {{--                                <form action="">--}}
                                     <div class="row mt-2">
@@ -68,27 +70,21 @@
                                             <div class="select2-purple">
                                                 <select id="color" class="select2" name="color_article[]"   multiple="multiple" data-placeholder="Select a Color" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                     @foreach ($colors as $color)
-                                                        <!-- <input  type="number" name="quantity_total" value="{{$color->quantity}}"> -->
-                                                        <option value="{{ $color->image}}">
+                                                        <option value="{{$color->image}}">
                                                             {{ $color->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div id="cant"></div>
                                         </div>
                                         <div id="cantidad" class="col-6">
                                             <h4>Cantidad</h4>
-                                            <input type="number" name="quantity" class="form-control">
+                                            <input type="number" name="quantity" class="form-control" required>
                                         </div>
-                                        <div id="cantidad_article" class="col-6">
-
+                                        <div  class="col-6">
+{{--                                            space--}}
                                         </div>
-{{--                                        <div class="btn btn-primary btn-sm btn-flat">--}}
-{{--                                            <button class="btn btn-primary">--}}
-{{--                                                Agregar--}}
-{{--                                                <i class="fa fa-plus-square fa-lg mr-2"></i>--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
                                     </div>
 {{--                                </form>--}}
                                 <div class="bg-gray py-2 px-3 mt-4">
@@ -113,6 +109,9 @@
                                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                                         <button class="btn btn-primary">Add to Cart</button>
                                     </div>
+{{--                                    <div class="swalDefaultError">--}}
+{{--                                        content json--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -151,12 +150,61 @@
                 if ($.trim(color.length) > 1){
                     $('#cantidad').hide();
                     console.log($.trim(color.length));
-                    // $('#cantidad_article').append("<h4>Total De Articulos</h4>\n" +
-                    //     "                  <input type='number' value='"+$.trim(color.length)+"' class='form-control'>\n" +
-                    //     "                  ");
-                    //
                 }
             });
         });
     </script>
+@endsection
+@section('alert_validations')
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+            // if exist some errors
+            var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}';
+            var exist = '{{\Illuminate\Support\Facades\Session::has('alert')}}';
+            if (exist){
+                Toast.fire({
+                    type: 'error',
+                    title: msg
+                })
+            }
+
+            $('.swalDefaultSuccess').click(function() {
+                Toast.fire({
+                    type: 'success',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultInfo').click(function() {
+                Toast.fire({
+                    type: 'info',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            // $('.swalDefaultError').click(function() {
+            //     Toast.fire({
+            //         type: 'error',
+            //         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            //     })
+            // });
+            $('.swalDefaultWarning').click(function() {
+                Toast.fire({
+                    type: 'warning',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultQuestion').click(function() {
+                Toast.fire({
+                    type: 'question',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+        });
+    </script>
+
 @endsection

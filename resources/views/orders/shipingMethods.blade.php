@@ -22,73 +22,47 @@
                     </div>
                     
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-striped elevation-2">
+                                    <thead>
+                                    <tr>
+                                        <th>Articulo</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Color</th>
+                                        <th>Sub Total</th>
+                                        <th class="text-right">Opciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($order_details as $order_detail)
+                                        <tr>
+                                            <td>{{$order_detail->articulo}}</td>
+                                            <td>{{$order_detail->precio}}</td>
+                                            <td>{{$order_detail->cantidad}}</td>
+                                            <td>
+                                                <img src="{{asset('/imagenes/imagenes_articulos/'.$order_detail->color)}}" alt="" class="img-circle fa-2x" style="width: 35px; height: 35px;">
+                                            </td>
+                                            <td>{{$order_detail->subTotal}}</td>
+                                            <td class="py-0 align-middle text-right">
+                                                <form action="{{ route('order_details.destroy',$order_detail->id) }}" method="POST">
+                                                    <div class="btn-group btn-group-sm">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Quitar Articulo</button> 
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <form action="{{route('orders.update',$order->id)}}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="card-body" style="display: block;">
-                            <table id="example2" class="table table-striped elevation-2">
-                                <thead>
-                                <tr>
-                                    <!-- <th class="text-center">&ensp; ID</th> -->
-                                    <th>Articulo</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Color</th>
-                                    <th>Sub Total</th>
-                                    <th class="text-right">Opciones</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($order_details as $order_detail)
-                                    <tr>
-                                        <th class="text-center">{{$order_detail->articulo}}</th>
-                                        <td>{{$order_detail->precio}}</td>
-                                        <td>{{$order_detail->cantidad}}</td>
-                                        <td>
-                                        <div class="col-2">
-                                                <img src="{{asset('/imagenes/imagenes_articulos/'.$order_detail->color)}}" alt="" class="img-circle fa-2x" style="width: 35px; height: 35px;">
-                                        </div>
-                                        </td>
-                                        <td>{{$order_detail->subTotal}}</td>
-
-                                        <td class="py-0 align-middle text-right">
-                                           
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <!-- <th class="text-center">&ensp; ID</th> -->
-                                    <th>Articulo</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Color</th>
-                                    <th>Sub Total</th>
-                                    <th class="text-right">Opciones</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                            </div>
-                            <!-- @foreach($order_details as $order_detail)
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h4><b>Title :</b> {{$order_detail->articulo}}</h4>
-                                    </div>
-                                    <div class="col-2">
-                                        <p><b>Cantidad :</b> {{$order_detail->cantidad}}</p>
-                                    </div>
-                                    <div class="col-2">
-                                        <p><b>Color:</b>
-                                            <img src="{{asset('/imagenes/imagenes_articulos/'.$order_detail->color)}}" alt="" class="img-circle fa-2x" style="width: 35px; height: 35px;">
-                                        </p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <hr>
-                            @endforeach -->
-
-                            
                             <div class="row">
                                 <div class="col-6">
                                     <strong>Ciudad</strong>
@@ -137,10 +111,10 @@
                         $('#transport_fare').append("<option value=''>Selecione su tipo y precio de envio</option>");
                         $.each(transport_fares, function (index , value){
                             if (value[1] == 1 ){
-                                $('#transport_fare').append("<option  value='"+index+"'>Costo de "+value[0]+" bs. Por Vuelo</option>");
+                                $('#transport_fare').append("<option  value='"+index+"'>Envio Normal "+value[0]+" bs.</option>");
                             }
                             if (value[1] == 0 ){
-                                $('#transport_fare').append("<option  value='"+index+"'>Costo de "+value[0]+" bs. Por Bus</option>");
+                                $('#transport_fare').append("<option  value='"+index+"'>Envio Rapido "+value[0]+" bs.</option>");
                             }
                         }).done();
                     });

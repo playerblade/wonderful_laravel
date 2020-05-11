@@ -38,7 +38,7 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-8">
-                                            <input type="number" name="account_number" class="form-control float-left" placeholder="Ingrese numero de tarjeta..">
+                                            <input type="number" name="account_number" class="form-control float-left" placeholder="Ingrese numero de tarjeta.."required>
                                         </div>
                                         <div class="col-4">
                                             <i class="fa fa-credit-card" aria-hidden="true"></i>&ensp;&ensp;
@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <h3 class="float-right bg-info">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</h3>
-                                    <input hidden type="text" name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
+                                    <h2 class="float-right" style="color: red;">Monto Total Mas Envio: {{$totalAmounts[0]->montoTotal+$order->price}}</h2>
+                                    <input type="text" hidden name="amount" value="{{$totalAmounts[0]->montoTotal+$order->price}}">
                                 </div>
                             </div>
                             <hr>
@@ -83,6 +83,28 @@
                     });
                 }
             });
+        });
+    </script>
+@endsection
+@section('alert_validations')
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+            // if exist some errors
+            var msg = '{{\Illuminate\Support\Facades\Session::get('alerta')}}'
+            var exist = '{{\Illuminate\Support\Facades\Session::has('alerta')}}'
+            if (exist){
+                Toast.fire({
+                    type: 'warning',
+                    title: msg
+                })
+            }
+
         });
     </script>
 @endsection

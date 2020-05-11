@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Category;
+use App\City;
 use App\Maker;
+use App\PriceArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,8 +30,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::all();
-        $makers = Maker::all();
+//        $categories = Category::all();
+        $categories = Category::select('categories.*')->orderBy('category','asc')->get();
+        $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
+//        $makers = DB::table('makers')
+//                      ->select('makers.*')
+//                      ->orderBy('name','asc')->get();
+
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id, sc.sub_category, c.category
@@ -39,8 +47,8 @@ class HomeController extends Controller
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                    and sc.id=1
-                order by c.category,sc.sub_category,articulo desc;
+                    and c.id = 1
+               order by a.title asc;
         ");
 
         $user = Auth::user();
