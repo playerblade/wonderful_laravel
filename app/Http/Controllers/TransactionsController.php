@@ -46,7 +46,7 @@ class TransactionsController extends Controller
                                                     ->first();
         if ($bank_accounts){
             // return response()->json(true);
-            $transaction = DB::connection('db1')->table('transactions')->insert([
+            DB::connection('db1')->table('transactions')->insert([
                 // $transactions = new Transactions();
                 'bank_accounts_id' => $bank_accounts->id,
                 'transaction_type_id' => 1,
@@ -56,9 +56,13 @@ class TransactionsController extends Controller
                 // $transactions->save();
             ]);
 
+            $bank_amount = DB::connection('db1')->table('bank_accounts')
+            ->where('account_number','=',[$request->account_number])
+            ->select('amount')->get();
+
             DB::connection('db1')->table('bank_accounts')
              ->where('account_number',[$request->account_number])
-             ->update(['amount'=> - $request->amount]);
+             ->update(['amount'=>$bank_amount[0]->amount - $request->amount]);
                 
         }else{
             return redirect()->back()->with('alerta','Monto insuficiente o Cuanta inactiva');
