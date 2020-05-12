@@ -9,11 +9,13 @@ use App\ColorArticle;
 use App\Maker;
 use App\Order;
 use App\OrderDetail;
+use App\PriceArticle;
 use App\ProcessOrder;
 use App\StatusOrder;
 use App\TransportFare;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -228,17 +230,17 @@ class OrderController extends Controller
 
     public function formOrder($article_id)
     {
+        $decrypt_article_id = Crypt::decrypt($article_id);
         $cities = City::all();
-        $prices = DB::select("
-            select pa.price as price , pa.id as id , pa.is_current as current , a.id as article_id
-            from articles a inner join price_articles pa on a.id = pa.article_id
-            where a.id = $article_id;
-        ");
+        $prices = PriceArticle::join('articles','price_articles.article_id','articles.id')
+                              ->where('articles.id',$decrypt_article_id)
+                              ->select('price_articles.*')->get();
+
         $colors = DB::select("
             select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
             from articles a inner join color_articles ca on a.id = ca.article_id
                  inner join colors c on ca.color_id = c.id
-            where a.id = $article_id;
+            where a.id = $decrypt_article_id;
         ");
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
@@ -248,14 +250,14 @@ class OrderController extends Controller
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                    and a.id = $article_id
+                    and a.id = $decrypt_article_id
                 order by articulo desc ;
         ");
         $stocks = DB::select("
                     select a.id as id, sum(ca.quantity) as stock
                     from colors c inner join color_articles ca on c.id = ca.color_id
                     inner join articles a on ca.article_id = a.id
-                    and a.id = $article_id
+                    and a.id = $decrypt_article_id
                     group by id;
         ");
         return view('orders.formOrder',compact('articles','cities','colors','prices','stocks'));
@@ -351,7 +353,7 @@ class OrderController extends Controller
                 order by articulo desc ;
         ");
 
-        return view('orders.formOrderMore',compact('articles','colors','prices','orders'));
+        return view('orders.formOrdeMore',compact('articles','colors','prices','orders'));
     }
 
     public function addMoreArticles(Request $request)

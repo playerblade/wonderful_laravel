@@ -89,14 +89,14 @@
 {{--                                </form>--}}
                                 <div class="bg-gray py-2 px-3 mt-4">
                                     @foreach($prices as $price )
-                                        @if($price->current == 1)
+                                        @if($price->is_current == 1)
                                             <h2 class="mb-0">
                                                 ${{$price->price}}
                                             </h2>
                                             <input hidden type="number" name="price_article_id" value="{{$price->id}}">
                                             <input hidden type="number" name="price" value="{{$price->price}}">
                                         @endif
-                                        @if($price->current == 0)
+                                        @if($price->is_current == 0)
                                             <h4 class="mt-0">
                                                 <small>Ex Tax: <strike>${{$price->price}}</strike> </small>
                                             </h4>

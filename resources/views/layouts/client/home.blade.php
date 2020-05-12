@@ -89,7 +89,8 @@
                                         <a href="/order/{{$article->id}}/form" class="btn btn-primary float-right">Añadir al carrito</a>
                                     </div>
                                 </div>
-                                <a href="/order/{{$article->id}}/form" class="btn btn-primary mt-2">Ver detalle del producto</a>
+
+                                <a href="/order/{{encrypt($article->id)}}/form" class="btn btn-primary mt-2">Ver detalle del producto</a>
                             </div>
                             <hr>
                             <hr>
