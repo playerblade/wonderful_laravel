@@ -71,7 +71,8 @@ class UserStatusOrderController extends Controller
      */
     public function update(Request $request, UserStatusOrder $userStatusOrder)
     {
-        //
+        // $userStatusOrder->
+
     }
 
     /**

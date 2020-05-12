@@ -64,7 +64,7 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <strong>Ciudad</strong>
                                     <select id="cities" name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
                                         <option value="">Seleccione un ciudad</option>
@@ -73,7 +73,11 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
+                                    <strong>Direccion</strong>
+                                    <input type="text" class="form-control" name="location" placeholder="Lugar, Calle, Numero de casa" required>
+                                </div>
+                                <div class="col-4">
                                     <strong>Costo</strong>
                                     <select id="transport_fare" name="transport_fares_id"  class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
 {{--                                        json code--}}

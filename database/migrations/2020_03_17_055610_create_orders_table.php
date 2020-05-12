@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('transport_fares_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('total_amount');
+            $table->string('location');
             $table->foreign('transport_fares_id')->references('id')->on('transport_fares')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -73,6 +73,7 @@ class OrderController extends Controller
             $order->transport_fares_id = 4;
             $order->user_id =  $request->user_id;
             $order->total_amount = 0;
+            $order->location = '';
             $order->save();
 
             $length_colors = sizeof($request->color_article);
@@ -207,6 +208,7 @@ class OrderController extends Controller
         $order->transport_fares_id = $request->transport_fares_id;
         $order->user_id = $request->user_id;
         $order->total_amount = $request->total_amount;
+        $order->location = $request->location;
         $order->update();
 
         return redirect()->route('paymentMethods',['order_id' => $order->id]);

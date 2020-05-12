@@ -26,11 +26,7 @@
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                                     <div class="card-header">
-                                        @if($orders)
-                                            <h3 class="card-title">Ordenes: <b><u>{{$orders[0]->cliente}}</u></b></h3>
-                                        @else
-                                            <h3 class="card-title">Ordenes: <b> No tiene ordenes.</b></h3>
-                                        @endif
+                                        <!--  -->
                                     </div>
                     <!-- /.card-header -->
                         <div class="card-body">

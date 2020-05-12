@@ -117,8 +117,9 @@ class OrderDetailController extends Controller
     }
 
     public function listaDeOrdenesPorCliente($client_id, Request $request, Order $orders){
+           
             $orders = DB::select("
-                select o.id as order_id , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
+                	select o.id as order_id ,
                       CASE po.process_order
                          when 'initial' then 'inicial'
                          when 'process' then 'proceso'
@@ -127,14 +128,18 @@ class OrderDetailController extends Controller
                          when 'delivered' then 'entregado'
                       END as estado,
                       o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario
-                from users u inner join orders o on u.id = o.user_id
-                     inner join status_orders so on o.id = so.order_id
-                     inner join process_orders po on so.process_order_id = po.id
-                     -- inner join user_status_orders uso on so.id = uso.status_order_id
-                     -- inner join users c on uso.user_id = c.id
-                -- and u.id = 5
-                and u.id = $client_id
-                order by o.created_at desc;"
+                from roles r inner join users u on r.id = u.role_id
+
+		        inner join user_status_orders uso on u.id = uso.user_id
+                        inner join status_orders so on uso.status_order_id = so.id
+                        inner join process_orders po on so.process_order_id = po.id
+                        inner join orders o on so.order_id = o.id
+		        inner join users c on o.user_id = c.id
+                   and r.id = 2
+                   -- and c.id = 5
+                   and c.id = $client_id
+                   order by o.created_at desc;
+                   "
             );
 //            dd($orders);
             return view('clients.listaDeOrdenesPorCliente2Pantalla',compact('orders'));

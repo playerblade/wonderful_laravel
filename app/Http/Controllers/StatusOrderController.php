@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StatusOrder;
+use App\UserStatusOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +74,11 @@ class StatusOrderController extends Controller
         $statusOrder->order_id = $request->order_id;
         $statusOrder->process_order_id = $request->process_order_id;
         $statusOrder->update();
+
+        $userStatus = new UserStatusOrder();
+        $userStatus->status_order_id = $statusOrder->id;
+        $userStatus->user_id = $request->user_id;
+        $userStatus->save();
 
         return redirect()->route('statusOrder');
 //        return response()->json($statusOrder);
