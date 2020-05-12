@@ -50,9 +50,23 @@ class OrderController extends Controller
     {
 //            return response()->json($request->quantity_total);
 
-        if ($request->quantity >
-         $request->stocks){
-             return redirect()->back()->with('alert','No hay suficientes productos en el stock');
+        $colors=DB::table('colors')
+            // ->join('colors','color_articles.color_id','=','colors.id')
+            // ->join('articles','color_articles.article_id','=','articles.id')
+            ->where('colors.image',[$request->color_article])
+            ->select('colors.*')->get();
+
+//              $res = $request->quantity_total - $request->quantity;
+        $quantity=DB::table('color_articles')
+            ->join('colors','color_articles.color_id','=','colors.id')
+            ->join('articles','color_articles.article_id','=','articles.id')
+            // ->where('colors.image',[$request->color_article])
+            ->where('color_articles.color_id',[$colors[0]->id])
+            ->where('article_id',[$request->article_id])
+            ->select('color_articles.quantity')->get();
+
+        if ($request->quantity > $quantity[0]->quantity){
+            return redirect()->back()->with('alert','No hay suficientes productos en el stock');
 
         }else{
 //            return response()->json(true);
@@ -92,13 +106,28 @@ class OrderController extends Controller
                 $order_datail->sub_total = $request->price * $order_datail->quantity;
                 $order_datail->save();
 
+                $colors=DB::table('colors')
+                    // ->join('colors','color_articles.color_id','=','colors.id')
+                    // ->join('articles','color_articles.article_id','=','articles.id')
+                    ->where('colors.image',[$request->color_article])
+                    ->select('colors.*')->get();
+
 //                $res = $request->quantity_total - $request->quantity;
+                $quantity=DB::table('color_articles')
+                    ->join('colors','color_articles.color_id','=','colors.id')
+                    ->join('articles','color_articles.article_id','=','articles.id')
+                    // ->where('colors.image',[$request->color_article])
+                    ->where('color_articles.color_id',[$colors[0]->id])
+                    ->where('article_id',[$request->article_id])
+                    ->select('color_articles.quantity')->get();
+
                 DB::table('color_articles')
                     ->join('colors','color_articles.color_id','=','colors.id')
                     ->join('articles','color_articles.article_id','=','articles.id')
-                    ->where('colors.image',[$request->color_article])
+                    // ->where('colors.image',[$request->color_article])
+                    ->where('color_articles.color_id',[$colors[0]->id])
                     ->where('article_id',[$request->article_id])
-                    ->update(['color_articles.quantity'=> $request->quantity- $request->quantity]);
+                    ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
 
 
             }
