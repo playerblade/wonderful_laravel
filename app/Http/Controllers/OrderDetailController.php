@@ -8,6 +8,7 @@ use App\OrderDetail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class OrderDetailController extends Controller
 {
@@ -117,7 +118,7 @@ class OrderDetailController extends Controller
     }
 
     public function listaDeOrdenesPorCliente($client_id, Request $request, Order $orders){
-           
+
             $orders = DB::select("
                 	select o.id as order_id ,
                       CASE po.process_order
@@ -222,5 +223,26 @@ class OrderDetailController extends Controller
             ");
 
             return view('clients.detalleDelArticulo4Pantalla',compact('articles', 'prices_articles','images_articles'));
+    }
+
+    public function allOrdersClient($user_id){
+//        $orders = DB::select("
+//                select o.id as order_id , o.active as active
+//                from orders o
+//                   where o.user_id = $user_id
+//                   order by o.created_at desc;
+//                   "
+//        );
+
+        $orders = DB::select("
+                select o.id as order_id , o.active as active , po.process_order as process_order
+                from orders o inner join status_orders so on o.id = so.order_id
+                    inner join process_orders po on po.id = so.process_order_id
+                   where o.user_id = $user_id
+                   order by o.created_at desc;
+                   "
+        );
+//            dd($orders);
+        return view('orders.allOrderClient',compact('orders'));
     }
 }

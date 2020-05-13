@@ -34,6 +34,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Orden</th>
                                     <th>Estado</th>
                                     {{--                                    <th>Color</th>--}}
                                 </tr>
@@ -47,6 +48,11 @@
                                         <td>{{$order_detail->precio}}</td>
                                         <td>{{$order_detail->cantidad}}</td>
                                         <td>{{$order_detail->subTotal}}</td>
+                                        @if($order_detail->acitve == 1)
+                                            <td><span class="right badge badge-succes">En Curso</span></td>
+                                        @else
+                                            <td><span class="right badge badge-danger">Cancelado</span></td>
+                                        @endif
                                         @if($order_detail->porcess_order_id == 2)
                                             <td><span class="right badge badge-primary">{{$order_detail->process_order}}</span></td>
                                         @else
@@ -62,6 +68,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Orden</th>
                                     <th>Estado</th>
                                     {{--                                    <th>Color</th>--}}
                                 </tr>

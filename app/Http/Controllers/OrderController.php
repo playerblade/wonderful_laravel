@@ -76,6 +76,7 @@ class OrderController extends Controller
             $order->user_id =  $request->user_id;
             $order->total_amount = 0;
             $order->location = '';
+            $order->active = 1;
             $order->save();
 
             $length_colors = sizeof($request->color_article);
@@ -434,5 +435,21 @@ class OrderController extends Controller
             group by o.id , u.id;
         ");
         return view('orders.paymentMethods',compact('order_details','orders','cities','totalAmounts'));
+    }
+
+    public function orderCancel($order_id)
+    {
+        DB::connection('mysql')->table('orders')
+                                     ->where('orders.id',$order_id)
+                                     ->update(['orders.active' => 0]);
+        return redirect()->back();
+    }
+
+    public function orderRestart($order_id)
+    {
+        DB::connection('mysql')->table('orders')
+            ->where('orders.id',$order_id)
+            ->update(['orders.active' => 1]);
+        return redirect()->back();
     }
 }

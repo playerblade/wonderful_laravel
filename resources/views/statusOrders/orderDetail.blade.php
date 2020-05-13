@@ -34,8 +34,8 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Orden </th>
                                     <th>Cambiar Estado A:</th>
-                                    {{--                                    <th>Color</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,19 +47,22 @@
                                         <td>{{$order_detail->precio}}</td>
                                         <td>{{$order_detail->cantidad}}</td>
                                         <td>{{$order_detail->subTotal}}</td>
+                                        @if($order_detail->acitve == 1)
+                                        <td><span class="right badge badge-succes">En Curso</span></td>
+                                        @else
+                                        <td><span class="right badge badge-danger">Cancelado</span></td>
+                                        @endif
                                         <td>
-                                            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                                             <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
+                                                &ensp;&ensp;&ensp;&ensp;&ensp;
+                                                <button class="btn btn-info">Proceso</button>
                                                 <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
                                                 <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                 <input hidden type="number" name="process_order_id" value="2">
-                                                &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                <button class="btn btn-info">Proceso</button>
                                             </form>
                                         </td>
-                                        {{--                                        <td>{{$order_detail->color}}</td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -71,6 +74,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Orden </th>
                                     <th>Cambiar Estado A:</th>
                                     {{--                                    <th>Color</th>--}}
                                 </tr>

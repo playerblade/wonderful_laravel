@@ -101,7 +101,7 @@ class StatusOrderController extends Controller
             select o.id as order_id ,concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
                    a.id as article_id, a.title as articulo,
                    pa.price as precio , od.quantity as cantidad , od.sub_total as subTotal,
-                   od.created_at , po.process_order as estado
+                   od.created_at , po.process_order as estado , o.active as acitve
             from order_details od inner join orders o on od.order_id = o.id
                  inner join users u on o.user_id = u.id
                  inner join status_orders so on o.id = so.order_id
@@ -122,7 +122,7 @@ class StatusOrderController extends Controller
                    u.id as user_id , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
                    a.title as articulo , pa.price as precio , od.quantity as cantidad ,
                    od.sub_total as subTotal, po.process_order as process_order,
-                   o.created_at as fecha , po.id as porcess_order_id
+                   o.created_at as fecha , po.id as porcess_order_id , o.active as acitve
             from users u inner join orders o on u.id = o.user_id
                   inner join status_orders so on so.order_id = o.id
                   inner join process_orders po on so.process_order_id = po.id
@@ -131,7 +131,7 @@ class StatusOrderController extends Controller
                   inner join price_articles pa on a.id = pa.article_id
             and pa.is_current = 1
             and po.id = 2
-            group by a.id, o.id, u.id, concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name), a.title, pa.price, od.quantity, od.sub_total, o.created_at , porcess_order_id,process_order
+            group by a.id, o.id, u.id, concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name), a.title, pa.price, od.quantity, od.sub_total, o.created_at , porcess_order_id,process_order,o.active
             order by fecha desc;
         ");
 
