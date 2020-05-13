@@ -68,7 +68,7 @@ class UserTableSeeder extends Seeder
 
 //        user 4
         DB::table('users')->insert([
-            'role_id' => 4,
+            'role_id' => 2,
             'ci' => '3553534',
             'first_name' => 'Pedro',
             'second_name' => 'Lucas',
@@ -77,8 +77,8 @@ class UserTableSeeder extends Seeder
             'gender' => 'M',
             'phone_number' => 76891219,
             'birthday' => date("Y-m-d H:i:s"),
-            'user' => 'pedro'.'@gmail.com',
-            'password' => bcrypt('12345678'),
+            'user' => 'pedroperez3553534',
+            'password' => bcrypt('3553534'),
             'active' => 1,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
