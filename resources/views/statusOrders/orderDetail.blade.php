@@ -48,10 +48,13 @@
                                         <td>{{$order_detail->cantidad}}</td>
                                         <td>{{$order_detail->subTotal}}</td>
                                         @if($order_detail->acitve == 1)
-                                        <td><span class="right badge badge-succes">En Curso</span></td>
+                                        <td><span class="right badge badge-success">En Curso</span></td>
                                         @else
                                         <td><span class="right badge badge-danger">Cancelado</span></td>
                                         @endif
+
+                                        @if($order_detail->acitve == 1)
+                                        <!-- <td><span class="right badge badge-success">En Curso</span></td> -->
                                         <td>
                                             <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
                                                 @csrf
@@ -63,6 +66,21 @@
                                                 <input hidden type="number" name="process_order_id" value="2">
                                             </form>
                                         </td>
+                                        @else
+                                        <!-- <td><span class="right badge badge-danger">Cancelado</span></td> -->
+                                        <td>
+                                            <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                &ensp;&ensp;&ensp;&ensp;&ensp;
+                                                <button class="btn btn-info" disabled>Proceso</button>
+                                                <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
+                                                <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                                <input hidden type="number" name="process_order_id" value="2">
+                                            </form>
+                                        </td>
+                                        @endif
+                                        
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -47,7 +47,7 @@ class HomeController extends Controller
                     inner join makers m on a.maker_id = m.id
                     and pa.is_current = 1
                     and ia.is_main = 1
-                    -- and c.id = 1
+                    and c.id = 1
                order by a.title asc;
         ");
 
