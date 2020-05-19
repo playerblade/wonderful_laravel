@@ -44,38 +44,39 @@
                                 <tbody>
                                 @foreach($orders as $order)
                                     <tr>
-                                        <th>&ensp; {{$order->order_id}}</th>
-                                        @if($order->estado == 'inicial')
-                                            <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
-                                        @endif
-                                        @if($order->estado == 'proceso')
-                                            <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
-                                        @endif
-                                        @if($order->estado == 'preparacion')
-                                            <td><span class="right badge badge-info">{{$order->estado}}</span></td>
-                                        @endif
-                                        @if($order->estado == 'despachado')
-                                            <td><span class="right badge badge-warning">{{$order->estado}}</span></td>
-                                        @endif
-                                        @if($order->estado == 'entregado')
-                                            <td><span class="right badge badge-success">{{$order->estado}}</span></td>
-                                        @endif
-                                        <td>{{$order->fechaOrden}}</td>
-{{--                                        cuando el estado es inicial se matiene el usuario como el cliente mismo--}}
-                                        @if($order->estado == 'inicial')
-                                            <td><span class="right badge badge-secondary">{{$order->cliente}}</span></td>
-                                        @else
-                                            <td>{{$order->usuario}}</td>
-                                        @endif
-                                        {{--              disabled   @if($order->activo == 'activo')--}}
-                                        <td>
-                                            <button type="submit" class="btn">
-                                                <a class="btn bg-purple elevation-1 btn-sm" href="/reportes/cliente/orden/{{$order->order_id}}/detalle_orden">
-                                                    <i class="fas fa-eye"></i> ver
-                                                </a>
-                                            </button>
-                                        </td>
-
+{{--                                        @if($order->role_id == 2 )--}}
+                                            <th>&ensp; {{$order->order_id}}</th>
+                                            @if($order->estado == 'inicial')
+                                                <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                            @endif
+                                            @if($order->estado == 'proceso')
+                                                <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                            @endif
+                                            @if($order->estado == 'preparacion')
+                                                <td><span class="right badge badge-info">{{$order->estado}}</span></td>
+                                            @endif
+                                            @if($order->estado == 'despachado')
+                                                <td><span class="right badge badge-warning">{{$order->estado}}</span></td>
+                                            @endif
+                                            @if($order->estado == 'entregado')
+                                                <td><span class="right badge badge-success">{{$order->estado}}</span></td>
+                                            @endif
+                                            <td>{{$order->fechaOrden}}</td>
+                                            {{--                                        cuando el estado es inicial se matiene el usuario como el cliente mismo--}}
+                                            @if($order->estado == 'inicial')
+                                                <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
+                                            @else
+                                                <td>{{$order->usuario}}</td>
+                                            @endif
+                                            {{--              disabled   @if($order->activo == 'activo')--}}
+                                            <td>
+                                                <button type="submit" class="btn">
+                                                    <a class="btn bg-purple elevation-1 btn-sm" href="/reportes/cliente/orden/{{$order->order_id}}/detalle_orden">
+                                                        <i class="fas fa-eye"></i> ver
+                                                    </a>
+                                                </button>
+                                            </td>
+{{--                                        @endif--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

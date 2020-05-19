@@ -13,8 +13,8 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        $categories = Category::all();
-        $makers = Maker::all();
+        $categories = Category::orderBy('categories.category')->get();
+        $makers = Maker::orderBy('makers.name')->get();
         $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
                        pa.price as price , a.id as id

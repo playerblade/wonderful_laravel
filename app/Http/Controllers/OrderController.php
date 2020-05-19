@@ -14,6 +14,7 @@ use App\ProcessOrder;
 use App\StatusOrder;
 use App\TransportFare;
 use App\User;
+use App\UserStatusOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -48,19 +49,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-//            return response()->json($request->quantity_total);
-
         $colors=DB::table('colors')
-            // ->join('colors','color_articles.color_id','=','colors.id')
-            // ->join('articles','color_articles.article_id','=','articles.id')
             ->where('colors.image',[$request->color_article])
             ->select('colors.*')->get();
 
-//              $res = $request->quantity_total - $request->quantity;
         $quantity=DB::table('color_articles')
             ->join('colors','color_articles.color_id','=','colors.id')
             ->join('articles','color_articles.article_id','=','articles.id')
-            // ->where('colors.image',[$request->color_article])
             ->where('color_articles.color_id',[$colors[0]->id])
             ->where('article_id',[$request->article_id])
             ->select('color_articles.quantity')->get();
@@ -69,7 +64,6 @@ class OrderController extends Controller
             return redirect()->back()->with('alert','No hay suficientes productos en el stock');
 
         }else{
-//            return response()->json(true);
 //        1 paso crea una orden
             $order = new Order();
             $order->transport_fares_id = 4;
@@ -80,6 +74,7 @@ class OrderController extends Controller
             $order->save();
 
             $length_colors = sizeof($request->color_article);
+//            aqui validamos si colo que ingresa son mas de 2 colores
             if ($length_colors > 1){
                 $list = [];
                 foreach ($request->color_article as $colors){
@@ -93,11 +88,9 @@ class OrderController extends Controller
                         'created_at' => date("Y-m-d H:i:s"),
                         'updated_at' => date("Y-m-d H:i:s")
                     ];
-//                $order_detail = new OrderDetail();
                     array_push($list,$data);
                 }
                 DB::table('order_details')->insert($list);
-//            return response()->json($list);
             }else{
                 $order_datail = new OrderDetail();
                 $order_datail->article_id = $request->article_id;
@@ -109,35 +102,35 @@ class OrderController extends Controller
                 $order_datail->save();
 
                 $colors=DB::table('colors')
-                    // ->join('colors','color_articles.color_id','=','colors.id')
-                    // ->join('articles','color_articles.article_id','=','articles.id')
-                    ->where('colors.image',[$request->color_article])
-                    ->select('colors.*')->get();
+                ->where('colors.image',[$request->color_article])
+                ->select('colors.*')->get();
 
-//                $res = $request->quantity_total - $request->quantity;
                 $quantity=DB::table('color_articles')
-                    ->join('colors','color_articles.color_id','=','colors.id')
-                    ->join('articles','color_articles.article_id','=','articles.id')
-                    // ->where('colors.image',[$request->color_article])
-                    ->where('color_articles.color_id',[$colors[0]->id])
-                    ->where('article_id',[$request->article_id])
-                    ->select('color_articles.quantity')->get();
+                ->join('colors','color_articles.color_id','=','colors.id')
+                ->join('articles','color_articles.article_id','=','articles.id')
+                ->where('color_articles.color_id',[$colors[0]->id])
+                ->where('article_id',[$request->article_id])
+                ->select('color_articles.quantity')->get();
 
                 DB::table('color_articles')
-                    ->join('colors','color_articles.color_id','=','colors.id')
-                    ->join('articles','color_articles.article_id','=','articles.id')
-                    // ->where('colors.image',[$request->color_article])
-                    ->where('color_articles.color_id',[$colors[0]->id])
-                    ->where('article_id',[$request->article_id])
-                    ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
-
-
+                ->join('colors','color_articles.color_id','=','colors.id')
+                ->join('articles','color_articles.article_id','=','articles.id')
+                ->where('color_articles.color_id',[$colors[0]->id])
+                ->where('article_id',[$request->article_id])
+                ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
             }
 
             $status_order = new StatusOrder();
             $status_order->order_id = $order->id;
             $status_order->process_order_id = 1;
             $status_order->save();
+
+            $user_status_order = new UserStatusOrder();
+            $user_status_order->status_order_id = $status_order->id;
+            $user_status_order->user_id = $request->user_id;
+            $user_status_order->save();
+
+//            return response()->json($user_status_order);
 
             return redirect()->route('orderAdd',['order_id' => $order->id])->with('200 , the first artcle add on order');
         }
@@ -483,8 +476,22 @@ class OrderController extends Controller
         return view('orders.paymentMethods',compact('order_details','orders','cities','totalAmounts'));
     }
 
-    public function orderCancel($order_id)
+    public function orderCancel($order_id , Request $request)
     {
+        $colors = DB::table('color_articles')
+        ->join('colors','color_articles.color_id','=','colors.id')
+        ->where('colors.image',$request->color)->get();
+
+//        dd($colors[0]);
+        DB::table('color_articles')
+        ->where('color_id',$colors[0]->color_id)
+        ->update(['quantity' => $colors[0]->quantity + $request->quantity]);
+
+        DB::connection('db1')->table('bank_accounts')
+            ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+            ->where('first_name',$request->first_name)
+            ->update(['amount' => $request->amount_bank_account + $request->monto_total_transaction]);
+
         DB::connection('mysql')->table('orders')
                                      ->where('orders.id',$order_id)
                                      ->update(['orders.active' => 0]);

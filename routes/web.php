@@ -106,7 +106,8 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     //    1 pantalla
     Route::get('/reportes/detalle_ordenes_por_cliente' ,
         'OrderDetailController@detalleDeOrdenesPorCliente'
-    )->name('clientes')->middleware('password.confirm');
+    )->name('clientes');
+//    ->middleware('password.confirm')
     //      2 pantalla ordenes
     Route::get('/reportes/cliente/{client_id}/ordenes' ,
         'OrderDetailController@listaDeOrdenesPorCliente'
@@ -221,6 +222,9 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
         'OrderController@orderRestart'
     )->name('order_restart');
 
+    Route::get('/order_detail/{order_id}/client',
+        'OrderDetailController@orderDetailClient'
+    );
 });
 
 Route::group(['middleware' => 'web','role:colaborador'], function () {

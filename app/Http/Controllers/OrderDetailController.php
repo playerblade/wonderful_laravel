@@ -118,7 +118,6 @@ class OrderDetailController extends Controller
     }
 
     public function listaDeOrdenesPorCliente($client_id, Request $request, Order $orders){
-
             $orders = DB::select("
                 	select o.id as order_id ,
                       CASE po.process_order
@@ -128,18 +127,18 @@ class OrderDetailController extends Controller
                          when 'dispatched' then 'despachado'
                          when 'delivered' then 'entregado'
                       END as estado,
-                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario
-                from roles r inner join users u on r.id = u.role_id
-
-		        inner join user_status_orders uso on u.id = uso.user_id
+                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
+                      r.id as role_id
+                    from roles r inner join users u on r.id = u.role_id
+		                inner join user_status_orders uso on u.id = uso.user_id
                         inner join status_orders so on uso.status_order_id = so.id
                         inner join process_orders po on so.process_order_id = po.id
                         inner join orders o on so.order_id = o.id
-		        inner join users c on o.user_id = c.id
-                   and r.id = 2
-                   -- and c.id = 5
-                   and c.id = $client_id
-                   order by o.created_at desc;
+                        inner join users c on o.user_id = c.id
+                    -- and r.id = 2
+                    and c.id = 5
+                    -- and c.id = $client_id
+                    order by o.created_at desc;
                    "
             );
 //            dd($orders);
@@ -226,23 +225,80 @@ class OrderDetailController extends Controller
     }
 
     public function allOrdersClient($user_id){
-//        $orders = DB::select("
-//                select o.id as order_id , o.active as active
-//                from orders o
-//                   where o.user_id = $user_id
-//                   order by o.created_at desc;
-//                   "
-//        );
-
-        $orders = DB::select("
-                select o.id as order_id , o.active as active , po.process_order as process_order
-                from orders o inner join status_orders so on o.id = so.order_id
-                    inner join process_orders po on po.id = so.process_order_id
-                   where o.user_id = $user_id
-                   order by o.created_at desc;
-                   "
+        $orders =DB::select(
+            "select o.id as order_id ,
+                      CASE po.process_order
+                         when 'initial' then 'inicial'
+                         when 'process' then 'proceso'
+                         when 'preparation' then 'preparacion'
+                         when 'dispatched' then 'despachado'
+                         when 'delivered' then 'entregado'
+                      END as estado,
+                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
+                      r.id as role_id , o.active as active
+                    from roles r inner join users u on r.id = u.role_id
+		                inner join user_status_orders uso on u.id = uso.user_id
+                        inner join status_orders so on uso.status_order_id = so.id
+                        inner join process_orders po on so.process_order_id = po.id
+                        inner join orders o on so.order_id = o.id
+                        inner join users c on o.user_id = c.id
+                    -- and r.id = 2
+                    -- and c.id = 5
+                    -- and c.id = $user_id
+                    order by o.created_at desc;"
         );
-//            dd($orders);
+
+//        return response()->json($orders);
         return view('orders.allOrderClient',compact('orders'));
+    }
+
+    public function orderDetailClient($order_id){
+        $transport = DB::select("
+            select tf.price as price
+            from users u inner join orders o on u.id = o.user_id
+                 inner join transport_fares tf on o.transport_fares_id = tf.id
+                 inner join cities c on tf.city_id = c.id
+            where o.id = $order_id;
+        ");
+
+        $orderDetails = DB::select("
+                select a.id as article_id, o.id as order_id ,
+                       c.id as client_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
+                       od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
+                       od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
+                       o.created_at as fecha, od.color_article as color
+                from roles r inner join users c on r.id = c.role_id
+                      inner join orders o on c.id = o.user_id
+                      inner join order_details od on o.id = od.order_id
+                      inner join articles a on od.article_id = a.id
+                      inner join price_articles pa on a.id = pa.article_id
+                and o.id = $order_id
+                and r.role = 'cliente'
+                and pa.is_current = 1
+                -- group by c.id, od.id, a.title, pa.price
+                group by a.id, o.id, c.id, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name), od.id, a.title, pa.price, od.quantity, od.sub_total, o.created_at,od.color_article
+                order by fecha desc;
+                "
+        );
+
+        $totalAmounts = DB::select("
+                select o.id as order_id, sum(od.sub_total) as montoTotal
+                from users c inner join orders o on c.id = o.user_id
+                      inner join order_details od on o.id = od.order_id
+                      inner join articles a on od.article_id = a.id
+                      inner join price_articles pa on a.id = pa.article_id
+                      and o.id=$order_id
+                      and pa.is_current = 1
+                group by o.id , c.id;
+            ");
+
+        $transaction = DB::connection('db1')->table('bank_accounts')
+            ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+            ->join('transactions','transactions.bank_accounts_id','=','bank_accounts.id')
+            ->where('first_name',Auth::user()->first_name)->get();
+
+//        dd($transaction[0]);
+//            dd($orderDetails);
+        return view('orders.orderDetailClient',compact('orderDetails','totalAmounts','transaction','transport'));
     }
 }
