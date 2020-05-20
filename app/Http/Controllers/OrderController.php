@@ -480,10 +480,17 @@ class OrderController extends Controller
     {
         $colors = DB::table('color_articles')
         ->join('colors','color_articles.color_id','=','colors.id')
+        ->join('articles','color_articles.article_id','=','articles.id')
+        ->join('order_details','order_details.article_id','=','articles.id')
+        ->join('orders','order_details.order_id','=','orders.id')
+        ->select('color_articles.quantity','color_articles.article_id','color_articles.color_id')
+        ->where('order_id',$order_id)
         ->where('colors.image',$request->color)->get();
 
+//        return response()->json($colors);
 //        dd($colors[0]);
         DB::table('color_articles')
+        ->where('article_id',$colors[0]->article_id)
         ->where('color_id',$colors[0]->color_id)
         ->update(['quantity' => $colors[0]->quantity + $request->quantity]);
 

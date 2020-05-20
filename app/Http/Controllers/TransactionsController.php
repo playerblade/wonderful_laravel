@@ -45,25 +45,28 @@ class TransactionsController extends Controller
                                                     ->select('bank_accounts.id')
                                                     ->first();
         if ($bank_accounts){
-            // return response()->json(true);
-            DB::connection('db1')->table('transactions')->insert([
-                // $transactions = new Transactions();
-                'bank_accounts_id' => $bank_accounts->id,
-                'transaction_type_id' => 1,
-                'mount_transaction' => $request->amount,
-                'created_at' => date("Y-m-d H:i:s"),
-                // $request->amount -$bank_accounts->mount_transaction
-                // $transactions->save();
-            ]);
+//           step 1 start transaccion
+            DB::beginTransaction();
+            try {
+                DB::connection('db1')->table('transactions')->insert([
+                    'bank_accounts_id' => $bank_accounts->id,
+                    'transaction_type_id' => 1,
+                    'mount_transaction' => $request->amount,
+                    'created_at' => date("Y-m-d H:i:s"),
+                ]);
 
-            $bank_amount = DB::connection('db1')->table('bank_accounts')
-            ->where('account_number','=',[$request->account_number])
-            ->select('amount')->get();
-
-            DB::connection('db1')->table('bank_accounts')
-             ->where('account_number',[$request->account_number])
-             ->update(['amount'=>$bank_amount[0]->amount - $request->amount]);
-                
+                $bank_amount = DB::connection('db1')->table('bank_accounts')
+                    ->where('account_number','=',[$request->account_number])
+                    ->select('amount')->get();
+                DB::connection('db1')->table('bank_accounts')
+                    ->where('account_number',[$request->account_number])
+                    ->update(['amount'=>$bank_amount[0]->amount - $request->amount]);
+//              step 2  if all good commit
+                DB::commit();
+            } catch (\Exception $exception) {
+//               step 3 if some error rollback
+                DB::rollBack();
+            }
         }else{
             return redirect()->back()->with('alerta','Monto insuficiente o Cuanta inactiva');
         }

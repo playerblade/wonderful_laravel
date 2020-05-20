@@ -71,16 +71,25 @@ class StatusOrderController extends Controller
      */
     public function update(Request $request, StatusOrder $statusOrder)
     {
-        $statusOrder->order_id = $request->order_id;
-        $statusOrder->process_order_id = $request->process_order_id;
-        $statusOrder->update();
+        DB::beginTransaction();
+        try {
+            $statusOrder->order_id = $request->order_id;
+            $statusOrder->process_order_id = $request->process_order_id;
+            $statusOrder->update();
 
-        $userStatus = new UserStatusOrder();
-        $userStatus->status_order_id = $statusOrder->id;
-        $userStatus->user_id = $request->user_id;
-        $userStatus->save();
+            $userStatus = new UserStatusOrder();
+            $userStatus->status_order_id = $statusOrder->id;
+            $userStatus->user_id = $request->user_id;
+            $userStatus->save();
+//              step 2  if all good commit
+            DB::commit();
+            return redirect()->route('statusOrder');
+        } catch (\Exception $exception) {
+//               step 3 if some error rollback
+            DB::rollBack();
+        }
 
-        return redirect()->route('statusOrder');
+//        return redirect()->route('statusOrder');
 //        return response()->json($statusOrder);
     }
 

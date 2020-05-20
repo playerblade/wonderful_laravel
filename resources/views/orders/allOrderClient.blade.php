@@ -30,52 +30,50 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <tr>
-                                            <td>{{$order->order_id}}</td>
-{{--                                            @if($order->active == 1)--}}
-{{--                                                <td><span class="right badge badge-success">En Curso</span></td>--}}
-{{--                                            @else--}}
-{{--                                                <td><span class="right badge badge-danger">Cancelado</span></td>--}}
-{{--                                            @endif--}}
-                                            @if($order->estado == 'inicial')
-                                                <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
-                                            @endif
-                                            @if($order->estado == 'proceso')
-                                                <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
-                                            @endif
-                                            <td>{{$order->fechaOrden}}</td>
-                                            @if($order->estado == 'inicial')
-                                                <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
+                                            @if($order->active == 1 )
+                                                <td>{{$order->order_id}}</td>
+                                                @if($order->active == 0)
+                                                    <td><span class="right badge badge-danger">Cancelado</span></td>
+                                                @else
+                                                    @if($order->estado == 'inicial')
+                                                        <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                                    @endif
+                                                    @if($order->estado == 'proceso')
+                                                        <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                                    @endif
+                                                @endif
+                                                <td>{{$order->fechaOrden}}</td>
+                                                @if($order->estado == 'inicial')
+                                                    <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
+                                                @else
+                                                    <td>{{$order->usuario}}</td>
+                                                @endif
+                                                <td class="text-right">
+                                                    <a href="/order_detail/{{$order->order_id}}/client" class="btn btn-info"><i class="fas fa-eye"></i> Ver</a>
+                                                </td>
                                             @else
-                                                <td>{{$order->usuario}}</td>
+{{--                                                elseeeeee--}}
+                                                <td style="opacity: .4;">{{$order->order_id}}</td>
+                                                @if($order->active == 0)
+                                                    <td style="opacity: .4;"><span class="right badge badge-danger">Cancelado</span></td>
+                                                @else
+                                                    @if($order->estado == 'inicial')
+                                                        <td style="opacity: .4;"><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                                    @endif
+                                                    @if($order->estado == 'proceso')
+                                                        <td style="opacity: .4;"><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                                    @endif
+                                                @endif
+                                                <td style="opacity: .4;">{{$order->fechaOrden}}</td>
+                                                @if($order->estado == 'inicial')
+                                                    <td style="opacity: .4;"><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
+                                                @else
+                                                    <td style="opacity: .4;">{{$order->usuario}}</td>
+                                                @endif
+                                                <td  class="text-right">
+                                                    <a style="pointer-events: none;cursor: default; opacity: .4" href="/order_detail/{{$order->order_id}}/client" class="btn btn-info"><i class="fas fa-eye"></i> Ver</a>
+                                                </td>
                                             @endif
-{{--                                            @if($order->estado == 'inicial' || $order->estado == 'proceso' )--}}
-{{--                                                @if($order->active == 1)--}}
-{{--                                                    <td class="py-0 align-middle text-right">--}}
-{{--                                                        <form action="{{ route('order_cancel',$order->order_id) }}" method="POST">--}}
-{{--                                                            @csrf--}}
-{{--                                                            @method('PUT')--}}
-{{--                                                            <div class="btn-group btn-group-sm">--}}
-{{--                                                                <button type="submit" class="btn btn-warning"><i class="fas fa-stop-circle"></i> Cancelar</button>--}}
-{{--                                                            </div>--}}
-{{--                                                        </form>--}}
-{{--                                                    </td>--}}
-{{--                                                @else--}}
-{{--                                                    <td class="py-0 align-middle text-right">--}}
-{{--                                                        <form action="{{ route('order_restart',$order->order_id) }}" method="POST">--}}
-{{--                                                            <div class="btn-group btn-group-sm">--}}
-{{--                                                                @csrf--}}
-{{--                                                                @method('PUT')--}}
-{{--                                                                <button type="submit" class="btn btn-warning"><i class="fas fa-play-circle"></i> Restablecer</button>--}}
-{{--                                                            </div>--}}
-{{--                                                        </form>--}}
-{{--                                                    </td>--}}
-{{--                                                @endif--}}
-{{--                                            @else--}}
-{{--                                                <td>><span class="right badge badge-secondary">You Can't Cancel</span></td>--}}
-{{--                                            @endif--}}
-                                            <td>
-                                                <a href="/order_detail/{{$order->order_id}}/client" class="btn btn-info"><i class="fas fa-eye"></i> Ver</a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
