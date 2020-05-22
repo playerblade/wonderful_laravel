@@ -24,8 +24,7 @@
                                         @if($totalAmounts)
                                             <h3 class="card-title float-right"><b>Monto Total Mas Envio:</b>&ensp; {{$totalAmounts[0]->montoTotal + $transport[0]->price}}</h3>
 {{--                                            <input hidden type="number" name="monto_total" value="{{$totalAmounts[0]->montoTotal + $transport[0]->price}}">--}}
-                                            <input hidden type="number" name="monto_total_transaction" value="{{$totalAmounts[0]->montoTotal + $transport[0]->price}}">
-                                            <input hidden type="number" name="amount_bank_account" value="{{$transaction[0]->amount}}">
+                                             <input hidden type="number" name="amount_bank_account" value="{{$transaction[0]->amount}}">
                                         @else
                                             No hay datos...
                                         @endif

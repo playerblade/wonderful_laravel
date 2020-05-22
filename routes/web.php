@@ -241,4 +241,5 @@ Route::group(['middleware' => 'web','role:colaborador'], function () {
     Route::get('/orders_process',
         'StatusOrderController@ordersProcess'
     );
+    
 });

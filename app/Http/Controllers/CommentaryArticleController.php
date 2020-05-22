@@ -35,7 +35,10 @@ class CommentaryArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comentario = new CommentaryArticle();
+        $comentario->comment = $request->comment;
+
+        $comentario->save();
     }
 
     /**
