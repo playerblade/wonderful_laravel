@@ -54,15 +54,14 @@ class HomeController extends Controller
         $user = Auth::user();
         if ($request->user()->hasRole('administrador')) {
             return view('layouts.admin.home',compact('user'));
-        }
-        if ($request->user()->hasRole('colaborador')){
+        }elseif($request->user()->hasRole('colaborador')){
             return view('layouts.collaborator.home',compact('user'));
-        }
-        if ($request->user()->hasRole('verificador')){
+        }elseif($request->user()->hasRole('verificador')){
             return view('layouts.checker.home',compact('user'));
-        }
-        if ($request->user()->hasRole('cliente')){
+        }elseif($request->user()->hasRole('cliente')){
             return view('layouts.client.home',compact('user','articles','categories','makers'));
+        }else{
+            return back();
         }
 
     }

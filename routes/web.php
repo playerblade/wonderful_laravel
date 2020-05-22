@@ -48,7 +48,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 Route::group(['middleware' => 'web','role:administrador'], function () {
 
-    Route::get('/home','HomeController@index');
+    Route::get('/home','HomeController@index')->name('home');
     //    consulta 1
     Route::get('/reportes/articulos' ,
         'ArticleController@articulosVendidosPorMes'
@@ -212,7 +212,7 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
 
     Route::get('/{user_id}/orders',
         'OrderDetailController@allOrdersClient'
-    );
+    )->name('user_orders');
 
     Route::put('/order_cancel/{order_id}',
         'OrderController@orderCancel'

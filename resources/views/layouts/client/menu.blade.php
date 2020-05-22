@@ -7,7 +7,15 @@
              style="opacity: .8; width: 35px;">
         <span class="brand-text font-weight-light">WonderFuL</span>
       </a>
-
+        &ensp;&ensp;&ensp;
+        <a href="/home">
+            <span class="brand-text font-weight-light" style="color: gray">Inicio</span>
+        </a>
+        &ensp;&ensp;&ensp;
+        <a href="/home">
+            <span class="brand-text font-weight-light" style="color: gray">Lista de Productos</span>
+        </a>
+        &ensp;&ensp;&ensp;
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

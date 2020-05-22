@@ -326,3 +326,4 @@
         bsCustomFileInput.init();
     });
 </script>
+@yield('script_reload_this_page')

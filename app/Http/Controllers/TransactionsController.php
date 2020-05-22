@@ -6,6 +6,7 @@ use App\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionsController extends Controller
 {
@@ -70,7 +71,8 @@ class TransactionsController extends Controller
         }else{
             return redirect()->back()->with('alerta','Monto insuficiente o Cuanta inactiva');
         }
-        return redirect()->route('detail_transaction',['bank_account_id' => $bank_accounts->id])->with('alert','Su pedio fue realizado con exito');
+//        return redirect()->route('detail_transaction',['bank_account_id' => $bank_accounts->id])->with('alert','Su pedio fue realizado con exito');
+        return redirect()->route('user_orders',['user_id' => Auth::user()->id])->with('alert','Su pedio fue realizado con exito');
 //        return response()->json($bank_account_array);
     }
 

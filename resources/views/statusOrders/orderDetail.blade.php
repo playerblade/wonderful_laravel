@@ -28,71 +28,74 @@
                             <table id="example1" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">&ensp;Order ID</th>
-                                    <th>Cliente</th>
-                                    <th>Articulo</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Sub Total</th>
-                                    <th>Orden </th>
+                                    <th>Numero de Orden</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Usuario</th>
                                     <th>Cambiar Estado A:</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($order_details as $order_detail)
                                     <tr>
-                                        <th class="text-center">{{$order_detail->order_id}}</th>
-                                        <td>{{$order_detail->cliente}}</td>
-                                        <td>{{$order_detail->articulo}}</td>
-                                        <td>{{$order_detail->precio}}</td>
-                                        <td>{{$order_detail->cantidad}}</td>
-                                        <td>{{$order_detail->subTotal}}</td>
-                                        @if($order_detail->acitve == 1)
-                                        <td><span class="right badge badge-success">En Curso</span></td>
-                                        @else
-                                        <td><span class="right badge badge-danger">Cancelado</span></td>
-                                        @endif
-
-                                        @if($order_detail->acitve == 1)
-                                        <!-- <td><span class="right badge badge-success">En Curso</span></td> -->
-                                        <td>
-                                            <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                <button class="btn btn-info">Proceso</button>
-                                                <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
-                                                <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                <input hidden type="number" name="process_order_id" value="2">
-                                            </form>
-                                        </td>
+                                        @if($order_detail->active == 1)
+                                            <th class="text-center">{{$order_detail->order_id}}</th>
+                                            @if($order_detail->estado == 'initial')
+                                                <td><span class="right badge badge-secondary">{{$order_detail->estado}}</span></td>
+                                            @endif
+                                            @if($order_detail->estado == 'process')
+                                                <td><span class="right badge badge-primary">{{$order_detail->estado}}</span></td>
+                                            @endif
+                                            <td>{{$order_detail->fecha}}</td>
+                                            <td><span class="right badge badge-secondary">{{$order_detail->usuario}}</span></td>
+                                            <td>
+                                                <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;
+                                                    <button class="btn btn-info">Proceso</button>
+                                                    <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
+                                                    <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                                    <input hidden type="number" name="process_order_id" value="2">
+                                                </form>
+                                            </td>
                                         @else
                                         <!-- <td><span class="right badge badge-danger">Cancelado</span></td> -->
-                                        <td>
-                                            <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                <button class="btn btn-info" disabled>Proceso</button>
-                                                <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
-                                                <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                <input hidden type="number" name="process_order_id" value="2">
-                                            </form>
-                                        </td>
+                                            <th style="opacity: .4" class="text-center">{{$order_detail->order_id}}</th>
+                                            @if($order_detail->active == 0)
+                                                <td style="opacity: .4;"><span class="right badge badge-danger">Cancelado</span></td>
+                                            @else
+                                                @if($order_detail->estado == 'initial')
+                                                    <td style="opacity: .4"><span class="right badge badge-secondary">{{$order_detail->estado}}</span></td>
+                                                @endif
+                                                @if($order_detail->estado == 'process')
+                                                    <td style="opacity: .4"><span class="right badge badge-primary">{{$order_detail->estado}}</span></td>
+                                                @endif
+                                            @endif
+                                            <td style="opacity: .4">{{$order_detail->fecha}}</td>
+                                            <td style="opacity: .4"><span class="right badge badge-danger">{{$order_detail->usuario}}</span></td>
+                                            <td>
+                                                <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    &ensp;&ensp;&ensp;&ensp;&ensp;
+                                                    <button class="btn btn-info" disabled>Proceso</button>
+                                                    <input hidden type="number" name="order_id" value="{{$order_detail->order_id}}">
+                                                    <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                                    <input hidden type="number" name="process_order_id" value="2">
+                                                </form>
+                                            </td>
                                         @endif
-                                        
+
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th class="text-center">&ensp;Order ID</th>
-                                    <th>Cliente</th>
-                                    <th>Articulo</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Sub Total</th>
-                                    <th>Orden </th>
+                                    <th>Numero de Orden</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Usuario</th>
                                     <th>Cambiar Estado A:</th>
                                     {{--                                    <th>Color</th>--}}
                                 </tr>
@@ -106,4 +109,15 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
+@endsection
+@section('script_reload_this_page')
+    <script>
+        $(document).ready(function () {
+            setTimeout(refresh,1000);
+        });
+        function refresh() {
+            // location.reload();
+            // $("#refresh").load("http://127.0.0.1:8000/orders_initial");
+        }
+    </script>
 @endsection

@@ -244,7 +244,7 @@ class OrderDetailController extends Controller
                         inner join users c on o.user_id = c.id
                     -- and r.id = 2
                     -- and c.id = 5
-                    -- and c.id = $user_id
+                    and c.id = $user_id
                     order by o.created_at desc;"
         );
 
