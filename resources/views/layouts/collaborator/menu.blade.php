@@ -2,7 +2,7 @@
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-1">
         <div class="container">
-            <a href="../../index3.html" class="navbar-brand">
+            <a href="/home" class="navbar-brand">
                 <img src="{{asset("/images/logo1.jpg")}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8; width: 35px;">
                 <span class="brand-text font-weight-light">WonderFuL</span>

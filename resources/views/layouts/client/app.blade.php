@@ -83,7 +83,15 @@
         $("#example1").DataTable();
         $("#example2").DataTable();
         // habilitarlos 1 por 1
-        // $('#example2').DataTable({
+        $('#example3').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+        });
+        // $('#example3').DataTable({
         //     "paging": true,
         //     "lengthChange": false,
         //     "searching": false,

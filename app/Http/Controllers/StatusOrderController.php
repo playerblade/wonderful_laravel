@@ -77,20 +77,17 @@ class StatusOrderController extends Controller
             $statusOrder->process_order_id = $request->process_order_id;
             $statusOrder->update();
 
-            $userStatus = new UserStatusOrder();
-            $userStatus->status_order_id = $statusOrder->id;
-            $userStatus->user_id = $request->user_id;
-            $userStatus->save();
+            DB::table('user_status_orders')
+            ->join('status_orders','user_status_orders.status_order_id','=','status_orders.id')
+            ->where('status_order_id',$statusOrder->id)
+            ->update(['user_id' => $request->user_id]);
 //              step 2  if all good commit
             DB::commit();
-            return redirect()->route('statusOrder');
         } catch (\Exception $exception) {
 //               step 3 if some error rollback
             DB::rollBack();
         }
-
-//        return redirect()->route('statusOrder');
-//        return response()->json($statusOrder);
+        return redirect()->route('statusOrder');
     }
 
     /**
@@ -107,10 +104,10 @@ class StatusOrderController extends Controller
     public function ordersInitial()
     {
         $order_details = DB::select("
-            select o.id as order_id ,concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as cliente,
+            select o.id as order_id ,concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
                    a.id as article_id, a.title as articulo,
                    pa.price as precio , od.quantity as cantidad , od.sub_total as subTotal,
-                   od.created_at , po.process_order as estado , o.active as acitve
+                   od.created_at , o.created_at as fecha, po.process_order as estado , o.active as active
             from order_details od inner join orders o on od.order_id = o.id
                  inner join users u on o.user_id = u.id
                  inner join status_orders so on o.id = so.order_id

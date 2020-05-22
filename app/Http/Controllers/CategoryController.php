@@ -46,15 +46,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category' => 'required|string|max:250'
+            'category' => 'required|string|max:250|unique:categories'
         ]);
-//        Category::create($request->all());
-        $category = new Category();
-        $category->category = ucwords($request->input('category'));
-//        Category::create($request->all());
-        $category->save();
+            $category = new Category();
+            $category->category = ucwords($request->category);
+            $category->save();
+
         return redirect()->route('categories.index')
-            ->with('success','Product created successfully.');
+            ->with('success','Category created successfully.');
     }
 
     /**

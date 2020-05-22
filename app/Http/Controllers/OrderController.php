@@ -16,6 +16,7 @@ use App\TransportFare;
 use App\User;
 use App\UserStatusOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
@@ -502,7 +503,8 @@ class OrderController extends Controller
         DB::connection('mysql')->table('orders')
                                      ->where('orders.id',$order_id)
                                      ->update(['orders.active' => 0]);
-        return redirect()->back();
+
+        return redirect()->route('user_orders',['user_id' => Auth::user()->id]);
     }
 
     public function orderRestart($order_id)

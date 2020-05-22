@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <table id="example1" class="table table-striped elevation-2">
+                                <table id="example3" class="table table-striped elevation-2">
                                     <thead>
                                     <tr>
                                         <th>Numero de Orden</th>
@@ -99,5 +99,28 @@
         <!-- /.row -->
     </section>
     <!-- /.container-fluid -->
+@endsection
+@section('alert_validations')
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000
+            });
+            // if exist some errors
+            var msg = '{{\Illuminate\Support\Facades\Session::get('alert')}}'
+            var exist = '{{\Illuminate\Support\Facades\Session::has('alert')}}'
+            if (exist){
+                Toast.fire({
+                    type: 'success',
+                    title: msg
+                })
+            }
+
+        });
+    </script>
+
 @endsection
 

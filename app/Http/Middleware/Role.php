@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Routing\Route;
 
 class Role
 {
@@ -17,23 +18,19 @@ class Role
     {
         if ($request->user()->hasRole($role) == 'administrador') {
             return $next($request);
-        }
-        if ($request->user()->hasRole($role) == 'colaborador'){
+        }elseif($request->user()->hasRole($role) == 'colaborador'){
             return $next($request);
 
-        }
-        if ($request->user()->hasRole($role) == 'usuario'){
+        }elseif($request->user()->hasRole($role) == 'usuario'){
             return $next($request);
 
-        }
-        if ($request->user()->hasRole($role) == 'verificador'){
+        }elseif($request->user()->hasRole($role) == 'verificador'){
             return $next($request);
 
-        }
-        if ($request->user()->hasRole($role) == 'cliente'){
+        }elseif($request->user()->hasRole($role) == 'cliente'){
             return $next($request);
+        }else{
+            return redirect('/','not allowed');
         }
-
-        return redirect('/','not allowed');
     }
 }
