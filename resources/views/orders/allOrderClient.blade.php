@@ -118,6 +118,15 @@
                     title: msg
                 })
             }
+            // alert para la evualuacion de producto
+            var msg = '{{\Illuminate\Support\Facades\Session::get('success')}}'
+            var exist = '{{\Illuminate\Support\Facades\Session::has('success')}}'
+            if (exist){
+                Toast.fire({
+                    type: 'success',
+                    title: msg
+                })
+            }
 
         });
     </script>

@@ -225,6 +225,9 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::get('/order_detail/{order_id}/client',
         'OrderDetailController@orderDetailClient'
     );
+    Route::resource('comentaries',
+        'CommentaryArticleController'
+    );
 });
 
 Route::group(['middleware' => 'web','role:colaborador'], function () {
