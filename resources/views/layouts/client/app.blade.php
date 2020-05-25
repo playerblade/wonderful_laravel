@@ -4,7 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <style>
+        #form {
+          width: 250px;
+          margin: 0 auto;
+          height: 50px;
+        }
 
+        #form p {
+          text-align: center;
+        }
+
+        #form label {
+          font-size: 20px;
+        }
+
+        input[type="radio"] {
+          display: none;
+        }
+
+        .labelTamanio {
+          font-size: 60px;
+          color: grey;
+        }
+
+        .clasificacion {
+          direction: rtl;
+          unicode-bidi: bidi-override;
+        }
+
+        label:hover,
+        label:hover ~ label {
+          color: orange;
+        }
+
+        input[type="radio"]:checked ~ label {
+          color: orange;
+        }
+    </style>
     <title>WonderFuL</title>
 
     <!-- Font Awesome Icons -->

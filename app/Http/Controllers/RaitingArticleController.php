@@ -90,24 +90,24 @@ class RaitingArticleController extends Controller
     }
 
     public function raitingsYComentariosArticulos(Article $articles , Request $request){
-        if ($request->user()->authorizeRole(['administrador'])) {
+        // if ($request->user()->authorizeRole(['administrador'])) {
             $articles = DB::select("select * from articles");
 
             return view('articles.raitingsYComentariosArticulos',compact('articles'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+        // } else {
+        //     abort(403, 'you do not authorized for this web site');
+        // }
     }
 
     public function raitingsArticulos($article_id , Article $articles , Request $request){
-        if ($request->user()->authorizeRole(['administrador'])) {
+        // if ($request->user()->authorizeRole(['administrador'])) {
 
             $raitings = DB::select(
                 "
                 select a.id as article_id, a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                 from stars s inner join raiting_articles ra on s.id = ra.star_id
-                   inner join clients c on ra.client_id = c.id
-                   inner join commentary_articles ca on c.id = ca.client_id
+                   inner join users c on ra.user_id = c.id
+                   inner join commentary_articles ca on c.id = ca.user_id
                    inner join articles a on ra.article_id = a.id
                    where a.id = 1
                    group by s.id
@@ -119,7 +119,7 @@ class RaitingArticleController extends Controller
                     select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
                      from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                           from stars s inner join raiting_articles ra on s.id = ra.star_id
-                               inner join clients c on ra.client_id = c.id
+                               inner join users c on ra.user_id = c.id
                                inner join commentary_articles ca on c.id = ca.client_id
                                inner join articles a on ra.article_id = a.id
                                where a.id = 1
@@ -130,13 +130,13 @@ class RaitingArticleController extends Controller
             );
 
             return view('articles.raitingsArticulos',compact('raitings','porcentajes'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+        // } else {
+        //     abort(403, 'you do not authorized for this web site');
+        // }
     }
 
     public function comentariosArticulos($article_id , $raiting, CommentaryArticle $comentarios , Request $request){
-        if ($request->user()->authorizeRole(['administrador'])) {
+        // if ($request->user()->authorizeRole(['administrador'])) {
 
 
             $comentarios = DB::select(
@@ -145,7 +145,7 @@ class RaitingArticleController extends Controller
                        ca.comment as cometario, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
                        ia.url_image as imagen, a.description as description
                   from stars s inner join raiting_articles ra on s.id = ra.star_id
-                       inner join clients c on ra.client_id = c.id
+                       inner join users c on ra.user_id = c.id
                        inner join commentary_articles ca on c.id = ca.client_id
                        inner join articles a on ra.article_id = a.id
                        inner join image_articles ia on a.id = ia.article_id
@@ -157,9 +157,9 @@ class RaitingArticleController extends Controller
             );
 //            dd($comentarios);
             return view('articles.comentariosArticulos',compact('comentarios'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+        // } else {
+        //     abort(403, 'you do not authorized for this web site');
+        // }
 
     }
 }

@@ -18,6 +18,10 @@
                     <li class="nav-item dropdown">
                         <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Ordenes</a>
                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                            <li class="dropdown-divider"></li>
+                            <li><a href="/reportes/detalleOrdenesPorCliente" class="dropdown-item">10. Detalle Orden </a></li>
+                            <li class="dropdown-divider"></li>
+                            <li class="dropdown-divider"></li>
                             <li><a href="/orders_initial" class="dropdown-item">Estado Inicial </a></li>
                             <li class="dropdown-divider"></li>
                             <li><a href="/orders_process" class="dropdown-item">Estado En Proceso </a></li>

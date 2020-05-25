@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\CommentaryArticle;
+use App\RaitingArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CommentaryArticleController extends Controller
 {
@@ -35,7 +38,29 @@ class CommentaryArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->estrellas);
+        $comentario = new CommentaryArticle();
+        $comentario->article_id = $request->article_id;
+        $comentario->user_id = $request->user_id;
+        $comentario->comment = $request->comment;
+
+        $comentario->save();
+
+        $stars = DB::table('stars')
+                    ->where('id','=',[$request->estrellas])
+                    ->select('stars.id')
+                    ->first();
+            // dd($stars);
+
+        $raitingArticles = new RaitingArticle();
+        $raitingArticles->article_id = $request->article_id;
+        $raitingArticles->user_id = $request->user_id;
+        $raitingArticles->star_id = $stars->id;
+        $raitingArticles->save();
+
+        // return redirect()->route('user_orders')->with('success','s');
+        return redirect()->route('user_orders',['user_id' => $request->user_id])
+        ->with('success','Comentario enviado exitosamente');
     }
 
     /**
