@@ -236,7 +236,7 @@ class ArticleController extends Controller
 
     public function promedioDeProductosMasVendidosPorCiudades($city_id, Article $articles , Request $request){
 
-        if ($request->user()->authorizeRole(['administrador'])) {
+//        if ($request->user()->authorizeRole(['administrador'])) {
 
             $cities = DB::table('cities')->select('*')->paginate(3);
             //        dd($cities);
@@ -267,9 +267,9 @@ class ArticleController extends Controller
             //        dd($articles);
             // return view('articles.promedioDeProductosMasVendidosPorCiudades',compact('barchart','articles','cities'));
             return view('articles.promedioDeProductosMasVendidosPorCiudades', compact('barchart', 'articles', 'cities'));
-        } else {
-            abort(403, 'you do not authorized for this web site');
-        }
+//        } else {
+//            abort(403, 'you do not authorized for this web site');
+//        }
     }
 }
 

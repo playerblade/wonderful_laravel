@@ -98,6 +98,15 @@
         $("#example1").DataTable();
         $("#example2").DataTable();
         // habilitarlos 1 por 1
+        $('#example3').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+        });
+        // backup
         // $('#example2').DataTable({
         //     "paging": true,
         //     "lengthChange": false,
@@ -343,6 +352,6 @@
 @yield('scriptsBarChart')
 @yield('scriptReadMore')
 @yield('script_categories')
-
+@yield('alert_validations')
 <!-- DASHBOARD LAST VERSION-->
 {{--<script src="{{asset("/admin-lte/dist/js/pages/dashboard3.js")}}"></script>--}}

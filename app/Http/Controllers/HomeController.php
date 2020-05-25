@@ -33,23 +33,19 @@ class HomeController extends Controller
 //        $categories = Category::all();
         $categories = Category::select('categories.*')->orderBy('category','asc')->get();
         $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
-//        $makers = DB::table('makers')
-//                      ->select('makers.*')
-//                      ->orderBy('name','asc')->get();
 
-        $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id, sc.sub_category, c.category
-                from categories c inner join sub_categories sc on c.id=sc.category_id
-                    inner join articles a on sc.id=a.sub_category_id
-                    inner join image_articles ia on a.id = ia.article_id
-                    inner join price_articles pa on a.id = pa.article_id
-                    inner join makers m on a.maker_id = m.id
-                    and pa.is_current = 1
-                    and ia.is_main = 1
-                    and c.id = 1
-               order by a.title asc;
-        ");
+        $articles = DB::table('categories')
+            ->join('sub_categories','categories.id','=','sub_categories.category_id')
+            ->join('articles','sub_categories.id','=','articles.sub_category_id')
+            ->join('image_articles','articles.id','=','image_articles.article_id')
+            ->join('price_articles','articles.id','=','price_articles.article_id')
+            ->join('makers','articles.maker_id','=','makers.id')
+            ->where('price_articles.is_current','=',1)
+            ->where('image_articles.is_main','=',1)
+            ->where('categories.id','=',1)
+            ->select('articles.id','articles.title','makers.name','image_articles.url_image','price_articles.price')
+//                    ->get();
+            ->paginate(5);
 
         $user = Auth::user();
         if ($request->user()->hasRole('administrador')) {

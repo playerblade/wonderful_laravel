@@ -165,6 +165,11 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::get('/orders_initial',
         'OrderController@ordersInitial'
     );
+
+//    sprint 3 final test DB2
+    Route::resource('users',
+        'UserController'
+    );
 });
 
 Route::group(['middleware' => 'web','role:cliente'], function () {

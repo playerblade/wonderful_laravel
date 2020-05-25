@@ -46,6 +46,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <img src="{{asset("/admin-lte/dist/img/user3-128x128.jpg")}}" class="user-image img-circle elevation-2" alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                        &ensp;<i class="fas fa-power-off"></i>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -263,6 +264,29 @@
                             </p>
                         </a>
                     </li>
+{{--                    FIN ADMINSTRAR--}}
+
+                    {{-- GESTIOANR  ===== >>>> Usuarios --}}
+                    <li class="nav-header">USUARIOS</li>
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}" class="nav-link">
+{{--                            <i class="nav-icon fas fa-user-plus"></i>--}}
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Usuarios
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}" class="nav-link">
+                            {{--                            <i class="nav-icon fas fa-user-plus"></i>--}}
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Clientes
+                            </p>
+                        </a>
+                    </li>
+                    {{--      FIN             GESTIOANR  ===== >>>> Usuarios --}}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

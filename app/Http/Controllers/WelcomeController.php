@@ -13,21 +13,22 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        $categories = Category::orderBy('categories.category')->get();
-        $makers = Maker::orderBy('makers.name')->get();
-        $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
-                from articles a inner join image_articles ia on a.id = ia.article_id
-                    inner join sub_categories sc on a.sub_category_id = sc.id
-                    inner join categories c on sc.category_id = c.id
-                    inner join price_articles pa on a.id = pa.article_id
-                    inner join makers m on a.maker_id = m.id
-                    and pa.is_current = 1
-                    and ia.is_main = 1
-                    and c.id = 1
-               order by a.title asc;
-        ");
+        $categories = Category::select('categories.*')->orderBy('category','asc')->get();
+        $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
+
+        $articles = DB::table('categories')
+                    ->join('sub_categories','categories.id','=','sub_categories.category_id')
+                    ->join('articles','sub_categories.id','=','articles.sub_category_id')
+                    ->join('image_articles','articles.id','=','image_articles.article_id')
+                    ->join('price_articles','articles.id','=','price_articles.article_id')
+                    ->join('makers','articles.maker_id','=','makers.id')
+                    ->where('price_articles.is_current','=',1)
+                    ->where('image_articles.is_main','=',1)
+                    ->where('categories.id','=',1)
+                    ->select('articles.id','articles.title','articles.description','makers.name','image_articles.url_image','price_articles.price')
+//                    ->get();
+                    ->paginate(5);
+//        dd($articles);
 
         return view('welcome.welcome',compact('articles','categories','makers'));
     }
@@ -56,21 +57,33 @@ class WelcomeController extends Controller
     public function geArticlesForCategories(Request $request){
         if ($request->ajax()){
 //            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
-            $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
-                from articles a inner join image_articles ia on a.id = ia.article_id
-                    inner join sub_categories sc on a.sub_category_id = sc.id
-                    inner join categories c on sc.category_id = c.id
-                    inner join price_articles pa on a.id = pa.article_id
-                    inner join makers m on a.maker_id = m.id
-                    and pa.is_current = 1
-                    and ia.is_main = 1
-                    and c.id = $request->category_id
-                order by articulo asc;
-            ");
+//            $articles = DB::select("
+//                select a.title as articulo , m.name as fabricante, ia.url_image as image,
+//                       pa.price as price , a.id as id
+//                from articles a inner join image_articles ia on a.id = ia.article_id
+//                    inner join sub_categories sc on a.sub_category_id = sc.id
+//                    inner join categories c on sc.category_id = c.id
+//                    inner join price_articles pa on a.id = pa.article_id
+//                    inner join makers m on a.maker_id = m.id
+//                    and pa.is_current = 1
+//                    and ia.is_main = 1
+//                    and c.id = $request->category_id
+//                order by articulo asc;
+//            ");
+            $articles = DB::table('categories')
+                ->join('sub_categories','categories.id','=','sub_categories.category_id')
+                ->join('articles','sub_categories.id','=','articles.sub_category_id')
+                ->join('image_articles','articles.id','=','image_articles.article_id')
+                ->join('price_articles','articles.id','=','price_articles.article_id')
+                ->join('makers','articles.maker_id','=','makers.id')
+                ->where('price_articles.is_current','=',1)
+                ->where('image_articles.is_main','=',1)
+                ->where('categories.id','=',$request->category_id)
+                ->select('articles.id','articles.title','makers.name','image_articles.url_image','price_articles.price')
+                    ->get();
+//                ->paginate(2);
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
+                $articles_array[$article->id] = [$article->title,$article->price,$article->name,$article->url_image];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
