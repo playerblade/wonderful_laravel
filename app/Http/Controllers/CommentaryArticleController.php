@@ -50,7 +50,7 @@ class CommentaryArticleController extends Controller
                     ->where('id','=',[$request->estrellas])
                     ->select('stars.id')
                     ->first();
-            // dd($stars);
+//             dd($stars);
 
         $raitingArticles = new RaitingArticle();
         $raitingArticles->article_id = $request->article_id;
@@ -59,8 +59,9 @@ class CommentaryArticleController extends Controller
         $raitingArticles->save();
 
         // return redirect()->route('user_orders')->with('success','s');
-        return redirect()->route('user_orders',['user_id' => $request->user_id])
-        ->with('success','Comentario enviado exitosamente');
+//        return redirect()->route('user_orders',['user_id' => $request->user_id])
+//        ->with('success','Comentario enviado exitosamente');
+        return back()->with('success','Comentario enviado exitosamente');
     }
 
     /**

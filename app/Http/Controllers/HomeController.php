@@ -48,6 +48,7 @@ class HomeController extends Controller
             ->paginate(5);
 
         $user = Auth::user();
+
         if ($request->user()->hasRole('administrador')) {
             return view('layouts.admin.home',compact('user'));
         }elseif($request->user()->hasRole('colaborador')){

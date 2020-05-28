@@ -11,14 +11,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = DB::table('users')
-                 ->join('roles','users.role_id','=','roles.id')
-                 ->select('users.*','roles.role',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
-                 ->orderBy('users.id','desc')->get();
+//        $users = DB::table('users')
+//                 ->join('roles','users.role_id','=','roles.id')
+//                 ->select('users.*','roles.role',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+//                 ->orderBy('users.id','desc')->get();
 //                 ->paginate(5);
 //        dd($users);
-        $roles = DB::table('roles')
-                 ->orderBy('role','asc')->get();
+        $users = DB::select("CALL get_users_with_roles();");
+//        dd($users);
+//        $roles = DB::table('roles')
+//                 ->orderBy('role','asc')->get();
+        $roles = DB::select("CALL get_roles();");
 
         return view('users.crud.index',compact('users','roles'));
 //        return response()->json('hello index');
@@ -42,28 +45,53 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'first_name' => ['required', 'string', 'max:255'],
+        $validate =  $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'second_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'mother_last_name' => ['required', 'string', 'max:255'],
 //            'user' => ['required', 'string', 'max:255', 'unique:users'],
-//            'password' => ['required', 'string', 'min:8', 'confirmed'],
-//        ]);
+            'user' => ['required', 'string', 'max:255'],
+//            'password' => ['required', 'string', 'min:2', 'confirmed'],
+            'password' => ['required', 'string', 'min:2'],
+        ]);
 
-        $user = new User();
-        $user->role_id = $request->role_id;
-        $user->ci = $request->ci;
-        $user->first_name = $request->first_name;
-        $user->second_name = $request->second_name;
-        $user->last_name = $request->last_name;
-        $user->mother_last_name = $request->mother_last_name;
-        $user->gender = $request->gender;
-        $user->phone_number = $request->phone_number;
-        $user->birthday = date($request->birthday);
-        $user->user = strtolower($request->user);
-        $user->password = bcrypt($request->password);
-        $user->active = 1;
-        $user->save();
+//        $user = new User();
+//        $user->role_id = $request->role_id;
+//        $user->ci = $request->ci;
+//        $user->first_name = $request->first_name;
+//        $user->second_name = $request->second_name;
+//        $user->last_name = $request->last_name;
+//        $user->mother_last_name = $request->mother_last_name;
+//        $user->gender = $request->gender;
+//        $user->phone_number = $request->phone_number;
+//        $user->birthday = date($request->birthday);
+//        $user->user = strtolower($request->user);
+//        $user->password = bcrypt($request->password);
+//        $user->active = 1;
+//        $user->save();
 
-        return redirect()->route('users.index') ->with('success','use saved');
+        $first_name = ucwords($request->first_name);
+        $second_name = ucwords($request->second_name);
+        $last_name = ucwords($request->last_name);
+        $mother_last_name = ucwords($request->mother_last_name);
+        $user = strtolower($request->user);
+        $password = bcrypt($request->password);
+
+        if (empty(DB::table('users')->where('user',$user)->first() || empty(DB::table('users')->where('ci',$request->ci)->first()))){
+            DB::insert("
+                CALL insert_users_with_roles($request->role_id,'$request->ci',
+                '$first_name','$second_name','$last_name',
+                '$mother_last_name','$request->gender',$request->phone_number,
+                '$request->birthday','$user','$password',1);
+            ");
+            return redirect()->route('users.index') ->with('success','use saved');
+        } else {
+            return redirect()->route('users.index') ->with('error',' CI O USER DUPLICATE!!!');
+        }
+
+
+
     }
 
     /**

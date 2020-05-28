@@ -374,3 +374,4 @@
 @yield('script_color_form')
 @yield('script_for_search')
 @yield('alert_validations')
+@yield('script_raiting')

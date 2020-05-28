@@ -170,6 +170,11 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::resource('users',
         'UserController'
     );
+
+//    crud clients
+    Route::resource('clients',
+        'ClientController'
+    );
 });
 
 Route::group(['middleware' => 'web','role:cliente'], function () {
@@ -249,5 +254,5 @@ Route::group(['middleware' => 'web','role:colaborador'], function () {
     Route::get('/orders_process',
         'StatusOrderController@ordersProcess'
     );
-    
+
 });

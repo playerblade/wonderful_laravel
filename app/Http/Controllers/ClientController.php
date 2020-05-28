@@ -2,26 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class ClientController extends controller
 {
-
-    
-    use AuthenticatesUsers;
-
-    // protected $loginView = 'clients.view';
-    protected $guard = 'clients';
-
-    // function __construct()
-    // { 
-    //     $this->middleware('auth:clients', ['only' => ['secret']]);
-    // }
-
-
     /**
      * display a listing of the resource.
      *
@@ -29,7 +15,11 @@ class ClientController extends controller
      */
     public function index()
     {
-        //
+        $users = DB::select("CALL get_clients();");
+
+        $roles = DB::select("CALL get_roles();");
+
+        return view('clients.crud.index',compact('users','roles'));
     }
 
     /**
@@ -50,16 +40,23 @@ class ClientController extends controller
      */
     public function store(request $request)
     {
-        //
+        DB::insert("CALL insert_users_with_roles(
+            5,'$request->ci','$request->first_name',
+           '$request->second_name','$request->last_name','$request->mother_last_name',
+           '$request->gender',$request->phone_number,'$request->birthday','$request->user',
+           '$request->password',1);
+        ");
+
+        return redirect()->route('clients.index') ->with('success','client saved');
     }
 
     /**
      * display the specified resource.
      *
-     * @param  \app\client  $client
+     * @param  \app\User  $user
      * @return \illuminate\http\response
      */
-    public function show(client $client)
+    public function show(User $user)
     {
         //
     }
@@ -67,10 +64,10 @@ class ClientController extends controller
     /**
      * show the form for editing the specified resource.
      *
-     * @param  \app\client  $client
+     * @param  \app\User  $user
      * @return \illuminate\http\response
      */
-    public function edit(client $client)
+    public function edit(User $user)
     {
         //
     }
@@ -79,23 +76,32 @@ class ClientController extends controller
      * update the specified resource in storage.
      *
      * @param  \illuminate\http\request  $request
-     * @param  \app\client  $client
+     * @param  \app\User  $user
      * @return \illuminate\http\response
      */
-    public function update(request $request, client $client)
+    public function update(request $request, User $user)
     {
-        //
+//        dd($request->all());
+        $user->update($request->all());
+        return redirect()->route('clients.index')->with('success','client updated successfully');
     }
 
     /**
      * remove the specified resource from storage.
      *
-     * @param  \app\client  $client
+     * @param  \app\user  $user
      * @return \illuminate\http\response
      */
-    public function destroy(client $client)
+    public function destroy(User $user)
     {
-        //
+//        $user_status_orders = DB::table('user_status_orders')
+//            ->where('user_id',$user->id)->get();
+//        if (empty($user_status_orders[0])){
+            $user->delete();
+            return redirect()->route('clients.index') ->with('success','use deleted');
+//        }else{
+//            return redirect()->route('users.index') ->with('error','not deleted, User working in Order!!');
+//        }
     }
 
     public function cantidaddeproductosporcliente_2( request $request, client $clients)

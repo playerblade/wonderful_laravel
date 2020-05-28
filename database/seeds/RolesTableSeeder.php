@@ -33,7 +33,6 @@ class RolesTableSeeder extends Seeder
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
 
-
 //        user 4
         DB::table('roles')->insert([
             'role' => 'verificador',

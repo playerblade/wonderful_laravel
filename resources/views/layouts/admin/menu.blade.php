@@ -278,7 +278,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('users.index') }}" class="nav-link">
+                        <a href="{{ route('clients.index') }}" class="nav-link">
                             {{--                            <i class="nav-icon fas fa-user-plus"></i>--}}
                             <i class="nav-icon fas fa-users"></i>
                             <p>

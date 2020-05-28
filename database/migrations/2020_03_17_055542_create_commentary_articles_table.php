@@ -18,6 +18,7 @@ class CreateCommentaryArticlesTable extends Migration
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('user_id');
             $table->string('comment',1000);
+            $table->boolean('is_main');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

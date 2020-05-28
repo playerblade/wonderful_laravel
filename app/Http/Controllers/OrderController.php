@@ -255,7 +255,19 @@ class OrderController extends Controller
                     and a.id = $article_id
                     group by id;
         ");
-        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks'));
+
+//        validation query for raiting and camentary article
+        $orders = DB::table('orders')->join('order_details','orders.id','=','order_details.order_id')
+            ->join('articles','order_details.article_id','=','articles.id')
+            ->where('orders.user_id',Auth::user()->id)->first();
+
+//        list raiting and commentary article
+        $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
+                        ->join('users','commentary_articles.user_id','=','users.id')
+                        ->select('commentary_articles.comment',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->orderBy('commentary_articles.created_at','desc')->get();
+
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders','commentaries'));
     }
 
     public function getTransportFares(Request $request)

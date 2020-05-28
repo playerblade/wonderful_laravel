@@ -23,8 +23,6 @@
                     <h3 class="card-title">Users</h3>
 
                     <div class="card-tools">
-{{--                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>--}}
-{{--                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>--}}
                         <button class="btn btn-block btn-outline-success btn-sm" data-toggle="modal" data-target="#modal-lg">
                             <i class="fa fa-user-plus"></i>&ensp;<b>Add More</b>
                         </button>
@@ -44,7 +42,7 @@
                             <th>User</th>
                             <th class="text-center">Password</th>
                             <th>Status</th>
-                            <th>Role</th>
+{{--                            <th>Role</th>--}}
                             <th class="text-right">Opciones</th>
                         </tr>
                         </thead>
@@ -65,7 +63,7 @@
                                 <td>{{$user->phone_number}}</td>
                                 <td>{{$user->birthday}}</td>
                                 <td>{{$user->user}}</td>
-{{--                                for password--}}
+                                {{--                                for password--}}
                                 <td class="py-1 align-middle text-center">
                                     <div class="btn-group btn-group-sm">
                                         <a href="{{ route('users.show',$user->id) }}" class="btn bg-danger elevation-2" data-toggle="modal" data-target="#modal-user-show-password{{$user->id}}">
@@ -82,14 +80,14 @@
                                         <span class="badge badge-danger elevation-3">Inactive</span>
                                     </td>
                                 @endif
-                                <td><b>{{$user->role}}</b></td>
+{{--                                <td><b>{{$user->role}}</b></td>--}}
                                 <td class="py-0 align-middle text-right">
-                                    <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                    <form action="{{ route('clients.destroy',$user->id) }}" method="POST">
                                         <div class="btn-group btn-group-sm">
-                                            <a href="{{ route('users.show',$user->id) }}" class="btn btn-info float-right elevation-2" data-toggle="modal" data-target="#modal-user-show{{$user->id}}">
+                                            <a href="{{ route('clients.show',$user->id) }}" class="btn btn-info float-right elevation-2" data-toggle="modal" data-target="#modal-user-show{{$user->id}}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning elevation-2" data-toggle="modal" data-target="#modal-user-edit{{$user->id}}">
+                                            <a href="{{ route('clients.edit',$user->id) }}" class="btn btn-warning elevation-2" data-toggle="modal" data-target="#modal-user-edit{{$user->id}}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @csrf
@@ -99,17 +97,17 @@
                                     </form>
                                 </td>
                             </tr>
-{{--                            MODAL FOR EDIT FORM--}}
+                            {{--                            MODAL FOR EDIT FORM--}}
                             <div class="modal fade" id="modal-user-edit{{$user->id}}">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content card-primary card-outline">
                                         <div class="modal-header">
-                                            <b class="modal-title">Add More Users</b>
+                                            <b class="modal-title">Edit Clients</b>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{route('users.update',$user->id)}}" method="POST">
+                                        <form action="{{route('clients.update',$user->id)}}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body small">
@@ -161,27 +159,15 @@
                                                         <div class="form-group">
                                                             <label>Gender</label>
                                                             <div class="form-group clearfix">
-                                                                @if($user->gender == 'M')
-                                                                    <div class="icheck-success d-inline">
-                                                                        <input type="radio" name="gender" id="radioPrimary1"  value="M" checked>
-                                                                        <label for="radioPrimary1">Male</label>
-                                                                    </div>
-                                                                    &ensp;&ensp;
-                                                                    <div class="icheck-info d-inline">
-                                                                        <input type="radio" name="gender" id="radioPrimary2" value="F">
-                                                                        <label for="radioPrimary2">Female</label>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="icheck-success d-inline">
-                                                                        <input type="radio" name="gender" id="radioPrimary1"  value="M">
-                                                                        <label for="radioPrimary1">Male</label>
-                                                                    </div>
-                                                                    &ensp;&ensp;
-                                                                    <div class="icheck-info d-inline">
-                                                                        <input type="radio" name="gender" id="radioPrimary2" value="F" checked>
-                                                                        <label for="radioPrimary2">Female</label>
-                                                                    </div>
-                                                                @endif
+                                                                <div class="icheck-success d-inline">
+                                                                    <input type="radio" name="gender" id="radioPrimary1"  value="{{$user->gender}}">
+                                                                    <label for="radioPrimary1">Male</label>
+                                                                </div>
+                                                                &ensp;&ensp;
+                                                                <div class="icheck-info d-inline">
+                                                                    <input type="radio" name="gender" id="radioPrimary2" value="{{$user->gender}}">
+                                                                    <label for="radioPrimary2">Female</label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <!-- /.form-group -->
@@ -211,7 +197,7 @@
                                                         <div class="form-group">
                                                             <label>Password</label>
                                                             <div class="input-group mb-3">
-                                                                <input type="text" name="password" class="form-control" placeholder="Password" value="{{$user->password}}">
+                                                                <input type="password" name="password" class="form-control" placeholder="Password" value="{{$user->password}}">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                                                 </div>
@@ -219,45 +205,21 @@
                                                         </div>
                                                         <!-- /.form-group -->
                                                         <div class="form-group">
-                                                            <label>Role</label>
-                                                            <select class="form-control select2" name="role_id" style="width: 100%;">
-{{--                                                                <option selected="selected">Select a role</option>--}}
-                                                                @foreach($roles as $role)
-                                                                    @if($user->role == $role->role)
-                                                                        <option selected value="{{$role->id}}">{{$role->role}}</option>
-                                                                    @else
-                                                                        <option value="{{$role->id}}">{{$role->role}}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <!-- /.form-group -->
-                                                        <div class="form-group">
                                                             <label>Active</label>
                                                             <div class="form-group clearfix">
-                                                                @if($user->active ==1)
-                                                                    <div class="icheck-success d-inline">
-                                                                        <input type="radio" name="active" id="radioSuccess1"  value="1" checked>
-                                                                        <label for="radioSuccess1">Active</label>
-                                                                    </div>
-                                                                    &ensp;&ensp;
-                                                                    <div class="icheck-danger d-inline">
-                                                                        <input type="radio" name="active" id="radioSuccess2" value="0">
-                                                                        <label for="radioSuccess2">Inactive</label>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="icheck-success d-inline">
-                                                                        <input type="radio" name="active" id="radioSuccess1"  value="1">
-                                                                        <label for="radioSuccess1">Active</label>
-                                                                    </div>
-                                                                    &ensp;&ensp;
-                                                                    <div class="icheck-danger d-inline">
-                                                                        <input type="radio" name="active" id="radioSuccess2" value="0" checked>
-                                                                        <label for="radioSuccess2">Inactive</label>
-                                                                    </div>
-                                                                @endif
+                                                                <div class="icheck-success d-inline">
+                                                                    <input type="radio" name="active" id="radioSuccess1"  value="{{$user->active}}">
+                                                                    <label for="radioSuccess1">Active</label>
+                                                                </div>
+                                                                &ensp;&ensp;
+                                                                <div class="icheck-danger d-inline">
+                                                                    <input type="radio" name="active" id="radioSuccess2" value="{{$user->active}}">
+                                                                    <label for="radioSuccess2">Inactive</label>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <!-- /.form-group -->
+                                                        <input hidden type="number" name="role_id" value="5">
                                                         <!-- /.form-group -->
                                                     </div>
                                                     <!-- /.col -->
@@ -274,7 +236,7 @@
                                 <!-- /.modal-dialog -->
                             </div>
                             <!-- /.modal -->
-{{--                            MODAL FOR SHOW USER--}}
+                            {{--                            MODAL FOR SHOW USER--}}
                             <div class="modal fade" id="modal-user-show{{$user->id}}">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content card-primary card-outline">
@@ -299,7 +261,7 @@
                                                                 <p class="text-muted text-sm mt-2"><b>About: </b> CI: {{$user->ci}} / Male / {{$user->role}} / Inactive</p>
                                                             @endif
                                                             <ul class="ml-4 mb-lg-2 fa-ul text-muted">
-{{--                                                               pendiente <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>--}}
+                                                                {{--                                                               pendiente <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>--}}
                                                                 <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 591 - {{$user->phone_number}}</li>
                                                                 <li class="small"><span class="fa-li"><i class="fas fa-lg fa-birthday-cake"></i></span> Birthday: {{$user->birthday}}</li>
                                                                 <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> User:  {{$user->user}}</li>
@@ -318,7 +280,7 @@
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button class="btn btn-danger" data-dismiss="modal">Close</button>
-{{--                                            <button class="btn btn-primary">Save Changes</button>--}}
+                                            {{--                                            <button class="btn btn-primary">Save Changes</button>--}}
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -326,7 +288,7 @@
                                 <!-- /.modal-dialog -->
                             </div>
                             <!-- /.modal -->
-{{--                            MODAL FOR SHOW PASSWORD USER--}}
+                            {{--                            MODAL FOR SHOW PASSWORD USER--}}
                             <div class="modal fade" id="modal-user-show-password{{$user->id}}">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content card-primary card-outline">
@@ -357,28 +319,28 @@
                             <th>User</th>
                             <th class="text-center">Password</th>
                             <th>Status</th>
-                            <th>Role</th>
+{{--                            <th>Role</th>--}}
                             <th class="text-right">Opciones</th>
                         </tr>
                         </tfoot>
                     </table>
-{{--                    <div class="card-link float-right">{{$users->links()}}</div>--}}
+                    {{--                    <div class="card-link float-right">{{$users->links()}}</div>--}}
                 </div>
                 <!-- /.card-body -->
             </div>
         </div>
         <!-- /.container-fluid -->
-{{--        Modal Users--}}
+        {{--        Modal Users add more users--}}
         <div class="modal fade" id="modal-lg">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content card-primary card-outline">
                     <div class="modal-header">
-                        <b class="modal-title">Add More Users</b>
+                        <b class="modal-title">Add More Clients</b>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('users.store')}}" method="POST">
+                    <form action="{{route('clients.store')}}" method="POST">
                         @csrf
                         <div class="modal-body small">
                             <div class="row">
@@ -389,23 +351,23 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                             </div>
-                                            <input type="number" name="ci" class="form-control" placeholder="CI" required>
+                                            <input type="number" name="ci" class="form-control" placeholder="CI">
                                         </div>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" name="first_name" class="form-control" placeholder="First Name" required>
+                                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Second Name</label>
-                                        <input type="text" name="second_name" class="form-control" placeholder="Second Name" required>
+                                        <input type="text" name="second_name" class="form-control" placeholder="Second Name">
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
+                                        <input type="text" name="last_name" class="form-control" placeholder="Last Name">
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
@@ -413,7 +375,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Mother Last Name</label>
-                                        <input type="text" name="mother_last_name" class="form-control" placeholder="Mother Last Name" required>
+                                        <input type="text" name="mother_last_name" class="form-control" placeholder="Mother Last Name">
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
@@ -422,7 +384,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input type="number" name="phone_number" class="form-control" placeholder="Phone Number" required>
+                                            <input type="number" name="phone_number" class="form-control" placeholder="Phone Number">
                                         </div>
                                     </div>
                                     <!-- /.form-group -->
@@ -430,11 +392,11 @@
                                         <label>Gender</label>
                                         <div class="form-group clearfix">
                                             <div class="icheck-success d-inline">
-                                                <input type="radio" name="gender" checked="" value="M" id="radioDanger1" required>
+                                                <input type="radio" name="gender" checked="" id="radioDanger1">
                                                 <label for="radioDanger1"> Male </label>
                                             </div>
                                             <div class="icheck-info d-inline">
-                                                <input type="radio" name="gender" value="F" id="radioDanger2" required>
+                                                <input type="radio" name="gender" id="radioDanger2">
                                                 <label for="radioDanger2"> Female </label>
                                             </div>
                                         </div>
@@ -443,7 +405,7 @@
                                     <div class="form-group">
                                         <label>Birthday</label>
                                         <div class="input-group mb-3">
-                                            <input type="date" name="birthday" class="form-control" placeholder="Birthday" required>
+                                            <input type="date" name="birthday" class="form-control" placeholder="Birthday">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             </div>
@@ -456,7 +418,7 @@
                                     <div class="form-group">
                                         <label>User</label>
                                         <div class="input-group mb-3">
-                                            <input type="text" name="user" class="form-control" placeholder="User" required>
+                                            <input type="text" name="user" class="form-control" placeholder="User">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
@@ -466,21 +428,11 @@
                                     <div class="form-group">
                                         <label>Password</label>
                                         <div class="input-group mb-3">
-                                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                            <input type="password" name="password" class="form-control" placeholder="Password">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <select class="form-control select2" name="role_id" style="width: 100%;" required>
-                                            <option selected="selected">Select a role</option>
-                                            @foreach($roles as $role)
-                                                <option required value="{{$role->id}}">{{$role->role}}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
@@ -531,22 +483,13 @@
             // if exist some user in session
             var msgsession = '{{\Illuminate\Support\Facades\Session::get('error')}}';
             var existseecion = '{{\Illuminate\Support\Facades\Session::has('error')}}';
-            if (existseecion){
+            if (exist){
                 Toast.fire({
                     type: 'error',
-                    title: msgsession
+                    title: msg
                 })
             }
 
-            // error user ci
-            var msgci = '{{Session::get('error')}}';
-            var existci = '{{Session::has('error')}}';
-            if (existci){
-                Toast.fire({
-                    type: 'error',
-                    title: msgci
-                })
-            }
         });
     </script>
 
