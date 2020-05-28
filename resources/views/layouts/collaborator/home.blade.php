@@ -26,7 +26,25 @@
                         <h4></h4>
                     </div>
                     <div class="card-body">
-                        colaborador
+                        <div class="row">
+                            <div class="col-6 d-xl-flex justify-content-lg-center">
+                                <div class="card bg-light">
+                                    <a href="/orders_initial">
+                                        <img src="{{asset('/imagenes/imagenes_estados/inicial.jpg')}}" alt="">
+                                    </a>
+                                    <b>Estado inicial</b>
+                                </div>
+                            </div>
+                            {{--                        ./ card--}}
+                            <div class="col-6 d-xl-flex justify-content-lg-center">
+                                <div class="card bg-light">
+                                    <a href="/orders_process">
+                                        <img src="{{asset('/imagenes/imagenes_estados/proceso.jpg')}}" alt="">
+                                    </a>
+                                    <b>Estado En Proceso</b>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

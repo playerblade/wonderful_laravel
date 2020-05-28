@@ -46,7 +46,7 @@
                                             @if($order_detail->estado == 'process')
                                                 <td><span class="right badge badge-primary">{{$order_detail->estado}}</span></td>
                                             @endif
-                                            <td>{{$order_detail->fecha}}</td>
+                                            <td>{{$order_detail->fechaOrden}}</td>
                                             <td><span class="right badge badge-secondary">{{$order_detail->usuario}}</span></td>
                                             <td>
                                                 <form action="{{route('status_orders.update',$order_detail->order_id)}}" method="POST">
