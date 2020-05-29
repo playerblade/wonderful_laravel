@@ -209,7 +209,7 @@
                                                     @method('PUT')
                                                     <div class="modal-body small">
                                                         <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                        <strong>Raiting</strong>
+                                                        <!-- <strong>Raiting</strong>
                                                         <p class="clasificacion">
                                                             <input id="radio1" type="radio" name="estrellas" value="5">
                                                             <label class="labelTamanio" for="radio1">★</label>
@@ -221,9 +221,9 @@
                                                             <label class="labelTamanio" for="radio4">★</label>
                                                             <input id="radio5" type="radio" name="estrellas" value="1">
                                                             <label class="labelTamanio" for="radio5">★</label>
-                                                        </p>
+                                                        </p> -->
                                                         <p>
-{{--                                                            <input hidden type="number" name="article_id" value="{{$orderDetails[0]->article_id}}">--}}
+                                                            <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
                                                             <strong>Comentario</strong>
                                                             <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?">{{$commentary->comment}}</textarea>
                                                         </p>

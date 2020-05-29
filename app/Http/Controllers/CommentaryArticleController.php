@@ -97,7 +97,13 @@ class CommentaryArticleController extends Controller
      */
     public function update(Request $request, CommentaryArticle $commentaryArticle)
     {
-        //
+        // dd($request->all());
+        $commentaryArticle->article_id = $request->article_id;
+        $commentaryArticle->user_id = $request->user_id;
+        $commentaryArticle->comment = $request->comment;
+        $commentaryArticle->is_main = 1;
+        $commentaryArticle->update();
+        return back();
     }
 
     /**
