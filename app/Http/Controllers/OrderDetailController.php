@@ -291,8 +291,15 @@ class OrderDetailController extends Controller
             ->join('transactions','transactions.bank_accounts_id','=','bank_accounts.id')
             ->where('first_name',Auth::user()->first_name)->get();
 
+        $validation_orders = DB::table('process_orders')
+                             ->join('status_orders','process_orders.id','=','status_orders.process_order_id')
+                             ->join('orders','status_orders.order_id','=','orders.id')
+                             ->where('orders.id',$order_id)->first();
+
+//        dd($validation_orders);
+
 //        dd($transaction[0]);
 //            dd($orderDetails);
-        return view('orders.orderDetailClient',compact('orderDetails','totalAmounts','transaction','transport'));
+        return view('orders.orderDetailClient',compact('orderDetails','totalAmounts','transaction','transport','validation_orders'));
     }
 }

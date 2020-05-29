@@ -56,7 +56,7 @@
                                                     <button class="btn btn-success">Entregado</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="5">
+                                                    <input hidden type="number" name="process_order_id" value="4">
                                                 </form>
                                             </td>
                                         @else

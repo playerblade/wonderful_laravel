@@ -254,10 +254,6 @@ Route::group(['middleware' => 'web','role:colaborador'], function () {
     Route::get('/orders_process',
         'StatusOrderController@ordersProcess'
     );
-
-    Route::get('/orders_preparacion',
-        'StatusOrderController@ordersPreparation'
-    );
 });
 
 Route::group(['middleware' => 'web','role:verificador'], function () {
