@@ -36,7 +36,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order_process as $order)
+                                @foreach($orders_preparation as $order)
                                     <tr>
                                         @if($order->active == 1)
                                             <th class="text-center">{{$order->order_id}}</th>
@@ -46,6 +46,9 @@
                                             @if($order->estado == 'process')
                                                 <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
                                             @endif
+                                            @if($order->estado == 'preparation')
+                                                <td><span class="right badge badge-warning">{{$order->estado}}</span></td>
+                                            @endif
                                             <td>{{$order->fechaOrden}}</td>
                                             <td>{{$order->usuario}}</td>
                                             <td>
@@ -53,10 +56,10 @@
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-warning">Preparacion</button>
+                                                    <button class="btn btn-info">Despachado</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
+                                                    <input hidden type="number" name="process_order_id" value="4">
                                                 </form>
                                             </td>
                                         @else
@@ -82,7 +85,7 @@
                                                     <button class="btn btn-info" disabled>Proceso</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
+                                                    <input hidden type="number" name="process_order_id" value="2">
                                                 </form>
                                             </td>
                                         @endif

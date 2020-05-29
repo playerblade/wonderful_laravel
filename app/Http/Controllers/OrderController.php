@@ -257,17 +257,24 @@ class OrderController extends Controller
         ");
 
 //        validation query for raiting and camentary article
-        $orders = DB::table('orders')->join('order_details','orders.id','=','order_details.order_id')
+        $orders_validation = DB::table('process_orders')
+            ->join('status_orders','process_orders.id','=','status_orders.process_order_id')
+            ->join('orders','status_orders.order_id','=','orders.id')
+            ->join('order_details','orders.id','=','order_details.order_id')
             ->join('articles','order_details.article_id','=','articles.id')
+            ->where('articles.id',$article_id)
+            ->where('process_orders.id',5)
             ->where('orders.user_id',Auth::user()->id)->first();
-
+//        dd($orders_validation);
 //        list raiting and commentary article
         $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
                         ->join('users','commentary_articles.user_id','=','users.id')
-                        ->select('commentary_articles.comment',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->join('raiting_articles','articles.id','=','raiting_articles.article_id')
+                        ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->where('articles.id',$article_id)
                         ->orderBy('commentary_articles.created_at','desc')->get();
 
-        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders','commentaries'));
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries'));
     }
 
     public function getTransportFares(Request $request)

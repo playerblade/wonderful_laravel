@@ -150,7 +150,7 @@
                     </style>
                     <div class="card-body">
                         <h5>Raiting & Comentary</h5>
-                        @if($orders)
+                        @if($orders_validation)
                             <div class="post">
                                 <form action="{{ route('comentaries.store') }}" method="POST">
                                     @csrf
@@ -173,6 +173,7 @@
                                     <div id="comentary" class="small">
                                         <p>
                                             <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
+{{--                                            <input hidden type="number" name="is_main" value="1">--}}
                                             {{--                                        <strong>Comentario</strong>--}}
                                             <textarea name="comment" id="" cols="3" rows="4" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
                                         </p>
@@ -192,15 +193,58 @@
                                     <!-- /.user-block -->
                                     <p>
                                         {{$commentary->comment}}
+{{--                                        <button class="btn btn-default btn-sm"><i class="fa fa-edit"></i> </button>--}}
                                     </p>
 
                                     <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+                                        <a href="{{ route('comentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
                                     </p>
+
+{{--                            MODAL FOR EDIT FORM--}}
+                                    <div class="modal fade" id="modal-commentary-edit{{$commentary->id}}">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content card-primary card-outline">
+                                                <form action="{{route('comentaries.update',$commentary->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-body small">
+                                                        <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                                        <strong>Raiting</strong>
+                                                        <p class="clasificacion">
+                                                            <input id="radio1" type="radio" name="estrellas" value="5">
+                                                            <label class="labelTamanio" for="radio1">★</label>
+                                                            <input id="radio2" type="radio" name="estrellas" value="4">
+                                                            <label class="labelTamanio" for="radio2">★</label>
+                                                            <input id="radio3" type="radio" name="estrellas" value="3">
+                                                            <label class="labelTamanio" for="radio3">★</label>
+                                                            <input id="radio4" type="radio" name="estrellas" value="2">
+                                                            <label class="labelTamanio" for="radio4">★</label>
+                                                            <input id="radio5" type="radio" name="estrellas" value="1">
+                                                            <label class="labelTamanio" for="radio5">★</label>
+                                                        </p>
+                                                        <p>
+{{--                                                            <input hidden type="number" name="article_id" value="{{$orderDetails[0]->article_id}}">--}}
+                                                            <strong>Comentario</strong>
+                                                            <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?">{{$commentary->comment}}</textarea>
+                                                        </p>
+
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button  class="btn btn-primary">Evaluar Producto</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+
                                 @endforeach
                             </div>
                         @else
-                            <h5 class="text-center" ><b>No puede evaluar porque aun no tiene una orden!!</b></h5>
+                            <h5 class="text-center" ><b>No puede evaluar este articulo porque aun no se le entrego!!!</b></h5>
                             <div class="post">
                                 @foreach($commentaries as $commentary)
                                     <div class="user-block">

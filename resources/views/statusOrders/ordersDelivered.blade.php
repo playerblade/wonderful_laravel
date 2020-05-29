@@ -1,4 +1,4 @@
-@extends('layouts.collaborator.app')
+@extends('layouts.checker.app')
 @section('content')
     <section class="content-header">
         <div class="container">
@@ -32,59 +32,31 @@
                                     <th>Estado</th>
                                     <th>Fecha</th>
                                     <th>Usuario</th>
-                                    <th>Cambiar Estado A:</th>
+{{--                                    <th>Cambiar Estado A:</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order_process as $order)
+                                @foreach($order_delivered as $order)
                                     <tr>
                                         @if($order->active == 1)
                                             <th class="text-center">{{$order->order_id}}</th>
-                                            @if($order->estado == 'initial')
-                                                <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
-                                            @endif
-                                            @if($order->estado == 'process')
-                                                <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                            @if($order->estado == 'delivered')
+                                                <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                             @endif
                                             <td>{{$order->fechaOrden}}</td>
                                             <td>{{$order->usuario}}</td>
-                                            <td>
-                                                <form action="{{route('status_orders.update',$order->order_id)}}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-warning">Preparacion</button>
-                                                    <input hidden type="number" name="order_id" value="{{$order->order_id}}">
-                                                    <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
-                                                </form>
-                                            </td>
                                         @else
                                         <!-- <td><span class="right badge badge-danger">Cancelado</span></td> -->
                                             <th style="opacity: .4" class="text-center">{{$order->order_id}}</th>
                                             @if($order->active == 0)
                                                 <td style="opacity: .4;"><span class="right badge badge-danger">Cancelado</span></td>
                                             @else
-                                                @if($order->estado == 'initial')
-                                                    <td style="opacity: .4"><span class="right badge badge-secondary">{{$order->estado}}</span></td>
-                                                @endif
-                                                @if($order->estado == 'process')
-                                                    <td style="opacity: .4"><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                                @if($order->estado == 'delivered')
+                                                    <td style="opacity: .4"><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
                                             <td style="opacity: .4">{{$order->fecha}}</td>
                                             <td style="opacity: .4"><span class="right badge badge-danger">{{$order->usuario}}</span></td>
-                                            <td>
-                                                <form action="{{route('status_orders.update',$order->order_id)}}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-info" disabled>Proceso</button>
-                                                    <input hidden type="number" name="order_id" value="{{$order->order_id}}">
-                                                    <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
-                                                </form>
-                                            </td>
                                         @endif
 
                                     </tr>
@@ -96,7 +68,7 @@
                                     <th>Estado</th>
                                     <th>Fecha</th>
                                     <th>Usuario</th>
-                                    <th>Cambiar Estado A:</th>
+{{--                                    <th>Cambiar Estado A:</th>--}}
                                     {{--                                    <th>Color</th>--}}
                                 </tr>
                                 </tfoot>

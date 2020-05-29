@@ -227,13 +227,7 @@ class OrderDetailController extends Controller
     public function allOrdersClient($user_id){
         $orders =DB::select(
             "select o.id as order_id ,
-                      CASE po.process_order
-                         when 'initial' then 'inicial'
-                         when 'process' then 'proceso'
-                         when 'preparation' then 'preparacion'
-                         when 'dispatched' then 'despachado'
-                         when 'delivered' then 'entregado'
-                      END as estado,
+                      po.process_order as estado,
                       o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
                       r.id as role_id , o.active as active
                     from roles r inner join users u on r.id = u.role_id
@@ -245,8 +239,8 @@ class OrderDetailController extends Controller
                     -- and r.id = 2
                     -- and c.id = 5
                     and c.id = $user_id
-                    order by o.created_at desc;"
-        );
+                    order by o.created_at desc;
+        ");
 
 //        return response()->json($orders);
         return view('orders.allOrderClient',compact('orders'));

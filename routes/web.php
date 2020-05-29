@@ -255,4 +255,24 @@ Route::group(['middleware' => 'web','role:colaborador'], function () {
         'StatusOrderController@ordersProcess'
     );
 
+    Route::get('/orders_preparacion',
+        'StatusOrderController@ordersPreparation'
+    );
+});
+
+Route::group(['middleware' => 'web','role:verificador'], function () {
+    Route::get('/home','HomeController@index')->name('home');
+
+    Route::get('/orders_dispatched',
+        'StatusOrderController@ordersDispatched'
+    )->name('statusOrder');
+
+    Route::resource('status_orders',
+        'StatusOrderController'
+    );
+
+    Route::get('/orders_delivered',
+        'StatusOrderController@ordersDelivered'
+    );
+
 });

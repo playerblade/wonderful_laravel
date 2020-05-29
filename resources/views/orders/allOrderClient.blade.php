@@ -35,11 +35,20 @@
                                                 @if($order->active == 0)
                                                     <td><span class="right badge badge-danger">Cancelado</span></td>
                                                 @else
-                                                    @if($order->estado == 'inicial')
+                                                    @if($order->estado == 'initial')
                                                         <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
                                                     @endif
-                                                    @if($order->estado == 'proceso')
+                                                    @if($order->estado == 'process')
                                                         <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                                    @endif
+                                                    @if($order->estado == 'preparation')
+                                                        <td><span class="right badge badge-warning">{{$order->estado}}</span></td>
+                                                    @endif
+                                                    @if($order->estado == 'dispatched')
+                                                        <td><span class="right badge badge-info">{{$order->estado}}</span></td>
+                                                    @endif
+                                                    @if($order->estado == 'delivered')
+                                                        <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                     @endif
                                                 @endif
                                                 <td>{{$order->fechaOrden}}</td>

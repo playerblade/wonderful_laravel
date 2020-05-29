@@ -1,4 +1,4 @@
-@extends('layouts.collaborator.app')
+@extends('layouts.checker.app')
 @section('content')
     <section class="content-header">
         <div class="container">
@@ -36,15 +36,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order_process as $order)
+                                @foreach($order_dispatched as $order)
                                     <tr>
                                         @if($order->active == 1)
                                             <th class="text-center">{{$order->order_id}}</th>
-                                            @if($order->estado == 'initial')
-                                                <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                            @if($order->estado == 'dispatched')
+                                                <td><span class="right badge badge-info">{{$order->estado}}</span></td>
                                             @endif
-                                            @if($order->estado == 'process')
-                                                <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                            @if($order->estado == 'delivered')
+                                                <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                             @endif
                                             <td>{{$order->fechaOrden}}</td>
                                             <td>{{$order->usuario}}</td>
@@ -53,10 +53,10 @@
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-warning">Preparacion</button>
+                                                    <button class="btn btn-success">Entregado</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
+                                                    <input hidden type="number" name="process_order_id" value="5">
                                                 </form>
                                             </td>
                                         @else
@@ -65,11 +65,11 @@
                                             @if($order->active == 0)
                                                 <td style="opacity: .4;"><span class="right badge badge-danger">Cancelado</span></td>
                                             @else
-                                                @if($order->estado == 'initial')
-                                                    <td style="opacity: .4"><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                                @if($order->estado == 'dispatched')
+                                                    <td style="opacity: .4"><span class="right badge badge-info">{{$order->estado}}</span></td>
                                                 @endif
-                                                @if($order->estado == 'process')
-                                                    <td style="opacity: .4"><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                                @if($order->estado == 'delivered')
+                                                    <td style="opacity: .4"><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
                                             <td style="opacity: .4">{{$order->fecha}}</td>
@@ -79,10 +79,10 @@
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-info" disabled>Proceso</button>
+                                                    <button class="btn btn-success" disabled>Proceso</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                    <input hidden type="number" name="process_order_id" value="3">
+                                                    <input hidden type="number" name="process_order_id" value="2">
                                                 </form>
                                             </td>
                                         @endif
