@@ -68,7 +68,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <img class="rounded mx-auto d-block img-fluid"  src="{{asset('/imagenes/imagenes_articulos/'.$article->url_image)}}">
-                                    <a href="/order/{{$article->id}}/form" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver detalle</a>
+                                    <a href="/article/{{$article->id}}/detail" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver detalle</a>
                                 </div>
                                 <div class="col-8">
                                     <h3>{{$article->title}}</h3>
@@ -84,7 +84,7 @@
                                             <h5 class="mt-3"><b>Raiting:</b><br></h5>
                                         </div>
                                         <br><br><br>
-                                        <a href="/order/{{$article->id}}/form" class="btn bg-gradient-primary btn-sm float-right">Añadir al carrito</a>
+                                        <a href="/login" class="btn bg-gradient-primary btn-sm float-right">Añadir al carrito</a>
                                     </div>
                                 </div>
                             </div>
