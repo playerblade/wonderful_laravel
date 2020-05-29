@@ -181,4 +181,6 @@ class StatusOrderController extends Controller
 //        return response()->json($order_delivered);
         return view('statusOrders.ordersDelivered',compact('order_delivered'));
     }
+
+
 }

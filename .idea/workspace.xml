@@ -21,16 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_13_060336_create_process_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_13_060336_create_process_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/imagenes/imagenes_estados/preparacion.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/imagenes/imagenes_estados/proceso.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/imagenes/imagenes_estados/proceso.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/checker/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/checker/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/checker/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/checker/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/collaborator/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/collaborator/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/collaborator/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/collaborator/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersPreparation.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +293,7 @@
       <workItem from="1590709365119" duration="12774000" />
       <workItem from="1590759427768" duration="4210000" />
       <workItem from="1590782669076" duration="388000" />
-      <workItem from="1590783263258" duration="1769000" />
+      <workItem from="1590783263258" duration="5138000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>

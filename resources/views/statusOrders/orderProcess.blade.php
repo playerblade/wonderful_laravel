@@ -60,8 +60,7 @@
                                                 </form>
                                             </td>
                                         @else
-                                        <!-- <td><span class="right badge badge-danger">Cancelado</span></td> -->
-                                            <th style="opacity: .4" class="text-center">{{$order->order_id}}</th>
+                                            <th style="opacity: .4" class="text-center"><span class="right badge badge-danger">{{$order->order_id}}</span></th>
                                             @if($order->active == 0)
                                                 <td style="opacity: .4;"><span class="right badge badge-danger">Cancelado</span></td>
                                             @else
@@ -72,7 +71,7 @@
                                                     <td style="opacity: .4"><span class="right badge badge-primary">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
-                                            <td style="opacity: .4">{{$order->fecha}}</td>
+                                            <td style="opacity: .4"><span class="right badge badge-danger">{{$order->fechaOrden}}</span></td>
                                             <td style="opacity: .4"><span class="right badge badge-danger">{{$order->usuario}}</span></td>
                                             <td>
                                                 <form action="{{route('status_orders.update',$order->order_id)}}" method="POST">

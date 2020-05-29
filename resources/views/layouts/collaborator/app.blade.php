@@ -93,6 +93,14 @@
         //     "info": true,
         //     "autoWidth": false,
         // });
+        $('#example3').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+        });
     });
 </script>
 
