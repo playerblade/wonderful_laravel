@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome/articleDetail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/articleDetail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +288,7 @@
       <workItem from="1590759427768" duration="4210000" />
       <workItem from="1590782669076" duration="388000" />
       <workItem from="1590783263258" duration="6866000" />
-      <workItem from="1590858544847" duration="7234000" />
+      <workItem from="1590858544847" duration="8126000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>

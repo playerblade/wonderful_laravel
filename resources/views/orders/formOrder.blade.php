@@ -125,7 +125,7 @@
                 <div class="card-body">
                     <nav class="w-100">
                         <div class="nav nav-tabs" id="product-tab" role="tablist">
-                            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Raiting & Comentary</a>
+                            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false"><h3>Raiting & Comentary</h3></a>
                         </div>
                     </nav>
                     <div class="tab-content p-3" id="nav-tabContent">
