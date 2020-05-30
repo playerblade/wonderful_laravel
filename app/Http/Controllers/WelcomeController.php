@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\City;
 use App\Maker;
+use App\PriceArticle;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +49,27 @@ class WelcomeController extends Controller
                 order by articulo desc ;
         ");
 
-        return view('welcome.articleDetail',compact('articles'));
+        $stocks = DB::select("
+                    select a.id as id, sum(ca.quantity) as stock
+                    from colors c inner join color_articles ca on c.id = ca.color_id
+                    inner join articles a on ca.article_id = a.id
+                    and a.id = $article_id
+                    group by id;
+        ");
+
+        $cities = City::all();
+        $prices = PriceArticle::join('articles','price_articles.article_id','articles.id')
+            ->where('articles.id',$article_id)
+            ->select('price_articles.*')->get();
+
+        $colors = DB::select("
+            select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
+            from articles a inner join color_articles ca on a.id = ca.article_id
+                 inner join colors c on ca.color_id = c.id
+            where a.id = $article_id;
+        ");
+
+        return view('welcome.articleDetail',compact('articles','stocks','cities','prices','colors'));
     }
 
     public function admin(){

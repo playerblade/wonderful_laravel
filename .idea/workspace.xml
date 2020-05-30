@@ -21,12 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/crud/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/articleDetail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/articleDetail.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +293,7 @@
       <workItem from="1590759427768" duration="4210000" />
       <workItem from="1590782669076" duration="388000" />
       <workItem from="1590783263258" duration="6866000" />
-      <workItem from="1590858544847" duration="4381000" />
+      <workItem from="1590858544847" duration="7234000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -394,11 +394,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587927255419" />
-    <state x="415" y="123" width="532" height="487" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589978316088">
+    <state x="415" y="123" width="532" height="487" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590868782419">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1588905126898" />
-    <state x="415" y="123" width="532" height="487" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.738@0.0.1360.738" timestamp="1589978316088" />
+    <state x="415" y="123" width="532" height="487" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.738@0.0.1360.738" timestamp="1590868782419" />
     <state x="417" y="122" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.732@0.0.1366.732" timestamp="1586460014753" />
     <state x="324" y="18" width="688" height="640" key="#phpunit.xml" timestamp="1587263761902">
       <screen x="0" y="0" width="1280" height="680" />

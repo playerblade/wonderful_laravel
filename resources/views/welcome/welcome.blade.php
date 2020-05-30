@@ -133,6 +133,7 @@
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
                                 "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                   <a href='/article/"+index+"/detail' class='btn btn-block bg-gradient-primary btn-sm mt-2'>Ver detalle</a> \n"+
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h3>"+value[0]+"</h3>\n" +
@@ -146,10 +147,9 @@
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -181,6 +181,7 @@
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
                                 "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                   <a href='/article/"+index+"/detail' class='btn btn-block bg-gradient-primary btn-sm mt-2'>Ver detalle</a> \n"+
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h3>"+value[0]+"</h3>\n" +
@@ -194,10 +195,9 @@
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -219,6 +219,7 @@
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
                                 "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
+                                "                                   <a href='/article/"+index+"/detail' class='btn btn-block bg-gradient-primary btn-sm mt-2'>Ver detalle</a> \n"+
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h3>"+value[0]+"</h3>\n" +
@@ -229,13 +230,12 @@
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class='col-4'>\n" +
-                                "                                            <h5<b>Maker:</b><br>"+value[2]+" </h5>\n" +
+                                "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>");
@@ -259,6 +259,7 @@
                             $('#content').append("<div class='row'>\n" +
                                 "                                <div class='col-4'>\n" +
                                 "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[1]+"'>\n" +
+                                "                                   <a href='/article/"+value[0]+"/detail' class='btn btn-block bg-gradient-primary btn-sm mt-2'>Ver detalle</a> \n"+
                                 "                                </div>\n" +
                                 "                                <div  class='col-8'>\n" +
                                 "                                    <h3>"+title+"</h3>\n" +
@@ -272,10 +273,9 @@
                                 "                                            <h5><b>Maker:</b><br>"+value[3]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
-                                "                                        <a href='/order/"+value[0]+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
+                                "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                                <a href='/order/"+value[0]+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
                                 "                            </div>\n" +
                                 "                            <hr>\n" +
                                 "                            <hr>"
