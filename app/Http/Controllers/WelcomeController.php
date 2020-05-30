@@ -56,20 +56,6 @@ class WelcomeController extends Controller
 
     public function geArticlesForCategories(Request $request){
         if ($request->ajax()){
-//            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
-//            $articles = DB::select("
-//                select a.title as articulo , m.name as fabricante, ia.url_image as image,
-//                       pa.price as price , a.id as id
-//                from articles a inner join image_articles ia on a.id = ia.article_id
-//                    inner join sub_categories sc on a.sub_category_id = sc.id
-//                    inner join categories c on sc.category_id = c.id
-//                    inner join price_articles pa on a.id = pa.article_id
-//                    inner join makers m on a.maker_id = m.id
-//                    and pa.is_current = 1
-//                    and ia.is_main = 1
-//                    and c.id = $request->category_id
-//                order by articulo asc;
-//            ");
             $articles = DB::table('categories')
                 ->join('sub_categories','categories.id','=','sub_categories.category_id')
                 ->join('articles','sub_categories.id','=','articles.sub_category_id')
@@ -80,7 +66,7 @@ class WelcomeController extends Controller
                 ->where('image_articles.is_main','=',1)
                 ->where('categories.id','=',$request->category_id)
                 ->select('articles.id','articles.title','makers.name','image_articles.url_image','price_articles.price')
-                    ->get();
+                ->get();
 //                ->paginate(2);
             foreach ($articles as $article) {
                 $articles_array[$article->id] = [$article->title,$article->price,$article->name,$article->url_image];
@@ -124,28 +110,6 @@ class WelcomeController extends Controller
             return response()->json($articles_array);
         }
     }
-    public function getArticlesForMakers(Request $request){
-        if ($request->ajax()){
-//            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
-            $articles = DB::select("
-                select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
-                from articles a inner join image_articles ia on a.id = ia.article_id
-                    inner join sub_categories sc on a.sub_category_id = sc.id
-                    inner join price_articles pa on a.id = pa.article_id
-                    inner join makers m on a.maker_id = m.id
-                    and pa.is_current = 1
-                    and ia.is_main = 1
-                    and m.id = $request->maker_id
-                order by articulo asc;
-            ");
-            foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
-//                $articles_array_description[$article->id] = $article->description;
-            }
-            return response()->json($articles_array);
-        }
-    }
 
     public function getArticlesForMakersAndSubCategories(Request $request){
         if ($request->ajax()){
@@ -168,6 +132,23 @@ class WelcomeController extends Controller
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
+        }
+    }
+
+    public function getMakers(Request $request){
+        if ($request->ajax()){
+            $makers = DB::table('makers')
+                      ->join('articles','makers.id','=','articles.maker_id')
+                      ->join('sub_categories','articles.sub_category_id','=','sub_categories.id')
+                      ->where('sub_categories.id',$request->sub_category_id)
+                      ->select('makers.*')
+                      ->orderBy('makers.name','asc')->get();
+//            dd($makers);
+
+            foreach ($makers as $maker) {
+                $makers_array[$maker->id] = $maker->name;
+            }
+            return response()->json($makers_array);
         }
     }
 

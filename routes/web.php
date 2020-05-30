@@ -36,12 +36,15 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/get_articles_for_sub_categories',
         'WelcomeController@getArticlesForSubCategories'
     );
-    Route::get('/get_articles_for_makers',
-        'WelcomeController@getArticlesForMakers'
-    );
+
     Route::get('/get_articles_for_makers_and_sub_categories',
         'WelcomeController@getArticlesForMakersAndSubCategories'
     );
+
+    Route::get('/get_makers',
+        'WelcomeController@getMakers'
+    );
+
     Route::get('/get_search_articles',
         'WelcomeController@getSearchArticles'
     );

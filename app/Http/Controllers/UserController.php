@@ -51,9 +51,9 @@ class UserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'mother_last_name' => ['required', 'string', 'max:255'],
 //            'user' => ['required', 'string', 'max:255', 'unique:users'],
-            'user' => ['required', 'string', 'max:255'],
+//            'user' => ['required', 'string', 'max:255'],
 //            'password' => ['required', 'string', 'min:2', 'confirmed'],
-            'password' => ['required', 'string', 'min:2'],
+//            'password' => ['required', 'string', 'min:2'],
         ]);
 
 //        $user = new User();
@@ -75,10 +75,12 @@ class UserController extends Controller
         $second_name = ucwords($request->second_name);
         $last_name = ucwords($request->last_name);
         $mother_last_name = ucwords($request->mother_last_name);
-        $user = strtolower($request->user);
-        $password = bcrypt($request->password);
+//        $user = strtolower($request->user);
+        $user = strtolower($request->first_name.$request->mother_last_name.$request->ci);
+//        $password = bcrypt($request->password);
+        $password = bcrypt($request->ci);
 
-        if (empty(DB::table('users')->where('user',$user)->first() || empty(DB::table('users')->where('ci',$request->ci)->first()))){
+        if (empty(DB::table('users')->where('user',$user)->first()) || empty(DB::table('users')->where('ci',$request->ci)->first())){
             DB::insert("
                 CALL insert_users_with_roles($request->role_id,'$request->ci',
                 '$first_name','$second_name','$last_name',

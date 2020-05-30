@@ -453,25 +453,25 @@
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>User</label>
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="user" class="form-control" placeholder="User" required>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>User</label>--}}
+{{--                                        <div class="input-group mb-3">--}}
+{{--                                            <input type="text" name="user" class="form-control" placeholder="User" required>--}}
+{{--                                            <div class="input-group-prepend">--}}
+{{--                                                <span class="input-group-text"><i class="fas fa-user"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <div class="input-group mb-3">
-                                            <input type="password" name="password" class="form-control" placeholder="Password" required>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>Password</label>--}}
+{{--                                        <div class="input-group mb-3">--}}
+{{--                                            <input type="password" name="password" class="form-control" placeholder="Password" required>--}}
+{{--                                            <div class="input-group-prepend">--}}
+{{--                                                <span class="input-group-text"><i class="fas fa-key"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Role</label>

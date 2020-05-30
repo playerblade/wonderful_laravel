@@ -41,10 +41,7 @@
                             <div class="col-12">
                                 <label>Makers</label>
                                 <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    <option selected >Select a maker</option>
-                                    @foreach($makers as $maker)
-                                        <option value="{{$maker->id}}">{{$maker->name}}</option>
-                                    @endforeach
+{{--                                            json code--}}
                                 </select>
                             </div>
                         </div>
@@ -107,6 +104,7 @@
     <!-- /.container-fluid -->
 @endsection
 @section('script_for_search')
+
     <script type="text/javascript">
         // search for Categories
         $(document).ready(function () {
@@ -122,6 +120,7 @@
 
                         });
                     }).done();
+
                     $.get('get_articles_for_categories',{category_id: category_id}, function (articles) {
                         $('#content').empty();
                         $('#content_hidden').hide();
@@ -158,9 +157,17 @@
             // search for sub Categories
             $('#sub_categories').on('change', function () {
                 var sub_category_id = $('#sub_categories').val();
+
                 if ($.trim(sub_category_id) != ''){
-                    // $('#content').empty();
-                    // $('#content').append("<h1>HELLO CONTENT</h1>");
+
+                    $.get('get_makers',{sub_category_id: sub_category_id}, function (makers) {
+                        $('#makers_search').empty();
+                        $('#makers_search').append("<option value=''>Select a maker</option>");
+                        $.each(makers, function (index , value){
+                            $('#makers_search').append("<option value='"+index+"'>"+value+"</option>");
+                        });
+                    }).done();
+
                     $.get('get_articles_for_sub_categories',{sub_category_id: sub_category_id}, function (articles) {
                         $('#content').empty();
                         $('#content_hidden').hide();
@@ -195,42 +202,8 @@
             });
             // search for makers
             $('#makers_search').on('change', function () {
-                var maker_id = $('#makers_search').val();
-                // search for only makers
-                if ($.trim(maker_id) != ''){
-                    $.get('get_articles_for_makers',{maker_id: maker_id}, function (articles) {
-                        $('#content').empty();
-                        $('#content_hidden').hide();
-                        $.each(articles, function (index , value ){
-                            // $('#content').append("<h1>"+value+"</h1>");
-                            $('#content').append("<div class='row'>\n" +
-                                "                                <div class='col-4'>\n" +
-                                "                                    <img class='rounded mx-auto d-block img-fluid'  src='"+img_path+value[3]+"'>\n" +
-                                "                                </div>\n" +
-                                "                                <div  class='col-8'>\n" +
-                                "                                    <h3>"+value[0]+"</h3>\n" +
-                                "                                    <br>\n" +
-                                "                                    <div class='row'>\n" +
-                                "                                        <div class='col-8'>\n" +
-                                "                                            <h4>Price :"+value[1]+"</h4>\n" +
-                                "                                            <p>!Compra ahora!!!</p>\n" +
-                                "                                        </div>\n" +
-                                "                                        <div class='col-4'>\n" +
-                                "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
-                                "                                        </div>\n" +
-                                "                                        <br><br><br>\n" +
-                                "                                        <a href='/order/"+index+"/form' class='btn btn-primary float-right'>Añadir al carrito</a>\n" +
-                                "                                    </div>\n" +
-                                "                                </div>\n" +
-                                "                                <a href='/order/"+index+"/form' class='btn btn-primary mt-2'>Ver detalle del producto</a>\n" +
-                                "                            </div>\n" +
-                                "                            <hr>\n" +
-                                "                            <hr>");
-                        });
-                    }).done();
-                }
-
                 // search for makers and sub_categories
+                var maker_id = $('#makers_search').val();
                 var sub_category_id = $('#sub_categories').val();
                 if ($.trim(maker_id) != '' && $.trim(sub_category_id) != ''){
                     $.get('get_articles_for_makers_and_sub_categories',{maker_id: maker_id,sub_category_id: sub_category_id }, function (articles) {
