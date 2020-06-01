@@ -124,148 +124,153 @@
                 </div>
             </div>
             <!-- /.row -->
-            <hr>
             <div class="row">
-                <div class="col-12">
-                    <style>
-                        labelstyle[type="radio"] {
-                            display: none;
-                        }
+                <div class="card-body">
+                    <nav class="w-100">
+                        <div class="nav nav-tabs" id="product-tab" role="tablist">
+                            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false"><h3>Raiting & Comentary</h3></a>
+                        </div>
+                    </nav>
+                    <div class="tab-content p-3" id="nav-tabContent">
+                        <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+                            <style>
+                                labelstyle[type="radio"] {
+                                    display: none;
+                                }
 
-                        .labelstyle {
-                            font-size: 35px;
-                            color: grey;
-                        }
+                                .labelstyle {
+                                    font-size: 35px;
+                                    color: grey;
+                                }
 
-                        .clasificacion {
-                            direction: rtl;
-                            unicode-bidi: bidi-override;
-                        }
+                                .clasificacion {
+                                    direction: rtl;
+                                    unicode-bidi: bidi-override;
+                                }
 
-                        labelstyle:hover,
-                        labelstyle:hover ~ label {
-                            color: orange;
-                        }
+                                labelstyle:hover,
+                                labelstyle:hover ~ label {
+                                    color: orange;
+                                }
 
-                        #inputstyle[type="radio"]:checked ~ label {
-                            color: orange;
-                        }
-                    </style>
-                    <div class="card-body">
-                        <h5>Raiting & Comentary</h5>
-                        @if($orders_validation)
-                            <div class="post">
-                                <form action="{{ route('comentaries.store') }}" method="POST">
-                                    @csrf
-                                    <div id="raiting" class="small">
-                                        <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                        {{--                                    <strong>Raiting</strong>--}}
-                                        <p class="clasificacion">
-                                            <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
-                                            <label class="labelstyle" for="radio1">★</label>
-                                            <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
-                                            <label class="labelstyle" for="radio2">★</label>
-                                            <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
-                                            <label class="labelstyle" for="radio3">★</label>
-                                            <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
-                                            <label class="labelstyle" for="radio4">★</label>
-                                            <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
-                                            <label class="labelstyle" for="radio5">★</label>
-                                        </p>
-                                    </div>
-                                    <div id="comentary" class="small">
-                                        <p>
-                                            <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
-{{--                                            <input hidden type="number" name="is_main" value="1">--}}
-                                            {{--                                        <strong>Comentario</strong>--}}
-                                            <textarea name="comment" id="" cols="3" rows="4" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
-                                        </p>
-                                        <div class="text-right">
-                                            <button  class="btn btn-primary">Evaluar Producto</button>
+                                #inputstyle[type="radio"]:checked ~ label {
+                                    color: orange;
+                                }
+                            </style>
+                            @if($orders_validation)
+                                <div class="post">
+                                    <form action="{{ route('comentaries.store') }}" method="POST">
+                                        @csrf
+                                        <div id="raiting" class="small">
+                                            <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                            {{--                                    <strong>Raiting</strong>--}}
+                                            <p class="clasificacion">
+                                                <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
+                                                <label class="labelstyle" for="radio1">★</label>
+                                                <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
+                                                <label class="labelstyle" for="radio2">★</label>
+                                                <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
+                                                <label class="labelstyle" for="radio3">★</label>
+                                                <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
+                                                <label class="labelstyle" for="radio4">★</label>
+                                                <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
+                                                <label class="labelstyle" for="radio5">★</label>
+                                            </p>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="post">
-                                @foreach($commentaries as $commentary)
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
-                                        <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
-                                        <span class="description">Shared publicly - 7:45 PM today</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        {{$commentary->comment}}
-{{--                                        <button class="btn btn-default btn-sm"><i class="fa fa-edit"></i> </button>--}}
-                                    </p>
-
-                                    <p>
-                                        <a href="{{ route('comentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
-                                    </p>
-
-{{--                            MODAL FOR EDIT FORM--}}
-                                    <div class="modal fade" id="modal-commentary-edit{{$commentary->id}}">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content card-primary card-outline">
-                                                <form action="{{route('comentaries.update',$commentary->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="modal-body small">
-                                                        <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                        <!-- <strong>Raiting</strong>
-                                                        <p class="clasificacion">
-                                                            <input id="radio1" type="radio" name="estrellas" value="5">
-                                                            <label class="labelTamanio" for="radio1">★</label>
-                                                            <input id="radio2" type="radio" name="estrellas" value="4">
-                                                            <label class="labelTamanio" for="radio2">★</label>
-                                                            <input id="radio3" type="radio" name="estrellas" value="3">
-                                                            <label class="labelTamanio" for="radio3">★</label>
-                                                            <input id="radio4" type="radio" name="estrellas" value="2">
-                                                            <label class="labelTamanio" for="radio4">★</label>
-                                                            <input id="radio5" type="radio" name="estrellas" value="1">
-                                                            <label class="labelTamanio" for="radio5">★</label>
-                                                        </p> -->
-                                                        <p>
-                                                            <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
-                                                            <strong>Comentario</strong>
-                                                            <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?">{{$commentary->comment}}</textarea>
-                                                        </p>
-
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button  class="btn btn-primary">Evaluar Producto</button>
-                                                    </div>
-                                                </form>
+                                        <div id="comentary" class="small">
+                                            <p>
+                                                <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
+                                                {{--                                            <input hidden type="number" name="is_main" value="1">--}}
+                                                {{--                                        <strong>Comentario</strong>--}}
+                                                <textarea name="comment" id="" cols="3" rows="4" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
+                                            </p>
+                                            <div class="text-right">
+                                                <button  class="btn btn-primary">Evaluar Producto</button>
                                             </div>
-                                            <!-- /.modal-content -->
                                         </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
-                                    <!-- /.modal -->
+                                    </form>
+                                </div>
+                                <div class="post">
+                                    @foreach($commentaries as $commentary)
+                                        <div class="user-block">
+                                            <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
+                                            <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
+                                            <span class="description">Shared publicly - 7:45 PM today</span>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <p>
+                                            {{$commentary->comment}}
+                                            {{--                                        <button class="btn btn-default btn-sm"><i class="fa fa-edit"></i> </button>--}}
+                                        </p>
 
-                                @endforeach
-                            </div>
-                        @else
-                            <h5 class="text-center" ><b>No puede evaluar este articulo porque aun no se le entrego!!!</b></h5>
-                            <div class="post">
-                                @foreach($commentaries as $commentary)
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
-                                        <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
-                                        <span class="description">Shared publicly - 7:45 PM today</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        {{$commentary->comment}}
-                                    </p>
+                                        <p>
+                                            <a href="{{ route('comentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
+                                        </p>
 
-                                    <p>
-                                        <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
-                                    </p>
-                                @endforeach
-                            </div>
-                        @endif
+                                        {{--                            MODAL FOR EDIT FORM--}}
+                                        <div class="modal fade" id="modal-commentary-edit{{$commentary->id}}">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content card-primary card-outline">
+                                                    <form action="{{route('comentaries.update',$commentary->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-body small">
+                                                            <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
+                                                            <!-- <strong>Raiting</strong>
+                                                            <p class="clasificacion">
+                                                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                                                <label class="labelTamanio" for="radio1">★</label>
+                                                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                                                <label class="labelTamanio" for="radio2">★</label>
+                                                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                                                <label class="labelTamanio" for="radio3">★</label>
+                                                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                                                <label class="labelTamanio" for="radio4">★</label>
+                                                                <input id="radio5" type="radio" name="estrellas" value="1">
+                                                                <label class="labelTamanio" for="radio5">★</label>
+                                                            </p> -->
+                                                            <p>
+                                                                <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
+                                                                <strong>Comentario</strong>
+                                                                <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?">{{$commentary->comment}}</textarea>
+                                                            </p>
+
+                                                        </div>
+                                                        <div class="modal-footer justify-content-between">
+                                                            <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button  class="btn btn-primary">Evaluar Producto</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <!-- /.modal -->
+
+                                    @endforeach
+                                </div>
+                            @else
+                                <h5 class="text-center" ><b>No puede evaluar este articulo porque aun no se le entrego!!!</b></h5>
+                                <div class="post">
+                                    @foreach($commentaries as $commentary)
+                                        <div class="user-block">
+                                            <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
+                                            <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
+                                            <span class="description">Shared publicly - 7:45 PM today</span>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <p>
+                                            {{$commentary->comment}}
+                                        </p>
+
+                                        <p>
+                                            <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+                                        </p>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

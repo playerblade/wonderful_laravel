@@ -15,7 +15,7 @@ class CreateProcessOrdersTable extends Migration
     {
         Schema::connection('mysql')->create('process_orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('process_order',['initial','process','preparation','dispatched','delivered']);
+            $table->enum('process_order',['initial','process','dispatched','delivered']);
             $table->timestamps();
         });
     }

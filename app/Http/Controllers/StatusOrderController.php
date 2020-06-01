@@ -141,26 +141,6 @@ class StatusOrderController extends Controller
         return view('statusOrders.orderProcess',compact('order_process'));
     }
 
-    public function ordersPreparation()
-    {
-        $orders_preparation = DB::select("
-                    select o.id as order_id ,
-                      po.process_order as estado,
-                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
-                      r.id as role_id, o.active as active
-                    from roles r inner join users u on r.id = u.role_id
-		                inner join user_status_orders uso on u.id = uso.user_id
-                        inner join status_orders so on uso.status_order_id = so.id
-                        inner join process_orders po on so.process_order_id = po.id
-                        inner join orders o on so.order_id = o.id
-                        inner join users c on o.user_id = c.id
-                    and po.id = 3
-                    order by o.created_at desc;
-        ");
-
-        return view('statusOrders.ordersPreparation',compact('orders_preparation'));
-    }
-
     public function ordersDispatched()
     {
         $order_dispatched = DB::select("
@@ -174,7 +154,7 @@ class StatusOrderController extends Controller
                         inner join process_orders po on so.process_order_id = po.id
                         inner join orders o on so.order_id = o.id
                         inner join users c on o.user_id = c.id
-                    and po.id = 4
+                    and po.id = 3
                     order by o.created_at desc;
         ");
 
@@ -194,11 +174,13 @@ class StatusOrderController extends Controller
                         inner join process_orders po on so.process_order_id = po.id
                         inner join orders o on so.order_id = o.id
                         inner join users c on o.user_id = c.id
-                    and po.id = 5
+                    and po.id = 4
                     order by o.created_at desc;
         ");
 
 //        return response()->json($order_delivered);
         return view('statusOrders.ordersDelivered',compact('order_delivered'));
     }
+
+
 }

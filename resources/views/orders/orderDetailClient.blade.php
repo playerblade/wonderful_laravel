@@ -16,7 +16,7 @@
                                 <input hidden type="text" name="first_name" value="{{Auth::user()->first_name}}">
                                 @if($orderDetails)
                                     <div class="col-6 float-left">
-                                        <h3 class="card-title"><b>Orden:</b>&ensp; {{$orderDetails[0]->order_id}}</h3><br>
+                                        <h3 class="card-title"><b>Numero de Orden:</b>&ensp; {{$orderDetails[0]->order_id}}</h3><br>
                                         <h3 class="card-title"><b>Cliente:</b>&ensp; {{$orderDetails[0]->cliente}}</h3>
                                     </div>
                                     <div class="col-6 float-right">
@@ -27,10 +27,14 @@
                                         @else
                                             No hay datos...
                                         @endif
-                                        <br>
-                                        <div class="btn-group btn-group-sm float-right">
-                                            <button type="submit" class="btn btn-warning"><i class="fas fa-stop-circle"></i> Cancelar Orden</button>
-                                        </div>
+                                        <br><br>
+                                        @if($validation_orders->process_order == 'dispatched' || $validation_orders->process_order == 'delivered')
+                                            <p class="float-right" style="color: red;"> Ya puede Cancelar su Orden!!! </p>
+                                        @else
+                                            <div class="btn-group btn-group-sm float-right">
+                                                <button type="submit" class="btn btn-warning"><i class="fas fa-stop-circle"></i> Cancelar Orden</button>
+                                            </div>
+                                        @endif
                                     </div>
                                 @else
                                     <div class="col-12">
@@ -82,7 +86,7 @@
                                                     {{--                                                    &ensp;Ver | {{$orderDetail->articulo}}--}}
                                                 </a>
                                             </button>
-                                            
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -120,7 +124,7 @@
                                 </div>
                                 <form action="{{ route('comentaries.store') }}" method="POST">
                                     @csrf
-                                    
+
                                     <div class="modal-body">
                                         <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                         <strong>Raiting</strong>
@@ -141,7 +145,7 @@
                                             <strong>Comentario</strong>
                                             <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
                                         </p>
-                                    
+
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button  class="btn btn-default" data-dismiss="modal">Close</button>
