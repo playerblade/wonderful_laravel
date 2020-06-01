@@ -101,18 +101,22 @@ class RaitingArticleController extends Controller
 
     public function raitingsArticulos($article_id , Article $articles , Request $request){
         // if ($request->user()->authorizeRole(['administrador'])) {
+            // dd($request);
 
             $raitings = DB::select(
                 "
                 select a.id as article_id, a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                 from stars s inner join raiting_articles ra on s.id = ra.star_id
                    inner join users c on ra.user_id = c.id
+                   inner join roles r on c.role_id = r.id
                    inner join commentary_articles ca on c.id = ca.user_id
                    inner join articles a on ra.article_id = a.id
-                   where a.id = 1
-                   group by s.id
-                   order by s.star;"
-            );
+                  --  where r.id = 5
+                   and a.id = $article_id
+                   group by estrella
+                   order by s.star;
+                   
+            ");
 
             $porcentajes = DB::select(
                 "
@@ -120,9 +124,9 @@ class RaitingArticleController extends Controller
                      from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                           from stars s inner join raiting_articles ra on s.id = ra.star_id
                                inner join users c on ra.user_id = c.id
-                               inner join commentary_articles ca on c.id = ca.client_id
+                               inner join commentary_articles ca on c.id = ca.user_id
                                inner join articles a on ra.article_id = a.id
-                               where a.id = 1
+                               where a.id = $article_id
                                group by s.id
                                order by s.star) as cantidad
                       group by cantidad.article;

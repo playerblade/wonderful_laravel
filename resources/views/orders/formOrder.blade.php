@@ -45,6 +45,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
+                                        <button type="button" class="btn bg-yellow elevation-3 btn-ml" data-toggle="modal" data-target="#modal-xl">
+                                                ★  ★  ★  ★  ★
+                                        </button>
                                         <h3 class="my-3">{{$article->articulo}}</h3>
                                         <h5><b>Fabricante: </b>{{$article->fabricante}}.</h5>
                                         @foreach ($stocks as $stock)

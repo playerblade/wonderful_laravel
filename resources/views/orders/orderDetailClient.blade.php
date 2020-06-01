@@ -66,7 +66,7 @@
                                             <!-- <div class="mt-2"> -->
                                             <button type="button" class="btn bg-yellow elevation-1 btn-sm" data-toggle="modal" data-target="#modal-xl">
                                                 ★★★★★
-                                                </button>
+                                            </button>
                                             <!-- </div> -->
                                             <button type="submit" class="btn">
                                                 <a class="btn bg-success elevation-1 btn-sm" href="/reportes/cliente/orden/detalle_orden/{{$orderDetail->article_id}}/articulo">
