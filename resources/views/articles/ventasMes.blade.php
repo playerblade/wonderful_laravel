@@ -33,7 +33,7 @@
                                     <di class="col-6">
                                         @foreach($months1 as $month)
                                             <div class="external-event bg-gradient-purple" style="position: relative;">
-                                                <a href="/ventas_mes/{{$mes_id++}}" class="text-black-50">{{$month}}</a>
+                                                <a href="/ventas_mes/{{$mes_id2++}}" class="text-black-50">{{$month}}</a>
                                             </div>
                                             <hr>
                                         @endforeach
@@ -41,7 +41,7 @@
                                     <di class="col-6">
                                         @foreach($months2 as $month)
                                             <div class="external-event bg-gradient-purple" style="position: relative;">
-                                                <a href="/ventas_mes/{{$mes_id++}}" class="text-black-50">{{$month}}</a>
+                                                <a href="/ventas_mes/{{$mes_id2++}}" class="text-black-50">{{$month}}</a>
                                             </div>
                                             <hr>
                                         @endforeach
@@ -55,9 +55,9 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="card card-info card-outline">
-                        <div class="card-header">
-                            <b>Articulos</b>
-                        </div>
+                    <div class="card-header">
+                        <b>Articulos</b>
+                    </div>
                     <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example3" class="table table-striped elevation-2">
@@ -74,13 +74,13 @@
                                         <td>{{$article->mes}}</td>
                                         <td>{{$article->producto}}</td>
                                         <td>{{$article->cantidad}}</td>
-{{--                                        <td>--}}
-{{--                                            <button type="submit" class="btn">--}}
-{{--                                                <a class="btn btn-info btn-sm elevation-1" href="/reportes/cliente/{{$client->id}}/ordenes">--}}
-{{--                                                    <i class="fas fa-eye"></i> ver--}}
-{{--                                                </a>--}}
-{{--                                            </button>--}}
-{{--                                        </td>--}}
+        {{--                                        <td>--}}
+        {{--                                            <button type="submit" class="btn">--}}
+        {{--                                                <a class="btn btn-info btn-sm elevation-1" href="/reportes/cliente/{{$client->id}}/ordenes">--}}
+        {{--                                                    <i class="fas fa-eye"></i> ver--}}
+        {{--                                                </a>--}}
+        {{--                                            </button>--}}
+        {{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

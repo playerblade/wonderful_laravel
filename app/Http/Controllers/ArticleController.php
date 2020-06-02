@@ -7,9 +7,12 @@ use App\Category;
 use App\Charts\BarChart;
 use App\Color;
 use App\ColorArticle;
+use App\Maker;
 use App\PriceArticle;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
@@ -24,16 +27,18 @@ class ArticleController extends Controller
             $categories = Category::all();
             $sub_categories = SubCategory::all();
             $colors = Color::all();
+            $makers = Maker::select('*')->orderBy('name','asc')->get();
 
             $articles = DB::select(
                 "select sb.id ,  a.id as id , a.title as article , m.name as marker , a.stock  as stock,
                         sb.sub_category as sub_category , c.category as category , a.description as description
                        from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
                        inner join categories c on sb.category_id  = c.id
-                       inner join makers m on a.maker_id = m.id;
+                       inner join makers m on a.maker_id = m.id
+                       order by a.id desc;
             ");
             //        dd($articles);
-            return view('articles.crud.index', compact('articles','categories','sub_categories','colors'));
+            return view('articles.crud.index', compact('articles','categories','sub_categories','colors','makers'));
     }
 
     /**
@@ -60,18 +65,25 @@ class ArticleController extends Controller
 
         // $articles = request()->except('_token');
         $request->except('_token');
-            $request->validate([
-                'sub_category_id' => 'required',
-                'title' => 'required|max:250|string|regex:/^.+@.+$/i',
-                'marker' => 'required|max:250|string|regex:/^.+@.+$/i',
-                'description' => 'required',
-                'stock' => 'required|numeric',
-                'color_id' => 'required|numeric',
-                'price' => 'required|max:250|string|regex:/^.+@/i',
-                'is_current' => 'required|boolean',
-            ]);
+//            $request->validate([
+//                'sub_category_id' => 'required',
+//                'title' => 'required|max:250|string|regex:/^.+@.+$/i',
+//                'marker_id' => 'required|max:250|string|regex:/^.+@.+$/i',
+//                'description' => 'required',
+//                'stock' => 'required|numeric',
+//                'color_id' => 'required|numeric',
+//                'price' => 'required|max:250|string|regex:/^.+@/i',
+//                'is_current' => 'required|boolean',
+//            ]);
 
-            $article =  Article::create($request->all());
+//            $article =  Article::create($request->all());
+            $article =  new Article();
+            $article->sub_category_id = $request->sub_category_id;
+            $article->maker_id = $request->maker_id;
+            $article->title = $request->title;
+            $article->description = $request->description;
+            $article->stock = $request->stock;
+            $article->save();
             // dd($article->id);
 
             // $color =  ColorArticle::create($request->all());
@@ -85,6 +97,7 @@ class ArticleController extends Controller
                 $colorAssings[] = [
                     'article_id' => $article->id,
                     'color_id' => $color_id,
+                    'quantity' => 1,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s"),
                 ];
@@ -93,9 +106,8 @@ class ArticleController extends Controller
             $price  = new PriceArticle();
             $price->article_id = $article->id;
             $price->price = $request->input('price');
-            $price->is_current = $request->input('is_current');
+            $price->is_current = 1;
 
-            $article->save();
 //            $color->save();
             ColorArticle::insert($colorAssings);
             $price->save();
@@ -198,7 +210,16 @@ class ArticleController extends Controller
 
     public function articulosVendidosPorMes( Request $request, Article $articles)
     {
-        if ($request->user()->authorizeRole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
+
+            $months1 = [
+                1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril', 5 => 'Mayo', 6 => 'Junio'
+            ];
+            $mes_id = 1;
+            $months2 = [
+                7 => 'Julio', 8 => 'Agosto', 9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
+            ];
+//            dd($months1);
             $articles = DB::select(
                 "select a.title as producto , dt.quantity as cantidad,
                             CASE MONTH(o.created_at)
@@ -219,7 +240,7 @@ class ArticleController extends Controller
                             inner join articles a on a.id = dt.article_id
                             inner join orders o on o.id = dt.order_id
                             inner join price_articles pa on pa.id = dt.price_article_id
-                            inner join clients c on c.id = o.client_id
+                            inner join users c on c.id = o.user_id
                             inner join status_orders so on so.order_id = o.id
                             inner join process_orders po on so.process_order_id = po.id
                         where po.id = 4
@@ -228,12 +249,51 @@ class ArticleController extends Controller
                         order by cantidad desc;"
             );
             //        dd($articles);
-            return view('articles.articulosVendidosPorMes', compact('articles'));
+            return view('articles.articulosVendidosPorMes', compact('articles','months1','months2','mes_id'));
         } else {
             abort(403, 'you do not authorized for this web site');
         }
     }
 
+    public function ventasMes($mes_id){
+        $months1 = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril', 5 => 'Mayo', 6 => 'Junio'
+        ];
+        $mes_id2 = 1;
+        $months2 = [
+            7 => 'Julio', 8 => 'Agosto', 9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
+        ];
+        $articles = DB::select(
+            "select a.title as producto , dt.quantity as cantidad,
+                            CASE MONTH(o.created_at)
+                                when 1 then 'Enero'
+                                when 2 then 'Febrero'
+                                when 3 then 'Marzo'
+                                when 4 then 'Abril'
+                                when 5 then 'Mayo'
+                                when 6 then 'Junio'
+                                when 7 then 'Julio'
+                                when 8 then 'Agosto'
+                                when 9 then 'Septiembre'
+                                when 10 then 'Octubre'
+                                when 11 then 'Noviembre'
+                                when 12 then 'Diciembre'
+                            END as mes
+                        from order_details dt
+                            inner join articles a on a.id = dt.article_id
+                            inner join orders o on o.id = dt.order_id
+                            inner join price_articles pa on pa.id = dt.price_article_id
+                            inner join users c on c.id = o.user_id
+                            inner join status_orders so on so.order_id = o.id
+                            inner join process_orders po on so.process_order_id = po.id
+                        where MONTH(o.created_at) = $mes_id
+                        and po.id = 4
+                        group by a.title , dt.quantity , mes
+                        order by cantidad desc;"
+        );
+
+        return view('articles.ventasMes', compact('articles','months1','months2','mes_id2'));
+    }
     public function promedioDeProductosMasVendidosPorCiudades($city_id, Article $articles , Request $request){
 
 //        if ($request->user()->authorizeRole(['administrador'])) {
