@@ -56,6 +56,10 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::get('/reportes/articulos' ,
         'ArticleController@articulosVendidosPorMes'
     )->name('articulos');
+//    consulta 1.a
+    Route::get('/ventas_mes/{mes_id}' ,
+        'ArticleController@ventasMes'
+    );
     //    consulta 2
     Route::get('/reportes/clientes' ,
         'ClientController@cantidadDeProductosPorCliente_2'

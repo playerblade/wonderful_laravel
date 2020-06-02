@@ -33,7 +33,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
@@ -99,7 +99,7 @@
             {{-- CREATE ARTICULOS  --}}
             <div class="modal fade" id="modal-lg">
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content card-red card-outline">
+                    <div class="modal-content card-purple card-outline">
                         <div class="modal-header">
                             <h4 class="modal-title">Agregar Articulo</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -130,7 +130,13 @@
                                         </div>
                                         <div class="form-group">
                                             <strong>Marker:</strong>
-                                            <input type="text" name="marker" class="form-control" placeholder="Marker" required>
+{{--                                            <input type="text" name="marker" class="form-control" placeholder="Marker" required>--}}
+                                            <select name="maker_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                                <option selected>Select a maker</option>
+                                                @foreach($makers as $maker)
+                                                    <option value="{{$maker->id}}">{{$maker->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <strong>Stock:</strong>
@@ -173,11 +179,18 @@
                                                 <div class="col-8">
                                                     <input type="text" name="price" class="form-control" placeholder="Precio" required>
                                                 </div>
-                                                <div class="col-4">
-                                                    <input type="radio" checked  name="is_current" value="1" required>
-                                                    <br>
-                                                    <input type="radio" disabled name="is_current" value="0" required>
-                                                </div>
+{{--                                                <div class="col-4">--}}
+{{--                                                    <div class="form-group clearfix">--}}
+{{--                                                        <div class="icheck-primary d-inline">--}}
+{{--                                                            <input type="radio" id="radioPrimary1" name="is_current" checked="" value="1" required>--}}
+{{--                                                            <label for="radioPrimary1">Current</label>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="icheck-primary d-inline">--}}
+{{--                                                            <input type="radio" id="radioPrimary2" name="is_current" value="1" required disabled>--}}
+{{--                                                            <label for="radioPrimary2">Before</label>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                              </div>
                                         </div>
                                     </div>

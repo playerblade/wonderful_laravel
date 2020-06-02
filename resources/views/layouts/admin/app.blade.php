@@ -347,6 +347,7 @@
     $(document).ready(function () {
         bsCustomFileInput.init();
     });
+
     </script>
 
 @yield('scriptsBarChart')

@@ -104,12 +104,12 @@ class ClientController extends controller
 //        }
     }
 
-    public function cantidaddeproductosporcliente_2( request $request, client $clients)
+    public function cantidaddeproductosporcliente_2( request $request)
     {
-        if ($request->user()->authorizerole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
             $clients = db::select(
                 "select concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
-                 count(do.id) as cantidadproducto, year(o.created_at) as anio
+                 count(do.id) as cantidadProducto, year(o.created_at) as anio
             from categories d join sub_categories sd on d.id = sd.category_id
                  join articles a on sd.id = a.sub_category_id
                  join order_details do on a.id = do.article_id
@@ -117,14 +117,14 @@ class ClientController extends controller
                  join status_orders eo on o.id = eo.order_id
                  join process_orders po on eo.process_order_id = po.id
                  join price_articles pa on a.id = pa.article_id
-                 join clients c on o.client_id = c.id
+                 join users c on o.user_id = c.id
             -- where eo.id = 5
             -- and year(o.created_at) = 2014
             group by anio, cliente
             order by cantidadproducto desc;"
             );
 //        dd($clients);
-            return view('clients.cantidaddeproductosporcliente_2',compact('clients'));
+            return view('clients.cantidadDeProductosPorCliente_2',compact('clients'));
         } else {
             abort(403, 'you do not authorized for this web site');
         }

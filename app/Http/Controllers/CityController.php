@@ -85,7 +85,7 @@ class CityController extends Controller
         //
     }
     public function promedioVentasPorCiudades(Request $request , City $cities){
-        if ($request->user()->authorizeRole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
             $cities  = DB::select(
                 "
                 select c.city as ciudad, count(do.article_id) as cantidad, avg(do.sub_total) as totalVenta

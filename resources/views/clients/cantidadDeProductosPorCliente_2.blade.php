@@ -24,9 +24,9 @@
                 <!-- /.col-md-6 -->
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
-                    {{--                <div class="card-header">--}}
-                    {{--                    <h3 class="card-title">DataTable with default features</h3>--}}
-                    {{--                </div>--}}
+                    <div class="card-header">
+                        <b>Clientes</b>
+                    </div>
                     <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-striped elevation-2">

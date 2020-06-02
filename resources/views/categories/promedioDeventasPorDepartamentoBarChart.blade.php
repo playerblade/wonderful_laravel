@@ -1,4 +1,4 @@
-@extends('layouts.menuAdmin')
+@extends('layouts.admin.app')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -30,8 +30,13 @@
                     <!-- /.card-header -->
                         <div class="card-body">
                             <div style="width: 100%;">
-                                {{$chart->container()}}
+                                @if($chart)
+                                    {{$chart->container()}}
+                                @else
+                                    no hay datos!!!
+                                @endif
                             </div>
+                            {{$chart->script()}}
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -41,8 +46,7 @@
         <!-- /.container-fluid -->
     </section>
 @endsection
-@section('scriptsBarChart')
-{{--    <script src="{{asset('js/chartjs-2.7.1/Chart.min.js')}}"></script>--}}
-    {{$chart->script()}}
-@endsection
+{{--@section('scriptsBarChart')--}}
+{{--        {{$chart->script()}}--}}
+{{--@endsection--}}
 

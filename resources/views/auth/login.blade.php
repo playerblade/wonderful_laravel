@@ -51,7 +51,7 @@
                     @enderror
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col-4 mt-3">
                         <button type="submit" class="btn btn-primary btn-block">
                             {{ __('Login') }}
                         </button>
@@ -96,35 +96,36 @@
                 </div>
             </form>
 
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
+{{--            <div class="social-auth-links text-center mb-3">--}}
+{{--                <p>- OR -</p>--}}
 {{--                <a href="#" class="btn btn-block btn-primary">--}}
 {{--                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook--}}
 {{--                </a>--}}
 {{--                <a href="#" class="btn btn-block btn-danger">--}}
 {{--                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+--}}
 {{--                </a>--}}
-            </div>
+{{--            </div>--}}
             <!-- /.social-auth-links -->
 
-            <div class="row">
-                <div class="col-8">
-                    <p class="mb-1">
-                        @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                        @endif
-                    </p>
-                </div>
-                <div class="col-4">
-                    <p class="mb-0">
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            {{ __('Register') }}
-                        </a>
-                    </p>
-                </div>
-            </div>
+{{--            <div class="row">--}}
+{{--                <div class="col-8">--}}
+{{--                    <p class="mb-1">--}}
+{{--                        @if (Route::has('password.request'))--}}
+{{--                            <a class="btn btn-link" href="{{ route('password.request') }}">--}}
+{{--                                {{ __('Forgot Your Password?') }}--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--                <div class="col-4">--}}
+{{--                    <p class="mb-0">--}}
+{{--                        <a class="btn btn-link" href="{{ route('password.request') }}">--}}
+{{--                            {{ __('Register') }}--}}
+{{--                        </a>--}}
+{{--                    </p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+            <br>
         </div>
         <!-- /.login-card-body -->
     </div>
