@@ -174,6 +174,32 @@ class RaitingArticleController extends Controller
         // }
 
     }
+    public function ComentarioDeLaEstrellaBottonVer($article_id , $raiting, CommentaryArticle $comentarios , Request $request){
+        // if ($request->user()->authorizeRole(['administrador'])) {
+
+            $comentarios = DB::select(
+                "
+                select a.title as article ,s.id as estrella, s.id as raiting , ca.created_at as fecha,
+                       ca.comment as cometario, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
+                       ia.url_image as imagen, a.description as description
+                  from stars s inner join raiting_articles ra on s.id = ra.star_id
+                       inner join users c on ra.user_id = c.id
+                       inner join commentary_articles ca on c.id = ca.user_id
+                       inner join articles a on ra.article_id = a.id
+                       inner join image_articles ia on a.id = ia.article_id
+                       where a.id = $article_id
+                       and  s.id = $raiting
+                       group by a.title, s.id, s.id, ca.created_at, ca.comment, cliente, ia.url_image, a.description
+                       order by ca.created_at  desc;
+            "
+            );
+//            dd($comentarios);
+            return view('orders.ComentarioDeLaEstrellaBottonVer',compact('comentarios'));
+        // } else {
+        //     abort(403, 'you do not authorized for this web site');
+        // }
+
+    }
     
     
 }

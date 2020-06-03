@@ -76,6 +76,13 @@ class HomeController extends Controller
                     where po.id = 3 or po.id = 4
                     order by o.created_at desc;
         ");
+        $stocks = DB::select("
+                    select a.id as id, sum(ca.quantity) as stock
+                    from colors c inner join color_articles ca on c.id = ca.color_id
+                    inner join articles a on ca.article_id = a.id
+                    and a.id = 1
+                    group by id;
+        ");
 
         $user = Auth::user();
 
@@ -86,7 +93,7 @@ class HomeController extends Controller
         }elseif($request->user()->hasRole('verificador')){
             return view('layouts.checker.home',compact('user','order_for_checker'));
         }elseif($request->user()->hasRole('cliente')){
-            return view('layouts.client.home',compact('user','articles','categories','makers'));
+            return view('layouts.client.home',compact('user','articles','categories','makers','stocks'));
         }else{
             return back();
         }

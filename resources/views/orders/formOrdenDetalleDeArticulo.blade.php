@@ -65,6 +65,9 @@
                                         <p><b>Description: </b>{{$article->description}}.</p>
                                         <h4>Available Colors</h4>
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <td>
+                                            <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$orderDetail->color)}}" alt="">
+                                        </td>
                                             @foreach($colors as $color)
                                                 <label class="btn btn-default text-center active">
                                                     <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
@@ -293,8 +296,75 @@
                         <div class="modal-dialog modal-ml">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                
-                                    <img class="elevation-0" src="{{asset('/stars/01Estrella.png')}}" style="width: 300px;height: 70px;"> 
+                                    @foreach($raitings as $raiting)   
+                                        {{--   @foreach($agruparRaitingsIguales as $agruparRaitingsIgual)   --}}
+                                        @if($maximoDeEstrella[0]->maximo == $raiting->cantidadCliente)
+                                            <p class="clasificacion">
+                                                @if($raiting->estrella == 5)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5" checked>
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 4)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4"checked>
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 3)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3" checked>
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 2)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2" checked>
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 1)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1" checked>
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                               
+                                            </p>
+                                        @endif
+                                        {{--    @endforeach     --}}
+                                    @endforeach 
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -320,14 +390,7 @@
                                                 </div>
                                             </td>
                                             <td>{{round( $raiting->cantidadCliente * 100 / $porcentajes[0]->montoTotal,0) }} %</td>
-                                            <td>
-                                                <button type="submit" class="btn">
-                                                    <a class="btn btn-info btn-sm elevation-1" href="/comentario/article/{{$raiting->article_id}}/{{$raiting->estrella}}/detail">
-                                                        <i class="fas fa-eye"></i>
-                                                        <!-- <i class="fas fa-play"></i>  -->
-                                                    </a>
-                                                </button>
-                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                     </tbody>
