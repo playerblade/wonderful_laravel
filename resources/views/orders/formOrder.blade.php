@@ -45,10 +45,18 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <button type="button" class="btn bg-yellow elevation-3 btn-ml" data-toggle="modal" data-target="#modal-xl">
-                                                ★  ★  ★  ★  ★
-                                        </button>
-                                        <h3 class="my-3">{{$article->articulo}}</h3>
+                                        <div class="row  ">
+                                            <div class="col-sm-6"><h3 class="my-3">{{$article->articulo}}</h3></div>
+                                            <div class="col-sm-6">
+                                            <div class="float-right">
+                                            <button type="button" class="btn bg-yellow elevation-3 btn-ml my-3" data-toggle="modal" data-target="#modal-xl">
+                                                    ★  ★  ★  ★  ★ 
+                                            </button>
+                                            <strong>{{$porcentajes[0]->montoTotal }} calificaciones</strong>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
                                         <h5><b>Fabricante: </b>{{$article->fabricante}}.</h5>
                                         @foreach ($stocks as $stock)
                                             <h5><b>Stock: </b>{{$stock->stock}}.</h5>
@@ -85,7 +93,7 @@
                                             </div>
                                             <div id="cantidad" class="col-6">
                                                 <h4>Cantidad</h4>
-                                                <input type="number" name="quantity" class="form-control" required>
+                                                <input type="number" name="quantity" class="form-control" min="1" required>
                                             </div>
                                             <div  class="col-6">
                                                 {{--                                            space--}}
@@ -195,7 +203,7 @@
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
                                             <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
-                                            <span class="description">Shared publicly - 7:45 PM today</span>
+                                            <span class="description">Shared publicly - {{$commentary->created_at}} </span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
@@ -280,6 +288,120 @@
     <br>
     <!-- /.card -->
 @endsection
+<!-- inicio del modal del porcentaje de los raitings-------------------------------------------------------------- -->
+<div class="modal fade" id="modal-xl">
+                        <div class="modal-dialog modal-ml">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    @foreach($raitings as $raiting)   
+                                        {{--   @foreach($agruparRaitingsIguales as $agruparRaitingsIgual)   --}}
+                                        @if($maximoDeEstrella[0]->maximo == $raiting->cantidadCliente)
+                                            <p class="clasificacion">
+                                                @if($raiting->estrella == 5)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5" checked>
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 4)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4"checked>
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 3)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3" checked>
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 2)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2" checked>
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                                @if($raiting->estrella == 1)
+                                                    <input id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelTamanio" for="radio1">★</label>
+                                                    <input id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelTamanio" for="radio2">★</label>
+                                                    <input id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelTamanio" for="radio3">★</label>
+                                                    <input id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelTamanio" for="radio4">★</label>
+                                                    <input id="radio5" type="radio" name="estrellas" value="1" checked>
+                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                @endif
+                                               
+                                            </p>
+                                        @endif
+                                        {{--    @endforeach     --}}
+                                    @endforeach 
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-header">
+                                    <strong>{{$porcentajes[0]->montoTotal }} calificaciones de clientes</strong>
+                                </div>
+                                <div class="card-body">
+                                    <table id="example1" class="table table-striped elevation-2">
+                                    
+                                    <tbody>
+                                    @foreach($raitings as $raiting)
+                                        <tr>
+                                            <td>{{$raiting->nameRaiting}}</td>
+                                            <td >
+                                                <div class="progress" style="width: 200px;">
+                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="100"
+                                                        aria-valuemin="0" aria-valuemax="100" style="width: {{$raiting->cantidadCliente}}%">
+                                                        <!-- <span class="sr-only">60% completado</span> -->
+                                                        {{$raiting->cantidadCliente}}
+                                                    </div>
+                                                    
+                                                </div>
+                                            </td>
+                                            <td>{{round( $raiting->cantidadCliente * 100 / $porcentajes[0]->montoTotal,0) }} %</td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    
+                                </table>
+                                </div>
+                                
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+    <!-- fin del modal-------------------------------------------------------------- -->
 @section('script_cities')
     <script type="text/javascript">
         $(document).ready(function () {
@@ -342,3 +464,24 @@
         });
     </script>
 @endsection
+
+<!-- ------------------------------Del Modal del Porcentaje del raiting--------------------------------------------------- -->
+@section('scriptReadMore')
+    <script>
+        $(document).ready(function () {
+            $('.nav-toggle').click(function () {
+                var collapse_content_selector = $(this).attr('href');
+                var toggle_switch = $(this);
+                $(collapse_content_selector).toggle(function () {
+                    if ($(this).css('display') == 'none') {
+                        toggle_switch.html('Read More');
+                    } else {
+                        toggle_switch.html('Read Less');
+                    }
+                });
+            });
+
+        });
+    </script>
+@endsection
+<!-- ----------------------------------------------------------------------------------------- -->

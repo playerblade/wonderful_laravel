@@ -101,25 +101,34 @@ class RaitingArticleController extends Controller
 
     public function raitingsArticulos($article_id , Article $articles , Request $request){
         // if ($request->user()->authorizeRole(['administrador'])) {
-            // dd($request);
 
             $raitings = DB::select(
-                "
-                select a.id as article_id, a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                "select a.id as article_id, a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                 from stars s inner join raiting_articles ra on s.id = ra.star_id
                    inner join users c on ra.user_id = c.id
-                   inner join roles r on c.role_id = r.id
+                   -- inner join roles r on c.role_id = r.id
                    inner join commentary_articles ca on c.id = ca.user_id
                    inner join articles a on ra.article_id = a.id
-                  --  where r.id = 5
-                   and a.id = $article_id
-                   group by estrella
-                   order by s.star;
-                   
+                   -- where c.role_id = 5
+                   where a.id = $article_id
+                   group by s.id, a.id,a.title, s.star
+                   order by s.star;   
+                    
             ");
+            // $raitings = DB::table('stars')
+            // ->join('raiting_articles','stars.id','=','raiting_articles.star_id')
+            // ->join('users','raiting_articles.user_id','=','users.id')
+            // ->join('commentary_articles','users.id','=','commentary_articles.user_id')
+            // ->join('articles','commentary_articles.article_id','=','articles.id')
+            // ->where('articles.id',$article_id)
+            // ->where('users.role_id',5)
+            // ->groupBy('stars.id')
+            // ->orderBy('stars.id','desc')->get()
+            // ->select('raiting_articles.star_id','*')
+            // ->count();
 
-            $porcentajes = DB::select(
-                "
+            // dd($raitings);
+            $porcentajes = DB::select("
                     select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
                      from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                           from stars s inner join raiting_articles ra on s.id = ra.star_id
@@ -127,11 +136,10 @@ class RaitingArticleController extends Controller
                                inner join commentary_articles ca on c.id = ca.user_id
                                inner join articles a on ra.article_id = a.id
                                where a.id = $article_id
-                               group by s.id
+                               group by s.id, a.title, s.star
                                order by s.star) as cantidad
                       group by cantidad.article;
-                "
-            );
+            ");
 
             return view('articles.raitingsArticulos',compact('raitings','porcentajes'));
         // } else {
@@ -150,7 +158,7 @@ class RaitingArticleController extends Controller
                        ia.url_image as imagen, a.description as description
                   from stars s inner join raiting_articles ra on s.id = ra.star_id
                        inner join users c on ra.user_id = c.id
-                       inner join commentary_articles ca on c.id = ca.client_id
+                       inner join commentary_articles ca on c.id = ca.user_id
                        inner join articles a on ra.article_id = a.id
                        inner join image_articles ia on a.id = ia.article_id
                        where a.id = $article_id
@@ -166,4 +174,6 @@ class RaitingArticleController extends Controller
         // }
 
     }
+    
+    
 }

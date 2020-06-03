@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommentaryArticle;
 use App\RaitingArticle;
+use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -116,4 +117,6 @@ class CommentaryArticleController extends Controller
     {
         //
     }
+    
+
 }

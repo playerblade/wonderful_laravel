@@ -270,11 +270,61 @@ class OrderController extends Controller
         $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
                         ->join('users','commentary_articles.user_id','=','users.id')
                         ->join('raiting_articles','articles.id','=','raiting_articles.article_id')
-                        ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
                         ->where('articles.id',$article_id)
                         ->orderBy('commentary_articles.created_at','desc')->get();
-
-        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries'));
+        
+        $raitings = DB::select(
+            "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
+            from stars s inner join raiting_articles ra on s.id = ra.star_id
+               inner join users c on ra.user_id = c.id
+               -- inner join roles r on c.role_id = r.id
+               inner join commentary_articles ca on c.id = ca.user_id
+               inner join articles a on ra.article_id = a.id
+               -- where c.role_id = 5
+               where a.id = $article_id
+               group by s.id, a.id,a.title, s.star
+               order by s.star desc;   
+                
+        ");
+        $porcentajes = DB::select("
+                select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                      from stars s inner join raiting_articles ra on s.id = ra.star_id
+                           inner join users c on ra.user_id = c.id
+                           inner join commentary_articles ca on c.id = ca.user_id
+                           inner join articles a on ra.article_id = a.id
+                           where a.id = $article_id
+                           group by s.id, a.title, s.star
+                           order by s.star) as cantidad
+                  group by cantidad.article;
+        ");
+        $maximoDeEstrella = DB::select("
+                select cantidad.article, max(cantidad.cantidadCliente) as maximo
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                      from stars s inner join raiting_articles ra on s.id = ra.star_id
+                           inner join users c on ra.user_id = c.id
+                           inner join commentary_articles ca on c.id = ca.user_id
+                           inner join articles a on ra.article_id = a.id
+                           where a.id = $article_id
+                           group by s.id, a.title, s.star
+                           order by s.star) as cantidad
+                  group by cantidad.article;
+        ");
+        $agruparRaitingsIguales = DB::select(
+            "select cantidad.article, cantidad.cantidadCliente as cantidadClientee 
+            from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                 from stars s inner join raiting_articles ra on s.id = ra.star_id
+                      inner join users c on ra.user_id = c.id
+                      inner join commentary_articles ca on c.id = ca.user_id
+                      inner join articles a on ra.article_id = a.id
+                      where a.id = $article_id
+                      group by s.id, a.title, s.star
+                      order by s.star) as cantidad
+             group by cantidad.article,cantidad.cantidadCliente; 
+                
+        ");
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales'));
     }
 
     public function getTransportFares(Request $request)

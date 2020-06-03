@@ -25,7 +25,11 @@
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title"><b>Articulo: &ensp; </b>{{$raitings[0]->article}}</h3>
+                        @if(empty($raitings[0]->article))
+                            <strong>Datos vacios</strong>
+                        @else
+                            <h3 class="card-title"><b>Articulo: &ensp; </b>{{$raitings[0]->article}}</h3>
+                        @endif
                     </div>
                     <!-- /.card-header -->
                         <div class="card-body">

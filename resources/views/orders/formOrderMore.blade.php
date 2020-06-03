@@ -81,7 +81,7 @@
                                         </div>
                                         <div id="cantidad" class="col-6">
                                             <h4>Cantidad</h4>
-                                            <input type="number" name="quantity" class="form-control" required>
+                                            <input type="number" name="quantity" class="form-control" min="1" required>
                                         </div>
                                         <div  class="col-6">
 {{--                                            space--}}

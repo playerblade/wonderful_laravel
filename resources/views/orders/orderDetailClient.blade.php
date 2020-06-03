@@ -54,6 +54,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Color</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                                 </thead>
@@ -66,6 +67,9 @@
                                         <td>{{$orderDetail->precio}}</td>
                                         <td>{{$orderDetail->cantidad}} <input hidden type="number" name="quantity" value="{{$orderDetail->cantidad}}"> </td>
                                         <td>{{$orderDetail->subTotal}}</td>
+                                        <td>
+                                            <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$orderDetail->color)}}" alt="">
+                                        </td>
                                         <td class="text-center">
                                             <!-- <div class="mt-2"> -->
                                             <button type="button" class="btn bg-yellow elevation-1 btn-sm" data-toggle="modal" data-target="#modal-xl">
@@ -98,6 +102,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Color</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                                 </tfoot>

@@ -247,6 +247,12 @@ class OrderDetailController extends Controller
     }
 
     public function orderDetailClient($order_id){
+        // $colors = DB::select("
+        //     select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
+        //     from articles a inner join color_articles ca on a.id = ca.article_id
+        //          inner join colors c on ca.color_id = c.id
+        //     where a.id = $article_id;
+        // ");
         $transport = DB::select("
             select tf.price as price
             from users u inner join orders o on u.id = o.user_id
@@ -261,17 +267,20 @@ class OrderDetailController extends Controller
                        od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
                        od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
                        o.created_at as fecha, od.color_article as color
+                       -- col.image as image
                 from roles r inner join users c on r.id = c.role_id
-                      inner join orders o on c.id = o.user_id
-                      inner join order_details od on o.id = od.order_id
-                      inner join articles a on od.article_id = a.id
-                      inner join price_articles pa on a.id = pa.article_id
+                       inner join orders o on c.id = o.user_id
+                       inner join order_details od on o.id = od.order_id
+                       inner join articles a on od.article_id = a.id
+                       inner join price_articles pa on a.id = pa.article_id
+                       -- join color_articles ca on a.id = ca.article_id
+                       -- inner join colors col on ca.color_id = col.id
                 and o.id = $order_id
                 and r.role = 'cliente'
                 and pa.is_current = 1
                 -- group by c.id, od.id, a.title, pa.price
                 group by a.id, o.id, c.id, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name), od.id, a.title, pa.price, od.quantity, od.sub_total, o.created_at,od.color_article
-                order by fecha desc;
+                order by fecha desc, od.id desc;
                 "
         );
 
