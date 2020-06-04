@@ -13,6 +13,9 @@
                             <div class="col-6">
                                 <b>Busquedas</b>
                             </div>
+                            <div class="col-6">
+                                <strong class="float-right">php artisan config:clear</strong>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">

@@ -6,9 +6,14 @@ use App\Category;
 use App\Charts\BarChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        //
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,14 +22,8 @@ class CategoryController extends Controller
     public function index()
     {
 //        aniadir atorizacion para administradores
-        $categories = Category::all();
-
-        $sub_categories = DB::select("
-            select sc.id as id , c.category as category , sc.sub_category as sub_category
-            from categories c inner join sub_categories sc on c.id = sc.category_id;
-        ");
-
-        return view('categories.crud.index',compact('categories','sub_categories'));
+        $categories = Category::all()->sortDesc();
+        return view('categories.crud.index',compact('categories'));
     }
 
     /**
@@ -46,14 +45,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category' => 'required|string|max:250|unique:categories'
+            'category' => 'required|string|min:1|max:250|unique:categories'
         ]);
             $category = new Category();
             $category->category = ucwords($request->category);
+//            $category->created_at = date_default_timezone_set('Europe/London');
             $category->save();
 
-        return redirect()->route('categories.index')
-            ->with('success','Category created successfully.');
+        return redirect()->route('categories.index')->with('success','Category created successfully.');
     }
 
     /**
@@ -104,7 +103,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back();
     }
 
 //dev sara

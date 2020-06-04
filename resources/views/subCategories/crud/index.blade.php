@@ -33,12 +33,13 @@
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
-                            <table id="example2" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
-                                    <th>Categoria</th>
                                     <th>Sub Categoria</th>
+                                    <th>Categoria</th>
+                                    <th>Fecha</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </thead>
@@ -46,8 +47,11 @@
                                 @foreach($sub_categories as $sub_category)
                                     <tr>
                                         <th class="text-center">{{$sub_category->id}}</th>
-                                        <td>{{$sub_category->category}}</td>
                                         <td>{{$sub_category->sub_category}}</td>
+                                        <td>{{$sub_category->category}}</td>
+                                        <td>
+                                            {{Carbon\Carbon::parse($sub_category->created_at)->isoFormat('LLL')}}
+                                        </td>
                                         <td class="py-0 align-middle text-right">
                                             <form action="{{ route('sub_categories.destroy',$sub_category->id) }}" method="POST">
                                                 <div class="btn-group btn-group-sm">
@@ -69,8 +73,9 @@
                                 <tfoot>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
-                                    <th>Categoria</th>
                                     <th>Sub Categoria</th>
+                                    <th>Categoria</th>
+                                    <th>Fecha</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </tfoot>
@@ -107,7 +112,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="card-title">Sub Categoria:</label>
-                                    <input type="text" name="sub_category" class="form-control">
+                                    <input type="text" class="form-control @error('sub_category') is-invalid @enderror" name="sub_category" value="{{ old('sub_category') }}" required autocomplete="sub_category" autofocus>
+                                    @error('sub_category')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

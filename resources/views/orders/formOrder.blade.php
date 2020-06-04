@@ -2,26 +2,25 @@
 @section('content')
 
     <style>
-        labelstyle[type="radio"] {
+        .inputstyle[type="radio"] {
             display: none;
         }
 
         .labelstyle {
-            font-size: 35px;
+            font-size: 60px;
             color: grey;
         }
-
-        .clasificacion1 {
+        .clasificacion {
             direction: rtl;
             unicode-bidi: bidi-override;
         }
 
-        labelstyle:hover,
-        labelstyle:hover ~ label {
+        .labelstyle:hover,
+        .labelstyle:hover ~ label {
             color: orange;
         }
 
-        #inputstyle[type="radio"]:checked ~ label {
+        .inputstyle[type="radio"]:checked ~ label {
             color: orange;
         }
     </style>
@@ -171,7 +170,7 @@
                                         @csrf
                                         <div id="raiting" class="small">
                                             <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                            <p class="clasificacion1">
+                                            <p class="clasificacion">
                                                 <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
                                                 <label class="labelstyle" for="radio1">★</label>
                                                 <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
@@ -200,7 +199,7 @@
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
                                             <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
-                                            <span class="description">Shared publicly - {{$commentary->created_at}} </span>
+                                            <span class="description">Shared publicly - {{Carbon\Carbon::parse($commentary->created_at)->isoFormat('LLL')}}</span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
@@ -260,7 +259,7 @@
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="{{asset("/admin-lte/dist/img/user1-128x128.jpg")}}" alt="user image">
                                             <span class="username"> <a href="#">{{$commentary->full_name}}</a></span>
-                                            <span class="description">Shared publicly - 7:45 PM today</span>
+                                            <span class="description">Shared publicly - {{Carbon\Carbon::parse($commentary->created_at)->isoFormat('LLL')}}</span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
@@ -293,64 +292,64 @@
                                         @if($maximoDeEstrella[0]->maximo == $raiting->cantidadCliente)
                                             <p class="clasificacion">
                                                 @if($raiting->estrella == 5)
-                                                    <input id="radio1" type="radio" name="estrellas" value="5" checked>
-                                                    <label class="labelTamanio" for="radio1">★</label>
-                                                    <input id="radio2" type="radio" name="estrellas" value="4">
-                                                    <label class="labelTamanio" for="radio2">★</label>
-                                                    <input id="radio3" type="radio" name="estrellas" value="3">
-                                                    <label class="labelTamanio" for="radio3">★</label>
-                                                    <input id="radio4" type="radio" name="estrellas" value="2">
-                                                    <label class="labelTamanio" for="radio4">★</label>
-                                                    <input id="radio5" type="radio" name="estrellas" value="1">
-                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                    <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5" checked>
+                                                    <label class="labelstyle" for="radio1">★</label>
+                                                    <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelstyle" for="radio2">★</label>
+                                                    <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelstyle" for="radio3">★</label>
+                                                    <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelstyle" for="radio4">★</label>
+                                                    <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelstyle" for="radio5">★</label>
                                                 @endif
                                                 @if($raiting->estrella == 4)
-                                                    <input id="radio1" type="radio" name="estrellas" value="5">
-                                                    <label class="labelTamanio" for="radio1">★</label>
-                                                    <input id="radio2" type="radio" name="estrellas" value="4"checked>
-                                                    <label class="labelTamanio" for="radio2">★</label>
-                                                    <input id="radio3" type="radio" name="estrellas" value="3">
-                                                    <label class="labelTamanio" for="radio3">★</label>
-                                                    <input id="radio4" type="radio" name="estrellas" value="2">
-                                                    <label class="labelTamanio" for="radio4">★</label>
-                                                    <input id="radio5" type="radio" name="estrellas" value="1">
-                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                    <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelstyle" for="radio1">★</label>
+                                                    <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4" checked>
+                                                    <label class="labelstyle" for="radio2">★</label>
+                                                    <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelstyle" for="radio3">★</label>
+                                                    <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelstyle" for="radio4">★</label>
+                                                    <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelstyle" for="radio5">★</label>
                                                 @endif
                                                 @if($raiting->estrella == 3)
-                                                    <input id="radio1" type="radio" name="estrellas" value="5">
-                                                    <label class="labelTamanio" for="radio1">★</label>
-                                                    <input id="radio2" type="radio" name="estrellas" value="4">
-                                                    <label class="labelTamanio" for="radio2">★</label>
-                                                    <input id="radio3" type="radio" name="estrellas" value="3" checked>
-                                                    <label class="labelTamanio" for="radio3">★</label>
-                                                    <input id="radio4" type="radio" name="estrellas" value="2">
-                                                    <label class="labelTamanio" for="radio4">★</label>
-                                                    <input id="radio5" type="radio" name="estrellas" value="1">
-                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                    <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelstyle" for="radio1">★</label>
+                                                    <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelstyle" for="radio2">★</label>
+                                                    <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3" checked>
+                                                    <label class="labelstyle" for="radio3">★</label>
+                                                    <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelstyle" for="radio4">★</label>
+                                                    <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelstyle" for="radio5">★</label>
                                                 @endif
                                                 @if($raiting->estrella == 2)
-                                                    <input id="radio1" type="radio" name="estrellas" value="5">
-                                                    <label class="labelTamanio" for="radio1">★</label>
-                                                    <input id="radio2" type="radio" name="estrellas" value="4">
-                                                    <label class="labelTamanio" for="radio2">★</label>
-                                                    <input id="radio3" type="radio" name="estrellas" value="3">
-                                                    <label class="labelTamanio" for="radio3">★</label>
-                                                    <input id="radio4" type="radio" name="estrellas" value="2" checked>
-                                                    <label class="labelTamanio" for="radio4">★</label>
-                                                    <input id="radio5" type="radio" name="estrellas" value="1">
-                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                    <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelstyle" for="radio1">★</label>
+                                                    <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelstyle" for="radio2">★</label>
+                                                    <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelstyle" for="radio3">★</label>
+                                                    <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2" checked>
+                                                    <label class="labelstyle" for="radio4">★</label>
+                                                    <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
+                                                    <label class="labelstyle" for="radio5">★</label>
                                                 @endif
                                                 @if($raiting->estrella == 1)
-                                                    <input id="radio1" type="radio" name="estrellas" value="5">
-                                                    <label class="labelTamanio" for="radio1">★</label>
-                                                    <input id="radio2" type="radio" name="estrellas" value="4">
-                                                    <label class="labelTamanio" for="radio2">★</label>
-                                                    <input id="radio3" type="radio" name="estrellas" value="3">
-                                                    <label class="labelTamanio" for="radio3">★</label>
-                                                    <input id="radio4" type="radio" name="estrellas" value="2">
-                                                    <label class="labelTamanio" for="radio4">★</label>
-                                                    <input id="radio5" type="radio" name="estrellas" value="1" checked>
-                                                    <label class="labelTamanio" for="radio5">★</label>
+                                                    <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
+                                                    <label class="labelstyle" for="radio1">★</label>
+                                                    <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
+                                                    <label class="labelstyle" for="radio2">★</label>
+                                                    <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
+                                                    <label class="labelstyle" for="radio3">★</label>
+                                                    <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
+                                                    <label class="labelstyle" for="radio4">★</label>
+                                                    <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1" checked>
+                                                    <label class="labelstyle" for="radio5">★</label>
                                                 @endif
 
                                             </p>
