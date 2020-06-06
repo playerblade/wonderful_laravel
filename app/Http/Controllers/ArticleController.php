@@ -7,6 +7,7 @@ use App\Category;
 use App\Charts\BarChart;
 use App\Color;
 use App\ColorArticle;
+use App\ImageArticle;
 use App\Maker;
 use App\PriceArticle;
 use App\SubCategory;
@@ -62,9 +63,6 @@ class ArticleController extends Controller
         // $articles = request()->all();
 
         // return response()->json($articles);
-
-        // $articles = request()->except('_token');
-        $request->except('_token');
 //            $request->validate([
 //                'sub_category_id' => 'required',
 //                'title' => 'required|max:250|string|regex:/^.+@.+$/i',
@@ -76,44 +74,53 @@ class ArticleController extends Controller
 //                'is_current' => 'required|boolean',
 //            ]);
 
-//            $article =  Article::create($request->all());
             $article =  new Article();
             $article->sub_category_id = $request->sub_category_id;
             $article->maker_id = $request->maker_id;
             $article->title = $request->title;
             $article->description = $request->description;
             $article->stock = $request->stock;
+            $article->stock = 0;
             $article->save();
-            // dd($article->id);
 
-            // $color =  ColorArticle::create($request->all());
-//            $color = new ColorArticle();
-
-//            $color->article_id = $article->id;
-//            $color->color_id = $request->input('color_id');
-            // dd($color);
             $colorAssings = [];
             foreach ($request->input('color_id') as $color_id){
-                $colorAssings[] = [
+                $data = [
                     'article_id' => $article->id,
                     'color_id' => $color_id,
                     'quantity' => 1,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s"),
                 ];
+                array_push($colorAssings,$data);
             }
+            DB::table('color_articles')->insert($colorAssings);
 
             $price  = new PriceArticle();
             $price->article_id = $article->id;
             $price->price = $request->input('price');
             $price->is_current = 1;
-
-//            $color->save();
-            ColorArticle::insert($colorAssings);
             $price->save();
-            // dd($color);
 
+            $image_articles = new ImageArticle();
+            $image_articles->article_id = $article->id;
+            if ($request->hasFile('url_image')) {
+                $file = $request->file("url_image");
+                $fileName = $file->getFilename();
+                $file->move(public_path("imagenes/imagenes_articulos/", $fileName));
+                $image_articles->url_image = $fileName;
+            }
+            $image_articles->is_main = 1;
+            $image_articles->save();
 
+            $quantity_color = DB::table('color_articles')
+            ->where('color_articles.article_id','=',$article->id)
+//            ->sum('color_articles.quantity')
+            ->select(DB::raw("SUM(color_articles.quantity) as sum_quantity"))->first();
+
+            DB::table('articles')
+            ->where('id',$article->id)
+            ->update(['stock' => $quantity_color->sum_quantity]);
 
             return redirect()->route('articles.index')
             ->with('success','Product created successfully.');

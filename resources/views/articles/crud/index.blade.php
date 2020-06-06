@@ -153,13 +153,13 @@
                                                                         </div>
                                                                     </div>
                                                                     <!-- /.form-group -->
-                        {{--                                        <div class="form-group">--}}
-                        {{--                                            <strong for="customFile">Imagen:</strong>--}}
-                        {{--                                            <div class="custom-file">--}}
-                        {{--                                              <input type="file" class="custom-file-input" id="customFile">--}}
-                        {{--                                              <label class="custom-file-label" for="customFile">Choose file</label>--}}
-                        {{--                                            </div>--}}
-                        {{--                                        </div>--}}
+{{--                                                                    <div class="form-group">--}}
+{{--                                                                        <strong for="customFile">Imagen:</strong>--}}
+{{--                                                                        <div class="custom-file">--}}
+{{--                                                                          <input type="file" name="url_image" class="custom-file-input" id="customFile">--}}
+{{--                                                                          <label class="custom-file-label" for="customFile">Choose file</label>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
                                                                     <div class="form-group">
                                                                         <strong>Precio:</strong>
                                                                         <div class="row">
@@ -214,7 +214,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('articles.store') }}" method="POST">
+                        <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <!-- SELECT2 EXAMPLE -->
@@ -246,10 +246,10 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <strong>Stock:</strong>
-                                            <input type="number" name="stock" class="form-control" placeholder="Stock" required>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <strong>Stock:</strong>--}}
+{{--                                            <input type="number" name="stock" class="form-control" placeholder="Stock" required>--}}
+{{--                                        </div>--}}
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-6">
@@ -274,13 +274,13 @@
                                             </div>
                                         </div>
                                         <!-- /.form-group -->
-{{--                                        <div class="form-group">--}}
-{{--                                            <strong for="customFile">Imagen:</strong>--}}
-{{--                                            <div class="custom-file">--}}
-{{--                                              <input type="file" class="custom-file-input" id="customFile">--}}
-{{--                                              <label class="custom-file-label" for="customFile">Choose file</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="form-group">
+                                            <strong for="customFile">Imagen:</strong>
+                                            <div class="custom-file">
+                                                <input type="file" name="url_image" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <strong>Precio:</strong>
                                              <div class="row">

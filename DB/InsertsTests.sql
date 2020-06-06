@@ -27,6 +27,20 @@ create database payment_online;
                   select o.id as order_id
                   from orders o ;
 
+                  ---------
+                 select u.first_name , ca.comment , s.star
+                 from commentary_articles ca inner join users u on ca.user_id = u.id
+                      inner join raiting_articles ra on ra.user_id = u.id
+                      inner join stars s on ra.star_id = s.id
+                 where ca.article_id = 1
+                 and ra.article_id = 1;
+
+                 ----------
+
+                 select sum(ca.quantity) , a.stock
+                 from color_articles ca inner join articles a on ca.article_id = a.id
+                 where a.id = 1;
+
 use wonderful_laravel;
 -- inserts categorias
 insert into categories (category, created_at, updated_at) values ('Electronicos','2019-05-02 04:54:11', '2019-05-02 04:54:11');

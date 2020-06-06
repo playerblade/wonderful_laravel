@@ -54,7 +54,7 @@ class OrderController extends Controller
             ->where('colors.image',[$request->color_article])
             ->select('colors.*')->get();
 
-        $quantity=DB::table('color_articles')
+        $quantity = DB::table('color_articles')
             ->join('colors','color_articles.color_id','=','colors.id')
             ->join('articles','color_articles.article_id','=','articles.id')
             ->where('color_articles.color_id',[$colors[0]->id])
@@ -106,7 +106,7 @@ class OrderController extends Controller
                 ->where('colors.image',[$request->color_article])
                 ->select('colors.*')->get();
 
-                $quantity=DB::table('color_articles')
+                $quantity = DB::table('color_articles')
                 ->join('colors','color_articles.color_id','=','colors.id')
                 ->join('articles','color_articles.article_id','=','articles.id')
                 ->where('color_articles.color_id',[$colors[0]->id])
@@ -118,7 +118,16 @@ class OrderController extends Controller
                 ->join('articles','color_articles.article_id','=','articles.id')
                 ->where('color_articles.color_id',[$colors[0]->id])
                 ->where('article_id',[$request->article_id])
-                ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
+                ->update(['color_articles.quantity'=> $quantity[0]->quantity - $request->quantity]);
+
+                $stock = DB::table('articles')
+                    ->where('id',[$request->article_id])
+                    ->select('stock')
+                    ->first();
+
+                DB::table('articles')
+                ->where('id',[$request->article_id])
+                ->update(['stock'=> $stock->stock - $request->quantity]);
             }
 
             $status_order = new StatusOrder();
@@ -267,12 +276,16 @@ class OrderController extends Controller
             ->where('orders.user_id',Auth::user()->id)->first();
 //        dd($orders_validation);
 //        list raiting and commentary article
-        $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
-                        ->join('users','commentary_articles.user_id','=','users.id')
-                        ->join('raiting_articles','articles.id','=','raiting_articles.article_id')
+        $commentaries = DB::table('commentary_articles')->join('users','commentary_articles.user_id','=','users.id')
+                        ->join('raiting_articles','raiting_articles.user_id','=','users.id')
+                        ->join('stars','raiting_articles.star_id','=','stars.id')
                         ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
-                        ->where('articles.id',$article_id)
+                        ->where('commentary_articles.article_id',$article_id)
+                        ->where('raiting_articles.article_id',$article_id)
+                        ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at')
                         ->orderBy('commentary_articles.created_at','desc')->get();
+
+//        dd($commentaries);
 
         $raitings = DB::select(
             "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
@@ -557,21 +570,30 @@ class OrderController extends Controller
         ->where('order_id',$order_id)
         ->where('colors.image',$request->color)->get();
 
-//        return response()->json($colors);
-//        dd($colors[0]);
         DB::table('color_articles')
         ->where('article_id',$colors[0]->article_id)
         ->where('color_id',$colors[0]->color_id)
         ->update(['quantity' => $colors[0]->quantity + $request->quantity]);
 
+        $stock = DB::table('articles')
+            ->where('id',[$colors[0]->article_id])
+            ->select('stock')
+            ->first();
+//        dd($stock);
+//        dd($request->quantity);
+        DB::table('articles')
+            ->where('id',[$colors[0]->article_id])
+            ->update(['stock'=> $stock->stock + $request->quantity]);
+
+
         DB::connection('db1')->table('bank_accounts')
-            ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
-            ->where('first_name',$request->first_name)
-            ->update(['amount' => $request->amount_bank_account + $request->monto_total_transaction]);
+        ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+        ->where('first_name',$request->first_name)
+        ->update(['amount' => $request->amount_bank_account + $request->monto_total_transaction]);
 
         DB::connection('mysql')->table('orders')
-                                     ->where('orders.id',$order_id)
-                                     ->update(['orders.active' => 0]);
+        ->where('orders.id',$order_id)
+        ->update(['orders.active' => 0]);
 
         return redirect()->route('user_orders',['user_id' => Auth::user()->id]);
     }

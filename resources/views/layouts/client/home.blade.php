@@ -76,8 +76,22 @@
                                             <h4>Price :{{$article->price}}</h4>
                                             <p>!Compra ahora!!!</p>
                                         </div>
+                                            @if($article->stock >= 1)
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-success text-lg">
+                                                        Available
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-danger text-lg">
+                                                        Exhausted
+                                                    </div>
+                                                </div>
+                                            @endif
                                         <div class="col-4">
-                                            {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
+                                            <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
+                                            <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
                                         </div>
                                         <br><br><br>

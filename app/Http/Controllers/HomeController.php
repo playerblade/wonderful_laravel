@@ -43,8 +43,8 @@ class HomeController extends Controller
             ->where('price_articles.is_current','=',1)
             ->where('image_articles.is_main','=',1)
             ->where('categories.id','=',1)
-            ->select('articles.id','articles.title','makers.name','image_articles.url_image','price_articles.price')
-//                    ->get();
+            ->select('articles.id','articles.title','articles.stock','makers.name','image_articles.url_image','price_articles.price')
+            ->orderBy('articles.title','asc')
             ->paginate(5);
 
         $order_for_collaborator = DB::select("

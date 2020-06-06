@@ -39,31 +39,21 @@ class CommentaryArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $stars = DB::table('stars')
-            ->where('id','=',[$request->estrellas])
-            ->select('stars.id')
-            ->first();
-//             dd($stars);
 
         $raitingArticles = new RaitingArticle();
         $raitingArticles->article_id = $request->article_id;
-        $raitingArticles->user_id = $request->user_id;
-        $raitingArticles->star_id = $stars->id;
+        $raitingArticles->user_id = Auth::user()->id;
+        $raitingArticles->star_id = $request->star;
         $raitingArticles->save();
-
 
         // dd($request->estrellas);
         $comentario = new CommentaryArticle();
         $comentario->article_id = $request->article_id;
-        $comentario->user_id = $request->user_id;
+        $comentario->user_id = Auth::user()->id;
         $comentario->comment = $request->comment;
         $comentario->is_main = 1;
-
         $comentario->save();
 
-        // return redirect()->route('user_orders')->with('success','s');
-//        return redirect()->route('user_orders',['user_id' => $request->user_id])
-//        ->with('success','Comentario enviado exitosamente');
         return back()->with('success','Comentario enviado exitosamente');
     }
 
@@ -117,6 +107,6 @@ class CommentaryArticleController extends Controller
     {
         //
     }
-    
+
 
 }

@@ -42,14 +42,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <label>Makers</label>
-{{--                                <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>--}}
-{{--                                    <option selected >Select a maker</option>--}}
-{{--                                    @foreach($makers as $maker)--}}
-{{--                                        <option value="{{$maker->id}}">{{$maker->name}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
                                 <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-
+{{--                                        code js--}}
                                 </select>
                             </div>
                         </div>
@@ -69,7 +63,6 @@
                         </div>
                     </div>
                     <div id="content_hidden" class="card-header small">
-{{--                        <hr>--}}
                         @foreach($articles as $article)
                             <div class="row">
                                 <div class="col-4">
@@ -84,10 +77,23 @@
                                             <h4>Price :{{$article->price}}</h4>
                                             <p>!Compra ahora!!!</p>
                                         </div>
+                                            @if($article->stock >= 1)
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-success text-lg">
+                                                        Available
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-danger text-lg">
+                                                        Exhausted
+                                                    </div>
+                                                </div>
+                                            @endif
                                         <div class="col-4">
-                                            {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
+                                            <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
+                                            <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
-                                            <h5 class="mt-3"><b>Raiting:</b><br></h5>
                                         </div>
                                         <br><br><br>
                                         <a href="/login" class="btn bg-gradient-primary btn-sm float-right">Añadir al carrito</a>
@@ -147,15 +153,17 @@
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
                                 "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                            </div>\n" +
-                                "                            <hr>\n" +
-                                "                            <hr>");
+                                "                 </div>\n" +
+                                "                 <hr>\n" +
+                                "                 <hr>");
                         });
                         // $('#content').append("<div class='card-link'>"+articles.link()+"</div>");
 
