@@ -176,7 +176,7 @@ class OrderController extends Controller
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
-                   od.sub_total as subTotal, pa.price as precio , od.created_at as fecha,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
                    ia.url_image as imagen, od.id as id
             from users u inner join orders o on u.id = o.user_id
                   inner join order_details od on o.id = od.order_id
@@ -522,8 +522,8 @@ class OrderController extends Controller
 
     public function paymentMethods($order_id){
         $orders = DB::select("
-            select o.id as order_id ,tf.id  as transport_fares_id , c.id as city_id , u.id as user_id,
-                   c.city as city , tf.price as price, o.total_amount as total_amount
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
             from users u inner join orders o on u.id = o.user_id
                  inner join transport_fares tf on o.transport_fares_id = tf.id
                  inner join cities c on tf.city_id = c.id
@@ -533,8 +533,8 @@ class OrderController extends Controller
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
-                   od.sub_total as subTotal, pa.price as precio , od.created_at as fecha,
-                   ia.url_image as imagen
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   ia.url_image as imagen , od.id as id
             from users u inner join orders o on u.id = o.user_id
                   inner join order_details od on o.id = od.order_id
                   inner join articles a on od.article_id = a.id
@@ -579,17 +579,20 @@ class OrderController extends Controller
             ->where('id',[$colors[0]->article_id])
             ->select('stock')
             ->first();
-//        dd($stock);
-//        dd($request->quantity);
+
         DB::table('articles')
             ->where('id',[$colors[0]->article_id])
             ->update(['stock'=> $stock->stock + $request->quantity]);
 
+        $amount_bank_account = DB::connection('db1')->table('bank_accounts')
+        ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+        ->where('first_name',$request->first_name)
+        ->select('bank_accounts.amount')->first();
 
         DB::connection('db1')->table('bank_accounts')
         ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
         ->where('first_name',$request->first_name)
-        ->update(['amount' => $request->amount_bank_account + $request->monto_total_transaction]);
+        ->update(['amount' => $amount_bank_account->amount + $request->monto_total_transaction]);
 
         DB::connection('mysql')->table('orders')
         ->where('orders.id',$order_id)

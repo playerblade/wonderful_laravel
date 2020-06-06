@@ -3,102 +3,161 @@
     <br>
     <div class="container">
         <div class="row">
-            <!-- /.col-md-6 -->
-            <div class="col-lg-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="card-title m-0 float-left"><b>Monto Total: </b> {{$totalAmounts[0]->montoTotal}}</h5>
-                                <h5 class="card-title m-0 float-right">
-                                    <b>
-                                        {{ Auth::user()->first_name }}
-                                        {{ Auth::user()->last_name }}
-                                        {{ Auth::user()->mother_last_name }}
-                                    </b>
-                                </h5>
-                            </div>
+            <div class="col-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-info"></i> Nota:</h5>
+                    Asegurese de ingresar adecuadamente su direccion, la ciudad y el forma de envio que desee. !!!
+                </div>
+                <!-- Main content -->
+                <div class="invoice p-3 mb-3 card-purple card-outline">
+                    <!-- title row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fas fa-globe"></i> WonderFUL, Web.
+                                <small class="float-right"><b>Fecha:</b> {{Carbon\Carbon::parse($order_details[0]->fecha)->isoFormat('LLL')}}</small>
+                            </h4>
                         </div>
+                        <!-- /.col -->
                     </div>
-                    
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <table class="table table-striped elevation-2">
-                                    <thead>
+                    <!-- info row -->
+                    <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                            From
+                            <address>
+                                <strong>Admin, WonderFUL</strong>
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            To
+                            <address>
+                                <strong>
+                                    {{ Auth::user()->first_name }}
+                                    {{ Auth::user()->last_name }}
+                                    {{ Auth::user()->mother_last_name }}
+                                </strong><br>
+                                Phone: (+591) {{Auth::user()->phone_number}}<br>
+                                User: {{Auth::user()->user}}<br>
+                                Birthday: {{Carbon\Carbon::parse(Auth::user()->birthday)->isoFormat('LL')}}
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                            <br>
+                            <b>Numero de Orden:</b> {{$order_details[0]->order_id}}
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Articulo</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Color</th>
+                                    <th>Sub Total</th>
+                                    {{--                                    <th class="text-right">Opciones</th>--}}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($order_details as $order_detail)
                                     <tr>
-                                        <th>Articulo</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
-                                        <th>Color</th>
-                                        <th>Sub Total</th>
-                                        <th class="text-right">Opciones</th>
+                                        <td>{{$order_detail->articulo}}</td>
+                                        <td>{{$order_detail->precio}}</td>
+                                        <td>{{$order_detail->cantidad}}</td>
+                                        <td>
+                                            <img src="{{asset('/imagenes/imagenes_articulos/'.$order_detail->color)}}" alt="" class="img-circle fa-2x" style="width: 35px; height: 35px;">
+                                        </td>
+                                        <td>${{$order_detail->subTotal}}</td>
+                                        {{--                                        <td class="py-0 align-middle text-right">--}}
+                                        {{--                                            <form action="{{ route('order_details.destroy',$order_detail->id) }}" method="POST">--}}
+                                        {{--                                                <div class="btn-group btn-group-sm">--}}
+                                        {{--                                                    @csrf--}}
+                                        {{--                                                    @method('DELETE')--}}
+                                        {{--                                                    <button type="submit" class="btn btn-warning"><i class="fas fa-trash"></i> Quitar Articulo</button>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                            </form>--}}
+                                        {{--                                        </td>--}}
                                     </tr>
-                                    </thead>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-5">
+                            <p><b>Monto de:</b> {{Carbon\Carbon::parse($order_details[0]->fecha)->isoFormat('LLLL')}}</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
                                     <tbody>
-                                    @foreach($order_details as $order_detail)
-                                        <tr>
-                                            <td>{{$order_detail->articulo}}</td>
-                                            <td>{{$order_detail->precio}}</td>
-                                            <td>{{$order_detail->cantidad}}</td>
-                                            <td>
-                                                <img src="{{asset('/imagenes/imagenes_articulos/'.$order_detail->color)}}" alt="" class="img-circle fa-2x" style="width: 35px; height: 35px;">
-                                            </td>
-                                            <td>{{$order_detail->subTotal}}</td>
-                                            <td class="py-0 align-middle text-right">
-                                                <form action="{{ route('order_details.destroy',$order_detail->id) }}" method="POST">
-                                                    <div class="btn-group btn-group-sm">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Quitar Articulo</button> 
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tr>
+                                        <th style="width:50%">Subtotal:</th>
+                                        <td>${{$totalAmounts[0]->montoTotal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td>${{$totalAmounts[0]->montoTotal}}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <form action="{{route('orders.update',$order->id)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="row">
-                                <div class="col-4">
-                                    <strong>Ciudad</strong>
-                                    <select id="cities" name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                        <option value="">Seleccione un ciudad</option>
-                                        @foreach($cities as $city)
-                                            <option value="{{$city->id}}">{{$city->city}}</option>
+                        <!-- /.col -->
+                        <div class="col-7">
+                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                            <form action="{{route('orders.update',$order->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong>Ciudad</strong>
+                                        <select id="cities" name="city_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                            <option value="">Seleccione un ciudad</option>
+                                            @foreach($cities as $city)
+                                                <option value="{{$city->id}}">{{$city->city}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>Costo de envio</strong>
+                                        <select id="transport_fare" name="transport_fares_id"  class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                            {{--                                        json code--}}
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <strong>Direccion</strong>
+                                        <input type="text" class="form-control" name="location" placeholder="Lugar, Calle, Numero de casa" required>
+                                        @foreach($orders as $order)
+                                            <input hidden type="text" name="user_id" value="{{$order->user_id}}">
+                                            <input hidden type="text" name="total_amount" value="{{$order->total_amount + $totalAmounts[0]->montoTotal}}" >
                                         @endforeach
-                                    </select>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <strong>Direccion</strong>
-                                    <input type="text" class="form-control" name="location" placeholder="Lugar, Calle, Numero de casa" required>
+                                <hr>
+                                <div class="form-group">
+                                    <button class="btn btn-success float-right">Proceder con forma de pago!!!</button>
                                 </div>
-                                <div class="col-4">
-                                    <strong>Costo</strong>
-                                    <select id="transport_fare" name="transport_fares_id"  class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-{{--                                        json code--}}
-                                    </select>
-                                </div>
-                                @foreach($orders as $order)
-                                    <input hidden type="text" name="user_id" value="{{$order->user_id}}">
-                                    <input hidden type="text" name="total_amount" value="{{$order->total_amount + $totalAmounts[0]->montoTotal}}" >
-                                @endforeach
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                {{--                            <a href="/more/{{$order_details[0]->order_id}}/article" class="btn btn-info float-left">Añadir Mas Articulos</a>--}}
-                                {{--                            <a href="/payment/methods/{{$order_details[0]->order_id}}/{{$orders[0]->transport_fares_id}}/{{$orders[0]->user_id}}" class="btn btn-danger float-right">Proceder con forma de pago!!!</a>--}}
-                                <button class="btn btn-danger float-right">Proceder con forma de pago!!!</button>
-                            </div>
-                        </form>
+                            </form>
+                            </p>
+                        </div>
+                        <!-- /.col -->
                     </div>
+                    <!-- /.row -->
                 </div>
+                <!-- /.invoice -->
             </div>
-            <!-- /.col-md-6 -->
+            <!-- /. col-12 -->
         </div>
         <!-- /.row -->
     </div>

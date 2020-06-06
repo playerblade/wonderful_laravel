@@ -128,7 +128,7 @@ insert into cities (city) values ('Beni');
 -- insert into transport_fares (city_id, price, end_date, shiping, created_at) values (9,30 , '2019-07-06 22:20:04',0,curdate());
 
 -- inserts oficiales
--- inserts tarifa transporte bus
+-- inserts tarifa transporte normal
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (1,120, '2019-06-27 20:45:31',  0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (2,50, '2019-05-10 13:01:40', 0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (3,30, '2019-09-24 08:12:06',  0,curdate());
@@ -139,7 +139,7 @@ insert into transport_fares (city_id, price, end_date, shiping, created_at) valu
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (8,70 , '2019-11-24 17:06:03',0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (9,100 , '2019-07-06 22:20:04',0,curdate());
 
--- inserts tarifa transporte vuelo
+-- inserts tarifa transporte rapido
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (1,240, '2019-06-27 20:45:31',  1,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (2,100, '2019-05-10 13:01:40', 1,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (3,60, '2019-09-24 08:12:06',  1,curdate());
