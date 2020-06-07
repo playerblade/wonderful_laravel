@@ -25,7 +25,7 @@
                             <h4></h4>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>Numero de Orden</th>

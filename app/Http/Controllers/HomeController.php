@@ -47,7 +47,7 @@ class HomeController extends Controller
             ->orderBy('articles.title','asc')
             ->paginate(5);
 
-        $order_for_collaborator = DB::select("
+        $order_for_users_system = DB::select("
                     select o.id as order_id ,
                       po.process_order as estado, po.id as process_order_id,
                       o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
@@ -58,22 +58,6 @@ class HomeController extends Controller
                         inner join process_orders po on so.process_order_id = po.id
                         inner join orders o on so.order_id = o.id
                         inner join users c on o.user_id = c.id
-                    where po.id = 1 or po.id = 2
-                    order by o.created_at desc;
-        ");
-
-        $order_for_checker = DB::select("
-                    select o.id as order_id ,
-                      po.process_order as estado, po.id as process_order_id,
-                      o.created_at as fechaOrden , concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as usuario,
-                      r.id as role_id, o.active as active
-                    from roles r inner join users u on r.id = u.role_id
-		                inner join user_status_orders uso on u.id = uso.user_id
-                        inner join status_orders so on uso.status_order_id = so.id
-                        inner join process_orders po on so.process_order_id = po.id
-                        inner join orders o on so.order_id = o.id
-                        inner join users c on o.user_id = c.id
-                    where po.id = 3 or po.id = 4
                     order by o.created_at desc;
         ");
 
@@ -82,9 +66,9 @@ class HomeController extends Controller
         if ($request->user()->hasRole('administrador')) {
             return view('layouts.admin.home',compact('user'));
         }elseif($request->user()->hasRole('colaborador')){
-            return view('layouts.collaborator.home',compact('user','order_for_collaborator'));
+            return view('layouts.collaborator.home',compact('user','order_for_users_system'));
         }elseif($request->user()->hasRole('verificador')){
-            return view('layouts.checker.home',compact('user','order_for_checker'));
+            return view('layouts.checker.home',compact('user','order_for_users_system'));
         }elseif($request->user()->hasRole('cliente')){
             return view('layouts.client.home',compact('user','articles','categories','makers'));
         }else{

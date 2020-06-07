@@ -34,7 +34,16 @@
     <link rel="stylesheet" href="{{asset("/admin-lte/dist/css/adminlte.min.css")}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+        .img-background{
+            background-image: url("{{asset("/imagenes/backgrounds/13.jpg")}}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #0e2231;
+        }
+    </style>
 </head>
     <body class="hold-transition layout-top-nav">
         @extends('layouts.client.menu')

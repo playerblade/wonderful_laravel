@@ -608,4 +608,82 @@ class OrderController extends Controller
             ->update(['orders.active' => 1]);
         return redirect()->back();
     }
+
+    public function orderInvoice($order_id){
+        $orders = DB::select("
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
+            from users u inner join orders o on u.id = o.user_id
+                 inner join transport_fares tf on o.transport_fares_id = tf.id
+                 inner join cities c on tf.city_id = c.id
+            where o.id = $order_id;
+        ");
+
+        $cities = City::all();
+        $order_details = DB::select("
+            select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   a.description as description , od.id as id
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join image_articles as ia on ia.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+            and o.id = $order_id
+            -- and o.id = 14
+            and ia.is_main = 1
+            and pa.is_current = 1
+        ");
+
+        $totalAmounts = DB::select("
+            select o.id as order_id, sum(od.sub_total) as montoTotal
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+                  and o.id= $order_id
+                  and pa.is_current = 1
+            group by o.id , u.id;
+        ");
+        return view('invoice.invoice',compact('order_details','orders','cities','totalAmounts'));
+    }
+
+    public function orderInvoicePrint($order_id){
+        $orders = DB::select("
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
+            from users u inner join orders o on u.id = o.user_id
+                 inner join transport_fares tf on o.transport_fares_id = tf.id
+                 inner join cities c on tf.city_id = c.id
+            where o.id = $order_id;
+        ");
+
+        $cities = City::all();
+        $order_details = DB::select("
+            select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   a.description as description , od.id as id
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join image_articles as ia on ia.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+            and o.id = $order_id
+            -- and o.id = 14
+            and ia.is_main = 1
+            and pa.is_current = 1
+        ");
+
+        $totalAmounts = DB::select("
+            select o.id as order_id, sum(od.sub_total) as montoTotal
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+                  and o.id= $order_id
+                  and pa.is_current = 1
+            group by o.id , u.id;
+        ");
+        return view('invoice.invoicePrint',compact('order_details','orders','cities','totalAmounts'));
+    }
 }

@@ -5,7 +5,7 @@
         <div class="row">
             <!-- /.col-md-6 -->
             <div class="col-lg-12">
-                <div class="card card-primary card-outline">
+                <div class="card card-primary card-outline elevation-5">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-12">
@@ -51,7 +51,7 @@
                                                         <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                     @endif
                                                 @endif
-                                                <td>{{$order->fechaOrden}}</td>
+                                                <td>{{Carbon\Carbon::parse($order->fechaOrden)->isoFormat('LLL')}}</td>
                                                 @if($order->estado == 'inicial')
                                                     <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
                                                 @else
@@ -73,7 +73,7 @@
                                                         <td style="opacity: .4;"><span class="right badge badge-primary">{{$order->estado}}</span></td>
                                                     @endif
                                                 @endif
-                                                <td style="opacity: .4;">{{$order->fechaOrden}}</td>
+                                                <td style="opacity: .4;">{{Carbon\Carbon::parse($order->fechaOrden)->isoFormat('LLL')}}</td>
                                                 @if($order->estado == 'inicial')
                                                     <td style="opacity: .4;"><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
                                                 @else

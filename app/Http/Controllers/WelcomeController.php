@@ -29,7 +29,7 @@ class WelcomeController extends Controller
             ->where('categories.id','=',1)
             ->select('articles.id','articles.title','articles.stock','makers.name','image_articles.url_image','price_articles.price')
             ->orderBy('articles.title','asc')
-            ->paginate(5);
+            ->paginate(3);
 //        dd($articles);
 //        return response()->json($articles);
 
@@ -116,7 +116,7 @@ class WelcomeController extends Controller
 //            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
             $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
+                       pa.price as price , a.id as id, a.stock as stock
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join sub_categories sc on a.sub_category_id = sc.id
                     inner join price_articles pa on a.id = pa.article_id
@@ -127,7 +127,7 @@ class WelcomeController extends Controller
                 order by articulo asc;
             ");
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
+                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image,$article->stock];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
@@ -139,7 +139,7 @@ class WelcomeController extends Controller
 //            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
             $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
+                       pa.price as price , a.id as id , a.stock as stock
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join sub_categories sc on a.sub_category_id = sc.id
                     inner join price_articles pa on a.id = pa.article_id
@@ -151,7 +151,7 @@ class WelcomeController extends Controller
                 order by articulo asc;
             ");
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
+                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image,$article->stock];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
@@ -187,7 +187,7 @@ class WelcomeController extends Controller
                 ->orderBy('title','asc')->get();
 
             foreach ($articles as $article) {
-                $articles_array[$article->title] = [$article->id,$article->url_image,$article->price,$article->name];
+                $articles_array[$article->title] = [$article->id,$article->url_image,$article->price,$article->name,$article->stock];
             }
 
             return response()->json($articles_array);

@@ -245,6 +245,14 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::resource('comentaries',
         'CommentaryArticleController'
     );
+
+    Route::get('/client/invoice/{order_id}/order',
+        'OrderController@orderInvoice'
+    );
+
+    Route::get('invoice/print/{order_id}/order',
+        'OrderController@orderInvoicePrint'
+    );
 });
 
 Route::group(['middleware' => 'web','role:colaborador'], function () {

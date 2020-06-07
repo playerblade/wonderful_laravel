@@ -65,10 +65,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($order_for_checker as $order)
+                                @foreach($order_for_users_system as $order)
                                     <tr>
                                         @if($order->active == 1)
                                             <th class="text-center">{{$order->order_id}}</th>
+                                            @if($order->estado == 'initial')
+                                                <td><span class="right badge badge-secondary">{{$order->estado}}</span></td>
+                                            @endif
+                                            @if($order->estado == 'process')
+                                                <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
+                                            @endif
                                             @if($order->estado == 'dispatched')
                                                 <td><span class="right badge badge-info">{{$order->estado}}</span></td>
                                             @endif
@@ -76,7 +82,11 @@
                                                 <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                             @endif
                                             <td>{{$order->fechaOrden}}</td>
-                                            <td>{{$order->usuario}}</td>
+                                            @if($order->estado == 'initial')
+                                                <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>
+                                            @else
+                                                <td>{{$order->usuario}}</td>
+                                            @endif
 
                                         @else
                                             <th style="opacity: .4" class="text-center"><span class="right badge badge-danger">{{$order->order_id}}</span></th>

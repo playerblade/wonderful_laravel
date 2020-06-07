@@ -41,7 +41,7 @@
 
     <!-- Default box -->
     <div class="container">
-        <div class="card card-primary card-outline">
+        <div class="card card-primary card-outline elevation-5">
             <div class="row">
                 <div class="col-12">
                     <form action="{{route('orders.store')}}" method="POST">

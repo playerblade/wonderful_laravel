@@ -4,12 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="callout callout-info">
+                <div class="callout callout-info elevation-3">
                     <h5><i class="fas fa-info"></i> Nota:</h5>
                     Asegurese de ingresar adecuadamente su direccion, la ciudad y el forma de envio que desee. !!!
                 </div>
                 <!-- Main content -->
-                <div class="invoice p-3 mb-3 card-purple card-outline">
+                <div class="invoice p-3 mb-3 card-purple card-outline elevation-5">
                     <!-- title row -->
                     <div class="row">
                         <div class="col-12">
@@ -146,7 +146,7 @@
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                    <button class="btn btn-success float-right">Proceder con forma de pago!!!</button>
+                                    <button class="btn btn-success btn-sm float-right">Proceder con forma de pago!!!</button>
                                 </div>
                             </form>
                             </p>
