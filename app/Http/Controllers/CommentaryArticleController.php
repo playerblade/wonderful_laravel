@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\CommentaryArticle;
 use App\RaitingArticle;
-use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -89,11 +88,15 @@ class CommentaryArticleController extends Controller
     public function update(Request $request, CommentaryArticle $commentaryArticle)
     {
         // dd($request->all());
-        $commentaryArticle->article_id = $request->article_id;
-        $commentaryArticle->user_id = $request->user_id;
-        $commentaryArticle->comment = $request->comment;
-        $commentaryArticle->is_main = 1;
-        $commentaryArticle->update();
+        // $commentaryArticle->article_id = $request->article_id;
+        // $commentaryArticle->user_id = $request->user_id;
+        // $commentaryArticle->comment = $request->comment;
+        // $commentaryArticle->is_main = 1;
+        // $commentaryArticle->update();
+        // dd($commentaryArticle->update());
+        DB::table('commentary_articles')->where('article_id',$request->article_id)->where('user_id',$request->user_id)
+            ->update(['comment' => $request->comment]);
+
         return back();
     }
 

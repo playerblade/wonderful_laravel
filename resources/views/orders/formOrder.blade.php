@@ -2,28 +2,42 @@
 @section('content')
 
     <style>
-        labelstyle[type="radio"] {
-            display: none;
-        }
+        #form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
 
-        .labelstyle {
-            font-size: 35px;
-            color: grey;
-        }
+#form p {
+  text-align: center;
+}
 
-        .clasificacion1 {
-            direction: rtl;
-            unicode-bidi: bidi-override;
-        }
+#form label {
+  font-size: 20px;
+}
 
-        labelstyle:hover,
-        labelstyle:hover ~ label {
-            color: orange;
-        }
+input[type="radio"] {
+  display: none;
+}
 
-        #inputstyle[type="radio"]:checked ~ label {
-            color: orange;
-        }
+label {
+  color: grey;
+  font-size: 50px;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -167,21 +181,21 @@
                         <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                             @if($orders_validation)
                                 <div class="post">
-                                    <form action="{{ route('comentaries.store') }}" method="POST">
+                                    <form action="{{ route('commentaries.store') }}" method="POST">
                                         @csrf
                                         <div id="raiting" class="small">
                                             <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                            <p class="clasificacion1">
-                                                <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
-                                                <label class="labelstyle" for="radio1">★</label>
-                                                <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
-                                                <label class="labelstyle" for="radio2">★</label>
-                                                <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
-                                                <label class="labelstyle" for="radio3">★</label>
-                                                <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
-                                                <label class="labelstyle" for="radio4">★</label>
-                                                <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
-                                                <label class="labelstyle" for="radio5">★</label>
+                                            <p class="clasificacion">
+                                                <input id="radio1" type="radio" name="star" value="5"><!--
+                                                --><label for="radio1">★</label><!--
+                                                --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                --><label for="radio2">★</label><!--
+                                                --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                --><label for="radio3">★</label><!--
+                                                --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                --><label for="radio4">★</label><!--
+                                                --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                --><label for="radio5">★</label>
                                             </p>
                                         </div>
                                         <div id="comentary" class="small">
@@ -208,32 +222,20 @@
                                         </p>
 
                                         <p>
-                                            <a href="{{ route('comentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
+                                            <a href="{{ route('commentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
                                         </p>
 
                                         {{--                            MODAL FOR EDIT FORM--}}
                                         <div class="modal fade" id="modal-commentary-edit{{$commentary->id}}">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content card-primary card-outline">
-                                                    <form action="{{route('comentaries.update',$commentary->id)}}" method="POST">
+                                                    <form action="{{route('commentaries.update',$commentary->id)}}" method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-body small">
-                                                            <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                                            <!-- <strong>Raiting</strong>
-                                                            <p class="clasificacion">
-                                                                <input id="radio1" type="radio" name="estrellas" value="5">
-                                                                <label class="labelTamanio" for="radio1">★</label>
-                                                                <input id="radio2" type="radio" name="estrellas" value="4">
-                                                                <label class="labelTamanio" for="radio2">★</label>
-                                                                <input id="radio3" type="radio" name="estrellas" value="3">
-                                                                <label class="labelTamanio" for="radio3">★</label>
-                                                                <input id="radio4" type="radio" name="estrellas" value="2">
-                                                                <label class="labelTamanio" for="radio4">★</label>
-                                                                <input id="radio5" type="radio" name="estrellas" value="1">
-                                                                <label class="labelTamanio" for="radio5">★</label>
-                                                            </p> -->
+                                                            
                                                             <p>
+                                                                <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                                 <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
                                                                 <strong>Comentario</strong>
                                                                 <textarea name="comment" id="" cols="10" rows="5" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?">{{$commentary->comment}}</textarea>
@@ -242,7 +244,7 @@
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
                                                             <button  class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button  class="btn btn-primary">Evaluar Producto</button>
+                                                            <button  class="btn btn-primary">Guardar Cambios</button>
                                                         </div>
                                                     </form>
                                                 </div>
