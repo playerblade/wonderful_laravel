@@ -2,18 +2,13 @@
 @section('content')
 
     <style>
-        #form {
-            width: 250px;
-            margin: 0 auto;
-            height: 50px;
-        }
 
         #form p {
             text-align: center;
         }
 
         #form label {
-            font-size: 50px;
+            font-size: 30px;
         }
 
         input[type="radio"] {
@@ -22,6 +17,7 @@
 
         label {
             color: grey;
+            font-size: 50px;
         }
 
         .clasificacion {
