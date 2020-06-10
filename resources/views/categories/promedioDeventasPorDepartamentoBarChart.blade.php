@@ -30,10 +30,10 @@
                     <!-- /.card-header -->
                         <div class="card-body">
                             <div style="width: 100%;">
-                                @if($chart)
-                                    {{$chart->container()}}
+                                @if(empty($chart))
+                                    <h1>no hay datos!!!</h1>
                                 @else
-                                    no hay datos!!!
+                                    {{$chart->container()}}
                                 @endif
                             </div>
                             {{$chart->script()}}
@@ -46,7 +46,4 @@
         <!-- /.container-fluid -->
     </section>
 @endsection
-{{--@section('scriptsBarChart')--}}
-{{--        {{$chart->script()}}--}}
-{{--@endsection--}}
 

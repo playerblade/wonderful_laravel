@@ -329,9 +329,13 @@ class ArticleController extends Controller
             $barchart = new BarChart();
 
             foreach ($articles as $article) {
-                $barchart->dataset(
-                    $article->producto, 'bar', [$article->totalVenta]
-                );
+                if (!empty($barchart)){
+                    $barchart->dataset(
+                        $article->producto, 'bar', [$article->totalVenta]
+                    );
+                }else{
+                    return response()->json('No hay datos');
+                }
             }
             //        dd($articles);
             // return view('articles.promedioDeProductosMasVendidosPorCiudades',compact('barchart','articles','cities'));

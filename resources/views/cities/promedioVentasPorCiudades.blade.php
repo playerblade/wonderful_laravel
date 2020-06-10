@@ -1,4 +1,4 @@
-@extends('layouts.admin.menu')
+@extends('layouts.admin.app')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -32,6 +32,8 @@
                             <div style="width: 100%;">
                                 {{$barchart->container()}}
                             </div>
+
+                                {{$barchart->script()}}
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -41,8 +43,3 @@
         <!-- /.container-fluid -->
     </section>
 @endsection
-@section('scriptsBarChart')
-    {{--    <script src="{{asset('js/chartjs-2.7.1/Chart.min.js')}}"></script>--}}
-    {{$barchart->script()}}
-@endsection
-
