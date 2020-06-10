@@ -1,4 +1,4 @@
-@extends('layouts.menuAdmin')
+@extends('layouts.admin.app')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -47,7 +47,12 @@
                         @endif
                         <div class="card-body">
                             <div style="width: 100%;">
-                                {{$barchart->container()}}
+                                @if(!empty($barchart))
+                                    <h1>no hay datos!!!</h1>
+                                @else
+                                    {{$barchart->container()}}
+                                    {{$barchart->script()}}
+                                @endif
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -59,7 +64,7 @@
     </section>
 @endsection
 
-@section('scriptsBarChart')
+{{--@section('scriptsBarChart')--}}
 {{--    <script src="{{asset('js/chart/Chart.min.js')}}"></script>--}}
-    {{$barchart->script()}}
-@endsection
+{{--    {{$barchart->script()}}--}}
+{{--@endsection--}}
