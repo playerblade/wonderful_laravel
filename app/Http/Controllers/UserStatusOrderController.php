@@ -88,12 +88,11 @@ class UserStatusOrderController extends Controller
 
 //    consulta 7
     public function listaDeColaboradoresYLaCantidadeDeOrdenesDespachados(User $users , Request $request){
-        if ($request->user()->authorizeRole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
             $users = DB::select(
                 "
                 select concat_ws(' ' ,u.last_name,u.mother_last_name,u.first_name,u.second_name) as colaborador , count(so.order_id) as cantidadDespachado
-                from roles r join role_user ru on r.id = ru.role_id
-                    join users u on ru.user_id = u.id
+                from roles r join users u on u.role_id = r.id
                     -- and r.role = 'colaborador'
                     and r.id = 2
                     join user_status_orders uso on u.id = uso.user_id
@@ -116,14 +115,12 @@ class UserStatusOrderController extends Controller
 //consulta 8
     public function listaDeVerificadoresYSuCantidadDeOrdenEntregado( Request $request, User $users)
     {
-        if ($request->user()->authorizeRole(['administrador'])) {
+        if ($request->user()->hasRole('administrador')) {
             $users = DB::select(
                 "select concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as verificadores,
             COUNT(o.id) as cantidadEntregado
-            FROM roles r INNER JOIN role_user ru
-            ON r.id = ru.role_id
-            INNER JOIN users u
-            ON ru.user_id = u.id
+            FROM roles r INNER JOIN users u
+            ON u.role_id = r.id
             AND r.role = 'verificador'
             INNER JOIN user_status_orders ue
             ON u.id = ue.user_id
