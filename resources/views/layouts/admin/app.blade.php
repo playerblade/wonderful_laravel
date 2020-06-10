@@ -352,7 +352,8 @@
 
 @yield('scriptsBarChart')
 @yield('scriptReadMore')
-@yield('script_categories')
+@yield('script_categories_create')
+@yield('script_categories_edit')
 @yield('alert_validations')
 <!-- DASHBOARD LAST VERSION-->
 {{--<script src="{{asset("/admin-lte/dist/js/pages/dashboard3.js")}}"></script>--}}

@@ -32,7 +32,7 @@ class ArticleController extends Controller
             $makers = Maker::select('*')->orderBy('name','asc')->get();
 
             $articles = DB::select(
-                "select sb.id ,  a.id as id , a.title as article , m.name as marker , a.stock  as stock,
+                "select sb.id  as sub_id,  a.id as id , a.title as article , m.name as marker , a.stock  as stock,
                         sb.sub_category as sub_category , c.category as category , a.description as description
                        from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
                        inner join categories c on sb.category_id  = c.id
