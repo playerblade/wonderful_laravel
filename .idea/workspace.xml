@@ -21,10 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/promedioDeProductosMasVendidosPorCiudades.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/promedioDeProductosMasVendidosPorCiudades.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/categories/promedioDeventasPorDepartamentoBarChart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/promedioDeventasPorDepartamentoBarChart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cities/promedioVentasPorCiudades.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cities/promedioVentasPorCiudades.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clients/detalleDelArticulo4Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/detalleDelArticulo4Pantalla.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +305,7 @@
       <workItem from="1591534910811" duration="19739000" />
       <workItem from="1591732459050" duration="4716000" />
       <workItem from="1591759496811" duration="5930000" />
-      <workItem from="1591796122383" duration="2485000" />
+      <workItem from="1591796122383" duration="2903000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>

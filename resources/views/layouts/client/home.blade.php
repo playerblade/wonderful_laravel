@@ -75,7 +75,7 @@
                                     <a href="/order/{{$article->id}}/form" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver detalle</a>
                                 </div>
                                 <div class="col-8">
-                                    
+
                                     <div class="row">
                                         <div class="col-8">
                                             <h3>{{$article->title}}</h3>
@@ -103,13 +103,13 @@
                                             @endif
                                         <div class="col-4">
                                             {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
-                                            
+
                                                 <button type="button" class="btn btn-outline-warning elevation-1 btn-ml my-3" data-toggle="modal" data-target="#modal-xl">
                                                         <h5>★  ★  ★  ★  ★ </h5>
                                                         <!-- <h5>☆  ☆  ☆  ☆  ☆ </h5> -->
                                                 </button>
                                                 <strong>calificaciones</strong>
-                                            
+
                                             <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
                                             <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
@@ -136,7 +136,7 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-    
+
 @endsection
 @section('script_for_search')
 
@@ -173,7 +173,22 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
@@ -221,7 +236,22 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
@@ -259,7 +289,22 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
@@ -299,7 +344,22 @@
                                 "                                            <h4>Price :"+value[2]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[3]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
