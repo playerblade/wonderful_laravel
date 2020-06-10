@@ -20,34 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/invoice/invoice.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/invoice/invoicePrint.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin/menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/checker/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/checker/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/collaborator/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/collaborator/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/allOrderClient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/allOrderClient.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrderMore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrderMore.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailAddMore.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailAddMore.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/paymentMethods.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/paymentMethods.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/shipingMethods.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/shipingMethods.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderInitial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderInitial.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersDelivered.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/ordersDelivered.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,7 +301,9 @@
       <workItem from="1591207252078" duration="13509000" />
       <workItem from="1591281860921" duration="23819000" />
       <workItem from="1591448391436" duration="20159000" />
-      <workItem from="1591534910811" duration="19482000" />
+      <workItem from="1591534910811" duration="19739000" />
+      <workItem from="1591732459050" duration="4716000" />
+      <workItem from="1591759496811" duration="3368000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -438,6 +414,10 @@
     <state x="391" y="113" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1588905126898" />
     <state x="415" y="123" width="532" height="487" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1360.738@0.0.1360.738" timestamp="1591460619374" />
     <state x="417" y="122" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.732@0.0.1366.732" timestamp="1586460014753" />
+    <state x="381" y="0" width="596" height="738" key="#guzzle/Dockerfile" timestamp="1591735043387">
+      <screen x="0" y="0" width="1360" height="738" />
+    </state>
+    <state x="381" y="0" width="596" height="738" key="#guzzle/Dockerfile/0.0.1360.738@0.0.1360.738" timestamp="1591735043387" />
     <state x="324" y="18" width="688" height="640" key="#phpunit.xml" timestamp="1587263761902">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -454,35 +434,35 @@
     </state>
     <state x="465" y="123" key="FileChooserDialogImpl/0.0.1360.738@0.0.1360.738" timestamp="1589769772858" />
     <state x="467" y="122" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1584744298748" />
-    <state width="1314" height="139" key="GridCell.Tab.0.bottom" timestamp="1591534962231">
+    <state width="1314" height="139" key="GridCell.Tab.0.bottom" timestamp="1591761806477">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.bottom/0.0.1360.738@0.0.1360.738" timestamp="1591534962231" />
-    <state width="1314" height="139" key="GridCell.Tab.0.center" timestamp="1591534962229">
+    <state width="1314" height="139" key="GridCell.Tab.0.bottom/0.0.1360.738@0.0.1360.738" timestamp="1591761806477" />
+    <state width="1314" height="139" key="GridCell.Tab.0.center" timestamp="1591761806475">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.center/0.0.1360.738@0.0.1360.738" timestamp="1591534962229" />
-    <state width="1314" height="139" key="GridCell.Tab.0.left" timestamp="1591534962228">
+    <state width="1314" height="139" key="GridCell.Tab.0.center/0.0.1360.738@0.0.1360.738" timestamp="1591761806475" />
+    <state width="1314" height="139" key="GridCell.Tab.0.left" timestamp="1591761806474">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.left/0.0.1360.738@0.0.1360.738" timestamp="1591534962228" />
-    <state width="1314" height="139" key="GridCell.Tab.0.right" timestamp="1591534962230">
+    <state width="1314" height="139" key="GridCell.Tab.0.left/0.0.1360.738@0.0.1360.738" timestamp="1591761806474" />
+    <state width="1314" height="139" key="GridCell.Tab.0.right" timestamp="1591761806476">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.right/0.0.1360.738@0.0.1360.738" timestamp="1591534962230" />
+    <state width="1314" height="139" key="GridCell.Tab.0.right/0.0.1360.738@0.0.1360.738" timestamp="1591761806476" />
     <state x="151" y="0" width="1007" height="733" key="SettingsEditor" timestamp="1589940835371">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587413801032" />
     <state x="151" y="0" width="1007" height="733" key="SettingsEditor/0.0.1360.738@0.0.1360.738" timestamp="1589940835371" />
-    <state x="360" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1591534907876">
+    <state x="360" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1591759501398">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
-    <state x="360" y="195" key="com.intellij.ide.util.TipDialog/0.0.1360.738@0.0.1360.738" timestamp="1591534907876" />
+    <state x="360" y="195" key="com.intellij.ide.util.TipDialog/0.0.1360.738@0.0.1360.738" timestamp="1591759501398" />
     <state x="362" y="193" key="com.intellij.ide.util.TipDialog/0.0.1366.732@0.0.1366.732" timestamp="1586458535584" />
     <state x="346" y="0" width="688" height="738" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590270058824">
       <screen x="0" y="0" width="1360" height="738" />
@@ -499,11 +479,11 @@
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="458" y="246" width="898" height="488" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1360.738@0.0.1360.738" timestamp="1589204739108" />
-    <state x="345" y="161" width="672" height="677" key="run.anything.popup" timestamp="1591534951209">
+    <state x="345" y="161" width="672" height="677" key="run.anything.popup" timestamp="1591761754809">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="325" y="148" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1588858252940" />
-    <state x="345" y="161" width="672" height="677" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1591534951209" />
+    <state x="345" y="161" width="672" height="677" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1591761754809" />
     <state x="347" y="160" width="672" height="677" key="run.anything.popup/0.0.1366.732@0.0.1366.732" timestamp="1585922423918" />
     <state x="344" y="53" width="672" height="684" key="search.everywhere.popup" timestamp="1591451539376">
       <screen x="0" y="0" width="1360" height="738" />

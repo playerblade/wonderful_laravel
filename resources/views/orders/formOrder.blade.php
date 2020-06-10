@@ -2,6 +2,7 @@
 @section('content')
 
     <style>
+<<<<<<< HEAD
         #form {
   width: 250px;
   margin: 0 auto;
@@ -38,6 +39,39 @@ label:hover ~ label {
 input[type="radio"]:checked ~ label {
   color: orange;
 }
+=======
+
+        #form p {
+            text-align: center;
+        }
+
+        #form label {
+            font-size: 30px;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label {
+            color: grey;
+            font-size: 50px;
+        }
+
+        .clasificacion {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+
+        label:hover,
+        label:hover ~ label {
+            color: orange;
+        }
+
+        input[type="radio"]:checked ~ label {
+            color: orange;
+        }
+>>>>>>> 1eab0b7c83c4fd908d7ccb90cc70d9fd6840d294
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -290,8 +324,8 @@ input[type="radio"]:checked ~ label {
                         <div class="modal-dialog modal-ml">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                
-                                    <img class="elevation-0" src="{{asset('/stars/01Estrella.png')}}" style="width: 300px;height: 70px;"> 
+
+                                    <img class="elevation-0" src="{{asset('/stars/01Estrella.png')}}" style="width: 300px;height: 70px;">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
