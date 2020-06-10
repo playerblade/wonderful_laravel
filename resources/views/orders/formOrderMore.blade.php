@@ -20,7 +20,7 @@
 
     <!-- Default box -->
     <div class="container">
-        <div class="card card-primary card-outline">
+        <div class="card card-purple card-outline elevation-5">
             <!-- <form action="{{route('orders.store')}}" method="POST"> -->
             <form action="{{route('storeMoreArticles')}}" method="POST">
                 @csrf

@@ -29,6 +29,19 @@
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 @foreach($colors as $color)
                                     <label class="btn btn-default text-center active">
+                                        @if($color->quantity >= 1)
+                                            <div class="ribbon-wrapper">
+                                                <div class="ribbon bg-success text-small">
+                                                    Available
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="ribbon-wrapper">
+                                                <div class="ribbon bg-danger text-small">
+                                                    Exhausted
+                                                </div>
+                                            </div>
+                                        @endif
                                         <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
                                         {{$color->name}}
                                         <br>

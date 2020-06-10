@@ -25,7 +25,7 @@
                             <h4></h4>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>Numero de Orden</th>
@@ -72,7 +72,7 @@
                                                     <td style="opacity: .4"><span class="right badge badge-primary">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
-                                            <td style="opacity: .4">{{$order->fecha}}</td>
+                                            <td style="opacity: .4">{{$order->fechaOrden}}</td>
                                             <td style="opacity: .4"><span class="right badge badge-danger">{{$order->usuario}}</span></td>
                                             <td>
                                                 <form action="{{route('status_orders.update',$order->order_id)}}" method="POST">

@@ -251,6 +251,14 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::get('/comentario/article/{raiting}/{article_id}/detail',
         'RaitingArticleController@ComentarioDeLaEstrellaBottonVer'
     );
+
+    Route::get('/client/invoice/{order_id}/order',
+        'OrderController@orderInvoice'
+    );
+
+    Route::get('invoice/print/{order_id}/order',
+        'OrderController@orderInvoicePrint'
+    );
 });
 
 Route::group(['middleware' => 'web','role:colaborador'], function () {

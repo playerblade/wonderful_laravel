@@ -7,42 +7,48 @@
             <div class="col-1">
                 {{--                SPACE--}}
             </div>
-            <div class="col-3 small">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <b>Busquedas</b>
+            <div class="col-md-3 small">
+                <div class="sticky-top mb-3">
+                    <div class="card card-purple card-outline elevation-5">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Busquedas</b>
+                                </div>
+                                <div class="col-6">
+                                    <strong class="float-right">php artisan config:clear</strong>
+                                    <strong hidden class="float-right">layout-navbar-fixed</strong>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <label>Categoria</label>
-                                <select id="categories" name="category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    <option selected="selected">Seleccione Categoria</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">
-                                            {{ $category->category }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Categoria</label>
+                                    <select id="categories" name="category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        <option selected="selected">Seleccione Categoria</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Sub Categoria</label>
+                                    <select id="sub_categories" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        {{--                                    ajax code--}}
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <label>Sub Categoria</label>
-                                <select id="sub_categories" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    {{--                                    ajax code--}}
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-12">
-                                <label>Makers</label>
-                                <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-{{--                                            json code--}}
-                                </select>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Makers</label>
+                                    <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        {{--                                        code js--}}
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -50,7 +56,7 @@
             </div>
             <!-- /.col-md-2 -->
             <div class="col-7 small">
-                <div class="card card-primary card-outline">
+                <div class="card card-primary card-outline elevation-5">
                     <div class="card-header">
                         <b class="float-left">Articulos</b>
                         <!-- SEARCH FORM -->
@@ -82,6 +88,19 @@
                                             @endforeach
                                             <p>!Compra ahora!!!</p>
                                         </div>
+                                            @if($article->stock >= 1)
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-success text-lg">
+                                                        Available
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-danger text-lg">
+                                                        Exhausted
+                                                    </div>
+                                                </div>
+                                            @endif
                                         <div class="col-4">
                                             {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
                                             
@@ -91,6 +110,8 @@
                                                 </button>
                                                 <strong>calificaciones</strong>
                                             
+                                            <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
+                                            <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
                                         </div>
                                         <br><br><br>

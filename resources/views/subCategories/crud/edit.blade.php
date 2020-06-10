@@ -33,12 +33,13 @@
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
-                            <table id="example2" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
-                                    <th>Categoria</th>
                                     <th>Sub Categoria</th>
+                                    <th>Categoria</th>
+                                    <th>Fecha</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </thead>
@@ -46,8 +47,9 @@
                                 @foreach($sub_categories as $sub_category)
                                     <tr>
                                         <th class="text-center">{{$sub_category->id}}</th>
-                                        <td>{{$sub_category->category}}</td>
                                         <td>{{$sub_category->sub_category}}</td>
+                                        <td>{{$sub_category->category}}</td>
+                                        <td>{{$sub_category->created_at}}</td>
                                         <td class="py-0 align-middle text-right">
                                             <form action="{{ route('sub_categories.destroy',$sub_category->id) }}" method="POST">
                                                 <div class="btn-group btn-group-sm">
@@ -69,8 +71,9 @@
                                 <tfoot>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
-                                    <th>Categoria</th>
                                     <th>Sub Categoria</th>
+                                    <th>Categoria</th>
+                                    <th>Fecha</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </tfoot>
@@ -98,11 +101,16 @@
                                 <div class="form-group">
                                     <label>Categoria:</label>
                                     <select name="category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;">
-{{--                                        <option selected="selected">Seleccione una Categoria</option>--}}
                                         @foreach ($categories as $category)
-                                            <option selected value="{{ $category->id }}">
-                                                {{ $category->category }}
-                                            </option>
+                                            @if($subCategory->category_id == $category->id)
+                                                <option selected value="{{ $category->id }}">
+                                                    {{ $category->category }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $category->id }}">
+                                                    {{ $category->category }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -112,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit"  class="btn btn-info form-control ">Guardad Sub Categoria</button>
+                                <button type="submit"  class="btn btn-info form-control ">Guardar Cambios</button>
                             </div>
                         </form>
                         <!-- /.card-body -->

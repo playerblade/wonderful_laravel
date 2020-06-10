@@ -236,8 +236,6 @@ class OrderDetailController extends Controller
                         inner join process_orders po on so.process_order_id = po.id
                         inner join orders o on so.order_id = o.id
                         inner join users c on o.user_id = c.id
-                    -- and r.id = 2
-                    -- and c.id = 5
                     and c.id = $user_id
                     order by o.created_at desc;
         ");
@@ -254,7 +252,7 @@ class OrderDetailController extends Controller
         //     where a.id = $article_id;
         // ");
         $transport = DB::select("
-            select tf.price as price
+            select tf.price as price ,c.city as city , o.location as location
             from users u inner join orders o on u.id = o.user_id
                  inner join transport_fares tf on o.transport_fares_id = tf.id
                  inner join cities c on tf.city_id = c.id

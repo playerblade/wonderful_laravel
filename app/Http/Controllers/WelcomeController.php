@@ -19,18 +19,19 @@ class WelcomeController extends Controller
         $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
 
         $articles = DB::table('categories')
-                    ->join('sub_categories','categories.id','=','sub_categories.category_id')
-                    ->join('articles','sub_categories.id','=','articles.sub_category_id')
-                    ->join('image_articles','articles.id','=','image_articles.article_id')
-                    ->join('price_articles','articles.id','=','price_articles.article_id')
-                    ->join('makers','articles.maker_id','=','makers.id')
-                    ->where('price_articles.is_current','=',1)
-                    ->where('image_articles.is_main','=',1)
-                    ->where('categories.id','=',1)
-                    ->select('articles.id','articles.title','articles.description','makers.name','image_articles.url_image','price_articles.price')
-//                    ->get();
-                    ->paginate(5);
+            ->join('sub_categories','categories.id','=','sub_categories.category_id')
+            ->join('articles','sub_categories.id','=','articles.sub_category_id')
+            ->join('image_articles','articles.id','=','image_articles.article_id')
+            ->join('price_articles','articles.id','=','price_articles.article_id')
+            ->join('makers','articles.maker_id','=','makers.id')
+            ->where('price_articles.is_current','=',1)
+            ->where('image_articles.is_main','=',1)
+            ->where('categories.id','=',1)
+            ->select('articles.id','articles.title','articles.stock','makers.name','image_articles.url_image','price_articles.price')
+            ->orderBy('articles.title','asc')
+            ->paginate(3);
 //        dd($articles);
+//        return response()->json($articles);
 
         return view('welcome.welcome',compact('articles','categories','makers'));
     }
@@ -87,11 +88,11 @@ class WelcomeController extends Controller
                 ->where('price_articles.is_current','=',1)
                 ->where('image_articles.is_main','=',1)
                 ->where('categories.id','=',$request->category_id)
-                ->select('articles.id','articles.title','makers.name','image_articles.url_image','price_articles.price')
-                ->get();
+                ->select('articles.id','articles.title','articles.stock','makers.name','image_articles.url_image','price_articles.price')
+                ->orderBy('articles.title','asc')->get();
 //                ->paginate(2);
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->title,$article->price,$article->name,$article->url_image];
+                $articles_array[$article->id] = [$article->title,$article->price,$article->name,$article->url_image,$article->stock];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
@@ -115,7 +116,7 @@ class WelcomeController extends Controller
 //            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
             $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
+                       pa.price as price , a.id as id, a.stock as stock
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join sub_categories sc on a.sub_category_id = sc.id
                     inner join price_articles pa on a.id = pa.article_id
@@ -126,7 +127,7 @@ class WelcomeController extends Controller
                 order by articulo asc;
             ");
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
+                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image,$article->stock];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
@@ -138,7 +139,7 @@ class WelcomeController extends Controller
 //            $articles = Article::where('sub_category_id', $request->sub_category_id)->get();
             $articles = DB::select("
                 select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
+                       pa.price as price , a.id as id , a.stock as stock
                 from articles a inner join image_articles ia on a.id = ia.article_id
                     inner join sub_categories sc on a.sub_category_id = sc.id
                     inner join price_articles pa on a.id = pa.article_id
@@ -150,7 +151,7 @@ class WelcomeController extends Controller
                 order by articulo asc;
             ");
             foreach ($articles as $article) {
-                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image];
+                $articles_array[$article->id] = [$article->articulo,$article->price,$article->fabricante,$article->image,$article->stock];
 //                $articles_array_description[$article->id] = $article->description;
             }
             return response()->json($articles_array);
@@ -186,7 +187,7 @@ class WelcomeController extends Controller
                 ->orderBy('title','asc')->get();
 
             foreach ($articles as $article) {
-                $articles_array[$article->title] = [$article->id,$article->url_image,$article->price,$article->name];
+                $articles_array[$article->title] = [$article->id,$article->url_image,$article->price,$article->name,$article->stock];
             }
 
             return response()->json($articles_array);

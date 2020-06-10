@@ -16,11 +16,12 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-       $categories = Category::all();
-       $sub_categories = DB::select("
-           select sc.id as id , c.category as category , sc.sub_category as sub_category
-           from categories c inner join sub_categories sc on c.id = sc.category_id;
-       ");
+       $categories = Category::select('*')->orderBy('categories.category','asc')->get();
+       $sub_categories = DB::table('sub_categories')
+                         ->join('categories','sub_categories.category_id','=','categories.id')
+                         ->select('sub_categories.*','categories.category')
+                         ->orderBy('sub_categories.id','desc')->get();
+
        return view('subCategories.crud.index',compact('sub_categories','categories'));
     }
 
@@ -44,12 +45,15 @@ class SubCategoryController extends Controller
     {
         $request->validate([
             'category_id' => 'required',
-            'sub_category' => 'required'
+            'sub_category' => 'required|string|max:250|unique:sub_categories'
         ]);
-        SubCategory::create($request->all());
 
-        return redirect()->route('sub_categories.index')
-            ->with('success','Product created successfully.');
+        $sub_category = new SubCategory();
+        $sub_category->category_id = $request->category_id;
+        $sub_category->sub_category = ucfirst($request->sub_category);
+        $sub_category->save();
+
+        return redirect()->route('sub_categories.index')->with('success','Product created successfully.');
     }
 
     /**
@@ -71,14 +75,12 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subCategory)
     {
-        $categories = DB::select("
-           select c.id as id , c.category as category
-           from categories c inner join sub_categories sc on c.id = sc.category_id
-           where sc.id = $subCategory->id;
-        ");
+        $categories = Category::select('*')->orderBy('categories.category','asc')->get();
+
         $sub_categories = DB::select("
-           select sc.id as id , c.category as category , sc.sub_category as sub_category
-           from categories c inner join sub_categories sc on c.id = sc.category_id;
+           select sc.id as id , c.category as category , sc.sub_category as sub_category ,sc.created_at
+           from categories c inner join sub_categories sc on c.id = sc.category_id
+           order by sc.id desc;
        ");
         return view('subCategories.crud.edit',compact('subCategory','sub_categories','categories'));
     }
@@ -92,11 +94,9 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, SubCategory $subCategory)
     {
-        $request->validate([
-            'sub_category' => 'required|string|max:250|unique:sub_category'
-        ]);
 
         $subCategory->update($request->all());
+
         return redirect()->route('sub_categories.index')->with('success','Article updated successfully');
     }
 
@@ -108,6 +108,7 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subCategory)
     {
-        //
+        $subCategory->delete();
+        return back();
     }
 }

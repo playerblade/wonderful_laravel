@@ -28,15 +28,19 @@
                 0 100px 80px rgba(0, 0, 0, 0.2)
             ;
         }
+        .img-background{
+            background-image: url("{{asset("/imagenes/backgrounds/10.jpg")}}");
+            background-size: auto ,auto;
+        }
     </style>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page img-background">
 <div class="login-box">
     <div class="login-logo textshadow">
-        <a href="../../index2.html"><b>Wonder</b>FUL</a>
+        <a href="/"><b>Wonder</b>FUL</a>
     </div>
     <!-- /.login-logo -->
-    <div class="card card-primary card-outline elevation-5">
+    <div class="card card-purple card-outline elevation-5">
         <div class="card-body">
             <p class="login-box-msg">{{ __('Login') }}</p>
             <!--FORM LOGIN-->
@@ -82,7 +86,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4 mt-3">
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn bg-gradient-purple btn-block">
                             {{ __('Login') }}
                         </button>
 

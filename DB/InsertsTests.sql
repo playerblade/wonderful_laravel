@@ -27,6 +27,20 @@ create database payment_online;
                   select o.id as order_id
                   from orders o ;
 
+                  ---------
+                 select u.first_name , ca.comment , s.star
+                 from commentary_articles ca inner join users u on ca.user_id = u.id
+                      inner join raiting_articles ra on ra.user_id = u.id
+                      inner join stars s on ra.star_id = s.id
+                 where ca.article_id = 1
+                 and ra.article_id = 1;
+
+                 ----------
+
+                 select sum(ca.quantity) , a.stock
+                 from color_articles ca inner join articles a on ca.article_id = a.id
+                 where a.id = 1;
+
 use wonderful_laravel;
 -- inserts categorias
 insert into categories (category, created_at, updated_at) values ('Electronicos','2019-05-02 04:54:11', '2019-05-02 04:54:11');
@@ -114,7 +128,7 @@ insert into cities (city) values ('Beni');
 -- insert into transport_fares (city_id, price, end_date, shiping, created_at) values (9,30 , '2019-07-06 22:20:04',0,curdate());
 
 -- inserts oficiales
--- inserts tarifa transporte bus
+-- inserts tarifa transporte normal
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (1,120, '2019-06-27 20:45:31',  0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (2,50, '2019-05-10 13:01:40', 0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (3,30, '2019-09-24 08:12:06',  0,curdate());
@@ -125,7 +139,7 @@ insert into transport_fares (city_id, price, end_date, shiping, created_at) valu
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (8,70 , '2019-11-24 17:06:03',0,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (9,100 , '2019-07-06 22:20:04',0,curdate());
 
--- inserts tarifa transporte vuelo
+-- inserts tarifa transporte rapido
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (1,240, '2019-06-27 20:45:31',  1,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (2,100, '2019-05-10 13:01:40', 1,curdate());
 insert into transport_fares (city_id, price, end_date, shiping, created_at) values (3,60, '2019-09-24 08:12:06',  1,curdate());

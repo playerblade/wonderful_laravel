@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-1">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-3">
     <div class="container">
       <a href="/home" class="navbar-brand">
         <img src="{{asset("/images/logo1.jpg")}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -28,20 +28,6 @@
                     <i class="fas fa-cart-arrow-down fa-lg"></i>
                     <span class="badge badge-success navbar-badge">&ensp;5</span>
                 </a>
-{{--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">--}}
-{{--                    <span class="dropdown-item dropdown-header">15 Ordenes</span>--}}
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item">--}}
-{{--                        <i class="fas fa-table mr-2"></i> 4 new messages--}}
-{{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
-{{--                    </a>--}}
-{{--                    <a href="#" class="dropdown-item">--}}
-{{--                        <i class="fas fa-table mr-2"></i> Ver Utlima Orden--}}
-{{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>--}}
-{{--                </div>--}}
             </li>
         </ul>
 
@@ -95,7 +81,7 @@
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper img-background">
       <!-- Main content -->
       <section class="content">
           @yield('content')

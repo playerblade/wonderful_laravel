@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -45,16 +46,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validate =  $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'second_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'mother_last_name' => ['required', 'string', 'max:255'],
-//            'user' => ['required', 'string', 'max:255', 'unique:users'],
+//        $request->validate([
+//            'first_name' => ['required', 'string', 'max:255'],
+//            'second_name' => ['required', 'string', 'max:255'],
+//            'last_name' => ['required', 'string', 'max:255'],
+//            'mother_last_name' => ['required', 'string', 'max:255'],
+//            'ci' => ['required', 'string', 'max:255', 'unique:users'],
 //            'user' => ['required', 'string', 'max:255'],
 //            'password' => ['required', 'string', 'min:2', 'confirmed'],
 //            'password' => ['required', 'string', 'min:2'],
-        ]);
+//        ]);
 
 //        $user = new User();
 //        $user->role_id = $request->role_id;
@@ -80,18 +81,28 @@ class UserController extends Controller
 //        $password = bcrypt($request->password);
         $password = bcrypt($request->ci);
 
-        if (empty(DB::table('users')->where('user',$user)->first()) || empty(DB::table('users')->where('ci',$request->ci)->first())){
+        if (empty(DB::table('users')->where('ci',$request->ci)->first())){
             DB::insert("
                 CALL insert_users_with_roles($request->role_id,'$request->ci',
                 '$first_name','$second_name','$last_name',
                 '$mother_last_name','$request->gender',$request->phone_number,
                 '$request->birthday','$user','$password',1);
             ");
+//            methods form privileges of users
+            $user_db = strtolower($request->first_name);
+            if ($request->role_id == 2 || $request->role_id == 4){
+                $user = new User();
+                $user->privilegesUsers($user_db);
+
+            }elseif($request->role_id = 1){
+                $user = new User();
+                $user->privilegesUsersAdmins($user_db);
+            }
+
             return redirect()->route('users.index') ->with('success','use saved');
         } else {
-            return redirect()->route('users.index') ->with('error',' CI O USER DUPLICATE!!!');
+            return redirect()->route('users.index') ->with('error',' CI Already Exists!!!');
         }
-
 
 
     }
@@ -143,25 +154,19 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-//        $user_session = DB::table('users')
-//                        ->where('id',$user->id)->get();
+//        select user from mysql.user;
 
         $user_status_orders = DB::table('user_status_orders')
-                              ->where('user_id',$user->id)->get();
-//        return response()->json($user_status_orders);
+                              ->where('user_id',$user->id)->first();
 
-//        if (empty($user_session[0])){
-//            $user->delete();
-//            return redirect()->route('users.index') ->with('success','use deleted');
-//        }else{
-//            return redirect()->route('users.index') ->with('error','User is in Session!!');
-//        }
+        $user_db = strtolower($user->first_name);
 
-        if (empty($user_status_orders[0])){
+        if (empty($user_status_orders)){
             $user->delete();
+            $user->deleteUsersAndPrivileges($user_db);
             return redirect()->route('users.index') ->with('success','use deleted');
         }else{
-            return redirect()->route('users.index') ->with('error','not deleted, User working in Order!!');
+            return redirect()->route('users.index') ->with('error','not deleted, User working in Order!!!');
         }
 
     }

@@ -24,7 +24,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Categorias</h3>
-
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                 </button>
@@ -32,11 +31,12 @@
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
                                     <th>Categoria</th>
+                                    <th>Fecha Creada</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </thead>
@@ -45,8 +45,11 @@
                                     <tr>
                                         <th class="text-center">{{$category->id}}</th>
                                         <td>{{$category->category}}</td>
+                                        <td>
+                                            {{Carbon\Carbon::parse($category->created_at)->isoFormat('LLL')}}
+                                        </td>
                                         <td class="py-0 align-middle text-right">
-                                            <form action="{{ route('articles.destroy',$category->id) }}" method="POST">
+                                            <form action="{{ route('categories.destroy',$category->id) }}" method="POST">
                                                 <div class="btn-group btn-group-sm">
                                                     <a  href="{{ route('articles.show',$category->id) }}" class="btn btn-info float-right">
                                                         <i class="fas fa-eye"></i>
@@ -67,6 +70,7 @@
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
                                     <th>Categoria</th>
+                                    <th>Fecha Creada</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                                 </tfoot>
@@ -93,7 +97,12 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label class="card-title">Categoria:</label>
-                                    <input type="text" name="category" class="form-control">
+                                    <input type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required autocomplete="category" autofocus>
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

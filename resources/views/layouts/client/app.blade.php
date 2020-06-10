@@ -4,44 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <style>
-        #form {
-          width: 250px;
-          margin: 0 auto;
-          height: 50px;
-        }
 
-        #form p {
-          text-align: center;
-        }
-
-        #form label {
-          font-size: 20px;
-        }
-
-        input[type="radio"] {
-          display: none;
-        }
-
-        .labelTamanio {
-          font-size: 60px;
-          color: grey;
-        }
-
-        .clasificacion {
-          direction: rtl;
-          unicode-bidi: bidi-override;
-        }
-
-        label:hover,
-        label:hover ~ label {
-          color: orange;
-        }
-
-        input[type="radio"]:checked ~ label {
-          color: orange;
-        }
-    </style>
     <title>WonderFuL</title>
 
     <!-- Font Awesome Icons -->
@@ -71,7 +34,16 @@
     <link rel="stylesheet" href="{{asset("/admin-lte/dist/css/adminlte.min.css")}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+        .img-background{
+            background-image: url("{{asset("/imagenes/backgrounds/13.jpg")}}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #0e2231;
+        }
+    </style>
 </head>
     <body class="hold-transition layout-top-nav">
         @extends('layouts.client.menu')

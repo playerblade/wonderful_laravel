@@ -384,13 +384,18 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>CI</label>
+                                        <label class="card-title">CI</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                                             </div>
-                                            <input type="number" name="ci" class="form-control" placeholder="CI" required>
-                                        </div>
+                                            <input type="text" class="form-control @error('ci') is-invalid @enderror" name="ci" value="{{ old('ci') }}" placeholder="CI" required autocomplete="ci" autofocus>
+                                            @error('ci')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                                @enderror
+                                            </div>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
@@ -403,14 +408,14 @@
                                         <input type="text" name="second_name" class="form-control" placeholder="Second Name" required>
                                     </div>
                                     <!-- /.form-group -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Last Name</label>
                                         <input type="text" name="last_name" class="form-control" placeholder="Last Name" required>
                                     </div>
                                     <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Mother Last Name</label>
                                         <input type="text" name="mother_last_name" class="form-control" placeholder="Mother Last Name" required>
@@ -423,6 +428,19 @@
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
                                             <input type="number" name="phone_number" class="form-control" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <!-- /.form-group -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Birthday</label>
+                                        <div class="input-group mb-3">
+                                            <input type="date" name="birthday" class="form-control" placeholder="Birthday" required>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.form-group -->
@@ -439,39 +457,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Birthday</label>
-                                        <div class="input-group mb-3">
-                                            <input type="date" name="birthday" class="form-control" placeholder="Birthday" required>
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-4">
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>User</label>--}}
-{{--                                        <div class="input-group mb-3">--}}
-{{--                                            <input type="text" name="user" class="form-control" placeholder="User" required>--}}
-{{--                                            <div class="input-group-prepend">--}}
-{{--                                                <span class="input-group-text"><i class="fas fa-user"></i></span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-                                    <!-- /.form-group -->
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>Password</label>--}}
-{{--                                        <div class="input-group mb-3">--}}
-{{--                                            <input type="password" name="password" class="form-control" placeholder="Password" required>--}}
-{{--                                            <div class="input-group-prepend">--}}
-{{--                                                <span class="input-group-text"><i class="fas fa-key"></i></span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Role</label>

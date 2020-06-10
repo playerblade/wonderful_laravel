@@ -3,59 +3,59 @@
     {{--    <div class="container">--}}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-1">
+            <div class="col-md-1">
                 {{--                SPACE--}}
             </div>
-            <div class="col-3 small">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <b>Busquedas</b>
+            <div class="col-md-3 small">
+                <div class="sticky-top mb-3">
+                    <div class="card card-purple card-outline elevation-5">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Busquedas</b>
+                                </div>
+                                <div class="col-6">
+                                    <strong class="float-right">php artisan config:clear</strong>
+                                    <strong hidden class="float-right">layout-navbar-fixed</strong>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <label>Categoria</label>
-                                <select id="categories" name="category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    <option selected="selected">Seleccione Categoria</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">
-                                            {{ $category->category }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Categoria</label>
+                                    <select id="categories" name="category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        <option selected="selected">Seleccione Categoria</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->category }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Sub Categoria</label>
+                                    <select id="sub_categories" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        {{--                                    ajax code--}}
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <label>Sub Categoria</label>
-                                <select id="sub_categories" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-                                    {{--                                    ajax code--}}
-                                </select>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-12">
-                                <label>Makers</label>
-{{--                                <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>--}}
-{{--                                    <option selected >Select a maker</option>--}}
-{{--                                    @foreach($makers as $maker)--}}
-{{--                                        <option value="{{$maker->id}}">{{$maker->name}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-                                <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
-
-                                </select>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label>Makers</label>
+                                    <select id="makers_search" name="sub_category_id" class="form-control select2 select2-info" data-dropdown-css-class="select2-info" style="width: 100%;" required>
+                                        {{--                                        code js--}}
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /.col-md-2 -->
-            <div class="col-7 small">
-                <div class="card card-primary card-outline">
+            <div class="col-md-7 small">
+                <div class="card card-primary card-outline elevation-5">
                     <div class="card-header">
                         <b class="float-left">Articulos</b>
                         <!-- SEARCH FORM -->
@@ -66,7 +66,6 @@
                         </div>
                     </div>
                     <div id="content_hidden" class="card-header small">
-{{--                        <hr>--}}
                         @foreach($articles as $article)
                             <div class="row">
                                 <div class="col-4">
@@ -81,10 +80,23 @@
                                             <h4>Price :{{$article->price}}</h4>
                                             <p>!Compra ahora!!!</p>
                                         </div>
+                                            @if($article->stock >= 1)
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-success text-lg">
+                                                        Available
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="ribbon-wrapper ribbon-xl">
+                                                    <div class="ribbon bg-danger text-lg">
+                                                        Exhausted
+                                                    </div>
+                                                </div>
+                                            @endif
                                         <div class="col-4">
-                                            {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
+                                            <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
+                                            <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
-                                            <h5 class="mt-3"><b>Raiting:</b><br></h5>
                                         </div>
                                         <br><br><br>
                                         <a href="/login" class="btn bg-gradient-primary btn-sm float-right">Añadir al carrito</a>
@@ -101,9 +113,9 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="col-1">--}}
-{{--                --}}{{--                SPACE--}}
-{{--            </div>--}}
+            <div class="col-md-1">
+{{--                                SPACE--}}
+            </div>
         </div>
         <!-- /.row -->
     </div>
@@ -143,16 +155,31 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
                                 "                                        <a href='/login' class='btn bg-gradient-primary btn-sm mt-2'>Añadir al carrito</a>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
-                                "                            </div>\n" +
-                                "                            <hr>\n" +
-                                "                            <hr>");
+                                "                 </div>\n" +
+                                "                 <hr>\n" +
+                                "                 <hr>");
                         });
                         // $('#content').append("<div class='card-link'>"+articles.link()+"</div>");
 
@@ -191,7 +218,22 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
@@ -229,7 +271,22 @@
                                 "                                            <h4>Price :"+value[1]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[2]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +
@@ -269,7 +326,22 @@
                                 "                                            <h4>Price :"+value[2]+"</h4>\n" +
                                 "                                            <p>!Compra ahora!!!</p>\n" +
                                 "                                        </div>\n" +
+                                "                                        @if(12 >= 1) \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-success text-lg'> \n" +
+                                "                                                   Available \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @else \n" +
+                                "                                            <div class='ribbon-wrapper ribbon-xl'> \n" +
+                                "                                               <div class='ribbon bg-danger text-lg'> \n" +
+                                "                                                   Exhausted \n" +
+                                "                                               </div> \n" +
+                                "                                            </div> \n" +
+                                "                                        @endif \n" +
                                 "                                        <div class='col-4'>\n" +
+                                "                                            <h5><b>Stock:</b> &ensp;"+value[4]+"</h5> \n" +
+                                "                                            <br> \n" +
                                 "                                            <h5><b>Maker:</b><br>"+value[3]+" </h5>\n" +
                                 "                                        </div>\n" +
                                 "                                        <br><br><br>\n" +

@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp; ID</th>
@@ -50,9 +50,9 @@
                                             <img class="img-circle fa-2x" style="width: 30px; height: 30px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
                                         </td>
                                         <td class="py-0 align-middle text-right">
-                                            <form action="{{ route('articles.destroy',$color->id) }}" method="POST">
+                                            <form action="{{ route('colors.destroy',$color->id) }}" method="POST">
                                                 <div class="btn-group btn-group-sm">
-                                                    <a  href="{{ route('articles.edit',$color->id) }}" class="btn btn-info float-right">
+                                                    <a  href="{{ route('colors.show',$color->id) }}" class="btn btn-info float-right">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     <a href="{{ route('colors.edit',$color->id) }}" class="btn btn-warning">
@@ -102,8 +102,7 @@
                                 <div class="form-group">
                                     <strong for="customFile">Imagen:</strong>
                                     <div class="custom-file">
-                                        <input type="file" name="images" class="custom-file-input" id="customFile">
-                                        {{--                                        <input type="file" name="images">--}}
+                                        <input type="file" name="image" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Chose a file</label>
                                     </div>
                                 </div>

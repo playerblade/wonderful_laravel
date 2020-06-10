@@ -54,7 +54,7 @@ class OrderController extends Controller
             ->where('colors.image',[$request->color_article])
             ->select('colors.*')->get();
 
-        $quantity=DB::table('color_articles')
+        $quantity = DB::table('color_articles')
             ->join('colors','color_articles.color_id','=','colors.id')
             ->join('articles','color_articles.article_id','=','articles.id')
             ->where('color_articles.color_id',[$colors[0]->id])
@@ -106,7 +106,7 @@ class OrderController extends Controller
                 ->where('colors.image',[$request->color_article])
                 ->select('colors.*')->get();
 
-                $quantity=DB::table('color_articles')
+                $quantity = DB::table('color_articles')
                 ->join('colors','color_articles.color_id','=','colors.id')
                 ->join('articles','color_articles.article_id','=','articles.id')
                 ->where('color_articles.color_id',[$colors[0]->id])
@@ -118,7 +118,16 @@ class OrderController extends Controller
                 ->join('articles','color_articles.article_id','=','articles.id')
                 ->where('color_articles.color_id',[$colors[0]->id])
                 ->where('article_id',[$request->article_id])
-                ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
+                ->update(['color_articles.quantity'=> $quantity[0]->quantity - $request->quantity]);
+
+                $stock = DB::table('articles')
+                    ->where('id',[$request->article_id])
+                    ->select('stock')
+                    ->first();
+
+                DB::table('articles')
+                ->where('id',[$request->article_id])
+                ->update(['stock'=> $stock->stock - $request->quantity]);
             }
 
             $status_order = new StatusOrder();
@@ -167,7 +176,7 @@ class OrderController extends Controller
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
-                   od.sub_total as subTotal, pa.price as precio , od.created_at as fecha,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
                    ia.url_image as imagen, od.id as id
             from users u inner join orders o on u.id = o.user_id
                   inner join order_details od on o.id = od.order_id
@@ -267,12 +276,16 @@ class OrderController extends Controller
             ->where('orders.user_id',Auth::user()->id)->first();
 //        dd($orders_validation);
 //        list raiting and commentary article
-        $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
-                        ->join('users','commentary_articles.user_id','=','users.id')
-                        ->join('raiting_articles','articles.id','=','raiting_articles.article_id')
+        $commentaries = DB::table('commentary_articles')->join('users','commentary_articles.user_id','=','users.id')
+                        ->join('raiting_articles','raiting_articles.user_id','=','users.id')
+                        ->join('stars','raiting_articles.star_id','=','stars.id')
                         ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
-                        ->where('articles.id',$article_id)
+                        ->where('commentary_articles.article_id',$article_id)
+                        ->where('raiting_articles.article_id',$article_id)
+                        ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at','users.last_name','users.mother_last_name','users.first_name')
                         ->orderBy('commentary_articles.created_at','desc')->get();
+
+//        dd($commentaries);
 
         $raitings = DB::select(
             "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
@@ -509,8 +522,8 @@ class OrderController extends Controller
 
     public function paymentMethods($order_id){
         $orders = DB::select("
-            select o.id as order_id ,tf.id  as transport_fares_id , c.id as city_id , u.id as user_id,
-                   c.city as city , tf.price as price, o.total_amount as total_amount
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
             from users u inner join orders o on u.id = o.user_id
                  inner join transport_fares tf on o.transport_fares_id = tf.id
                  inner join cities c on tf.city_id = c.id
@@ -520,8 +533,8 @@ class OrderController extends Controller
         $cities = City::all();
         $order_details = DB::select("
             select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
-                   od.sub_total as subTotal, pa.price as precio , od.created_at as fecha,
-                   ia.url_image as imagen
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   ia.url_image as imagen , od.id as id
             from users u inner join orders o on u.id = o.user_id
                   inner join order_details od on o.id = od.order_id
                   inner join articles a on od.article_id = a.id
@@ -557,21 +570,33 @@ class OrderController extends Controller
         ->where('order_id',$order_id)
         ->where('colors.image',$request->color)->get();
 
-//        return response()->json($colors);
-//        dd($colors[0]);
         DB::table('color_articles')
         ->where('article_id',$colors[0]->article_id)
         ->where('color_id',$colors[0]->color_id)
         ->update(['quantity' => $colors[0]->quantity + $request->quantity]);
 
+        $stock = DB::table('articles')
+            ->where('id',[$colors[0]->article_id])
+            ->select('stock')
+            ->first();
+
+        DB::table('articles')
+            ->where('id',[$colors[0]->article_id])
+            ->update(['stock'=> $stock->stock + $request->quantity]);
+
+        $amount_bank_account = DB::connection('db1')->table('bank_accounts')
+        ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+        ->where('first_name',$request->first_name)
+        ->select('bank_accounts.amount')->first();
+
         DB::connection('db1')->table('bank_accounts')
-            ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
-            ->where('first_name',$request->first_name)
-            ->update(['amount' => $request->amount_bank_account + $request->monto_total_transaction]);
+        ->join('bank_users','bank_accounts.bank_user_id','=','bank_users.id')
+        ->where('first_name',$request->first_name)
+        ->update(['amount' => $amount_bank_account->amount + $request->monto_total_transaction]);
 
         DB::connection('mysql')->table('orders')
-                                     ->where('orders.id',$order_id)
-                                     ->update(['orders.active' => 0]);
+        ->where('orders.id',$order_id)
+        ->update(['orders.active' => 0]);
 
         return redirect()->route('user_orders',['user_id' => Auth::user()->id]);
     }
@@ -689,4 +714,81 @@ class OrderController extends Controller
     }
     
 
+    public function orderInvoice($order_id){
+        $orders = DB::select("
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
+            from users u inner join orders o on u.id = o.user_id
+                 inner join transport_fares tf on o.transport_fares_id = tf.id
+                 inner join cities c on tf.city_id = c.id
+            where o.id = $order_id;
+        ");
+
+        $cities = City::all();
+        $order_details = DB::select("
+            select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   a.description as description , od.id as id
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join image_articles as ia on ia.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+            and o.id = $order_id
+            -- and o.id = 14
+            and ia.is_main = 1
+            and pa.is_current = 1
+        ");
+
+        $totalAmounts = DB::select("
+            select o.id as order_id, sum(od.sub_total) as montoTotal
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+                  and o.id= $order_id
+                  and pa.is_current = 1
+            group by o.id , u.id;
+        ");
+        return view('invoice.invoice',compact('order_details','orders','cities','totalAmounts'));
+    }
+
+    public function orderInvoicePrint($order_id){
+        $orders = DB::select("
+            select o.id as order_id ,tf.shiping  as shiping , c.id as city_id , u.id as user_id,
+                   c.city as city , tf.price as price, o.total_amount as total_amount , o.location as location
+            from users u inner join orders o on u.id = o.user_id
+                 inner join transport_fares tf on o.transport_fares_id = tf.id
+                 inner join cities c on tf.city_id = c.id
+            where o.id = $order_id;
+        ");
+
+        $cities = City::all();
+        $order_details = DB::select("
+            select o.id as order_id , a.title as articulo , od.quantity as cantidad, od.color_article as color,
+                   od.sub_total as subTotal, pa.price as precio , o.created_at as fecha,
+                   a.description as description , od.id as id
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join image_articles as ia on ia.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+            and o.id = $order_id
+            -- and o.id = 14
+            and ia.is_main = 1
+            and pa.is_current = 1
+        ");
+
+        $totalAmounts = DB::select("
+            select o.id as order_id, sum(od.sub_total) as montoTotal
+            from users u inner join orders o on u.id = o.user_id
+                  inner join order_details od on o.id = od.order_id
+                  inner join articles a on od.article_id = a.id
+                  inner join price_articles pa on a.id = pa.article_id
+                  and o.id= $order_id
+                  and pa.is_current = 1
+            group by o.id , u.id;
+        ");
+        return view('invoice.invoicePrint',compact('order_details','orders','cities','totalAmounts'));
+    }
 }

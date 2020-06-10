@@ -1,6 +1,6 @@
 <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light elevation-2">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light elevation-3">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">

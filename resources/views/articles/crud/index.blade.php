@@ -153,13 +153,13 @@
                                                                         </div>
                                                                     </div>
                                                                     <!-- /.form-group -->
-                        {{--                                        <div class="form-group">--}}
-                        {{--                                            <strong for="customFile">Imagen:</strong>--}}
-                        {{--                                            <div class="custom-file">--}}
-                        {{--                                              <input type="file" class="custom-file-input" id="customFile">--}}
-                        {{--                                              <label class="custom-file-label" for="customFile">Choose file</label>--}}
-                        {{--                                            </div>--}}
-                        {{--                                        </div>--}}
+{{--                                                                    <div class="form-group">--}}
+{{--                                                                        <strong for="customFile">Imagen:</strong>--}}
+{{--                                                                        <div class="custom-file">--}}
+{{--                                                                          <input type="file" name="url_image" class="custom-file-input" id="customFile">--}}
+{{--                                                                          <label class="custom-file-label" for="customFile">Choose file</label>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
                                                                     <div class="form-group">
                                                                         <strong>Precio:</strong>
                                                                         <div class="row">
@@ -214,7 +214,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('articles.store') }}" method="POST">
+                        <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <!-- SELECT2 EXAMPLE -->
@@ -232,13 +232,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <!-- /.form-group -->
                                         <div class="form-group">
-                                            <strong>Articulo:</strong>
-                                            <input type="text" name="title" class="form-control" placeholder="Name" required>
+                                            <label>Sub Categoria:</label>
+                                            <select id="sub_categories" name="sub_category_id" class="form-control select2" style="width: 100%;" required>
+                                                {{--                                                code js is here--}}
+                                            </select>
                                         </div>
+                                        <!-- /.form-group -->
                                         <div class="form-group">
                                             <strong>Marker:</strong>
-{{--                                            <input type="text" name="marker" class="form-control" placeholder="Marker" required>--}}
+                                            {{--                                            <input type="text" name="marker" class="form-control" placeholder="Marker" required>--}}
                                             <select name="maker_id" class="form-control select2" style="width: 100%;" required>
                                                 <option selected>Select a maker</option>
                                                 @foreach($makers as $maker)
@@ -246,23 +250,20 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <!-- /.form-group -->
                                         <div class="form-group">
-                                            <strong>Stock:</strong>
-                                            <input type="number" name="stock" class="form-control" placeholder="Stock" required>
+                                            <strong>Articulo:</strong>
+                                            <input type="text" name="title" class="form-control" placeholder="Name" required>
                                         </div>
+                                        <!-- /.form-group -->
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Sub Categoria:</label>
-                                            <select id="sub_categories" name="sub_category_id" class="form-control select2" style="width: 100%;" required>
-{{--                                                code js is here--}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <strong>Description:</strong>
                                             <textarea name="description" class="form-control" rows="2" required></textarea>
                                         </div>
+                                        <!-- /.form-group -->
                                         <div class="form-group">
                                             <strong>Color:</strong>
                                             <div class="select2-purple">
@@ -274,32 +275,17 @@
                                             </div>
                                         </div>
                                         <!-- /.form-group -->
-{{--                                        <div class="form-group">--}}
-{{--                                            <strong for="customFile">Imagen:</strong>--}}
-{{--                                            <div class="custom-file">--}}
-{{--                                              <input type="file" class="custom-file-input" id="customFile">--}}
-{{--                                              <label class="custom-file-label" for="customFile">Choose file</label>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="form-group">
+                                            <strong for="customFile">Imagen:</strong>
+                                            <div class="custom-file">
+                                                <input type="file" name="url_image" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <!-- /.form-group -->
                                         <div class="form-group">
                                             <strong>Precio:</strong>
-                                             <div class="row">
-                                                <div class="col-8">
-                                                    <input type="text" name="price" class="form-control" placeholder="Precio" required>
-                                                </div>
-{{--                                                <div class="col-4">--}}
-{{--                                                    <div class="form-group clearfix">--}}
-{{--                                                        <div class="icheck-primary d-inline">--}}
-{{--                                                            <input type="radio" id="radioPrimary1" name="is_current" checked="" value="1" required>--}}
-{{--                                                            <label for="radioPrimary1">Current</label>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="icheck-primary d-inline">--}}
-{{--                                                            <input type="radio" id="radioPrimary2" name="is_current" value="1" required disabled>--}}
-{{--                                                            <label for="radioPrimary2">Before</label>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-                                             </div>
+                                            <input type="number" name="price" class="form-control" placeholder="Precio" required>
                                         </div>
                                     </div>
                                     <!-- /.col -->

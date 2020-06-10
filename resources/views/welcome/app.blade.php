@@ -34,14 +34,23 @@
     <link rel="stylesheet" href="{{asset("/admin-lte/dist/css/adminlte.min.css")}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+        .img-background{
+            background-image: url("{{asset("/imagenes/backgrounds/13.jpg")}}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #0e2231;
+        }
+    </style>
 </head>
-    <body class="hold-transition layout-top-nav">
+    <body class="hold-transition layout-top-nav ">
         <section class="wrapper">
             <!-- Navbar -->
-            <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-1">
+            <nav class="main-header navbar navbar-expand-md navbar-light navbar-white elevation-3">
                 <div class="container">
-                    <a href="../../index3.html" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="{{asset("/images/logo1.jpg")}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                              style="opacity: .8; width: 35px;">
                         <span class="brand-text font-weight-light">WonderFuL</span>
@@ -53,55 +62,18 @@
 
                     <div class="collapse navbar-collapse order-3" id="navbarCollapse">
                         <!-- Left navbar links -->
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Contact</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Dropdown</a>
-                                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                    <li><a href="#" class="dropdown-item">Some action </a></li>
-                                    <li><a href="#" class="dropdown-item">Some other action</a></li>
-
-                                    <li class="dropdown-divider"></li>
-
-                                    <!-- Level two dropdown-->
-                                    <li class="dropdown-submenu dropdown-hover">
-                                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                            <li>
-                                                <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                                            </li>
-
-                                            <!-- Level three dropdown-->
-                                            <li class="dropdown-submenu">
-                                                <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                                                <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                                    <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                                    <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Level three -->
-
-                                            <li><a href="#" class="dropdown-item">level 2</a></li>
-                                            <li><a href="#" class="dropdown-item">level 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <!-- End Level two -->
-                                </ul>
-                            </li>
-                        </ul>
+{{--                        link here --}}
                         <!-- SEARCH FORM -->
-                        <form class="form-inline ml-0 ml-md-3">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+{{--                        <form class="form-inline ml-0 ml-md-3">--}}
+{{--                            <div class="input-group input-group-sm">--}}
+{{--                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">--}}
+{{--                                <div class="input-group-append">--}}
+{{--                                    <button class="btn btn-navbar" type="submit">--}}
+{{--                                        <i class="fas fa-search"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
                     </div>
                     <!-- Right navbar links -->
                     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
@@ -112,10 +84,10 @@
                                 <a href="{{ url('/home') }}" class="nav-link">Home</a>
                             @else
                                 <a href="{{ route('login') }}" class="nav-link">Login</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="nav-link">Register</a>
-                                @endif
+{{--            very important--}}
+{{--                                @if (Route::has('register'))--}}
+{{--                                    <a href="{{ route('register') }}" class="nav-link">Register</a>--}}
+{{--                                @endif--}}
                             @endauth
                         @endif
                         {{-- </li> --}}
@@ -128,7 +100,7 @@
             </nav>
             <!-- /.navbar -->
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
+            <div class="content-wrapper img-background">
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container">
@@ -138,9 +110,8 @@
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                                    <li class="breadcrumb-item active">Top Navigation</li>
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    <li class="breadcrumb-item active">Articles</li>
                                 </ol>
                             </div><!-- /.col -->
                         </div><!-- /.row -->

@@ -15,7 +15,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        $colors = Color::all();
+        $colors = Color::select('*')->orderBy('id','desc')->get();
         $articles = Article::all();
         return view('colors.crud.index',compact('colors','articles'));
     }
@@ -39,17 +39,19 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         $color = new Color($request->all());
-//        $color->image = 'asf';
-//        dd($color->image);
-        if ($request->hasFile('images')){
-            $file = $request->file("images");
-            $fileName = $file->getClientOriginalName();
+        $color->name = $request->name;
+
+//        dd($request->hasFile('url_image'));
+
+        if ($request->hasFile('image')){
+            $file = $request->file("image");
+//            $fileName = $file->getClientOriginalName();
+            $fileName = $file->getFilename();
             $file->move(public_path("imagenes/imagenes_articulos/",$fileName));
             $color->image = $fileName;
         }
-//        return response()->json($file);
         $color->save();
-//        dd($color);
+
         return redirect()->route('colors.index')->with("succes","la imagen se subio correctamente");
     }
 
@@ -102,6 +104,7 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        $color->delete();
+        return back();
     }
 }
