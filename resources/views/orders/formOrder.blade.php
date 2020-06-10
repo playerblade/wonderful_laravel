@@ -2,26 +2,39 @@
 @section('content')
 
     <style>
-        labelstyle[type="radio"] {
+        #form {
+            width: 250px;
+            margin: 0 auto;
+            height: 50px;
+        }
+
+        #form p {
+            text-align: center;
+        }
+
+        #form label {
+            font-size: 50px;
+        }
+
+        input[type="radio"] {
             display: none;
         }
 
-        .labelstyle {
-            font-size: 35px;
+        label {
             color: grey;
         }
 
-        .clasificacion1 {
+        .clasificacion {
             direction: rtl;
             unicode-bidi: bidi-override;
         }
 
-        labelstyle:hover,
-        labelstyle:hover ~ label {
+        label:hover,
+        label:hover ~ label {
             color: orange;
         }
 
-        #inputstyle[type="radio"]:checked ~ label {
+        input[type="radio"]:checked ~ label {
             color: orange;
         }
     </style>
@@ -171,17 +184,17 @@
                                         @csrf
                                         <div id="raiting" class="small">
                                             <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
-                                            <p class="clasificacion1">
-                                                <input class="inputstyle" id="radio1" type="radio" name="estrellas" value="5">
-                                                <label class="labelstyle" for="radio1">★</label>
-                                                <input class="inputstyle" id="radio2" type="radio" name="estrellas" value="4">
-                                                <label class="labelstyle" for="radio2">★</label>
-                                                <input class="inputstyle" id="radio3" type="radio" name="estrellas" value="3">
-                                                <label class="labelstyle" for="radio3">★</label>
-                                                <input class="inputstyle" id="radio4" type="radio" name="estrellas" value="2">
-                                                <label class="labelstyle" for="radio4">★</label>
-                                                <input class="inputstyle" id="radio5" type="radio" name="estrellas" value="1">
-                                                <label class="labelstyle" for="radio5">★</label>
+                                            <p class="clasificacion">
+                                                <input id="radio1" type="radio" name="star" value="5"><!--
+                                                --><label for="radio1">★</label><!--
+                                                --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                --><label for="radio2">★</label><!--
+                                                --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                --><label for="radio3">★</label><!--
+                                                --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                --><label for="radio4">★</label><!--
+                                                --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                --><label for="radio5">★</label>
                                             </p>
                                         </div>
                                         <div id="comentary" class="small">
@@ -288,8 +301,8 @@
                         <div class="modal-dialog modal-ml">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                
-                                    <img class="elevation-0" src="{{asset('/stars/01Estrella.png')}}" style="width: 300px;height: 70px;"> 
+
+                                    <img class="elevation-0" src="{{asset('/stars/01Estrella.png')}}" style="width: 300px;height: 70px;">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
