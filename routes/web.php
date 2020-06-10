@@ -245,6 +245,12 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::resource('comentaries',
         'CommentaryArticleController'
     );
+    Route::get('/order/DetalleDelArticulo/{article_id}/form',
+        'OrderController@formOrdenDetalleDeArticulo'
+    );
+    Route::get('/comentario/article/{raiting}/{article_id}/detail',
+        'RaitingArticleController@ComentarioDeLaEstrellaBottonVer'
+    );
 
     Route::get('/client/invoice/{order_id}/order',
         'OrderController@orderInvoice'

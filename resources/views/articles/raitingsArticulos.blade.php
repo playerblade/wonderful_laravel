@@ -83,7 +83,7 @@
                                             </td>
                                         @endif
                                         <td>{{$raiting->cantidadCliente}}</td>
-                                        <td>{{$raiting->cantidadCliente * 100 / $porcentajes[0]->montoTotal }} %</td>
+                                        <td>{{round( $raiting->cantidadCliente * 100 / $porcentajes[0]->montoTotal,0) }} %</td>
                                         <td>
                                             <button type="submit" class="btn">
                                                 <a class="btn btn-info btn-sm elevation-1" href="/reportes/articulo/raiting/{{$raiting->article_id}}/{{$raiting->estrella}}/comentarios">

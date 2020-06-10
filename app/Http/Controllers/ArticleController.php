@@ -11,6 +11,8 @@ use App\ImageArticle;
 use App\Maker;
 use App\PriceArticle;
 use App\SubCategory;
+use App\City;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;

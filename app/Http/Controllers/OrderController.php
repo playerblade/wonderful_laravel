@@ -282,7 +282,7 @@ class OrderController extends Controller
                         ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
                         ->where('commentary_articles.article_id',$article_id)
                         ->where('raiting_articles.article_id',$article_id)
-                        ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at')
+                        ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at','users.last_name','users.mother_last_name','users.first_name')
                         ->orderBy('commentary_articles.created_at','desc')->get();
 
 //        dd($commentaries);
@@ -608,6 +608,111 @@ class OrderController extends Controller
             ->update(['orders.active' => 1]);
         return redirect()->back();
     }
+
+    public function formOrdenDetalleDeArticulo($article_id)
+    {
+        // $decrypt_article_id = Crypt::decrypt($article_id);
+        $cities = City::all();
+        $prices = PriceArticle::join('articles','price_articles.article_id','articles.id')
+                              ->where('articles.id',$article_id)
+                              ->select('price_articles.*')->get();
+
+        $colors = DB::select("
+            select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
+            from articles a inner join color_articles ca on a.id = ca.article_id
+                 inner join colors c on ca.color_id = c.id
+            where a.id = $article_id;
+        ");
+        $articles = DB::select("
+                select a.title as articulo , m.name as fabricante, ia.url_image as image,
+                       pa.price as price , a.description as description , a.id as id
+                from articles a inner join image_articles ia on a.id = ia.article_id
+                    inner join price_articles pa on a.id = pa.article_id
+                    inner join makers m on a.maker_id = m.id
+                    and pa.is_current = 1
+                    and ia.is_main = 1
+                    and a.id = $article_id
+                order by articulo desc ;
+        ");
+        $stocks = DB::select("
+                    select a.id as id, sum(ca.quantity) as stock
+                    from colors c inner join color_articles ca on c.id = ca.color_id
+                    inner join articles a on ca.article_id = a.id
+                    and a.id = $article_id
+                    group by id;
+        ");
+
+//        validation query for raiting and camentary article
+        $orders_validation = DB::table('process_orders')
+            ->join('status_orders','process_orders.id','=','status_orders.process_order_id')
+            ->join('orders','status_orders.order_id','=','orders.id')
+            ->join('order_details','orders.id','=','order_details.order_id')
+            ->join('articles','order_details.article_id','=','articles.id')
+            ->where('articles.id',$article_id)
+            ->where('process_orders.id',5)
+            ->where('orders.user_id',Auth::user()->id)->first();
+//        dd($orders_validation);
+//        list raiting and commentary article
+        $commentaries = DB::table('commentary_articles')->join('articles','commentary_articles.article_id','=','articles.id')
+                        ->join('users','commentary_articles.user_id','=','users.id')
+                        ->join('raiting_articles','articles.id','=','raiting_articles.article_id')
+                        ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->where('articles.id',$article_id)
+                        ->orderBy('commentary_articles.created_at','desc')->get();
+        
+        $raitings = DB::select(
+            "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
+            from stars s inner join raiting_articles ra on s.id = ra.star_id
+               inner join users c on ra.user_id = c.id
+               -- inner join roles r on c.role_id = r.id
+               inner join commentary_articles ca on c.id = ca.user_id
+               inner join articles a on ra.article_id = a.id
+               -- where c.role_id = 5
+               where a.id = $article_id
+               group by s.id, a.id,a.title, s.star
+               order by s.star desc;   
+                
+        ");
+        $porcentajes = DB::select("
+                select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                      from stars s inner join raiting_articles ra on s.id = ra.star_id
+                           inner join users c on ra.user_id = c.id
+                           inner join commentary_articles ca on c.id = ca.user_id
+                           inner join articles a on ra.article_id = a.id
+                           where a.id = $article_id
+                           group by s.id, a.title, s.star
+                           order by s.star) as cantidad
+                  group by cantidad.article;
+        ");
+        $maximoDeEstrella = DB::select("
+                select cantidad.article, max(cantidad.cantidadCliente) as maximo
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                      from stars s inner join raiting_articles ra on s.id = ra.star_id
+                           inner join users c on ra.user_id = c.id
+                           inner join commentary_articles ca on c.id = ca.user_id
+                           inner join articles a on ra.article_id = a.id
+                           where a.id = $article_id
+                           group by s.id, a.title, s.star
+                           order by s.star) as cantidad
+                  group by cantidad.article;
+        ");
+        $agruparRaitingsIguales = DB::select(
+            "select cantidad.article, cantidad.cantidadCliente as cantidadClientee 
+            from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                 from stars s inner join raiting_articles ra on s.id = ra.star_id
+                      inner join users c on ra.user_id = c.id
+                      inner join commentary_articles ca on c.id = ca.user_id
+                      inner join articles a on ra.article_id = a.id
+                      where a.id = $article_id
+                      group by s.id, a.title, s.star
+                      order by s.star) as cantidad
+             group by cantidad.article,cantidad.cantidadCliente; 
+                
+        ");
+        return view('orders.formOrdenDetalleDeArticulo',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales'));
+    }
+    
 
     public function orderInvoice($order_id){
         $orders = DB::select("

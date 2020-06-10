@@ -75,11 +75,17 @@
                                     <a href="/order/{{$article->id}}/form" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver detalle</a>
                                 </div>
                                 <div class="col-8">
-                                    <h3>{{$article->title}}</h3>
-                                    <br>
+                                    
                                     <div class="row">
                                         <div class="col-8">
+                                            <h3>{{$article->title}}</h3>
+                                            <br>
                                             <h4>Price :{{$article->price}}</h4>
+                                            @foreach ($stocks as $stock)
+                                                <input hidden type="number" name="stocks" value="{{$stock->id}}">
+                                                <h5><b>Stock: </b>{{$stock->stock}}.</h5>
+                                                <input hidden type="number" name="stocks" value="{{$stock->stock}}">
+                                            @endforeach
                                             <p>!Compra ahora!!!</p>
                                         </div>
                                             @if($article->stock >= 1)
@@ -96,6 +102,14 @@
                                                 </div>
                                             @endif
                                         <div class="col-4">
+                                            {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
+                                            
+                                                <button type="button" class="btn btn-outline-warning elevation-1 btn-ml my-3" data-toggle="modal" data-target="#modal-xl">
+                                                        <h5>★  ★  ★  ★  ★ </h5>
+                                                        <!-- <h5>☆  ☆  ☆  ☆  ☆ </h5> -->
+                                                </button>
+                                                <strong>calificaciones</strong>
+                                            
                                             <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
                                             <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
@@ -122,6 +136,7 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
+    
 @endsection
 @section('script_for_search')
 
