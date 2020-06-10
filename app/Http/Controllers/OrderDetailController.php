@@ -220,8 +220,14 @@ class OrderDetailController extends Controller
                 from articles a inner join image_articles ia on a.id = ia.article_id
                 where a.id = $article_id;
             ");
+            $colors = DB::select("
+                select c.name as name , c.image as image , c.id as color_id, ca.quantity as quantity
+                from articles a inner join color_articles ca on a.id = ca.article_id
+                    inner join colors c on ca.color_id = c.id
+                where a.id = $article_id;
+            ");
 
-            return view('clients.detalleDelArticulo4Pantalla',compact('articles', 'prices_articles','images_articles'));
+            return view('clients.detalleDelArticulo4Pantalla',compact('articles', 'prices_articles','images_articles','colors'));
     }
 
     public function allOrdersClient($user_id){

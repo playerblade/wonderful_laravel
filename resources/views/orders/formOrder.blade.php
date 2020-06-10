@@ -2,44 +2,6 @@
 @section('content')
 
     <style>
-<<<<<<< HEAD
-        #form {
-  width: 250px;
-  margin: 0 auto;
-  height: 50px;
-}
-
-#form p {
-  text-align: center;
-}
-
-#form label {
-  font-size: 20px;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-label {
-  color: grey;
-  font-size: 50px;
-}
-
-.clasificacion {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-}
-
-label:hover,
-label:hover ~ label {
-  color: orange;
-}
-
-input[type="radio"]:checked ~ label {
-  color: orange;
-}
-=======
 
         #form p {
             text-align: center;
@@ -71,7 +33,6 @@ input[type="radio"]:checked ~ label {
         input[type="radio"]:checked ~ label {
             color: orange;
         }
->>>>>>> 1eab0b7c83c4fd908d7ccb90cc70d9fd6840d294
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
