@@ -189,6 +189,7 @@ class RaitingArticleController extends Controller
                        inner join image_articles ia on a.id = ia.article_id
                        where a.id = $article_id
                        and  s.id = $raiting
+                       and ia.is_main = 1
                        group by a.title, s.id, s.id, ca.created_at, ca.comment, cliente, ia.url_image, a.description
                        order by ca.created_at  desc;
             "
