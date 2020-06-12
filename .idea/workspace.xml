@@ -21,15 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ImageArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/crud/edit.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/detalleDelArticulo4Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/detalleDelArticulo4Pantalla.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/detallesDeLasOrdnesDelCliente3Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/detallesDeLasOrdnesDelCliente3Pantalla.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/formOrder.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +308,8 @@
       <workItem from="1591732459050" duration="4716000" />
       <workItem from="1591759496811" duration="5930000" />
       <workItem from="1591796122383" duration="5890000" />
-      <workItem from="1591898403768" duration="24393000" />
+      <workItem from="1591898403768" duration="27319000" />
+      <workItem from="1591970039979" duration="1407000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -444,35 +440,35 @@
     </state>
     <state x="465" y="123" key="FileChooserDialogImpl/0.0.1360.738@0.0.1360.738" timestamp="1589769772858" />
     <state x="467" y="122" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1584744298748" />
-    <state width="1314" height="139" key="GridCell.Tab.0.bottom" timestamp="1591909148096">
+    <state width="1314" height="139" key="GridCell.Tab.0.bottom" timestamp="1591970408577">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.bottom/0.0.1360.738@0.0.1360.738" timestamp="1591909148096" />
-    <state width="1314" height="139" key="GridCell.Tab.0.center" timestamp="1591909148095">
+    <state width="1314" height="139" key="GridCell.Tab.0.bottom/0.0.1360.738@0.0.1360.738" timestamp="1591970408577" />
+    <state width="1314" height="139" key="GridCell.Tab.0.center" timestamp="1591970408575">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.center/0.0.1360.738@0.0.1360.738" timestamp="1591909148095" />
-    <state width="1314" height="139" key="GridCell.Tab.0.left" timestamp="1591909148094">
+    <state width="1314" height="139" key="GridCell.Tab.0.center/0.0.1360.738@0.0.1360.738" timestamp="1591970408575" />
+    <state width="1314" height="139" key="GridCell.Tab.0.left" timestamp="1591970408572">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.left/0.0.1360.738@0.0.1360.738" timestamp="1591909148094" />
-    <state width="1314" height="139" key="GridCell.Tab.0.right" timestamp="1591909148096">
+    <state width="1314" height="139" key="GridCell.Tab.0.left/0.0.1360.738@0.0.1360.738" timestamp="1591970408572" />
+    <state width="1314" height="139" key="GridCell.Tab.0.right" timestamp="1591970408576">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state width="1237" height="92" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588918459275" />
-    <state width="1314" height="139" key="GridCell.Tab.0.right/0.0.1360.738@0.0.1360.738" timestamp="1591909148096" />
+    <state width="1314" height="139" key="GridCell.Tab.0.right/0.0.1360.738@0.0.1360.738" timestamp="1591970408576" />
     <state x="151" y="0" width="1007" height="733" key="SettingsEditor" timestamp="1589940835371">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587413801032" />
     <state x="151" y="0" width="1007" height="733" key="SettingsEditor/0.0.1360.738@0.0.1360.738" timestamp="1589940835371" />
-    <state x="360" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1591898483791">
+    <state x="360" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1591970060727">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
-    <state x="360" y="195" key="com.intellij.ide.util.TipDialog/0.0.1360.738@0.0.1360.738" timestamp="1591898483791" />
+    <state x="360" y="195" key="com.intellij.ide.util.TipDialog/0.0.1360.738@0.0.1360.738" timestamp="1591970060727" />
     <state x="362" y="193" key="com.intellij.ide.util.TipDialog/0.0.1366.732@0.0.1366.732" timestamp="1586458535584" />
     <state x="346" y="0" width="688" height="738" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590270058824">
       <screen x="0" y="0" width="1360" height="738" />
@@ -489,11 +485,11 @@
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="458" y="246" width="898" height="488" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1360.738@0.0.1360.738" timestamp="1589204739108" />
-    <state x="345" y="161" width="672" height="677" key="run.anything.popup" timestamp="1591898507277">
+    <state x="345" y="161" width="672" height="677" key="run.anything.popup" timestamp="1591970404821">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="325" y="148" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1588858252940" />
-    <state x="345" y="161" width="672" height="677" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1591898507277" />
+    <state x="345" y="161" width="672" height="677" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1591970404821" />
     <state x="347" y="160" width="672" height="677" key="run.anything.popup/0.0.1366.732@0.0.1366.732" timestamp="1585922423918" />
     <state x="344" y="53" width="672" height="684" key="search.everywhere.popup" timestamp="1591451539376">
       <screen x="0" y="0" width="1360" height="738" />

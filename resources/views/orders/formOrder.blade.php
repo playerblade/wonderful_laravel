@@ -100,6 +100,19 @@
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             @foreach($colors as $color)
                                                 <label class="btn btn-default text-center active">
+                                                    @if($color->quantity >= 1)
+                                                        <div class="ribbon-wrapper">
+                                                            <div class="ribbon bg-success text-small">
+                                                                Available
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="ribbon-wrapper">
+                                                            <div class="ribbon bg-danger text-small">
+                                                                Exhausted
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
                                                     {{$color->name}}
                                                     <br>
@@ -204,7 +217,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    
+
                                 </div>
                                 @else
                                     <center>
@@ -236,7 +249,7 @@
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-body small">
-                                                            @foreach($raitings as $raiting)  
+                                                            @foreach($raitings as $raiting)
                                                                 @if($raiting->estrella == 5 && $raiting->user == Auth::user()->id)
                                                                     <p class="clasificacion">
                                                                         <input id="radio1" type="radio" name="star" value="5" checked><!--
@@ -327,7 +340,7 @@
                                             <nav class="w-100">
                                                 <div class="nav nav-tabs" id="product-tab" role="tablist">
                                                     <a class="nav-item nav-link link-black text-sm" id="comentarios-mas-tab" data-toggle="tab" href="#comentarios-mas" role="tab" aria-controls="comentarios-mas" aria-selected="false">
-                                                        <i class="fas fa-eye mr-1"></i> 1 comentario más  
+                                                        <i class="fas fa-eye mr-1"></i> 1 comentario más
                                                     </a>
                                                 </div>
                                             </nav>
@@ -341,7 +354,7 @@
                                                     <form action="{{ route('commentaries_secondary') }}" method="POST">
                                                         @csrf
                                                         <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
-                                                        
+
                                                         <div class="input-group mb-3">
                                                             <textarea name="comment1" cols="3" rows="1" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
                                                             <div class="input-group-prepend">

@@ -104,12 +104,12 @@
                                         <div class="col-4">
                                             {{--                                                <h5><b>Avaliable Colors</b></h5>--}}
 
-                                                <button type="button" class="btn btn-outline-warning elevation-1 btn-ml my-3" data-toggle="modal" data-target="#modal-xl">
-                                                        <h5>★  ★  ★  ★  ★ </h5>
+{{--                                                <button type="button" class="btn btn-outline-warning elevation-1 btn-ml my-3" data-toggle="modal" data-target="#modal-xl">--}}
+{{--                                                        <h5>★  ★  ★  ★  ★ </h5>--}}
                                                         <!-- <h5>☆  ☆  ☆  ☆  ☆ </h5> -->
-                                                </button>
-                                                <strong>calificaciones</strong>
-
+{{--                                                </button>--}}
+{{--                                                <strong>calificaciones</strong>--}}
+                                                <br><br>
                                             <h5><b>Stock:</b> &ensp;{{$article->stock}}</h5>
                                             <br>
                                             <h5><b>Maker:</b> <br> {{$article->name}}</h5>
