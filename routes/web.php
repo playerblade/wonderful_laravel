@@ -245,6 +245,10 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::resource('commentaries',
         'CommentaryArticleController'
     );
+    Route::post('/commentaries/secondary',
+        'CommentaryArticleController@commentariesSecondary'
+    )->name('commentaries_secondary');
+    
     Route::get('/order/DetalleDelArticulo/{article_id}/form',
         'OrderController@formOrdenDetalleDeArticulo'
     );

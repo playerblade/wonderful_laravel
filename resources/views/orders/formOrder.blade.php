@@ -175,6 +175,7 @@
                     <div class="tab-content p-3" id="nav-tabContent">
                         <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                             @if($orders_validation)
+                                @if(empty($validacionDeRainting))
                                 <div class="post">
                                     <form action="{{ route('commentaries.store') }}" method="POST">
                                         @csrf
@@ -203,7 +204,13 @@
                                             </div>
                                         </div>
                                     </form>
+                                    
                                 </div>
+                                @else
+                                    <center>
+                                        <h4> Ya calificaste este articulo</h4>
+                                    </center>
+                                @endif
                                 <div class="post">
                                     @foreach($commentaries as $commentary)
                                         <div class="user-block">
@@ -217,10 +224,11 @@
                                         </p>
 
                                         <p>
-                                            <a href="{{ route('commentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}"><i class="fas fa-edit mr-1"></i> Editar reseña</a>
+                                            <a href="{{ route('commentaries.edit',$commentary->id) }}" class="link-black text-sm" data-toggle="modal" data-target="#modal-commentary-edit{{$commentary->id}}">
+                                                <i class="fas fa-edit mr-1"></i> Editar reseña
+                                            </a>
                                         </p>
-
-                                        {{--                            MODAL FOR EDIT FORM--}}
+                {{--                            MODAL FOR EDIT FORM--}}
                                         <div class="modal fade" id="modal-commentary-edit{{$commentary->id}}">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content card-primary card-outline">
@@ -228,7 +236,74 @@
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-body small">
-                                                            
+                                                            @foreach($raitings as $raiting)  
+                                                                @if($raiting->estrella == 5 && $raiting->user == Auth::user()->id)
+                                                                    <p class="clasificacion">
+                                                                        <input id="radio1" type="radio" name="star" value="5" checked><!--
+                                                                        --><label for="radio1">★</label><!--
+                                                                        --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                                        --><label for="radio2">★</label><!--
+                                                                        --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                                        --><label for="radio3">★</label><!--
+                                                                        --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                                        --><label for="radio4">★</label><!--
+                                                                        --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                                        --><label for="radio5">★</label>
+                                                                    </p>
+                                                                @elseif($raiting->estrella == 4 && $raiting->user == Auth::user()->id)
+                                                                    <p class="clasificacion">
+                                                                        <input id="radio1" type="radio" name="star" value="5"><!--
+                                                                        --><label for="radio1">★</label><!--
+                                                                        --><input id="radio2" type="radio" name="star" value="4" checked><!--
+                                                                        --><label for="radio2">★</label><!--
+                                                                        --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                                        --><label for="radio3">★</label><!--
+                                                                        --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                                        --><label for="radio4">★</label><!--
+                                                                        --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                                        --><label for="radio5">★</label>
+                                                                    </p>
+                                                                @elseif($raiting->estrella == 3 && $raiting->user == Auth::user()->id)
+                                                                    <p class="clasificacion">
+                                                                        <input id="radio1" type="radio" name="star" value="5"><!--
+                                                                        --><label for="radio1">★</label><!--
+                                                                        --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                                        --><label for="radio2">★</label><!--
+                                                                        --><input id="radio3" type="radio" name="star" value="3" checked><!--
+                                                                        --><label for="radio3">★</label><!--
+                                                                        --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                                        --><label for="radio4">★</label><!--
+                                                                        --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                                        --><label for="radio5">★</label>
+                                                                    </p>
+                                                                @elseif($raiting->estrella == 2 && $raiting->user == Auth::user()->id)
+                                                                    <p class="clasificacion">
+                                                                        <input id="radio1" type="radio" name="star" value="5" ><!--
+                                                                        --><label for="radio1">★</label><!--
+                                                                        --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                                        --><label for="radio2">★</label><!--
+                                                                        --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                                        --><label for="radio3">★</label><!--
+                                                                        --><input id="radio4" type="radio" name="star" value="2" checked><!--
+                                                                        --><label for="radio4">★</label><!--
+                                                                        --><input id="radio5" type="radio" name="star" value="1"><!--
+                                                                        --><label for="radio5">★</label>
+                                                                    </p>
+                                                                @elseif($raiting->estrella == 1 && $raiting->user == Auth::user()->id)
+                                                                    <p class="clasificacion">
+                                                                        <input id="radio1" type="radio" name="star" value="5" ><!--
+                                                                        --><label for="radio1">★</label><!--
+                                                                        --><input id="radio2" type="radio" name="star" value="4"><!--
+                                                                        --><label for="radio2">★</label><!--
+                                                                        --><input id="radio3" type="radio" name="star" value="3"><!--
+                                                                        --><label for="radio3">★</label><!--
+                                                                        --><input id="radio4" type="radio" name="star" value="2"><!--
+                                                                        --><label for="radio4">★</label><!--
+                                                                        --><input id="radio5" type="radio" name="star" value="1" checked><!--
+                                                                        --><label for="radio5">★</label>
+                                                                    </p>
+                                                                @endif
+                                                            @endforeach
                                                             <p>
                                                                 <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                                 <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
@@ -248,6 +323,38 @@
                                             <!-- /.modal-dialog -->
                                         </div>
                                         <!-- /.modal -->
+                                        <!-- secondary comments -->
+                                            <nav class="w-100">
+                                                <div class="nav nav-tabs" id="product-tab" role="tablist">
+                                                    <a class="nav-item nav-link link-black text-sm" id="comentarios-mas-tab" data-toggle="tab" href="#comentarios-mas" role="tab" aria-controls="comentarios-mas" aria-selected="false">
+                                                        <i class="fas fa-eye mr-1"></i> 1 comentario más  
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content p-3" id="nav-tabContent">
+                                                <div class="tab-pane fade" id="comentarios-mas" role="tabpanel" aria-labelledby="comentarios-mas-tab">
+                                                    @foreach($commentaries_0 as $commentary)
+                                                        <p>
+                                                        {{$commentary->comment}}
+                                                        </p>
+                                                    @endforeach
+                                                    <form action="{{ route('commentaries_secondary') }}" method="POST">
+                                                        @csrf
+                                                        <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
+                                                        
+                                                        <div class="input-group mb-3">
+                                                            <textarea name="comment1" cols="3" rows="1" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-success">
+                                                                    <button class="btn bg-success">
+                                                                        <h3><i class="fas fa-arrow-alt-circle-right bg-success"></i></h3>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                     @endforeach
                                 </div>
                             @else
@@ -302,7 +409,7 @@
                                     <table id="example1" class="table table-striped elevation-2">
 
                                     <tbody>
-                                    @foreach($raitings as $raiting)
+                                    @foreach($raitingsA as $raiting)
                                         <tr>
                                             <td>{{$raiting->nameRaiting}}</td>
                                             <td >
@@ -310,12 +417,14 @@
                                                     <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="100"
                                                         aria-valuemin="0" aria-valuemax="100" style="width: {{$raiting->cantidadCliente}}%">
                                                         <!-- <span class="sr-only">60% completado</span> -->
-                                                        {{$raiting->cantidadCliente}}
+                                                        @foreach($raitings as $raiting1)
+                                                            {{$raiting1->cantidadCliente}}
+                                                        @endforeach
                                                     </div>
 
                                                 </div>
                                             </td>
-                                            <td>{{round( $raiting->cantidadCliente * 100 / $porcentajes[0]->montoTotal,0) }} %</td>
+                                            <td>{{round( $raiting->cantidadCliente * 100 / $porcentajesA[0]->montoTotal,0) }} %</td>
                                             <td>
                                                 <button type="submit" class="btn">
                                                     <a class="btn btn-info btn-sm elevation-1" href="/comentario/article/{{$raiting->article_id}}/{{$raiting->estrella}}/detail">

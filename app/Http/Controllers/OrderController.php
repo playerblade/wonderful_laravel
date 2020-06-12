@@ -281,13 +281,37 @@ class OrderController extends Controller
                         ->join('stars','raiting_articles.star_id','=','stars.id')
                         ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
                         ->where('commentary_articles.article_id',$article_id)
+                        ->where('commentary_articles.is_main',1)
                         ->where('raiting_articles.article_id',$article_id)
                         ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at','users.last_name','users.mother_last_name','users.first_name')
                         ->orderBy('commentary_articles.created_at','desc')->get();
-
+        
+        $commentaries_0 = DB::table('commentary_articles')->join('users','commentary_articles.user_id','=','users.id')
+                        ->join('raiting_articles','raiting_articles.user_id','=','users.id')
+                        ->join('stars','raiting_articles.star_id','=','stars.id')
+                        ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
+                        ->where('commentary_articles.article_id',$article_id)
+                        ->where('commentary_articles.is_main',0)
+                        ->where('commentary_articles.user_id','=',Auth::user()->id)
+                        ->where('raiting_articles.article_id',$article_id)
+                        ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at','users.last_name','users.mother_last_name','users.first_name')
+                        ->orderBy('commentary_articles.created_at','asc')->get();
 //        dd($commentaries);
 
         $raitings = DB::select(
+            "select c.id as user, a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
+            from stars s inner join raiting_articles ra on s.id = ra.star_id
+               inner join users c on ra.user_id = c.id
+               -- inner join roles r on c.role_id = r.id
+               -- inner join commentary_articles ca on c.id = ca.user_id
+               inner join articles a on ra.article_id = a.id
+               -- where c.role_id = 5
+               where a.id = $article_id
+               group by s.id, a.id,a.title, s.star,c.id
+               order by s.star desc;
+
+        ");
+        $raitingsA = DB::select(
             "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
             from stars s inner join raiting_articles ra on s.id = ra.star_id
                inner join users c on ra.user_id = c.id
@@ -302,7 +326,19 @@ class OrderController extends Controller
         ");
         $porcentajes = DB::select("
                 select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
-                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.user_id) as cantidadCliente
+                      from stars s inner join raiting_articles ra on s.id = ra.star_id
+                           inner join users c on ra.user_id = c.id
+                           -- inner join commentary_articles ca on c.id = ca.user_id
+                           inner join articles a on ra.article_id = a.id
+                           where a.id = $article_id
+                           group by s.id, a.title, s.star
+                           order by s.star) as cantidad
+                  group by cantidad.article;
+        ");
+        $porcentajesA = DB::select("
+                select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
+                 from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.user_id) as cantidadCliente
                       from stars s inner join raiting_articles ra on s.id = ra.star_id
                            inner join users c on ra.user_id = c.id
                            inner join commentary_articles ca on c.id = ca.user_id
@@ -337,7 +373,14 @@ class OrderController extends Controller
              group by cantidad.article,cantidad.cantidadCliente;
 
         ");
-        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales'));
+
+        $validacionDeRainting = DB::table('raiting_articles')
+            ->join('users','raiting_articles.user_id','=','users.id')
+            ->join('articles','raiting_articles.article_id','=','articles.id')
+            ->where('articles.id',$article_id)
+            ->where('raiting_articles.user_id',Auth::user()->id)->first();
+            
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales','commentaries_0','validacionDeRainting','porcentajesA','raitingsA'));
     }
 
     public function getTransportFares(Request $request)

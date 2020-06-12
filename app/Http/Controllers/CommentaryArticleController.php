@@ -87,14 +87,12 @@ class CommentaryArticleController extends Controller
      */
     public function update(Request $request, CommentaryArticle $commentaryArticle)
     {
-        // dd($request->all());
-        // $commentaryArticle->article_id = $request->article_id;
-        // $commentaryArticle->user_id = $request->user_id;
-        // $commentaryArticle->comment = $request->comment;
-        // $commentaryArticle->is_main = 1;
-        // $commentaryArticle->update();
-        // dd($commentaryArticle->update());
-        DB::table('commentary_articles')->where('article_id',$request->article_id)->where('user_id',$request->user_id)
+        DB::table('raiting_articles')->where('article_id',$request->article_id)->where('user_id',$request->user_id)
+        ->update(['star_id' => $request->star]);
+        
+        DB::table('commentary_articles')->where('article_id',$request->article_id)
+            ->where('user_id',$request->user_id)
+            ->where('commentary_articles.is_main',1)
             ->update(['comment' => $request->comment]);
 
         return back();
@@ -111,5 +109,16 @@ class CommentaryArticleController extends Controller
         //
     }
 
+    public function commentariesSecondary(Request $request)
+    {
+        $comentariosSegundarios = new CommentaryArticle();
+        $comentariosSegundarios->article_id = $request->article_id;
+        $comentariosSegundarios->user_id = Auth::user()->id;
+        $comentariosSegundarios->comment = $request->comment1;
+        $comentariosSegundarios->is_main = 0;
+        $comentariosSegundarios->save();
+
+        return back()->with('success','Comentario enviado exitosamente');
+    }
 
 }
