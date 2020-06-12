@@ -29,19 +29,33 @@ class ArticleController extends Controller
     {
             $categories = Category::all();
             $sub_categories = SubCategory::all();
-            $colors = Color::all();
+            $colors_store = Color::all();
+            $colors = DB::table('colors')
+                      ->join('color_articles','color_articles.color_id','=','colors.id')
+                      ->join('articles','color_articles.article_id','=','articles.id')
+                      ->select('colors.id','colors.name','color_articles.article_id')->get();
+
             $makers = Maker::select('*')->orderBy('name','asc')->get();
 
             $articles = DB::select(
                 "select sb.id  as sub_id,  a.id as id , a.title as article , m.name as marker , a.stock  as stock,
-                        sb.sub_category as sub_category , c.category as category , a.description as description
+                        sb.sub_category as sub_category , c.category as category , a.description as description, pa.price as price
                        from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
                        inner join categories c on sb.category_id  = c.id
                        inner join makers m on a.maker_id = m.id
+                       inner join price_articles pa on pa.article_id = a.id
+                       where pa.is_current = 1
                        order by a.id desc;
             ");
+
+            $price_articles = PriceArticle::all();
+
+            $images_articles = DB::table('image_articles')
+                               ->join('articles','image_articles.article_id','=','articles.id')
+                               ->select('image_articles.article_id','image_articles.url_image','image_articles.is_main')->get();
+//            dd($images_articles);
             //        dd($articles);
-            return view('articles.crud.index', compact('articles','categories','sub_categories','colors','makers'));
+            return view('articles.crud.index', compact('articles','categories','sub_categories','colors','makers','colors_store','images_articles','price_articles'));
     }
 
     /**
@@ -117,7 +131,6 @@ class ArticleController extends Controller
 
             $quantity_color = DB::table('color_articles')
             ->where('color_articles.article_id','=',$article->id)
-//            ->sum('color_articles.quantity')
             ->select(DB::raw("SUM(color_articles.quantity) as sum_quantity"))->first();
 
             DB::table('articles')
@@ -149,25 +162,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article , SubCategory $sub_categories)
     {
-        $colors = DB::select("
-            select c.name as name , c.id as id
-            from colors c inner join color_articles co on c.id = co.color_id
-                inner join articles a on co.article_id = a.id
-            where a.id = $article->id
-        ");
-
-        $sub_categories = DB::select(
-            "select sb.id as id , sb.sub_category as sub_category
-             from  articles a inner join sub_categories sb on a.sub_category_id  = sb.id
-             inner join categories c on sb.category_id  = c.id
-             where a.id = $article->id ;
-        ");
-        $prices = DB::select("
-            select pa.id as id,  pa.price as price
-            from price_articles pa inner join articles a on pa.article_id = a.id
-            where a.id = $article->id ;
-        ");
-        return view('articles.crud.edit',compact('article','sub_categories','colors','prices'));
+//        hello edit
     }
 
     /**
@@ -179,16 +174,44 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $request->validate([
-            'sub_category_id' => 'required',
-            'title' => 'required',
-            'marker' => 'required',
-            'description' => 'required',
-            'stock' => 'required',
-        ]);
+//        $colorAssings = [];
+//        foreach ($request->input('color_id') as $color_id){
+//            $data = [
+//                'article_id' => $article->id,
+//                'color_id' => $color_id,
+//                'quantity' => 1,
+//                'created_at' => date("Y-m-d H:i:s"),
+//                'updated_at' => date("Y-m-d H:i:s"),
+//            ];
+//            array_push($colorAssings,$data);
+//        }
+//        DB::table('color_articles')->update($colorAssings);
 
-        $article->update($request->all());
-        return redirect()->route('articles.index')->with('success','Article updated successfully');
+//        $quantity_color = DB::table('color_articles')
+//            ->where('color_articles.article_id','=',$article->id)
+//            ->select(DB::raw("SUM(color_articles.quantity) as sum_quantity"))->first();
+//
+//        DB::table('articles')
+//            ->where('id',$article->id)
+//            ->update(['stock' => $quantity_color->sum_quantity]);
+        $article->sub_category_id = $request->sub_category_id;
+        $article->maker_id = $request->maker_id;
+        $article->title = $request->title;
+        $article->description = $request->description;
+        $article->stock = $request->stock;
+        $article->update();
+
+        DB::table('price_articles')
+            ->where('article_id','=',$article->id)
+            ->update(['is_current' => 0]);
+
+        $price_articles = new PriceArticle();
+        $price_articles->article_id = $article->id;
+        $price_articles->price = $request->price_new;
+        $price_articles->is_current = 1;
+        $price_articles->save();
+
+        return back();
     }
 
     /**
