@@ -154,6 +154,7 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::resource('colo_articles',
         'ColorArticleController'
     );
+//    fin cruds
     Route::get('/get_sub_categories',
         'ArticleController@getSubCategories'
     );

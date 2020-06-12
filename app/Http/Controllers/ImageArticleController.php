@@ -19,7 +19,7 @@ class ImageArticleController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->authorizeRole(['administrador'])) {
-            
+
             $articles= Article::all();
 
             $image_articles = DB::select(
@@ -44,7 +44,7 @@ class ImageArticleController extends Controller
     public function create()
     {
         //
-       
+
     }
 
     /**
@@ -55,65 +55,18 @@ class ImageArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $article= new ImageArticle();
-        $article->article_id = $request->article_id;
-        $article->url_image = $request->url_image;
-        $article->is_main = 1;
-        
-        // if ($request->user()->authorizeRole(['administrador'])) { 
-        //     $request->validate([
-        //     ]);
-            
-        //     ImageArticle::create($request->all());
-
-        //     return redirect()->route('articles_images.index')
-        //     ->with('success','Product created successfully.');
-
-        // } else {
-        //     abort(403, 'you do not authorized for this web site');
-        // }
-
-        
-
-        if($request->hasFile('url_image')){
-            /*si la imagen que subes es distinta a la que está por defecto
-            entonces eliminaría la imagen anterior, eso es para evitar
-            acumular imagenes en el servidor*/
-          if($article->url_image != '1.jpg'){
-            Storage::delete('public/imagenesimagenes_articulos/'.$article->url_image);
-          }
-
-
-            //Get filename with the extension
-          $filenamewithExt = $request->file('url_image')->getClientOriginalName();
-
-          //Get just filename
-          $filename = pathinfo($filenamewithExt,PATHINFO_FILENAME);
-
-          //Get just ext
-          $extension = $request->file('url_image')->guessClientExtension();
-
-          //FileName to store
-          $fileNameToStore = time().'.'.$extension;
-
-          //Upload Image
-          $path = $request->file('url_image')->storeAs('public/imagenesimagenes_articulos/',$fileNameToStore);
-
-
-
-        } else {
-
-            $fileNameToStore = $article->url_image;
-            
-            // $fileNameToStore="1.jpg";
+        $image_articles = new ImageArticle();
+        $image_articles->article_id = $request->article_id;
+        if ($request->hasFile('url_image')) {
+            $file = $request->file("url_image");
+            $fileName = $file->getFilename();
+            $file->move(public_path("imagenes/imagenes_articulos/", $fileName));
+            $image_articles->url_image = $fileName;
         }
+        $image_articles->is_main = 0;
+        $image_articles->save();
 
-         $article->url_image=$fileNameToStore;
-        //  dd($article->url_image=$fileNameToStore);
-        //  $article->is_main = 1;
-        $article->save();
-        return Redirect::to("image_articles");
+        return back();
     }
 
     /**

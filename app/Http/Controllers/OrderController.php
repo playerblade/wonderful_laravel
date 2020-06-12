@@ -511,7 +511,7 @@ class OrderController extends Controller
                         // ->where('colors.image',[$request->color_article])
                         ->where('color_articles.color_id',[$colors[0]->id])
                         ->where('article_id',[$request->article_id])
-                        ->update(['color_articles.quantity'=> $quantity[0]->quantity- $request->quantity]);
+                        ->update(['color_articles.quantity'=> $quantity[0]->quantity - $request->quantity]);
 
 
     //            return response()->json($order_datail);
@@ -659,7 +659,7 @@ class OrderController extends Controller
                         ->select('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at',DB::raw("CONCAT(users.last_name,' ',users.mother_last_name,' ',users.first_name) as full_name"))
                         ->where('articles.id',$article_id)
                         ->orderBy('commentary_articles.created_at','desc')->get();
-        
+
         $raitings = DB::select(
             "select a.id as article_id, a.title as article ,s.id as estrella, s.star as nameRaiting , count(ra.star_id) as cantidadCliente
             from stars s inner join raiting_articles ra on s.id = ra.star_id
@@ -670,8 +670,8 @@ class OrderController extends Controller
                -- where c.role_id = 5
                where a.id = $article_id
                group by s.id, a.id,a.title, s.star
-               order by s.star desc;   
-                
+               order by s.star desc;
+
         ");
         $porcentajes = DB::select("
                 select cantidad.article, sum(cantidad.cantidadCliente) as montoTotal
@@ -698,7 +698,7 @@ class OrderController extends Controller
                   group by cantidad.article;
         ");
         $agruparRaitingsIguales = DB::select(
-            "select cantidad.article, cantidad.cantidadCliente as cantidadClientee 
+            "select cantidad.article, cantidad.cantidadCliente as cantidadClientee
             from (select a.title as article ,s.id as estrella, s.star as raiting , count(ra.star_id) as cantidadCliente
                  from stars s inner join raiting_articles ra on s.id = ra.star_id
                       inner join users c on ra.user_id = c.id
@@ -707,12 +707,12 @@ class OrderController extends Controller
                       where a.id = $article_id
                       group by s.id, a.title, s.star
                       order by s.star) as cantidad
-             group by cantidad.article,cantidad.cantidadCliente; 
-                
+             group by cantidad.article,cantidad.cantidadCliente;
+
         ");
         return view('orders.formOrdenDetalleDeArticulo',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales'));
     }
-    
+
 
     public function orderInvoice($order_id){
         $orders = DB::select("

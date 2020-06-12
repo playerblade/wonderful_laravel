@@ -141,7 +141,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('comentaries.store') }}" method="POST">
+                                <form action="{{ route('commentaries.store') }}" method="POST">
                                     @csrf
 
                                     <div class="modal-body">

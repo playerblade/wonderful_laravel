@@ -57,19 +57,19 @@
                         <hr>
                         <h4>Colores:</h4>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                            @foreach($colors as $color)
-                                                <label class="btn btn-default text-center active">
-                                                    <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
-                                                    {{$color->name}}
-                                                    <br>
-                                                    <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
-                                                    <br> Cant.: {{$color->quantity}}
-                                                </label>
+                                @foreach($colors as $color)
+                                    <label class="btn btn-default text-center active">
+                                        <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
+                                        {{$color->name}}
+                                        <br>
+                                        <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
+                                        <br> Cant.: {{$color->quantity}}
+                                    </label>
 
-                                            @endforeach
+                                @endforeach
                         </div>
                         <div class="bg-gray py-2 px-3 mt-4">
-                        
+
                             <h4><small>Precio:</small></h4>
                             @foreach($prices_articles as $prices_article)
                                 @if($prices_article->estadoPrecios == 'actual')
