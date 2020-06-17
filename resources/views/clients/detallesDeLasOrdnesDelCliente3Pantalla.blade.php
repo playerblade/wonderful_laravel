@@ -63,6 +63,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Color</th>
                                     <th>Ver Articulo</th>
                                 </tr>
                                 </thead>
@@ -74,6 +75,9 @@
                                             <td>{{$orderDetail->precio}}</td>
                                             <td>{{$orderDetail->cantidad}}</td>
                                             <td>{{$orderDetail->subTotal}}</td>
+                                            <td>
+                                                <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$orderDetail->color)}}" alt="">
+                                            </td>
                                             <td>
                                                 <button type="submit" class="btn">
                                                     <a class="btn bg-success elevation-1 btn-sm" href="/reportes/cliente/orden/detalle_orden/{{$orderDetail->article_id}}/articulo">
@@ -93,6 +97,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Sub Total</th>
+                                    <th>Color</th>
                                     <th>Ver Articulo</th>
                                 </tr>
                                 </tfoot>

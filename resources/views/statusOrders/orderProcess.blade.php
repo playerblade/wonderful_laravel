@@ -46,6 +46,9 @@
                                             @if($order->estado == 'process')
                                                 <td><span class="right badge badge-primary">{{$order->estado}}</span></td>
                                             @endif
+                                            @if($order->estado == 'dispatched')
+                                                <td><span class="right badge badge-info">{{$order->estado}}</span></td>
+                                            @endif
                                             <td>{{$order->fechaOrden}}</td>
                                             <td>{{$order->usuario}}</td>
                                             <td>
@@ -53,7 +56,7 @@
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-warning">Preparacion</button>
+                                                    <button class="btn btn-warning">Despachado</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                     <input hidden type="number" name="process_order_id" value="3">
