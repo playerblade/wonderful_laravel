@@ -64,13 +64,13 @@ insert into sub_categories (category_id , sub_category, created_at ,updated_at) 
 -- inserts articles 
 insert into articles (sub_category_id, maker_id, title, description, stock, created_at, updated_at)
 values (1,2, 'Dell XPS 13',  'una apariencia estupenda, la cual combina un exterior metálico con un interior blanco de fibra de vidrio tejida.', 12,curdate(),curdate()),
-       (1,2, 'HP 15-DA0001LA 15.6',  'la serie Mi 9 es popular por ser una de las de mayor gama', 10,curdate(),curdate()),
+       (1,2, 'HP 15-DA0001LA 15.6',  'la serie Mi 9 es popular por ser una de las de mayor gama', 12,curdate(),curdate()),
        (2,4, 'MacBook Air (2018)',  'Es relativamente delgada y liviana, tiene el útil sensor Touch ID y la mejor duración de batería de entre las opciones de Mac', 12,curdate(),curdate()),
        (3,1, 'CATLEYA',  'El nombre de Bucaramanga proviene de la lengua Guane, una cultura de expertos en telares.', 12,curdate(),curdate()),
        (4,5, 'Polera manga corta',  ' El traje artesanal de la señorita Antioquia está elaborado en tejidos de lanas e hilazas.', 12,curdate(),curdate()),
        (4,3, 'Vestido Para Boda',  'Polera de colores rojos con estampados para toda la familia', 12,curdate(),curdate()),
        (4,1, 'Vestido Casuale',  'Con estanpado de una cara sonriente de color amarillo', 12,curdate(),curdate()),
-       (5,5, 'CHEVROLET  Montana 2019',  'Carga de la SUV Trax 2019 compacta: Casa rodante Carga de la SUV Trax 2019 compacta: Artista Carga de la SUV Trax 2019 compacta', 8,curdate(),curdate()),
+       (5,5, 'CHEVROLET  Montana 2019',  'Carga de la SUV Trax 2019 compacta: Casa rodante Carga de la SUV Trax 2019 compacta: Artista Carga de la SUV Trax 2019 compacta', 12,curdate(),curdate()),
        (5,3, 'PEUGEOT 108 Pequeño',  'un automóvil realizado en joint-venture entre Toyota y el grupo PSA que da como resultado este modelo así como el Toyota Aygo y el Citroen C1', 12,curdate(),curdate()),
        (6,5, 'Toyota Corolla 2019',   'Motor: 1.8L, 16 válvulas Dual-VVTi.Potencia: 138 caballos @ 6.400 rpm.Torque: 173 Nm @ 4.000 rpm.', 12,curdate(),curdate()),
        (6,4, '2019 Toyota Corolla', 'The black and red beauty features a custom wrap.', 12,curdate(),curdate()),
@@ -87,7 +87,7 @@ values (1,2, 'Dell XPS 13',  'una apariencia estupenda, la cual combina un exter
        (9,3, 'Pasarela',  'Se trata de un grupo de jovenes famosos q se dedican al modelaje y una chica quiere audicionar para ser modelo y como jurado se encuentra uno de los modelos mas populares que le humilla a la señorita...', 12,curdate(),curdate()),
        (10,5, 'La vida es bella ',  'La Segunda Guerra Mundial está a punto de estallar en Europa.', 12,curdate(),curdate()),
        (10,1, 'Sonic. La película',  'Sonic, el famoso erizo azul de la conocida saga de videojuegos vivirá su primera aventura en la pantalla grande', 12,curdate(),curdate()), 
-       (10,4, 'Hasta que la boda nos separe',  'Cuando debido a un equívoco, Alexia Silvia Alonso descubra entre las cosas de su novio Carlos Álex García', 10,curdate(),curdate());
+       (10,4, 'Hasta que la boda nos separe',  'Cuando debido a un equívoco, Alexia Silvia Alonso descubra entre las cosas de su novio Carlos Álex García', 12,curdate(),curdate());
 
 
 
@@ -203,64 +203,42 @@ insert into color_articles (article_id, color_id, quantity) values (5,24,4);
 insert into color_articles (article_id, color_id, quantity) values (6,3,4);
 insert into color_articles (article_id, color_id, quantity) values (6,8,4);
 insert into color_articles (article_id, color_id, quantity) values (6,4,4);
-insert into color_articles (article_id, color_id, quantity) values (6,22,4);
-insert into color_articles (article_id, color_id, quantity) values (6,13,4);
-insert into color_articles (article_id, color_id, quantity) values (6,15,4);
 insert into color_articles (article_id, color_id, quantity) values (7,15,4);
 insert into color_articles (article_id, color_id, quantity) values (7,22,4);
 insert into color_articles (article_id, color_id, quantity) values (7,6,4);
-insert into color_articles (article_id, color_id, quantity) values (7,13,4);
 insert into color_articles (article_id, color_id, quantity) values (8,8,4);
 insert into color_articles (article_id, color_id, quantity) values (8,11,4);
 insert into color_articles (article_id, color_id, quantity) values (8,3,4);
-insert into color_articles (article_id, color_id, quantity) values (8,10,4);
-insert into color_articles (article_id, color_id, quantity) values (8,13,4);
-insert into color_articles (article_id, color_id, quantity) values (8,15,4);
 insert into color_articles (article_id, color_id, quantity) values (9,22,4);
 insert into color_articles (article_id, color_id, quantity) values (9,12,4);
 insert into color_articles (article_id, color_id, quantity) values (9,3,4);
-insert into color_articles (article_id, color_id, quantity) values (9,24,4);
-insert into color_articles (article_id, color_id, quantity) values (9,13,4);
-insert into color_articles (article_id, color_id, quantity) values (9,15,4);
 insert into color_articles (article_id, color_id, quantity) values (10,15,4);
 insert into color_articles (article_id, color_id, quantity) values (10,22,4);
 insert into color_articles (article_id, color_id, quantity) values (10,13,4);
-insert into color_articles (article_id, color_id, quantity) values (10,4,4);
 insert into color_articles (article_id, color_id, quantity) values (11,15,4);
 insert into color_articles (article_id, color_id, quantity) values (11,22,4);
 insert into color_articles (article_id, color_id, quantity) values (11,13,4);
-insert into color_articles (article_id, color_id, quantity) values (11,4,4);
 insert into color_articles (article_id, color_id, quantity) values (12,15,4);
 insert into color_articles (article_id, color_id, quantity) values (12,22,4);
 insert into color_articles (article_id, color_id, quantity) values (12,4,4);
-insert into color_articles (article_id, color_id, quantity) values (12,8,4);
 insert into color_articles (article_id, color_id, quantity) values (13,15,4);
 insert into color_articles (article_id, color_id, quantity) values (13,22,4);
 insert into color_articles (article_id, color_id, quantity) values (13,4,4);
-insert into color_articles (article_id, color_id, quantity) values (13,8,4);
 insert into color_articles (article_id, color_id, quantity) values (14,5,4);
 insert into color_articles (article_id, color_id, quantity) values (14,12,4);
 insert into color_articles (article_id, color_id, quantity) values (14,8,4);
-insert into color_articles (article_id, color_id, quantity) values (14,3,4);
 insert into color_articles (article_id, color_id, quantity) values (15,5,4);
 insert into color_articles (article_id, color_id, quantity) values (15,12,4);
 insert into color_articles (article_id, color_id, quantity) values (15,8,4);
-insert into color_articles (article_id, color_id, quantity) values (15,3,4);
 insert into color_articles (article_id, color_id, quantity) values (16,5,4);
 insert into color_articles (article_id, color_id, quantity) values (16,13,4);
 insert into color_articles (article_id, color_id, quantity) values (16,8,4);
-insert into color_articles (article_id, color_id, quantity) values (16,3,4);
 insert into color_articles (article_id, color_id, quantity) values (17,13,4);
 insert into color_articles (article_id, color_id, quantity) values (17,5,4);
 insert into color_articles (article_id, color_id, quantity) values (17,4,4);
-insert into color_articles (article_id, color_id, quantity) values (17,11,4);
-insert into color_articles (article_id, color_id, quantity) values (17,8,4);
-insert into color_articles (article_id, color_id, quantity) values (17,22,4);
 insert into color_articles (article_id, color_id, quantity) values (18,5,4);
 insert into color_articles (article_id, color_id, quantity) values (18,4,4);
 insert into color_articles (article_id, color_id, quantity) values (18,11,4);
-insert into color_articles (article_id, color_id, quantity) values (18,8,4);
-insert into color_articles (article_id, color_id, quantity) values (18,22,4);
 
 insert into color_articles (article_id, color_id, quantity) values (19,22,4);
 insert into color_articles (article_id, color_id, quantity) values (19,4,4);
@@ -270,12 +248,16 @@ insert into color_articles (article_id, color_id, quantity) values (20,12,4);
 insert into color_articles (article_id, color_id, quantity) values (20,8,4);
 insert into color_articles (article_id, color_id, quantity) values (21,3,4);
 insert into color_articles (article_id, color_id, quantity) values (21,5,4);
+insert into color_articles (article_id, color_id, quantity) values (21,11,4);
 insert into color_articles (article_id, color_id, quantity) values (22,12,4);
+insert into color_articles (article_id, color_id, quantity) values (22,13,4);
 insert into color_articles (article_id, color_id, quantity) values (22,8,4);
 insert into color_articles (article_id, color_id, quantity) values (23,3,4);
 insert into color_articles (article_id, color_id, quantity) values (23,5,4);
+insert into color_articles (article_id, color_id, quantity) values (23,1,4);
 insert into color_articles (article_id, color_id, quantity) values (24,13,4);
 insert into color_articles (article_id, color_id, quantity) values (24,8,4);
+insert into color_articles (article_id, color_id, quantity) values (24,10,4);
 insert into color_articles (article_id, color_id, quantity) values (25,3,4);
 insert into color_articles (article_id, color_id, quantity) values (25,13,4);
 insert into color_articles (article_id, color_id, quantity) values (25,5,4);
