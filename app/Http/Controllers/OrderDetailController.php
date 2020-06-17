@@ -148,25 +148,28 @@ class OrderDetailController extends Controller
 
     public function detallesDeLasOrdnesDelCliente($order_id, Request $request , OrderDetail $orderDetails){
 
-            $orderDetails = DB::select("
-                select a.id as article_id, o.id as order_id ,
-                       c.id as client_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
-                       od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
-                       od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
-                       o.created_at as fecha
-                from roles r inner join users c on r.id = c.role_id
-                      inner join orders o on c.id = o.user_id
-                      inner join order_details od on o.id = od.order_id
-                      inner join articles a on od.article_id = a.id
-                      inner join price_articles pa on a.id = pa.article_id
-                and o.id = $order_id
-                and r.role = 'cliente'
-                and pa.is_current = 1
-                -- group by c.id, od.id, a.title, pa.price
-                group by a.id, o.id, c.id, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name), od.id, a.title, pa.price, od.quantity, od.sub_total, o.created_at
-                order by fecha desc;
-                "
-            );
+        $orderDetails = DB::select("
+        select a.id as article_id, o.id as order_id ,
+               c.id as client_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
+               od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
+               od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
+               o.created_at as fecha, od.color_article as color
+               -- col.image as image
+        from roles r inner join users c on r.id = c.role_id
+               inner join orders o on c.id = o.user_id
+               inner join order_details od on o.id = od.order_id
+               inner join articles a on od.article_id = a.id
+               inner join price_articles pa on a.id = pa.article_id
+               -- join color_articles ca on a.id = ca.article_id
+               -- inner join colors col on ca.color_id = col.id
+        and o.id = $order_id
+        and r.role = 'cliente'
+        and pa.is_current = 1
+        -- group by c.id, od.id, a.title, pa.price
+        group by a.id, o.id, c.id, concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name), od.id, a.title, pa.price, od.quantity, od.sub_total, o.created_at,od.color_article
+        order by fecha desc, od.id desc;
+        "
+);
 
             $totalAmounts = DB::select("
                 select o.id as order_id, sum(od.sub_total) as montoTotal
