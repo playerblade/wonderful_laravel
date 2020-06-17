@@ -285,7 +285,7 @@ class OrderController extends Controller
                         ->where('raiting_articles.article_id',$article_id)
                         ->groupBy('commentary_articles.comment','commentary_articles.id','raiting_articles.star_id','commentary_articles.created_at','users.last_name','users.mother_last_name','users.first_name')
                         ->orderBy('commentary_articles.created_at','desc')->get();
-        
+
         $commentaries_0 = DB::table('commentary_articles')->join('users','commentary_articles.user_id','=','users.id')
                         ->join('raiting_articles','raiting_articles.user_id','=','users.id')
                         ->join('stars','raiting_articles.star_id','=','stars.id')
@@ -379,8 +379,12 @@ class OrderController extends Controller
             ->join('articles','raiting_articles.article_id','=','articles.id')
             ->where('articles.id',$article_id)
             ->where('raiting_articles.user_id',Auth::user()->id)->first();
-            
-        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales','commentaries_0','validacionDeRainting','porcentajesA','raitingsA'));
+
+        $images_articles = DB::table('image_articles')
+            ->join('articles','image_articles.article_id','=','articles.id')
+            ->select('image_articles.article_id','image_articles.url_image','image_articles.is_main')->get();
+
+        return view('orders.formOrder',compact('articles','cities','colors','prices','stocks','orders_validation','commentaries','raitings','porcentajes','maximoDeEstrella','agruparRaitingsIguales','commentaries_0','validacionDeRainting','porcentajesA','raitingsA','images_articles'));
     }
 
     public function getTransportFares(Request $request)
@@ -429,18 +433,19 @@ class OrderController extends Controller
         ");
         $categories = Category::select('categories.*')->orderBy('category','asc')->get();
         $makers = Maker::select('makers.*')->orderBy('name','asc')->get();
-        $articles = DB::select("
-            select a.title as articulo , m.name as fabricante, ia.url_image as image,
-                       pa.price as price , a.id as id
-                from articles a inner join image_articles ia on a.id = ia.article_id
-                    inner join sub_categories sc on a.sub_category_id = sc.id
-                    inner join categories c on sc.category_id = c.id
-                    inner join price_articles pa on a.id = pa.article_id
-                    inner join makers m on a.maker_id = m.id
-                    and pa.is_current = 1
-                    and ia.is_main = 1
-               order by a.title desc;
-        ");
+
+        $articles = DB::table('categories')
+            ->join('sub_categories','categories.id','=','sub_categories.category_id')
+            ->join('articles','sub_categories.id','=','articles.sub_category_id')
+            ->join('image_articles','articles.id','=','image_articles.article_id')
+            ->join('price_articles','articles.id','=','price_articles.article_id')
+            ->join('makers','articles.maker_id','=','makers.id')
+            ->where('price_articles.is_current','=',1)
+            ->where('image_articles.is_main','=',1)
+            ->select('articles.id','articles.title','articles.stock','makers.name','image_articles.url_image','price_articles.price')
+            ->orderBy('articles.title','asc')
+            ->paginate(5);
+
         return view('orders.showMore',compact('articles','orders','categories','makers'));
     }
 
@@ -479,7 +484,12 @@ class OrderController extends Controller
             from orders o
             where o.id = $order_id;
         ");
-        return view('orders.formOrderMore',compact('articles','cities','colors','prices','stocks','orders'));
+
+        $images_articles = DB::table('image_articles')
+            ->join('articles','image_articles.article_id','=','articles.id')
+            ->select('image_articles.article_id','image_articles.url_image','image_articles.is_main')->get();
+
+        return view('orders.formOrderMore',compact('articles','cities','colors','prices','stocks','orders','images_articles'));
     }
 
     public function addMoreArticles(Request $request)

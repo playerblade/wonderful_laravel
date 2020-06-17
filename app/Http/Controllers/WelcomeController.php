@@ -70,7 +70,11 @@ class WelcomeController extends Controller
             where a.id = $article_id;
         ");
 
-        return view('welcome.articleDetail',compact('articles','stocks','cities','prices','colors'));
+        $images_articles = DB::table('image_articles')
+            ->join('articles','image_articles.article_id','=','articles.id')
+            ->select('image_articles.article_id','image_articles.url_image','image_articles.is_main')->get();
+
+        return view('welcome.articleDetail',compact('articles','stocks','cities','prices','colors','images_articles'));
     }
 
     public function admin(){

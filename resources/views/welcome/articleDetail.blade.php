@@ -14,7 +14,10 @@
                                 <img src="{{asset('/imagenes/imagenes_articulos/'.$article->image)}}" class="product-image" alt="Product Image">
                             </div>
                             <div class="col-12 product-image-thumbs">
-                                <a href="#" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver Mas Imagenes</a>
+                                <a href="{{ route('articles.show',$article->id) }}" data-toggle="modal" data-target="#modal-article-img{{$article->id}}"
+                                   class="btn btn-sm bg-gradient-primary btn-block">
+                                    Ver ma imagnes
+                                </a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -107,6 +110,58 @@
     </div>
     <br>
     <!-- /.card -->
+
+    {{--       modal start image --}}
+    @foreach($articles as $article)
+        <div class="modal fade" id="modal-article-img{{$article->id}}">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content card-purple card-outline">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Imagenes Articulos</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" >
+                            @foreach($images_articles as $image)
+                                @if($image->article_id == $article->id)
+                                    <div class="col-3">
+                                        @if($image->is_main == 1)
+                                            <div class="card bg-light">
+                                                <div class="ribbon-wrapper ribbon-lg">
+                                                    <div class="ribbon bg-success text-sm">
+                                                        Principal
+                                                    </div>
+                                                </div>
+                                                <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                            </div>
+                                        @else
+                                            <div class="card bg-light">
+                                                <div class="ribbon-wrapper ribbon-lg">
+                                                    <div class="ribbon bg-info text-sm">
+                                                        Secundario
+                                                    </div>
+                                                </div>
+                                                <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    @endforeach
+    {{--   modal end image--}}
 @endsection
 @section('script_color_form')
     <script type="text/javascript">

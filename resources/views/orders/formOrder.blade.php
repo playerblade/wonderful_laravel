@@ -70,7 +70,10 @@
                                             <img src="{{asset('/imagenes/imagenes_articulos/'.$article->image)}}" class="product-image" alt="Product Image">
                                         </div>
                                         <div class="col-12 product-image-thumbs">
-                                            <a href="#" class="btn btn-block bg-gradient-primary btn-sm mt-2">Ver Mas Imagenes</a>
+                                            <a href="{{ route('articles.show',$article->id) }}" data-toggle="modal" data-target="#modal-article-img{{$article->id}}"
+                                               class="btn btn-sm bg-gradient-primary btn-block">
+                                               Ver ma imagnes
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
@@ -177,6 +180,58 @@
                     </form>
                 </div>
             </div>
+
+                {{--       modal start image --}}
+                @foreach($articles as $article)
+                    <div class="modal fade" id="modal-article-img{{$article->id}}">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content card-purple card-outline">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Imagenes Articulos</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" >
+                                        @foreach($images_articles as $image)
+                                            @if($image->article_id == $article->id)
+                                                <div class="col-3">
+                                                    @if($image->is_main == 1)
+                                                        <div class="card bg-light">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-success text-sm">
+                                                                    Principal
+                                                                </div>
+                                                            </div>
+                                                            <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                                        </div>
+                                                    @else
+                                                        <div class="card bg-light">
+                                                            <div class="ribbon-wrapper ribbon-lg">
+                                                                <div class="ribbon bg-info text-sm">
+                                                                    Secundario
+                                                                </div>
+                                                            </div>
+                                                            <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                @endforeach
+                {{--   modal end image--}}
             <!-- /.row -->
             <div class="row">
                 <div class="card-body">
@@ -337,37 +392,37 @@
                                         </div>
                                         <!-- /.modal -->
                                         <!-- secondary comments -->
-                                            <nav class="w-100">
-                                                <div class="nav nav-tabs" id="product-tab" role="tablist">
-                                                    <a class="nav-item nav-link link-black text-sm" id="comentarios-mas-tab" data-toggle="tab" href="#comentarios-mas" role="tab" aria-controls="comentarios-mas" aria-selected="false">
-                                                        <i class="fas fa-eye mr-1"></i> 1 comentario más
-                                                    </a>
-                                                </div>
-                                            </nav>
-                                            <div class="tab-content p-3" id="nav-tabContent">
-                                                <div class="tab-pane fade" id="comentarios-mas" role="tabpanel" aria-labelledby="comentarios-mas-tab">
-                                                    @foreach($commentaries_0 as $commentary)
-                                                        <p>
-                                                        {{$commentary->comment}}
-                                                        </p>
-                                                    @endforeach
-                                                    <form action="{{ route('commentaries_secondary') }}" method="POST">
-                                                        @csrf
-                                                        <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
-
-                                                        <div class="input-group mb-3">
-                                                            <textarea name="comment1" cols="3" rows="1" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text bg-success">
-                                                                    <button class="btn bg-success">
-                                                                        <h3><i class="fas fa-arrow-alt-circle-right bg-success"></i></h3>
-                                                                    </button>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                        <nav class="w-100">
+                                            <div class="nav nav-tabs" id="product-tab" role="tablist">
+                                                <a class="nav-item nav-link link-black text-sm" id="comentarios-mas-tab" data-toggle="tab" href="#comentarios-mas" role="tab" aria-controls="comentarios-mas" aria-selected="false">
+                                                    <i class="fas fa-eye mr-1"></i> 1 comentario más
+                                                </a>
                                             </div>
+                                        </nav>
+                                        <div class="tab-content p-3" id="nav-tabContent">
+                                            <div class="tab-pane fade" id="comentarios-mas" role="tabpanel" aria-labelledby="comentarios-mas-tab">
+                                                @foreach($commentaries_0 as $commentary)
+                                                    <p>
+                                                    {{$commentary->comment}}
+                                                    </p>
+                                                @endforeach
+                                                <form action="{{ route('commentaries_secondary') }}" method="POST">
+                                                    @csrf
+                                                    <input hidden type="number" name="article_id" value="{{$articles[0]->id}}">
+
+                                                    <div class="input-group mb-3">
+                                                        <textarea name="comment1" cols="3" rows="1" class="form-control" placeholder="Cuenta lo que te parecio el producto. ¿Qué recomiendas? ¿Por qué?"></textarea>
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text bg-success">
+                                                                <button class="btn bg-success">
+                                                                    <h3><i class="fas fa-arrow-alt-circle-right bg-success"></i></h3>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </div>
                             @else

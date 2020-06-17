@@ -21,7 +21,6 @@
     <!-- Default box -->
     <div class="container">
         <div class="card card-purple card-outline elevation-5">
-            <!-- <form action="{{route('orders.store')}}" method="POST"> -->
             <form action="{{route('storeMoreArticles')}}" method="POST">
                 @csrf
                 @foreach($articles as $article)
@@ -30,17 +29,15 @@
                             <div class="col-12 col-sm-6">
                                 <input hidden  type="number" name="user_id" value="{{ Auth::user()->id }}">
                                 <input hidden  type="number" name="article_id" value="{{ $article->id }}">
-{{--                                <h3  class="d-inline-block d-sm-none">{{$article->articulo}}</h3>--}}
                                 <h3  class="d-inline-block d-sm-none"><input type="text" name="title" value="{{$article->articulo}}"></h3>
                                 <div  class="col-12">
                                     <img src="{{asset('/imagenes/imagenes_articulos/'.$article->image)}}" class="product-image" alt="Product Image">
                                 </div>
                                 <div class="col-12 product-image-thumbs">
-                                    <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
+                                    <a href="{{ route('articles.show',$article->id) }}" data-toggle="modal" data-target="#modal-article-img{{$article->id}}"
+                                       class="btn btn-sm bg-gradient-primary btn-block">
+                                        Ver ma imagnes
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -55,13 +52,25 @@
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     @foreach($colors as $color)
                                         <label class="btn btn-default text-center active">
+                                                @if($color->quantity >= 1)
+                                                    <div class="ribbon-wrapper">
+                                                        <div class="ribbon bg-success text-small">
+                                                            Available
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="ribbon-wrapper">
+                                                        <div class="ribbon bg-danger text-small">
+                                                            Exhausted
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             <input type="radio" name="color_option" id="color_option1" autocomplete="off" checked="">
                                             {{$color->name}}
                                             <br>
-                                                <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
-                                                <br> Cant.: {{$color->quantity}}
+                                            <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$color->image)}}" alt="">
+                                            <br> Cant.: {{$color->quantity}}
                                         </label>
-
                                     @endforeach
                                 </div>
 {{--                                <form action="">--}}
@@ -125,6 +134,59 @@
     </div>
     <br>
     <!-- /.card -->
+
+    {{--       modal start image --}}
+    @foreach($articles as $article)
+        <div class="modal fade" id="modal-article-img{{$article->id}}">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content card-purple card-outline">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Imagenes Articulos</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" >
+                            @foreach($images_articles as $image)
+                                @if($image->article_id == $article->id)
+                                    <div class="col-3">
+                                        @if($image->is_main == 1)
+                                            <div class="card bg-light">
+                                                <div class="ribbon-wrapper ribbon-lg">
+                                                    <div class="ribbon bg-success text-sm">
+                                                        Principal
+                                                    </div>
+                                                </div>
+                                                <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                            </div>
+                                        @else
+                                            <div class="card bg-light">
+                                                <div class="ribbon-wrapper ribbon-lg">
+                                                    <div class="ribbon bg-info text-sm">
+                                                        Secundario
+                                                    </div>
+                                                </div>
+                                                <img class="img-fluid mb-2" src="{{asset('/imagenes/imagenes_articulos/'.$image->url_image)}}">
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    @endforeach
+    {{--   modal end image--}}
+
 @endsection
 @section('script_cities')
     <script type="text/javascript">

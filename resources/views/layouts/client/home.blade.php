@@ -81,11 +81,6 @@
                                             <h3>{{$article->title}}</h3>
                                             <br>
                                             <h4>Price :{{$article->price}}</h4>
-                                            @foreach ($stocks as $stock)
-                                                <input hidden type="number" name="stocks" value="{{$stock->id}}">
-                                                <h5><b>Stock: </b>{{$stock->stock}}.</h5>
-                                                <input hidden type="number" name="stocks" value="{{$stock->stock}}">
-                                            @endforeach
                                             <p>!Compra ahora!!!</p>
                                         </div>
                                             @if($article->stock >= 1)
@@ -152,7 +147,6 @@
                         $('#sub_categories').append("<option value=''>Selecione una sub categoria</option>");
                         $.each(sub_categories, function (index , value){
                             $('#sub_categories').append("<option value='"+index+"'>"+value+"</option>");
-
                         });
                     }).done();
 

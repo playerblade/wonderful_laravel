@@ -81,6 +81,7 @@ class StatusOrderController extends Controller
             ->join('status_orders','user_status_orders.status_order_id','=','status_orders.id')
             ->where('status_order_id',$statusOrder->id)
             ->update(['user_id' => $request->user_id]);
+
 //              step 2  if all good commit
             DB::commit();
         } catch (\Exception $exception) {
