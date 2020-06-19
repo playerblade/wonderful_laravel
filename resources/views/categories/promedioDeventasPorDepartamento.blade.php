@@ -22,14 +22,35 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
-                <div class="col-lg-12">
+                <div class="col-lg-3">
+                    <div class="sticky-top mb-3">
+                        <div class="card card-purple card-outline">
+                            <div class="card-header">
+                                <b>Categorias</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    @foreach($all_categories as $all_category)
+                                        <div class="col-6">
+                                            <div class="external-event bg-gradient-purple" style="position: relative;">
+                                                <a href="/reportes/categories_promedio/{{$all_category->id}}" class="text-black-50">{{$all_category->category}}</a>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
                     <div class="card card-primary card-outline">
-                    {{--                <div class="card-header">--}}
-                    {{--                    <h3 class="card-title">DataTable with default features</h3>--}}
-                    {{--                </div>--}}
+                        <div class="card-header">
+                            <b>Promedio de ventas por departamento</b>
+                        </div>
                     <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>Departamentos</th>
@@ -43,8 +64,8 @@
                                     <tr>
                                         <td>{{$categoria->departamento}}</td>
                                         <td>{{$categoria->producto}}</td>
-                                        <td>{{$categoria->cantidad}}</td>
-                                        <td>{{$categoria->totalVenta}}</td>
+                                        <td>&ensp;&ensp;&ensp;{{$categoria->cantidad}}</td>
+                                        <td>&ensp;&ensp;&ensp;{{$categoria->totalVenta}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

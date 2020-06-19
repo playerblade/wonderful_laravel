@@ -64,14 +64,28 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::get('/reportes/clientes' ,
         'ClientController@cantidadDeProductosPorCliente_2'
     )->name('clientes');
+//    consulta 2.a
+    Route::get('/reportes/clientes/{anio}/anio' ,
+        'ClientController@cantidadDeProductosPorCliente_2a'
+    );
+
     //    consulta 3
     Route::get('/reportes/categorias',
         'CategoryController@productosVendidosPorDepartamento'
     )->name('categorias');
+//    consulta 3.a
+    Route::get('/reportes/categorias_a/',
+        'CategoryController@productosVendidosPorDepartamento_a'
+    )->name('categorias_a');
+
     //    consulta 4
     Route::get('/reportes/categories_promedio',
         'CategoryController@promedioDeventasPorDepartamento'
     )->name('categories_promedio');
+    //    consulta 4.a
+    Route::get('reportes/categories_promedio/{category_id}',
+        'CategoryController@promedioDeventasPorDepartamento_a'
+    );
 
     //    consulta 4 barChart
     Route::get('/reportes/categories_promedio_chart',
@@ -249,7 +263,7 @@ Route::group(['middleware' => 'web','role:cliente'], function () {
     Route::post('/commentaries/secondary',
         'CommentaryArticleController@commentariesSecondary'
     )->name('commentaries_secondary');
-    
+
     Route::get('/order/DetalleDelArticulo/{article_id}/form',
         'OrderController@formOrdenDetalleDeArticulo'
     );

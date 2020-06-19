@@ -72,14 +72,14 @@
                                                     <td style="opacity: .4"><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
-                                            <td style="opacity: .4">{{$order->fecha}}</td>
+                                            <td style="opacity: .4">{{$order->fechaOrden}}</td>
                                             <td style="opacity: .4"><span class="right badge badge-danger">{{$order->usuario}}</span></td>
                                             <td>
                                                 <form action="{{route('status_orders.update',$order->order_id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-success" disabled>Proceso</button>
+                                                    <button class="btn btn-success" disabled>Entregado</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                     <input hidden type="number" name="process_order_id" value="2">

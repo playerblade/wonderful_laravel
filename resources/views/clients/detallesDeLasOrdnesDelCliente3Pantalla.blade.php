@@ -55,7 +55,7 @@
                     <!-- /.card-header -->
                         <div class="card-body">
                             {{--                            table-striped projects  otro estilo=> table-bordered--}}
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th class="text-center">&ensp;&ensp;ID</th>

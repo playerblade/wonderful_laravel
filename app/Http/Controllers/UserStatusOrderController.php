@@ -93,13 +93,13 @@ class UserStatusOrderController extends Controller
                 "
                 select concat_ws(' ' ,u.last_name,u.mother_last_name,u.first_name,u.second_name) as colaborador , count(so.order_id) as cantidadDespachado
                 from roles r join users u on u.role_id = r.id
-                    -- and r.role = 'colaborador'
-                    and r.id = 2
+                    and r.role = 'colaborador'
+                    -- and r.id = 2
                     join user_status_orders uso on u.id = uso.user_id
                     join status_orders so on uso.status_order_id = so.id
                     join process_orders po on so.process_order_id = po.id
-                    -- and po.process_order = 'dispatched'
-                    and po.id = 3
+                    and po.process_order = 'dispatched'
+                    -- and po.id = 3
                     join orders o on so.order_id = o.id
                 group by u.id,u.last_name,u.mother_last_name,u.first_name,u.second_name;
             "
@@ -117,22 +117,18 @@ class UserStatusOrderController extends Controller
     {
         if ($request->user()->hasRole('administrador')) {
             $users = DB::select(
-                "select concat_ws(' ',u.last_name,u.mother_last_name,u.first_name,u.second_name) as verificadores,
-            COUNT(o.id) as cantidadEntregado
-            FROM roles r INNER JOIN users u
-            ON u.role_id = r.id
-            AND r.role = 'verificador'
-            INNER JOIN user_status_orders ue
-            ON u.id = ue.user_id
-            INNER JOIN status_orders eo
-            ON ue.status_order_id = eo.id
-            INNER JOIN process_orders p
-            ON eo.process_order_id = p.id
-            AND p.process_order = 'delivered'
-            INNER JOIN orders o
-            on eo.order_id = o.id
-            GROUP BY verificadores;"
-            );
+                "select concat_ws(' ' ,u.last_name,u.mother_last_name,u.first_name,u.second_name) as verificadores , count(so.order_id) as cantidadEntregado
+                from roles r join users u on u.role_id = r.id
+                    and r.role = 'verificador'
+                    -- and r.id = 2
+                    join user_status_orders uso on u.id = uso.user_id
+                    join status_orders so on uso.status_order_id = so.id
+                    join process_orders po on so.process_order_id = po.id
+                    and po.process_order = 'delivered'
+                    -- and po.id = 3
+                    join orders o on so.order_id = o.id
+                group by u.id,u.last_name,u.mother_last_name,u.first_name,u.second_name;
+            ");
             //    dd($users);
             return view('users.listaDeVerificadoresYSuCantidadDeOrdenEntregado',compact('users'));
         } else {

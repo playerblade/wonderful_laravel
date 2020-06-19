@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\StatusOrder;
 use App\UserStatusOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StatusOrderController extends Controller
@@ -77,10 +78,14 @@ class StatusOrderController extends Controller
             $statusOrder->process_order_id = $request->process_order_id;
             $statusOrder->update();
 
-            DB::table('user_status_orders')
-            ->join('status_orders','user_status_orders.status_order_id','=','status_orders.id')
-            ->where('status_order_id',$statusOrder->id)
-            ->update(['user_id' => $request->user_id]);
+//            DB::table('user_status_orders')
+//            ->join('status_orders','user_status_orders.status_order_id','=','status_orders.id')
+//            ->where('status_order_id',$statusOrder->id)
+//            ->update(['user_id' => Auth::user()->id]);
+
+            $user_status_order = UserStatusOrder::find($statusOrder->id);
+            $user_status_order->user_id = Auth::user()->id;
+            $user_status_order->update();
 
 //              step 2  if all good commit
             DB::commit();

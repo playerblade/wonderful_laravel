@@ -45,10 +45,10 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="card card-info card-outline">
-                    <div class="card-header">
-                        <b>Clientes</b>
-                    </div>
-                    <!-- /.card-header -->
+                        <div class="card-header">
+                            <b>Clientes</b>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example3" class="table table-striped elevation-2">
                                 <thead>

@@ -26,52 +26,48 @@
                     <div class="sticky-top mb-3">
                         <div class="card card-purple card-outline">
                             <div class="card-header">
-                                <b>Anios Disponibles</b>
+                                <b>Categorias</b>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    @foreach($years as $year)
-                                        <div class="col-6">
-                                            <div class="external-event bg-gradient-purple elevation-2" style="position: relative;">
-                                                <a href="/reportes/clientes/{{$year->anio}}/anio" class="text-black-50">{{$year->anio}}</a>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    @endforeach
+                            <form action="{{route('categorias_a')}}">
+                                <div class="card-body">
+                                    <input type="date" name="date_1" class="form-control">
+                                    <hr>
+                                    <input type="date" name="date_2" class="form-control">
                                 </div>
-                            </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-block bg-gradient-purple btn-sm">Buscar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-9">
-                    <div class="card card-info card-outline">
-                    <div class="card-header">
-                        <b>Clientes</b>
-                    </div>
-                    <!-- /.card-header -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <b>Ventas</b>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Cantidad De Producto</th>
-                                    <th>Anio</th>
+                                    <th>Departamentos</th>
+                                    <th class="text-center">Catidad de Ventas</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($clients as $client)
+                                @foreach($categories as $category)
                                     <tr>
-                                        <td>{{$client->cliente}}</td>
-                                        <td>{{$client->cantidadProducto}}</td>
-                                        <td>{{$client->anio}}</td>
+                                        <td>{{$category->departamentos}}</td>
+                                        <td class="text-center">{{$category->cantidadVentas}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Cantidad De Producto</th>
-                                    <th>Anio</th>
+                                    <th>Departamentos</th>
+                                    <th class="text-center">Catidad de Ventas</th>
                                 </tr>
                                 </tfoot>
                             </table>

@@ -55,7 +55,7 @@
                                                     <td style="opacity: .4"><span class="right badge badge-success">{{$order->estado}}</span></td>
                                                 @endif
                                             @endif
-                                            <td style="opacity: .4">{{$order->fecha}}</td>
+                                            <td style="opacity: .4">{{$order->fechaOrden}}</td>
                                             <td style="opacity: .4"><span class="right badge badge-danger">{{$order->usuario}}</span></td>
                                         @endif
 

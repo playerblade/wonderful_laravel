@@ -24,30 +24,30 @@
                 <!-- /.col-md-6 -->
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
-                    {{--                <div class="card-header">--}}
-                    {{--                    <h3 class="card-title">DataTable with default features</h3>--}}
-                    {{--                </div>--}}
+                        <div class="card-header">
+                            <b>Usuario Colaboradores y la cantidad de ordenes que DESPACHARON</b>
+                        </div>
                     <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>Colaborador</th>
-                                    <th>Cantidad De Ordenes Despachados</th>
+                                    <th class="text-center">Cantidad De Ordenes Despachados</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->colaborador}}</td>
-                                        <td>{{$user->cantidadDespachado}}</td>
+                                        <td class="text-center">{{$user->cantidadDespachado}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>Colaborador</th>
-                                    <th>Cantidad De Ordenes Despachados</th>
+                                    <th class="text-center">Cantidad De Ordenes Despachados</th>
                                 </tr>
                                 </tfoot>
                             </table>

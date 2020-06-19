@@ -56,7 +56,7 @@
                                                     @csrf
                                                     @method('PUT')
                                                     &ensp;&ensp;&ensp;&ensp;&ensp;
-                                                    <button class="btn btn-warning">Despachado</button>
+                                                    <button class="btn btn-info">Proceso</button>
                                                     <input hidden type="number" name="order_id" value="{{$order->order_id}}">
                                                     <input hidden type="number" name="user_id" value="{{Auth::user()->id}}">
                                                     <input hidden type="number" name="process_order_id" value="3">

@@ -31,7 +31,7 @@
                     <!-- /.card-header -->
                         <div class="card-body">
                             {{--                            table-striped projects  otro estilo=> table-bordered--}}
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>&ensp; Numero de orden</th>
@@ -61,7 +61,7 @@
                                             @if($order->estado == 'entregado')
                                                 <td><span class="right badge badge-success">{{$order->estado}}</span></td>
                                             @endif
-                                            <td>{{$order->fechaOrden}}</td>
+                                            <td>{{\Carbon\Carbon::parse($order->fechaOrden)->isoFormat('LLL')}}</td>
                                             {{--                                        cuando el estado es inicial se matiene el usuario como el cliente mismo--}}
                                             @if($order->estado == 'inicial')
                                                 <td><span class="right badge badge-secondary">{{$order->usuario}}</span></td>

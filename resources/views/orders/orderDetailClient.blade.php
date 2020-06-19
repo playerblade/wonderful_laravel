@@ -57,11 +57,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            {{--                            table-striped projects  otro estilo=> table-bordered--}}
                             <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
-{{--                                    <th class="text-center">&ensp;&ensp;ID</th>--}}
                                     <th>Articulo</th>
                                     <th>Precio</th>
                                     <th>Cantidad</th>
@@ -74,8 +72,7 @@
                                 @foreach($orderDetails as $orderDetail)
                                     <tr>
                                         <input hidden type="text" value="{{$orderDetail->color}}" name="color">
-{{--                                        <th class="text-center">{{$orderDetail->article_id}}</th>--}}
-                                        <td>{{$orderDetail->articulo}}</td>
+                                        <td>{{$orderDetail->articulo}} <input hidden type="number" name="article" value="{{$orderDetail->articulo}}"></td>
                                         <td>{{$orderDetail->precio}}</td>
                                         <td>{{$orderDetail->cantidad}} <input hidden type="number" name="quantity" value="{{$orderDetail->cantidad}}"> </td>
                                         <td>{{$orderDetail->subTotal}}</td>
@@ -83,31 +80,16 @@
                                             <img class="img-circle fa-2x" style="width: 35px; height: 35px;" src="{{asset('/imagenes/imagenes_articulos/'.$orderDetail->color)}}" alt="">
                                         </td>
                                         <td class="text-center">
-                                            <!-- <div class="mt-2"> -->
-{{--                                            <button type="button" class="btn bg-yellow elevation-1 btn-sm" data-toggle="modal" data-target="#modal-xl">--}}
-{{--                                                <i class="fas fa-star"></i>&ensp;Raiting--}}
-{{--                                                ★Raiting--}}
-{{--                                            </button>--}}
-                                            <!-- </div> -->
                                             <a class="btn bg-success elevation-1 btn-sm" href="/order/{{$orderDetail->article_id}}/form">
                                                 <i class="fas fa-eye"></i>
                                                 <span class="right badge badge-success">Ver</span>
                                             </a>
-{{--                                            <button type="submit" class="btn">--}}
-{{--                                                <a class="btn bg-danger elevation-1 btn-sm" href="/reportes/cliente/orden/detalle_orden/{{$orderDetail->article_id}}/articulo">--}}
-{{--                                                    <i class="fas fa-trash"></i>--}}
-{{--                                                    <span class="right badge badge-danger">Quitar</span>--}}
-{{--                                                    --}}{{--                                                    &ensp;Ver | {{$orderDetail->articulo}}--}}
-{{--                                                </a>--}}
-{{--                                            </button>--}}
-
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-{{--                                    <th class="text-center">&ensp;ID</th>--}}
                                     <th>Articulo</th>
                                     <th>Precio</th>
                                     <th>Cantidad</th>

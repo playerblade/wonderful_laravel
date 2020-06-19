@@ -110,25 +110,51 @@ class CategoryController extends Controller
 //dev sara
     public function productosVendidosPorDepartamento(Request $request, Category $categories){
 //        departamento = category
-        $request->user()->hasRole('administrador');
+        if ( $request->user()->hasRole('administrador')){
 
-        $categories = DB::select(
-            "
-                select c.category as departamentos,  count(eo.process_order_id) as cantidadVentas
-                from categories c join sub_categories sc on c.id = sc.category_id
-                     join articles a on sc.id = a.sub_category_id
-                     join order_details od on a.id = od.article_id
-                     join orders o on od.order_id = o.id
-                     join status_orders eo on o.id = eo.order_id
-                     join process_orders po on eo.process_order_id = po.id
-                WHERE eo.process_order_id = 4
-                and o.created_at between '2010-01-01 00:41:05' and '2020-8-12 13:20:34'
-                group by departamentos
-                order by cantidadVentas desc;
-            "
-        );
+            $categories = DB::select(
+                "
+                    select c.category as departamentos,  count(eo.process_order_id) as cantidadVentas
+                    from categories c join sub_categories sc on c.id = sc.category_id
+                         join articles a on sc.id = a.sub_category_id
+                         join order_details od on a.id = od.article_id
+                         join orders o on od.order_id = o.id
+                         join status_orders eo on o.id = eo.order_id
+                         join process_orders po on eo.process_order_id = po.id
+                    WHERE eo.process_order_id = 4
+                    group by departamentos
+                    order by cantidadVentas desc;
+                "
+            );
+            return view('categories.productosVendidosPorDepartamento',compact('categories'));
+        }else{
+            return abort(400,'not authorized');
+        }
+    }
 
-        return view('categories.productosVendidosPorDepartamento',compact('categories'));
+    public function productosVendidosPorDepartamento_a(Request $request){
+//        departamento = category
+        if ( $request->user()->hasRole('administrador')){
+
+            $categories = DB::select(
+                "
+                    select c.category as departamentos,  count(eo.process_order_id) as cantidadVentas
+                    from categories c join sub_categories sc on c.id = sc.category_id
+                         join articles a on sc.id = a.sub_category_id
+                         join order_details od on a.id = od.article_id
+                         join orders o on od.order_id = o.id
+                         join status_orders eo on o.id = eo.order_id
+                         join process_orders po on eo.process_order_id = po.id
+                    WHERE eo.process_order_id = 4
+                    and o.created_at between '$request->date_1' and '$request->date_2'
+                    group by departamentos
+                    order by cantidadVentas desc;
+                "
+            );
+            return view('categories.productosVendidosPorDepartamento_a',compact('categories'));
+        }else{
+            return abort(400,'not authorized');
+        }
     }
 
 //    dev sara
@@ -144,14 +170,45 @@ class CategoryController extends Controller
                      join orders o on od.order_id = o.id
                      join status_orders so on o.id = so.order_id
                      join process_orders po on so.process_order_id = po.id
-                where so.process_order_id = 5
+                where so.process_order_id = 4
                 -- and c.id = 3
                 group by departamento,producto
                 order by cantidad desc;
             "
             );
 
-            return view('categories.promedioDeventasPorDepartamento',compact('categorias'));
+            $all_categories = Category::select('categories.*')->orderBy('category','asc')->get();
+
+            return view('categories.promedioDeventasPorDepartamento',compact('categorias','all_categories'));
+        } else {
+            abort(403, 'you do not authorized for this web site');
+        }
+    }
+
+
+//    dev sara
+    public function promedioDeventasPorDepartamento_a(Request $request, $category_id){
+//        departamento = category
+        if ($request->user()->hasRole('administrador')) {
+            $categorias = DB::select(
+                "
+                select c.category as departamento, a.title as producto, count(od.article_id) as cantidad, avg(od.sub_total) as totalVenta
+                from categories c join sub_categories sc on c.id = sc.category_id
+                     join articles a on sc.id = a.sub_category_id
+                     join order_details od on a.id = od.article_id
+                     join orders o on od.order_id = o.id
+                     join status_orders so on o.id = so.order_id
+                     join process_orders po on so.process_order_id = po.id
+                where so.process_order_id = 4
+                and c.id = $category_id
+                group by departamento,producto
+                order by cantidad desc;
+            "
+            );
+
+            $all_categories = Category::select('categories.*')->orderBy('category','asc')->get();
+
+            return view('categories.promedioDeventasPorDepartamento_a',compact('categorias','all_categories'));
         } else {
             abort(403, 'you do not authorized for this web site');
         }
@@ -172,7 +229,7 @@ class CategoryController extends Controller
                 -- and c.id = 3
                 -- group by a.id
                 group by departamento
-                order by cantidad desc;
+                order by totalVenta desc;
             "
             );
 //        dd($categories_promedios);

@@ -341,7 +341,7 @@ class ArticleController extends Controller
                          join cities c on tf.city_id = c.id
                          join status_orders so on o.id = so.order_id
                          join process_orders po on so.process_order_id = po.id
-                    where po.id = 5
+                    where po.id = 4
                     and c.id = $city_id
                     group by ciudad,producto
                     order by totalVenta desc;
@@ -352,13 +352,9 @@ class ArticleController extends Controller
             $barchart = new BarChart();
 
             foreach ($articles as $article) {
-                if (!empty($barchart)){
-                    $barchart->dataset(
-                        $article->producto, 'bar', [$article->totalVenta]
-                    );
-                }else{
-                    return response()->json('No hay datos');
-                }
+                $barchart->dataset(
+                    $article->producto, 'bar', [$article->totalVenta]
+                );
             }
             //        dd($articles);
             // return view('articles.promedioDeProductosMasVendidosPorCiudades',compact('barchart','articles','cities'));

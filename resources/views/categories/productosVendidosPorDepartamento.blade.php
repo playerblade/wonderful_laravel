@@ -22,32 +22,52 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- /.col-md-6 -->
-                <div class="col-lg-12">
+                <div class="col-lg-3">
+                    <div class="sticky-top mb-3">
+                        <div class="card card-purple card-outline">
+                            <div class="card-header">
+                                <b>Fechas</b>
+                            </div>
+                            <form action="{{route('categorias_a')}}">
+                                <div class="card-body">
+                                    <input type="date" name="date_1" class="form-control">
+                                    <hr>
+                                    <input type="date" name="date_2" class="form-control">
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-block bg-gradient-purple btn-sm">Buscar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
                     <div class="card card-primary card-outline">
-                    {{--                <div class="card-header">--}}
-                    {{--                    <h3 class="card-title">DataTable with default features</h3>--}}
-                    {{--                </div>--}}
-                    <!-- /.card-header -->
+                        <div class="card-header">
+                            <b>Ventas</b>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-striped elevation-2">
+                            <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
                                     <th>Departamentos</th>
-                                    <th>Catidad de Ventas</th>
+                                    <th class="text-center">Catidad de Ventas</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($categories as $category)
                                     <tr>
                                         <td>{{$category->departamentos}}</td>
-                                        <td>{{$category->cantidadVentas}}</td>
+                                        <td class="text-center">{{$category->cantidadVentas}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>Departamentos</th>
-                                    <th>Catidad de Ventas</th>
+                                    <th class="text-center">Catidad de Ventas</th>
                                 </tr>
                                 </tfoot>
                             </table>

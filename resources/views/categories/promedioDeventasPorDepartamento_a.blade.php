@@ -26,14 +26,14 @@
                     <div class="sticky-top mb-3">
                         <div class="card card-purple card-outline">
                             <div class="card-header">
-                                <b>Anios Disponibles</b>
+                                <b>Categorias</b>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    @foreach($years as $year)
+                                    @foreach($all_categories as $all_category)
                                         <div class="col-6">
-                                            <div class="external-event bg-gradient-purple elevation-2" style="position: relative;">
-                                                <a href="/reportes/clientes/{{$year->anio}}/anio" class="text-black-50">{{$year->anio}}</a>
+                                            <div class="external-event bg-gradient-purple" style="position: relative;">
+                                                <a href="/reportes/categories_promedio/{{$all_category->id}}" class="text-black-50">{{$all_category->category}}</a>
                                             </div>
                                             <hr>
                                         </div>
@@ -44,34 +44,37 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="card card-info card-outline">
-                    <div class="card-header">
-                        <b>Clientes</b>
-                    </div>
-                    <!-- /.card-header -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <b>Promedio de ventas por departamento</b>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example3" class="table table-striped elevation-2">
                                 <thead>
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Cantidad De Producto</th>
-                                    <th>Anio</th>
+                                    <th>Departamentos</th>
+                                    <th>Productos</th>
+                                    <th>Cantidad</th>
+                                    <th>Total Por Ventas</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($clients as $client)
+                                @foreach($categorias as $categoria)
                                     <tr>
-                                        <td>{{$client->cliente}}</td>
-                                        <td>{{$client->cantidadProducto}}</td>
-                                        <td>{{$client->anio}}</td>
+                                        <td>{{$categoria->departamento}}</td>
+                                        <td>{{$categoria->producto}}</td>
+                                        <td>&ensp;&ensp;&ensp;{{$categoria->cantidad}}</td>
+                                        <td>&ensp;&ensp;&ensp;{{$categoria->totalVenta}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Cantidad De Producto</th>
-                                    <th>Anio</th>
+                                    <th>Departamentos</th>
+                                    <th>Productos</th>
+                                    <th>Cantidad</th>
+                                    <th>Total Por Ventas</th>
                                 </tr>
                                 </tfoot>
                             </table>

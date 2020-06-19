@@ -118,13 +118,48 @@ class ClientController extends controller
                  join process_orders po on eo.process_order_id = po.id
                  join price_articles pa on a.id = pa.article_id
                  join users c on o.user_id = c.id
-            -- where eo.id = 5
-            -- and year(o.created_at) = 2014
             group by anio, cliente
             order by cantidadproducto desc;"
             );
 //        dd($clients);
-            return view('clients.cantidadDeProductosPorCliente_2',compact('clients'));
+            $years = DB::select("
+                select year(orders.created_at) as anio
+                from orders
+                group by year(orders.created_at);
+            ");
+
+            return view('clients.cantidadDeProductosPorCliente_2',compact('clients','years'));
+        } else {
+            abort(403, 'you do not authorized for this web site');
+        }
+    }
+
+    public function cantidadDeProductosPorCliente_2a( $anio , Request $request)
+    {
+        if ($request->user()->hasRole('administrador')) {
+            $clients = db::select(
+                "select concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
+                 count(do.id) as cantidadProducto, year(o.created_at) as anio
+            from categories d join sub_categories sd on d.id = sd.category_id
+                 join articles a on sd.id = a.sub_category_id
+                 join order_details do on a.id = do.article_id
+                 join orders o on do.order_id = o.id
+                 join status_orders eo on o.id = eo.order_id
+                 join process_orders po on eo.process_order_id = po.id
+                 join price_articles pa on a.id = pa.article_id
+                 join users c on o.user_id = c.id
+            where year(o.created_at) = $anio
+            group by anio, cliente
+            order by cantidadproducto desc;"
+            );
+//        dd($clients);
+            $years = DB::select("
+                select year(orders.created_at) as anio
+                from orders
+                group by year(orders.created_at);
+            ");
+
+            return view('clients.cantidadDeProductosPorCliente_2a',compact('clients','years'));
         } else {
             abort(403, 'you do not authorized for this web site');
         }

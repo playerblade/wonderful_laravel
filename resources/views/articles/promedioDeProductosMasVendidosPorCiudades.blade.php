@@ -23,21 +23,30 @@
             <div class="row">
                 <!-- /.col-md-6 -->
                 <div class="col-lg-3">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">Ciudades</div>
-                        <ul class="list-group">
-                            @foreach($cities as $city)
-                                <li class="list-group-item">
-                                    <a href="/reportes/ventas/{{$city->id}}/articulos_promedio_ventas_ciudades">{{$city->city}}</a>
-                                </li>
-                            @endforeach
-                            <div class="card-link">{{$cities->links()}}</div>
-                        </ul>
+                    <div class="sticky-top mb-3">
+                        <div class="card card-purple card-outline">
+                            <div class="card-header">
+                                Ciudades
+                            </div>
+                            <div class="card-body">
+                                @foreach($cities as $city)
+                                    <div class="external-event bg-gradient-purple elevation-2" style="position: relative;">
+                                        <a href="/reportes/ventas/{{$city->id}}/articulos_promedio_ventas_ciudades" class="text-black-50">
+                                            {{$city->city}}
+                                        </a>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-link blockquote-footer">{{$cities->links()}}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-lg-9">
-                    <div class="card card-primary card-outline">
+                    <div class="card card-info card-outline">
                         @if($articles)
                             <div class="card-header"><h3 class="card-title">Promedio de ventas por ciudades</h3>
                                 <label class="float-right">Ciudad : {{$articles[0]->ciudad}}</label>
@@ -47,13 +56,13 @@
                         @endif
                         <div class="card-body">
                             <div style="width: 100%;">
-                                @if(!empty($barchart))
+                                @if(empty($barchart))
                                     <h1>no hay datos!!!</h1>
                                 @else
                                     {{$barchart->container()}}
-                                    {{$barchart->script()}}
                                 @endif
                             </div>
+                            {{$barchart->script()}}
                         </div>
                         <!-- /.card-body -->
                     </div>

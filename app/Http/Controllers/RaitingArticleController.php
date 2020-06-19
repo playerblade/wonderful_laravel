@@ -91,7 +91,7 @@ class RaitingArticleController extends Controller
 
     public function raitingsYComentariosArticulos(Article $articles , Request $request){
         // if ($request->user()->authorizeRole(['administrador'])) {
-            $articles = DB::select("select * from articles");
+            $articles = DB::select("select * from articles order by articles.id desc");
 
             return view('articles.raitingsYComentariosArticulos',compact('articles'));
         // } else {
@@ -112,8 +112,8 @@ class RaitingArticleController extends Controller
                    -- where c.role_id = 5
                    where a.id = $article_id
                    group by s.id, a.id,a.title, s.star
-                   order by s.star;   
-                    
+                   order by s.star;
+
             ");
             // $raitings = DB::table('stars')
             // ->join('raiting_articles','stars.id','=','raiting_articles.star_id')
@@ -204,6 +204,6 @@ class RaitingArticleController extends Controller
         // }
 
     }
-    
-    
+
+
 }
