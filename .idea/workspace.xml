@@ -21,12 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/InsertsTestsFinal.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/InsertsTestsFinal.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ColorArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ColorArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/crud/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/colors/crud/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/colors/crud/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +313,7 @@
       <workItem from="1592137933943" duration="5745000" />
       <workItem from="1592359649014" duration="2422000" />
       <workItem from="1592399212615" duration="16760000" />
-      <workItem from="1592499064905" duration="24899000" />
+      <workItem from="1592499064905" duration="29793000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>
@@ -497,11 +495,11 @@
     <state x="325" y="148" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1588858252940" />
     <state x="345" y="161" width="672" height="677" key="run.anything.popup/0.0.1360.738@0.0.1360.738" timestamp="1592499336891" />
     <state x="347" y="160" width="672" height="677" key="run.anything.popup/0.0.1366.732@0.0.1366.732" timestamp="1585922423918" />
-    <state x="344" y="53" width="672" height="684" key="search.everywhere.popup" timestamp="1591451539376">
+    <state x="344" y="53" width="672" height="684" key="search.everywhere.popup" timestamp="1592572082351">
       <screen x="0" y="0" width="1360" height="738" />
     </state>
     <state x="324" y="49" width="672" height="630" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1587929049069" />
-    <state x="344" y="53" width="672" height="684" key="search.everywhere.popup/0.0.1360.738@0.0.1360.738" timestamp="1591451539376" />
+    <state x="344" y="53" width="672" height="684" key="search.everywhere.popup/0.0.1360.738@0.0.1360.738" timestamp="1592572082351" />
     <state x="346" y="53" width="672" height="678" key="search.everywhere.popup/0.0.1366.732@0.0.1366.732" timestamp="1585902642026" />
   </component>
 </project>

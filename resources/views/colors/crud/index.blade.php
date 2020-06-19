@@ -92,9 +92,9 @@
                                 <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
-                        <form action="{{ route('colors.store') }}" enctype="multipart/form-data" method="POST">
-                            @csrf
-                            <div class="card-body">
+                        <div class="card-body">
+                            <form action="{{ route('colors.store') }}" enctype="multipart/form-data" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <label class="card-title">Color:</label>
                                     <input type="text" name="name" class="form-control" placeholder="nombre del color">
@@ -106,11 +106,11 @@
                                         <label class="custom-file-label" for="customFile">Chose a file</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit"  class="btn btn-info form-control ">Guardar Color</button>
-                            </div>
-                        </form>
+                                <div class="card-footer">
+                                    <button type="submit"  class="btn btn-info form-control ">Guardar Color</button>
+                                </div>
+                            </form>
+                        </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('colo_articles.store') }}" method="POST">
+                            <form action="{{ route('color_articles.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label>Articulo:</label>
@@ -149,7 +149,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" style="display: block;" class="btn btn-info form-control ">Guardar Cambios</button>
+                                <div class="form-group">
+                                    <label>Cantidad:</label>
+                                    <input type="number" name="quantity" min="1" class="form-control">
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" style="display: block;" class="btn btn-info form-control ">Guardar Cambios</button>
+                                </div>
                             </form>
                         </div>
                         <!-- /.card-body -->

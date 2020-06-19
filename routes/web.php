@@ -165,7 +165,7 @@ Route::group(['middleware' => 'web','role:administrador'], function () {
     Route::resource('colors',
         'ColorController'
     );
-    Route::resource('colo_articles',
+    Route::resource('color_articles',
         'ColorArticleController'
     );
 //    fin cruds

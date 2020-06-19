@@ -262,7 +262,7 @@
                                             <div class="form-group">
                                                 <strong>Color:</strong>
                                                 <div class="select2-purple">
-                                                    <select class="select2" name="color_id[]"  multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
+                                                    <select class="select2" name="color_id[]" disabled multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
                                                         @foreach($colors as $color)
                                                             @if($article->id == $color->article_id)
                                                                 <option selected value="{{$color->id}}">{{ $color->name }}</option>

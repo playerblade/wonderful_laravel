@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\ColorArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ColorArticleController extends Controller
 {
@@ -39,8 +41,25 @@ class ColorArticleController extends Controller
             'article_id' => 'required',
             'color_id' => 'required'
         ]);
-        ColorArticle::create($request->all());
-        return redirect()->route('categories.index')
+        $color_article = new ColorArticle();
+        $color_article->article_id = $request->article_id;
+        $color_article->color_id = $request->color_id;
+        $color_article->quantity = $request->quantity;
+        $color_article->save();
+
+//        $query_article = DB::select("select a.stock as stock from articles a where a.id = $request->article_id;");
+
+        $query_article = DB::table('articles')
+                         ->where('id',$request->article_id)
+                         ->select('stock')->first();
+
+//        dd($query_article->stock);
+
+        $article = Article::find($request->article_id);
+        $article->stock = $query_article->stock + $request->quantity;
+        $article->update();
+
+        return redirect()->route('colors.index')
             ->with('success','Product created successfully.');
     }
 
