@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('color_article');
             $table->integer('quantity');
             $table->integer('sub_total');
+            $table->integer('price_article');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('price_article_id')->references('id')->on('price_articles')->onDelete('cascade');

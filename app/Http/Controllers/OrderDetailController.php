@@ -265,7 +265,7 @@ class OrderDetailController extends Controller
         $orderDetails = DB::select("
                 select a.id as article_id, o.id as order_id ,
                        c.id as client_id , concat_ws(' ',c.last_name,c.mother_last_name,c.first_name,c.second_name) as cliente,
-                       od.id as id , a.title as articulo , pa.price as precio , od.quantity as cantidad ,
+                       od.id as id , a.title as articulo , od.price_article as precio , od.quantity as cantidad ,
                        od.sub_total as subTotal, avg(od.sub_total) as montoTotal,
                        o.created_at as fecha, od.color_article as color
                 from roles r inner join users c on r.id = c.role_id
@@ -303,10 +303,7 @@ class OrderDetailController extends Controller
                              ->join('orders','status_orders.order_id','=','orders.id')
                              ->where('orders.id',$order_id)->first();
 
-//        dd($validation_orders);
 
-//        dd($transaction[0]);
-//            dd($orderDetails);
         return view('orders.orderDetailClient',compact('orderDetails','totalAmounts','transaction','transport','validation_orders'));
     }
 }

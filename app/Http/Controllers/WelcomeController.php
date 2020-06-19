@@ -74,6 +74,9 @@ class WelcomeController extends Controller
             ->join('articles','image_articles.article_id','=','articles.id')
             ->select('image_articles.article_id','image_articles.url_image','image_articles.is_main')->get();
 
+//        this part is for raitings .... esta parte es para los raitings
+
+
         return view('welcome.articleDetail',compact('articles','stocks','cities','prices','colors','images_articles'));
     }
 

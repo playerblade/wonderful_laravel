@@ -20,35 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63a9da84-2db9-48ac-b8ce-a203d9e936c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/categories/productosVendidosPorDepartamento_a.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/categories/promedioDeventasPorDepartamento_a.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/InsertsTests.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/InsertsTestsFinal.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/InsertsTestsFinal.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderDetailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RaitingArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RaitingArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StatusOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserStatusOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserStatusOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/promedioDeProductosMasVendidosPorCiudades.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/promedioDeProductosMasVendidosPorCiudades.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/articles/raitingsYComentariosArticulos.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/articles/raitingsYComentariosArticulos.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/categories/productosVendidosPorDepartamento.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/productosVendidosPorDepartamento.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/categories/promedioDeventasPorDepartamento.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/categories/promedioDeventasPorDepartamento.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/cantidadDeProductosPorCliente_2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/cantidadDeProductosPorCliente_2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/detalleDeOrdenesPorCliente1Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/detalleDeOrdenesPorCliente1Pantalla.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/detallesDeLasOrdnesDelCliente3Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/detallesDeLasOrdnesDelCliente3Pantalla.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/clients/listaDeOrdenesPorCliente2Pantalla.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clients/listaDeOrdenesPorCliente2Pantalla.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/orderDetailClient.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderInitial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderInitial.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/orderProcess.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersDelivered.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/ordersDelivered.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statusOrders/ordersDispatched.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/listaDeColaboradoresYLaCantidadeDeOrdenesDespachados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/listaDeColaboradoresYLaCantidadeDeOrdenesDespachados.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/listaDeVerificadoresYSuCantidadDeOrdenEntregado.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/listaDeVerificadoresYSuCantidadDeOrdenEntregado.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_17_055619_create_order_details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/client/menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,7 +315,7 @@
       <workItem from="1592137933943" duration="5745000" />
       <workItem from="1592359649014" duration="2422000" />
       <workItem from="1592399212615" duration="16760000" />
-      <workItem from="1592499064905" duration="20950000" />
+      <workItem from="1592499064905" duration="24899000" />
     </task>
     <task id="LOCAL-00001" summary="consulta 7 agregado , y nuevos cambios en los metodos de la consulta 6 y 9">
       <created>1584626492548</created>

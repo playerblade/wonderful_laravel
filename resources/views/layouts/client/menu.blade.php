@@ -26,7 +26,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" href="/{{Auth::user()->id}}/orders">
                     <i class="fas fa-cart-arrow-down fa-lg"></i>
-                    <span class="badge badge-success navbar-badge">&ensp;5</span>
+                    Mis ordenes
+{{--                    <span class="badge badge-success navbar-badge">&ensp;Mis ordenes5</span>--}}
                 </a>
             </li>
         </ul>

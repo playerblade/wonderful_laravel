@@ -100,6 +100,7 @@ class OrderController extends Controller
                 $order_datail->color_article = $request->color_article[0];
                 $order_datail->quantity = $request->quantity;
                 $order_datail->sub_total = $request->price * $order_datail->quantity;
+                $order_datail->price_article = $request->price;
                 $order_datail->save();
 
                 $colors=DB::table('colors')
